@@ -1,0 +1,28 @@
+---
+import FooterBackground from "../atoms/FooterBackground.astro";
+import MistralLogo from "../atoms/MistralLogo.astro";
+import FooterNav from "../molecules/FooterNav.astro";
+import FooterBottom from "../molecules/FooterBottom.astro";
+import PixelMarquee from "../molecules/PixelMarquee.astro";
+---
+
+<footer
+  class="mt-10 w-[-webkit-fill-available] max-lg:-mx-inner-sides lg:w-full flex flex-col max-lg:px-inner-sides"
+>
+  <div class="relative overflow-clip pt-40">
+    <FooterBackground />
+
+    <div
+      class="relative z-10 lg:max-w-5xl lg:mx-auto flex flex-col gap-6 px-inner-sides lg:px-sides"
+    >
+      <div class="flex justify-center mb-12">
+        <MistralLogo class="w-16 text-foreground" />
+      </div>
+
+      <FooterNav />
+      <FooterBottom />
+    </div>
+
+    <PixelMarquee />
+  </div>
+</footer>

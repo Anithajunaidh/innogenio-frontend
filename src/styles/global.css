@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+/* Enable class-based dark mode (toggled on <html class="dark">) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Design tokens used by the footer */
+  --color-foreground: #18181b;
+  --color-background: #ffffff;
+  --color-accent: #f4f4f5;
+  --color-accent-foreground: #18181b;
+  --color-border: #e4e4e7;
+  --color-ring: #a1a1aa;
+  --color-destructive: #ef4444;
+
+  /* Layout spacing utilities */
+  --spacing-inner-sides: 1.5rem;
+  --spacing-sides: 2.5rem;
+
+  --transition-property-base: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform;
+}
+
+:root {
+  color-scheme: light;
+}
+
+:root.dark {
+  color-scheme: dark;
+  --color-foreground: #fafafa;
+  --color-background: #09090b;
+  --color-accent: #27272a;
+  --color-accent-foreground: #fafafa;
+  --color-border: #27272a;
+  --color-ring: #52525b;
+}
+
+/* Convenience utility mirroring the reference markup */
+@utility transition-base {
+  transition-property: var(--transition-property-base);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+@utility pixelated {
+  image-rendering: pixelated;
+}
+
+@keyframes footer-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-footer-marquee {
+  animation: footer-marquee 40s linear infinite;
+}

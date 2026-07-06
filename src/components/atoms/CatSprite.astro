@@ -1,0 +1,18 @@
+---
+interface Props {
+  class?: string;
+  src: string;
+}
+const { class: className = "h-12 md:h-16 lg:h-16 w-auto shrink-0 pixelated", src } = Astro.props;
+---
+
+<img
+  alt="Cat"
+  loading="lazy"
+  width="800"
+  height="600"
+  decoding="async"
+  class={className}
+  src={src}
+  style="color: transparent;"
+/>

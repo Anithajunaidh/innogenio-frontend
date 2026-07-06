@@ -1,0 +1,21 @@
+---
+interface Props {
+  class?: string;
+}
+const {
+  class: className = "size-60 md:size-140 translate-y-1/2 -translate-x-1/2 left-1/2 bottom-10 z-0 dark:opacity-0",
+} = Astro.props;
+---
+
+<div class:list={["absolute", className]}>
+  <img
+    alt="Sun"
+    loading="lazy"
+    width="224"
+    height="224"
+    decoding="async"
+    class="size-full pixelated"
+    style="color: transparent;"
+    src="/sun.gif"
+  />
+</div>
