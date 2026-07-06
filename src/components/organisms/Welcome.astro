@@ -1,0 +1,103 @@
+<section id="studio-hero" class="px-6 lg:px-14 min-h-screen bg-[#f9f9f8] font-sans text-[#18181b] antialiased">
+  <header class=" pt-16 pb-10 lg:pt-20 lg:pb-12">
+    <p class="text-[11px] font-medium uppercase tracking-[0.22em] text-[#a1a1aa]">
+      Products - Studio
+    </p>
+    <h1 class="mt-5 max-w-4xl text-[clamp(2.5rem,5vw,4.25rem)] font-semibold leading-[1.05] tracking-[-0.03em]">
+      Build your frontier with Studio.
+    </h1>
+  </header>
+
+  <div id="hero-row" class="flex gap-4">
+    <div id="hero-copy" class="relative pb-12 pt-6 lg:pb-16 lg:pt-8 flex-[0.3] min-w-0 overflow-hidden">
+      <div class="absolute left-6 top-6 flex flex-col gap-1 text-[#d4d4d8] select-none sm:left-10 lg:left-14 lg:top-8"
+        aria-hidden="true">
+        <span class="text-sm leading-none">↓</span>
+        <span class="text-sm leading-none">↓</span>
+        <span class="text-sm leading-none">↓</span>
+      </div>
+      <div class="flex min-h-[18rem] flex-col justify-end lg:min-h-full lg:max-w-lg">
+        <div class="space-y-8">
+          <p class="text-xl font-semibold leading-snug tracking-[-0.02em] sm:text-[1.65rem] sm:leading-[1.25]">
+            One platform to build, deploy, and govern agentic AI systems—all with
+            enterprise privacy, security, and full ownership of your data.
+          </p>
+
+          <a href="#" class="inline-flex items-center gap-2 rounded-md bg-[#18181b] px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-[#27272a]">
+            Try Studio
+            <span aria-hidden="true">&gt;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="hero-panel" class="flex flex-[0.5] flex-col items-center justify-center bg-[#007aff] px-8 py-12 sm:px-10 lg:px-14 lg:py-16">
+      <p
+        id="hero-overlay-text"
+        class="h-0 max-w-3xl overflow-hidden text-center text-[clamp(1.75rem,3.5vw,3rem)] font-semibold leading-[1.15] tracking-[-0.02em] text-white opacity-0"
+      >
+        Operationalize AI. From frontier models to real-world systems.
+      </p>
+      <img
+        src="/werb.svg"
+        alt="Mistral Studio dashboard showing Build, Capture, and Govern sections"
+        class="w-full max-w-2xl rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.18)] lg:max-w-3xl"
+        width="955"
+        height="598"
+      />
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const section = document.querySelector<HTMLElement>("#studio-hero");
+  const row = document.querySelector<HTMLElement>("#hero-row");
+  const copy = document.querySelector<HTMLElement>("#hero-copy");
+  const panel = document.querySelector<HTMLElement>("#hero-panel");
+  const overlayText = document.querySelector<HTMLElement>("#hero-overlay-text");
+
+  if (section && row && copy && panel && overlayText) {
+    const sectionPad = (side: "paddingLeft" | "paddingRight") =>
+      parseFloat(getComputedStyle(section)[side]);
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "+=100%",
+        scrub: true,
+        pin: true,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    tl.to(copy, { flexGrow: 0, opacity: 0, ease: "none" }, 0)
+      .to(row, { gap: 0, ease: "none" }, 0)
+      .to(
+        panel,
+        {
+          flexGrow: 1,
+          marginLeft: () => -sectionPad("paddingLeft"),
+          marginRight: () => -sectionPad("paddingRight"),
+          ease: "none",
+        },
+        0
+      )
+      .to(
+        overlayText,
+        {
+          height: "auto",
+          marginBottom: "2rem",
+          opacity: 1,
+          duration: 0.5,
+          ease: "none",
+        },
+        0.5
+      );
+  }
+</script>
