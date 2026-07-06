@@ -9,7 +9,7 @@
   </header>
 
   <div id="hero-row" class="flex gap-4">
-    <div id="hero-copy" class="relative pb-12 pt-6 lg:pb-16 lg:pt-8 flex-[0.3] min-w-0 overflow-hidden">
+    <div id="hero-copy" class="relative z-0 pb-12 pt-6 lg:pb-16 lg:pt-8 flex-[0.3] min-w-0 overflow-hidden">
       <div class="absolute left-6 top-6 flex flex-col gap-1 text-[#d4d4d8] select-none sm:left-10 lg:left-14 lg:top-8"
         aria-hidden="true">
         <span class="text-sm leading-none">↓</span>
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div id="hero-panel" class="flex flex-[0.5] flex-col items-center justify-center bg-[#007aff] px-8 py-12 sm:px-10 lg:px-14 lg:py-16">
+    <div id="hero-panel" class="relative z-10 flex flex-[0.5] flex-col items-center justify-center bg-[#007aff] px-8 py-12 sm:px-10 lg:px-14 lg:py-16">
       <p
         id="hero-overlay-text"
         class="h-0 max-w-3xl overflow-hidden text-center text-[clamp(1.75rem,3.5vw,3rem)] font-semibold leading-[1.15] tracking-[-0.02em] text-white opacity-0"
@@ -65,6 +65,12 @@
     const sectionPad = (side: "paddingLeft" | "paddingRight") =>
       parseFloat(getComputedStyle(section)[side]);
 
+    // Lock the copy's content at its rendered width so the text keeps its
+    // layout while the column collapses — it gets clipped instead of re-wrapped.
+    Array.from(copy.children).forEach((el) => {
+      gsap.set(el, { width: el.getBoundingClientRect().width });
+    });
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
@@ -76,7 +82,7 @@
       },
     });
 
-    tl.to(copy, { flexGrow: 0, opacity: 0, ease: "none" }, 0)
+    tl.to(copy, { flexGrow: 0, ease: "none" }, 0)
       .to(row, { gap: 0, ease: "none" }, 0)
       .to(
         panel,
