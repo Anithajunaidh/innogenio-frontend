@@ -8,8 +8,8 @@
     </h1>
   </header>
 
-  <div id="hero-row" class="flex gap-4">
-    <div id="hero-copy" class="relative z-0 pb-12 pt-6 lg:pb-16 lg:pt-8 flex-[0.3] min-w-0 overflow-hidden">
+  <div id="hero-row" class="flex flex-col gap-4 lg:flex-row">
+    <div id="hero-copy" class="relative z-0 pb-12 pt-6 lg:pb-16 lg:pt-8 lg:flex-[0.3] min-w-0 overflow-hidden">
       <div class="absolute left-6 top-6 flex flex-col gap-1 text-[#d4d4d8] select-none sm:left-10 lg:left-14 lg:top-8"
         aria-hidden="true">
         <span class="text-sm leading-none">↓</span>
@@ -31,10 +31,10 @@
       </div>
     </div>
 
-    <div id="hero-panel" class="relative z-10 flex flex-[0.5] flex-col items-center justify-center bg-[#007aff] px-8 py-12 sm:px-10 lg:px-14 lg:py-16">
+    <div id="hero-panel" class="relative z-10 flex lg:flex-[0.5] flex-col items-center justify-center bg-[#007aff] px-8 py-12 sm:px-10 lg:px-14 lg:py-16">
       <p
         id="hero-overlay-text"
-        class="h-0 max-w-3xl overflow-hidden text-center text-[clamp(1.75rem,3.5vw,3rem)] font-semibold leading-[1.15] tracking-[-0.02em] text-white opacity-0"
+        class="mb-8 max-w-3xl overflow-hidden text-center text-[clamp(1.75rem,3.5vw,3rem)] font-semibold leading-[1.15] tracking-[-0.02em] text-white lg:mb-0 lg:h-0 lg:opacity-0"
       >
         Operationalize AI. From frontier models to real-world systems.
       </p>
@@ -65,45 +65,51 @@
     const sectionPad = (side: "paddingLeft" | "paddingRight") =>
       parseFloat(getComputedStyle(section)[side]);
 
-    // Lock the copy's content at its rendered width so the text keeps its
-    // layout while the column collapses — it gets clipped instead of re-wrapped.
-    Array.from(copy.children).forEach((el) => {
-      gsap.set(el, { width: el.getBoundingClientRect().width });
-    });
+    const mm = gsap.matchMedia();
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: "+=100%",
-        scrub: true,
-        pin: true,
-        invalidateOnRefresh: true,
-      },
-    });
+    // Animation only from the lg breakpoint up; below that the hero is a
+    // plain stacked column with no pinning.
+    mm.add("(min-width: 1024px)", () => {
+      // Lock the copy's content at its rendered width so the text keeps its
+      // layout while the column collapses — it gets clipped instead of re-wrapped.
+      Array.from(copy.children).forEach((el) => {
+        gsap.set(el, { width: el.getBoundingClientRect().width });
+      });
 
-    tl.to(copy, { flexGrow: 0, ease: "none" }, 0)
-      .to(row, { gap: 0, ease: "none" }, 0)
-      .to(
-        panel,
-        {
-          flexGrow: 1,
-          marginLeft: () => -sectionPad("paddingLeft"),
-          marginRight: () => -sectionPad("paddingRight"),
-          ease: "none",
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=100%",
+          scrub: true,
+          pin: true,
+          invalidateOnRefresh: true,
         },
-        0
-      )
-      .to(
-        overlayText,
-        {
-          height: "auto",
-          marginBottom: "2rem",
-          opacity: 1,
-          duration: 0.5,
-          ease: "none",
-        },
-        0.5
-      );
+      });
+
+      tl.to(copy, { flexGrow: 0, ease: "none" }, 0)
+        .to(row, { gap: 0, ease: "none" }, 0)
+        .to(
+          panel,
+          {
+            flexGrow: 1,
+            marginLeft: () => -sectionPad("paddingLeft"),
+            marginRight: () => -sectionPad("paddingRight"),
+            ease: "none",
+          },
+          0
+        )
+        .to(
+          overlayText,
+          {
+            height: "auto",
+            marginBottom: "2rem",
+            opacity: 1,
+            duration: 0.5,
+            ease: "none",
+          },
+          0.5
+        );
+    });
   }
 </script>
