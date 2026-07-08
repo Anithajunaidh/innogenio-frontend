@@ -7,7 +7,7 @@
       </h1>
     </div>
 
-    <aside id="grow" class=" bg-[#f4f4f1] flex items-end border-t border-black/10 px-8 pt-10 sm:px-12 lg:col-start-2 lg:row-start-1 lg:items-center lg:justify-center lg:overflow-hidden lg:border-l lg:border-t-0 lg:px-8 lg:pb-7 lg:pt-12">
+    <aside id="grow" class=" bg-[#f4f4f1] flex items-end border-t border-black/10 px-8 pt-10 lg:pb-0 pb-5 sm:px-12 lg:col-start-2 lg:row-start-1 lg:items-center lg:justify-center lg:overflow-hidden lg:border-l lg:border-t-0 lg:px-8 lg:pb-7 lg:pt-12">
       <div id="grow-content" class="w-full lg:text-center">
         <div class="hidden w-full justify-center gap-4 lg:flex">
           <div class="flex size-10 overflow-hidden">
@@ -26,18 +26,18 @@
       </div>
     </aside>
 
-    <div id="sd-orange" class="min-h-[42vh] border-t border-black/10 bg-[#ff5a00] lg:absolute lg:left-0 lg:top-[56vh] lg:z-10 lg:h-[44vh] lg:w-[70.6%] lg:min-h-0"></div>
+    <div id="sd-orange" class="order-4 min-h-[46vh] border-t border-black/10 bg-[#ff5a00] lg:absolute lg:left-0 lg:top-[56vh] lg:z-10 lg:h-[44vh] lg:w-[70.6%] lg:min-h-0"></div>
 
-    <aside id="hide-on-scroll" class="border-t border-black/10 px-6 py-5 sm:px-8 lg:col-start-2 lg:row-start-2 lg:border-l lg:overflow-hidden lg:px-6 lg:py-6">
+    <aside id="hide-on-scroll" class="order-3 border-t border-[#f4a300] px-0 py-3 sm:px-0 lg:col-start-2 lg:row-start-2 lg:border-l lg:border-black/10 lg:overflow-hidden lg:px-6 lg:py-6">
       <div class="flex h-full flex-col">
-        <div class="mb-5 flex flex-col gap-1 pl-1 text-[#b8b8b4]" aria-hidden="true">
+        <div class="mb-5 hidden flex-col gap-1 pl-1 text-[#b8b8b4] lg:flex" aria-hidden="true">
           <span class="text-lg leading-none">↓</span>
           <span class="text-lg leading-none">↓</span>
           <span class="text-lg leading-none">↓</span>
         </div>
 
-        <div class="mt-auto border border-black/10 bg-[#f4f4f1] p-3">
-          <p class="mb-2 text-[0.72rem] font-semibold uppercase tracking-[0.09em] text-black/55">
+        <div class="mt-auto border-y border-black/10 bg-[#f4f4f1] px-3 py-2 lg:border lg:p-3">
+          <p class="mb-2 text-[0.68rem] font-semibold uppercase tracking-[0.09em] text-black/55">
             Featured News
           </p>
           <div class="flex items-center gap-3">
@@ -139,3 +139,23 @@
     });
   }
 </script>
+
+<style>
+  #sd-orange {
+    background-color: #ff5a00;
+    background-image:
+      linear-gradient(90deg, rgba(225, 20, 0, 0.92) 0 14%, transparent 14% 100%),
+      linear-gradient(90deg, transparent 0 58%, rgba(255, 145, 0, 0.95) 58% 72%, transparent 72% 100%),
+      linear-gradient(90deg, transparent 0 28%, rgba(205, 0, 60, 0.95) 28% 43%, transparent 43% 100%),
+      linear-gradient(0deg, rgba(205, 0, 60, 0.95) 0 32%, transparent 32% 100%),
+      linear-gradient(0deg, transparent 0 43%, rgba(225, 20, 0, 0.95) 43% 71%, transparent 71% 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    background-repeat: no-repeat;
+  }
+
+  @media (min-width: 1024px) {
+    #sd-orange {
+      background-image: none;
+    }
+  }
+</style>
