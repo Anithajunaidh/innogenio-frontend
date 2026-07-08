@@ -87,7 +87,8 @@
       const pushOrange = () => {
         const gridLeft = grid.getBoundingClientRect().left;
         const growLeft = grow.getBoundingClientRect().left;
-        setOrangeX(growLeft - gridLeft - orange.offsetWidth);
+        // Overshoot by 1px to avoid subpixel bleed leaving a faint orange seam.
+        setOrangeX(growLeft - gridLeft - orange.offsetWidth - 1);
       };
 
       const tl = gsap.timeline({
