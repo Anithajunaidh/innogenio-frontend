@@ -1,14 +1,14 @@
-<section class="px-6 lg:px-14 min-h-screen bg-white text-[#111111] font-sans">
-  <div class="grid min-h-screen grid-cols-1 border border-black/10 lg:grid-cols-[3fr_1.25fr] lg:grid-rows-[56vh_44vh]">
-    <div class="flex items-end border-b border-black/10 px-8 pb-8 pt-16 sm:px-12 lg:px-8 lg:pb-7 lg:pt-12">
+<section id="scaledown-hero" class="px-6 lg:px-14 min-h-screen bg-white text-[#111111] font-sans">
+  <div id="scaledown-grid" class="grid min-h-screen grid-cols-1 border border-black/10 lg:grid-cols-[3fr_1.25fr] lg:grid-rows-[56vh_44vh]">
+    <div id="sd-title" class="flex items-end border-b border-black/10 px-8 pb-8 pt-16 sm:px-12 lg:overflow-hidden lg:px-8 lg:pb-7 lg:pt-12">
       <h1 class="max-w-[14ch] text-[clamp(2.6rem,6vw,5.2rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
         Frontier AI.<br />
         In your hands.
       </h1>
     </div>
 
-    <aside id="grow" class="bg-[#f4f4f1] flex items-end border-t border-black/10 px-8 pt-10 sm:px-12 lg:border-l lg:border-t-0 lg:px-8 lg:pb-7 lg:pt-12">
-      <div class="w-full">
+    <aside id="grow" class=" bg-[#f4f4f1] flex items-end border-t border-black/10 px-8 pt-10 sm:px-12 lg:items-center lg:justify-center lg:overflow-hidden lg:border-l lg:border-t-0 lg:px-8 lg:pb-7 lg:pt-12">
+      <div id="grow-content" class="w-full lg:text-center">
         <div class="hidden w-full justify-center gap-4 lg:flex">
           <div class="flex size-10 overflow-hidden">
             <img class="block size-full translate-z-0" src="/bag.svg" alt="" loading="lazy" decoding="async" />
@@ -20,15 +20,15 @@
             <img class="block size-full translate-z-0" src="/earth.svg" alt="" loading="lazy" decoding="async" />
           </div>
         </div>
-        <p class="max-w-[20ch] text-[clamp(1.05rem,1.65vw,2rem)] font-medium leading-[1.1] tracking-[-0.02em]">
+        <p class="mt-4 max-w-[20ch] text-[clamp(1.05rem,1.65vw,2rem)] font-medium leading-[1.1] tracking-[-0.02em] lg:mx-auto">
           We help organizations build tailored AI systems to solve the world’s hardest problems.
         </p>
       </div>
     </aside>
 
-    <div class="min-h-[42vh] border-t border-black/10 bg-[#ff5a00] lg:min-h-0"></div>
+    <div id="sd-orange" class="min-h-[42vh] border-t border-black/10 bg-[#ff5a00] lg:min-h-0 lg:overflow-hidden"></div>
 
-    <aside id="hide-on-scroll" class="border-t border-black/10 px-6 py-5 sm:px-8 lg:border-l lg:px-6 lg:py-6">
+    <aside id="hide-on-scroll" class="border-t border-black/10 px-6 py-5 sm:px-8 lg:border-l lg:overflow-hidden lg:px-6 lg:py-6">
       <div class="flex h-full flex-col">
         <div class="mb-5 flex flex-col gap-1 pl-1 text-[#b8b8b4]" aria-hidden="true">
           <span class="text-lg leading-none">↓</span>
@@ -57,3 +57,54 @@
     </aside>
   </div>
 </section>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const section = document.querySelector<HTMLElement>("#scaledown-hero");
+  const grid = document.querySelector<HTMLElement>("#scaledown-grid");
+  const hide = document.querySelector<HTMLElement>("#hide-on-scroll");
+  const growContent = document.querySelector<HTMLElement>("#grow-content");
+
+  if (section && grid && hide && growContent) {
+    const mm = gsap.matchMedia();
+
+    // Takeover animation only from the lg breakpoint up; below that the grid
+    // stays a plain stacked column with no pinning.
+    mm.add("(min-width: 1024px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=100%",
+          scrub: true,
+          pin: true,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      // Collapse the left column to 0 and the bottom row to 0 so the beige
+      // "#grow" panel (top-right cell) expands to fill the whole viewport.
+      // minmax(0, …) lets the tracks shrink below their content's min size.
+      tl.fromTo(
+        grid,
+        {
+          gridTemplateColumns: "minmax(0,3fr) minmax(0,1.25fr)",
+          gridTemplateRows: "minmax(0,56vh) minmax(0,44vh)",
+        },
+        {
+          gridTemplateColumns: "minmax(0,0fr) minmax(0,1fr)",
+          gridTemplateRows: "minmax(0,100vh) minmax(0,0vh)",
+          ease: "none",
+        },
+        0
+      )
+        .to(hide, { opacity: 0, ease: "none" }, 0)
+        // Grow the centered icons + text to 2x as the panel takes over.
+        .to(growContent, { scale: 2, transformOrigin: "center center", ease: "none" }, 0);
+    });
+  }
+</script>
