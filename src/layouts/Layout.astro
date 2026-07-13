@@ -1,18 +1,110 @@
 ---
 import '../styles/global.css';
+import { defaultLocale, locales, ogLocales, pathForLocale } from '../i18n';
+import type { Locale } from '../i18n';
+
+interface Props {
+	/** document language, set per locale route */
+	lang?: Locale;
+	/** page title (unique per page/locale) */
+	title?: string;
+	/** meta description (~155 chars); omitted from the head when absent */
+	description?: string;
+	/** JSON-LD blocks (Organization, WebSite, Service, …) */
+	jsonLd?: object[];
+}
+const { lang = defaultLocale, title = 'Innogenio', description, jsonLd = [] } = Astro.props;
+
+const site = Astro.site ?? new URL('https://innogenio.com');
+const canonical = new URL(Astro.url.pathname, site);
+const ogImage = new URL('/og.png', site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+
+		<title>{title}</title>
+		{description && <meta name="description" content={description} />}
+		<link rel="canonical" href={canonical.href} />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+
+		<!-- locale alternates: every locale of this route + x-default -->
+		{
+			locales.map((l) => (
+				<link
+					rel="alternate"
+					hreflang={l}
+					href={new URL(pathForLocale(Astro.url.pathname, l), site).href}
+				/>
+			))
+		}
+		<link
+			rel="alternate"
+			hreflang="x-default"
+			href={new URL(pathForLocale(Astro.url.pathname, defaultLocale), site).href}
+		/>
+
+		<!-- Open Graph / Twitter -->
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Innogenio" />
+		<meta property="og:title" content={title} />
+		{description && <meta property="og:description" content={description} />}
+		<meta property="og:url" content={canonical.href} />
+		<meta property="og:image" content={ogImage.href} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:locale" content={ogLocales[lang]} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		{description && <meta name="twitter:description" content={description} />}
+		<meta name="twitter:image" content={ogImage.href} />
+
+		{
+			jsonLd.map((block) => (
+				<script is:inline type="application/ld+json" set:html={JSON.stringify(block)} />
+			))
+		}
 	</head>
-	<body class="bg-black m-0 w-full h-full lg:px-16 px-8">
-		<slot />
+	<body class="m-0 bg-paper text-ink">
+		<!-- fixed chrome (navbar) must sit outside the smooth-scroll content:
+		     ScrollSmoother translates #smooth-content, and a transformed
+		     ancestor turns position:fixed into absolute -->
+		<slot name="header" />
+		<div id="smooth-wrapper">
+			<div id="smooth-content">
+				<div class="mx-auto w-full max-w-432">
+					<slot />
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
+
+<script>
+	/* GSAP smooth scroll — the wrapper is pinned and #smooth-content is
+	   translated on a slight lag behind the native scroll position, which
+	   ScrollTrigger-driven sections (the hero takeover) ride automatically.
+	   Native scroll is kept on touch devices (smoothTouch: false) and the
+	   smoother is skipped entirely under prefers-reduced-motion. */
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { ScrollSmoother } from 'gsap/ScrollSmoother';
+
+	gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+	if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		ScrollSmoother.create({
+			wrapper: '#smooth-wrapper',
+			content: '#smooth-content',
+			smooth: 1.2,
+			effects: false,
+			smoothTouch: false,
+		});
+	}
+</script>

@@ -1,0 +1,64 @@
+---
+/* Testimonial glass card (innogenio-testimonials .tst-card) — frosted
+   panel on the dark texture: top signal rail, gradient avatar stage with
+   a living-halftone portrait and USR tag, pixel-diamond stars, quote,
+   and an author meta block. Entrance/hover/rail choreography lives in
+   global.css under ".tst-card" (staggered by --i, added .in on scroll). */
+import HalftoneAvatar from '../atoms/HalftoneAvatar.astro';
+import PixelStars from '../atoms/PixelStars.astro';
+import type { HalftoneName } from '../../utils/halftone-portraits';
+
+interface Props {
+	quote: string;
+	name: string;
+	role?: string;
+	company?: string;
+	avatar?: HalftoneName;
+	/** mono corner tag on the avatar stage, e.g. "USR·0001" */
+	tag?: string;
+	stars?: number;
+	/** stagger order for the section entrance */
+	index?: number;
+}
+const { quote, name, role, company, avatar, tag, stars = 5, index = 0 } = Astro.props;
+---
+
+<figure class="tst-card" style={`--i: ${index}`}>
+	<span class="tst-rail" aria-hidden="true"><i></i></span>
+
+	{
+		avatar && (
+			<div
+				class="relative mx-3.5 mt-3.5 flex h-[226px] items-end justify-center overflow-hidden rounded-card [background:linear-gradient(180deg,var(--color-tst-stage-tint)_0%,transparent_66%),var(--color-tst-stage)]"
+				aria-hidden="true"
+			>
+				{tag && (
+					<span class="absolute top-3 right-3.5 z-2 font-mono text-mono-panel text-ink-fixed/42">
+						{tag}
+					</span>
+				)}
+				<HalftoneAvatar name={avatar} class="relative z-1 aspect-[56/70] h-[214px]" />
+			</div>
+		)
+	}
+
+	<div class="flex flex-1 flex-col px-6 pt-[22px] pb-6 text-left">
+		<PixelStars count={stars} class="mb-4" />
+		<blockquote
+			class="m-0 flex-1 text-tst-quote text-tst-body/84 before:content-['“'] after:content-['”']"
+		>
+			{quote}
+		</blockquote>
+		<figcaption class="mt-[22px] border-t border-white/11 pt-[18px]">
+			<span class="block text-tst-name text-tst-head">{name}</span>
+			{role && <span class="mt-[3px] block text-small text-tst-dim">{role}</span>}
+			{
+				company && (
+					<span class="mt-2.5 block font-mono text-mono-panel text-tst-accent uppercase">
+						{company}
+					</span>
+				)
+			}
+		</figcaption>
+	</div>
+</figure>

@@ -1,0 +1,65 @@
+---
+/* Listing service row (innogenio-services .svc-row) — wide bordered row:
+   title, body, and mono chips on the left; a brand-soft art cell with a
+   28px blueprint grid and a large pixel sprite on the right. The whole
+   row's border flushes brand on hover. Sprite fills ride the theme tokens
+   so the art recolors in dark mode like the reference's --px1/--px2. */
+import PixelSprite from '../atoms/PixelSprite.astro';
+import type { PixelSpriteName } from '../atoms/PixelSprite.astro';
+import ServiceIcon from '../atoms/ServiceIcon.astro';
+import type { ServiceIconName } from '../atoms/ServiceIcon.astro';
+
+export interface RowItem {
+	icon: string;
+	title: string;
+	body: string;
+	/** mono uppercase capability chips */
+	chips?: string[];
+	/** links the whole row (case-study rows → their detail page) */
+	href?: string;
+	/** 'service' swaps the pixel sprite for a contour ServiceIcon */
+	iconSet?: 'sprite' | 'service';
+}
+type Props = RowItem;
+const { icon, title, body, chips, href, iconSet = 'sprite' } = Astro.props;
+
+const Tag = href ? 'a' : 'article';
+---
+
+<Tag
+	href={href}
+	class="group mb-3.5 grid grid-cols-1 border border-line bg-tile transition-colors last:mb-0 hover:border-brand min-[720px]:grid-cols-[1fr_230px] focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset"
+>
+	<div class="min-w-0 px-[30px] pt-[26px] pb-6 max-[720px]:px-5">
+		<h3 class="text-card-title">{title}</h3>
+		<p class="mt-2 max-w-[38em] text-sm leading-normal text-ink-secondary">{body}</p>
+		{
+			chips?.length && (
+				<div class="mt-4 flex flex-wrap gap-[7px]">
+					{chips.map((chip) => (
+						<span class="border border-line px-[9px] py-[5px] font-mono text-case-chip text-ink-secondary uppercase transition-colors group-hover:border-brand-soft">
+							{chip}
+						</span>
+					))}
+				</div>
+			)
+		}
+	</div>
+	<div
+		class="flex items-center justify-center border-line bg-brand-soft text-brand [background-image:linear-gradient(color-mix(in_srgb,var(--color-brand)_6%,transparent)_1px,transparent_1px),linear-gradient(90deg,color-mix(in_srgb,var(--color-brand)_6%,transparent)_1px,transparent_1px)] [background-size:28px_28px] max-[720px]:min-h-[120px] max-[720px]:border-t min-[720px]:border-l"
+		aria-hidden="true"
+	>
+		{
+			iconSet === 'service' ? (
+				<ServiceIcon name={icon as ServiceIconName} class="w-14 py-6" />
+			) : (
+				<PixelSprite
+					name={icon as PixelSpriteName}
+					class="w-16 py-6"
+					primary="var(--color-brand)"
+					secondary="var(--color-sprite-soft)"
+				/>
+			)
+		}
+	</div>
+</Tag>

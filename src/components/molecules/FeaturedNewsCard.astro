@@ -1,0 +1,258 @@
+---
+/* Featured-news carousel (innogenio-home .news-card) — kicker label above a
+   bordered row that slides between news items: gradient pixel thumb, title
+   link, and a stacked next/prev control column. Whole card washes
+   brand-soft on hover. The thumb shows the pixel robot sprite unless an
+   image is passed.
+
+   Below lg the row collapses to the mobile news strip (reference
+   carousel-news): a compact bordered bar with the truncated title and a
+   square pixel-chevron button whose arrow slide-swaps on hover — no thumb
+   or prev/next column. The autoplay progress bar is absolutely positioned
+   and left unanchored here on purpose: it rides the top edge of the
+   nearest positioned ancestor (the hero's news aside sets `relative`), so
+   it draws over that container's top border edge-to-edge, outside this
+   card's own padding.
+
+   With two or more items the card auto-advances every 3s (paused while
+   hovered/focused, off under reduced motion); next/prev step manually. */
+import Button from '../atoms/Button.astro';
+import PixelSprite from '../atoms/PixelSprite.astro';
+
+export interface NewsItem {
+	title: string;
+	href?: string;
+	image?: string;
+	imageAlt?: string;
+}
+
+interface Props {
+	label?: string;
+	items?: NewsItem[];
+	/** single-item shorthand, used when `items` is not passed */
+	title?: string;
+	href?: string;
+	image?: string;
+	imageAlt?: string;
+}
+const { label, items, title, href, image, imageAlt } = Astro.props;
+const slides: NewsItem[] = items?.length ? items : title ? [{ title, href, image, imageAlt }] : [];
+
+/* pixel chevron "›" (reference 30×30 glyph — five 4px squares) */
+const ARROW = [
+	'M12.9995 25H8.99951V21H12.9995V25Z',
+	'M16.9995 21H12.9995V17H16.9995V21Z',
+	'M20.9995 17H16.9995V13H20.9995V17Z',
+	'M16.9995 13H12.9995V9H16.9995V13Z',
+	'M12.9995 9H8.99951V5H12.9995V9Z',
+];
+---
+
+<div data-news>
+	<span
+		data-news-bar
+		class="absolute top-0 left-0 z-1 h-[3px] w-0 bg-brand motion-reduce:hidden lg:hidden"
+		aria-hidden="true"></span>
+	{label && <span class="text-kicker mb-2.5 block font-mono text-ink-secondary uppercase">{label}</span>}
+
+	<div class="hidden items-stretch border border-line transition-colors duration-150 hover:bg-brand-soft lg:flex">
+		<div class="min-w-0 flex-1 overflow-hidden">
+			<div
+				data-news-track
+				class="flex touch-pan-y transition-transform duration-500 ease-out motion-reduce:transition-none"
+			>
+				{
+					slides.map((s) => (
+						<a
+							href={s.href ?? '#'}
+							class="flex w-full shrink-0 items-center focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset"
+						>
+							<span class="m-[11px] flex size-15 shrink-0 items-center justify-center bg-linear-135 from-news-thumb-1 to-news-thumb-2">
+								{s.image ? (
+									<img src={s.image} alt={s.imageAlt ?? ''} class="w-9" loading="lazy" decoding="async" />
+								) : (
+									<PixelSprite name="robot" class="w-9" primary="#F7E9FD" secondary="#340647" />
+								)}
+							</span>
+							<span class="flex items-center px-1 py-2.5 text-nav leading-[1.3] text-ink">{s.title}</span>
+						</a>
+					))
+				}
+			</div>
+		</div>
+		<span class="flex flex-col border-l border-line">
+			<Button
+				variant="icon"
+				data-news-next
+				aria-label="Next news item"
+				class="border-b border-line"
+			>
+				&#10095;
+			</Button>
+			<Button variant="icon" data-news-prev aria-label="Previous news item">&#10094;</Button>
+		</span>
+	</div>
+
+	<div class="border border-line bg-panel lg:hidden">
+		<div class="overflow-hidden">
+			<div
+				data-news-track
+				class="flex touch-pan-y transition-transform duration-500 ease-out motion-reduce:transition-none"
+			>
+				{
+					slides.map((s) => (
+						<a
+							href={s.href ?? '#'}
+							class="group flex w-full shrink-0 items-center justify-between gap-4 p-2 transition-colors duration-150 hover:bg-brand-soft focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset"
+						>
+							<p class="min-w-0 truncate pl-2 text-nav leading-[1.3] text-ink">{s.title}</p>
+							<span
+								class="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden border border-line bg-paper text-ink transition-colors group-hover:bg-brand group-hover:text-ink-inverse"
+								aria-hidden="true"
+							>
+								<span class="absolute inline-block w-5 -translate-x-7 transition-transform duration-300 will-change-transform group-hover:translate-x-0 group-hover:delay-100">
+									<svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+										{ARROW.map((d) => (
+											<path d={d} fill="currentColor" />
+										))}
+									</svg>
+								</span>
+								<span class="relative inline-block w-5 transition-transform duration-300 will-change-transform group-hover:translate-x-7">
+									<svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+										{ARROW.map((d) => (
+											<path d={d} fill="currentColor" />
+										))}
+									</svg>
+								</span>
+							</span>
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	/* Slide both tracks (desktop row + mobile strip) in lockstep — only one
+	   is visible at a time, so they share the index. Autoplay advances every
+	   3s and drives the mobile progress bar; hovering or focusing anywhere in
+	   the card pauses it, and reduced motion disables it entirely (buttons
+	   still step). */
+	const HOLD = 3000;
+
+	document.querySelectorAll<HTMLElement>('[data-news]').forEach((root) => {
+		const tracks = [...root.querySelectorAll<HTMLElement>('[data-news-track]')];
+		const bar = root.querySelector<HTMLElement>('[data-news-bar]');
+		const count = tracks[0]?.children.length ?? 0;
+		if (count < 2) return;
+
+		const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+		let index = 0;
+		let timer = 0;
+
+		const apply = () => {
+			tracks.forEach((t) => {
+				t.style.transform = `translateX(-${index * 100}%)`;
+			});
+		};
+
+		const runBar = () => {
+			if (!bar) return;
+			bar.style.transition = 'none';
+			bar.style.width = '0';
+			void bar.offsetWidth; // flush so the new transition starts from 0
+			bar.style.transition = `width ${HOLD}ms linear`;
+			bar.style.width = '100%';
+		};
+
+		const schedule = () => {
+			clearTimeout(timer);
+			if (REDUCED) return;
+			runBar();
+			timer = window.setTimeout(() => go(1), HOLD);
+		};
+
+		const pause = () => {
+			clearTimeout(timer);
+			if (bar) {
+				// freeze the bar where it is until autoplay resumes
+				bar.style.width = getComputedStyle(bar).width;
+				bar.style.transition = 'none';
+			}
+		};
+
+		function go(step: number) {
+			index = (index + step + count) % count;
+			apply();
+			schedule();
+		}
+
+		root.querySelectorAll('[data-news-next]').forEach((b) => b.addEventListener('click', () => go(1)));
+		root.querySelectorAll('[data-news-prev]').forEach((b) => b.addEventListener('click', () => go(-1)));
+
+		/* swipe / drag — pointer events cover touch and mouse alike. The track
+		   follows the finger live (transition off), then snaps: past the
+		   threshold it advances, otherwise it springs back. touch-pan-y on the
+		   track leaves vertical page scrolling to the browser. */
+		const SWIPE = 40; // px of horizontal travel needed to change slide
+
+		tracks.forEach((track) => {
+			let x0 = 0;
+			let dx = 0;
+			let active = false;
+
+			track.addEventListener('pointerdown', (e) => {
+				if (e.pointerType === 'mouse' && e.button !== 0) return;
+				active = true;
+				x0 = e.clientX;
+				dx = 0;
+				pause();
+				track.setPointerCapture(e.pointerId);
+				track.style.transition = 'none';
+				e.preventDefault(); // no text selection / native link drag
+			});
+
+			track.addEventListener('pointermove', (e) => {
+				if (!active) return;
+				dx = e.clientX - x0;
+				track.style.transform = `translateX(calc(${-index * 100}% + ${dx}px))`;
+			});
+
+			const settle = () => {
+				if (!active) return;
+				active = false;
+				track.style.transition = '';
+				if (Math.abs(dx) > SWIPE) {
+					go(dx < 0 ? 1 : -1);
+				} else {
+					apply();
+					schedule();
+				}
+			};
+			track.addEventListener('pointerup', settle);
+			track.addEventListener('pointercancel', settle);
+			track.addEventListener('dragstart', (e) => e.preventDefault());
+
+			// a drag ends on a link — swallow the click it would produce
+			track.addEventListener(
+				'click',
+				(e) => {
+					if (Math.abs(dx) > 6) {
+						e.preventDefault();
+						e.stopPropagation();
+					}
+					dx = 0;
+				},
+				true
+			);
+		});
+
+		root.addEventListener('pointerenter', pause);
+		root.addEventListener('pointerleave', () => schedule());
+		root.addEventListener('focusin', pause);
+		root.addEventListener('focusout', () => schedule());
+
+		schedule();
+	});
+</script>

@@ -1,0 +1,130 @@
+---
+/* Markitecture block — two variants.
+   `block` (default): a colored plate (the <a>) with a neutral face inside;
+   on hover the face slides or tilts off the plate (direction is a per-slot
+   preset) and lifts with shadow-box, revealing the plate color. The
+   mk-block class + --i drive the section's staggered entrance.
+   `mini` (innogenio-home-v2 .mini): a static feature row item — a 40px
+   colored square with a bare white etched glyph beside a title and
+   description. */
+import PixelSprite from '../atoms/PixelSprite.astro';
+import type { PixelSpriteName } from '../atoms/PixelSprite.astro';
+import EtchedIcon from '../atoms/EtchedIcon.astro';
+import type { EtchedIconName } from '../atoms/EtchedIcon.astro';
+
+export type Plate = 'case-1' | 'case-2' | 'case-3' | 'case-deep' | 'case-bright' | 'panel' | 'paper';
+type Slide = 'left' | 'left-alt' | 'right' | 'right-far' | 'rotate';
+
+interface Props {
+	variant?: 'block' | 'mini';
+	title: string;
+	description?: string;
+	href?: string;
+	/** block variant: PixelSprite name · mini variant: EtchedIcon name */
+	icon?: PixelSpriteName | EtchedIconName;
+	plate?: Plate;
+	/** block only — hover slide preset for the face */
+	slide?: Slide;
+	/** block only — stagger order for the section entrance */
+	index?: number;
+	class?: string;
+	/** block only — extra classes for the inner face (border tweaks, tech dots) */
+	faceClass?: string;
+}
+
+const {
+	variant = 'block',
+	title,
+	description,
+	href = '/',
+	icon,
+	plate = 'case-1',
+	slide = 'left',
+	index = 0,
+	class: className = '',
+	faceClass = '',
+} = Astro.props;
+
+const PLATES: Record<Plate, string> = {
+	'case-1': 'bg-case-1',
+	'case-2': 'bg-case-2',
+	'case-3': 'bg-case-3',
+	'case-deep': 'bg-case-deep',
+	'case-bright': 'bg-case-bright',
+	panel: 'bg-panel',
+	paper: 'bg-paper',
+};
+
+const SLIDES: Record<Slide, string> = {
+	left: 'origin-bottom-right duration-500 lg:group-hover:-translate-x-10',
+	'left-alt': 'origin-bottom-left duration-500 lg:group-hover:-translate-x-10',
+	right: 'origin-bottom-right duration-300 lg:group-hover:translate-x-10',
+	'right-far': 'duration-500 lg:group-hover:translate-x-20',
+	rotate: 'origin-bottom-right duration-500 lg:group-hover:rotate-12',
+};
+
+/* light plates keep the default brand-purple sprite; colored plates get a
+   white sprite on a plate-colored tile */
+const lightPlate = plate === 'panel' || plate === 'paper';
+---
+
+{
+	variant === 'mini' ? (
+		<div class:list={['flex items-start gap-3.5', className]}>
+			<span
+				class:list={[
+					'flex size-15 shrink-0 items-center justify-center rounded-tile [--tn-bg-opacity:.5] [--tn-stroke-bg:#fff] [--tn-stroke-fg:#fff]',
+					PLATES[plate],
+				]}
+			>
+				{icon && <EtchedIcon name={icon as EtchedIconName} bare />}
+			</span>
+			<div>
+				<h3 class="text-mini-h">{title}</h3>
+				{description && <p class="mt-[5px] text-small text-ink-secondary">{description}</p>}
+			</div>
+		</div>
+	) : (
+		<a
+			href={href}
+			class:list={[
+				'mk-block group outline-1 outline-line -outline-offset-1',
+				PLATES[plate],
+				className,
+			]}
+			style={`--i: ${index}`}
+		>
+			<div
+				class:list={[
+					'flex h-full w-full flex-col items-start justify-between border border-line bg-panel p-3 transition-all ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:shadow-box lg:bg-paper',
+					SLIDES[slide],
+					faceClass,
+				]}
+			>
+				{icon && (
+					<div
+						class:list={[
+							'flex aspect-square w-8 items-center justify-center',
+							lightPlate ? 'bg-panel' : `${PLATES[plate]} text-white`,
+						]}
+					>
+						{lightPlate ? (
+							<PixelSprite name={icon as PixelSpriteName} class="w-5" />
+						) : (
+							<PixelSprite
+								name={icon as PixelSpriteName}
+								class="w-5"
+								primary="#ffffff"
+								secondary="rgba(255,255,255,0.55)"
+							/>
+						)}
+					</div>
+				)}
+				<div>
+					<p class="text-card-title">{title}</p>
+					{description && <p class="text-small text-ink-secondary">{description}</p>}
+				</div>
+			</div>
+		</a>
+	)
+}

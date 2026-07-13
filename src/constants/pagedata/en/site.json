@@ -1,0 +1,99 @@
+{
+	"seo": {
+		"title": "Innogenio — Custom Software, AI & ERP for Enterprises",
+		"description": "Innogenio is a design and technology agency building custom software, AI & automation, ERP implementations, and data platforms that turn ambitious ideas into reliable products."
+	},
+	"navbar": {
+		"links": [
+			{
+				"label": "Services",
+				"href": "/services",
+				"menuFooter": "See all services",
+				"menu": [
+					{ "icon": "engineering", "title": "Engineering", "body": "Scalable, secure products — from tools to enterprise apps.", "href": "/services" },
+					{ "icon": "design", "title": "Design & Strategy", "body": "User-first experiences aligned to business goals.", "href": "/services" },
+					{ "icon": "advisory", "title": "Advisory", "body": "Digital transformation guided by strategy and expertise.", "href": "/services" },
+					{ "icon": "erp", "title": "ERP", "body": "ERPNext, Zoho, and Odoo — implemented and adopted.", "href": "/services" },
+					{ "icon": "data", "title": "Data & AI", "body": "Insight, automation, and smarter decisions.", "href": "/services" },
+					{ "icon": "devops", "title": "DevOps", "body": "Pipelines, IaC, and continuous monitoring.", "href": "/services" },
+					{ "icon": "iot", "title": "IoT", "body": "Connected systems from gateway to cloud.", "href": "/services" }
+				]
+			},
+			{
+				"label": "Work",
+				"href": "/works",
+				"menuFooter": "See all work",
+				"menu": [
+					{ "icon": "factory", "title": "Meridian", "body": "Four plants live on one ERP in twelve weeks.", "href": "/works/meridian" },
+					{ "icon": "card", "title": "NovaPay", "body": "AI cuts loan decisions from days to minutes.", "href": "/works/novapay" },
+					{ "icon": "chart", "title": "Halo Retail", "body": "1.2M monthly orders on one live dashboard.", "href": "/works/halo-retail" },
+					{ "icon": "erp", "title": "Corevance", "body": "The quarter, closed in four days, not eleven.", "href": "/works/corevance" },
+					{ "icon": "design", "title": "Kepler Labs", "body": "A rebuilt v2, shipped two months early.", "href": "/works/kepler-labs" },
+					{ "icon": "data", "title": "Helixon", "body": "A data pipeline rebuilt in nine weeks.", "href": "/works/helixon" }
+				]
+			},
+			{ "label": "About", "href": "/" },
+			{ "label": "Blog", "href": "/" }
+		],
+		"workCta": { "label": "See Our Work", "href": "/works" },
+		"hireCta": { "label": "Work With Us", "href": "/" }
+	},
+	"footer": {
+		"columns": [
+			{
+				"title": "Why Innogenio",
+				"links": [
+					{ "href": "/", "label": "About us" },
+					{ "href": "/", "label": "Our customers" },
+					{ "href": "/", "label": "Careers" },
+					{ "href": "/", "label": "Contact us" }
+				]
+			},
+			{
+				"title": "Explore",
+				"links": [
+					{ "href": "/services", "label": "Services" },
+					{ "href": "/", "label": "Industries" },
+					{ "href": "/works", "label": "Our work" },
+					{ "href": "/", "label": "Blog" }
+				]
+			},
+			{
+				"title": "Services",
+				"links": [
+					{ "href": "/", "label": "Custom software" },
+					{ "href": "/", "label": "AI & automation" },
+					{ "href": "/", "label": "ERP implementation" },
+					{ "href": "/", "label": "Data & DevOps" }
+				]
+			},
+			{
+				"title": "Build",
+				"links": [
+					{ "href": "/", "label": "Start a project" },
+					{ "href": "/", "label": "Book a demo" },
+					{ "href": "/", "label": "AI & Automation Studio" }
+				]
+			},
+			{
+				"title": "Legal",
+				"links": [
+					{ "href": "/", "label": "Terms of service" },
+					{ "href": "/", "label": "Privacy policy" },
+					{ "href": "/", "label": "Legal notice" }
+				]
+			},
+			{
+				"title": "Community",
+				"links": [
+					{ "href": "/", "label": "LinkedIn", "external": true },
+					{ "href": "/", "label": "X", "external": true },
+					{ "href": "/", "label": "GitHub", "external": true },
+					{ "href": "/", "label": "Instagram", "external": true }
+				]
+			}
+		],
+		"copyright": "Innogenio © 2026",
+		"tagline": "Built with intention"
+	}
+}

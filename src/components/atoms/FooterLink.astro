@@ -1,20 +1,22 @@
 ---
+/* Footer column link (innogenio-home-v2 .f-col a) — brand hover; external
+   links get a small superscript arrow. */
 interface Props {
-  href: string;
-  label: string;
-  external?: boolean;
+	href: string;
+	label: string;
+	external?: boolean;
 }
 const { href, label, external = false } = Astro.props;
-const rel = external ? "noopener noreferrer" : undefined;
-const target = external ? "_blank" : undefined;
+const rel = external ? 'noopener noreferrer' : undefined;
+const target = external ? '_blank' : undefined;
 ---
 
 <a
-  class="text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-1"
-  href={href}
-  target={target}
-  rel={rel}
+	class="flex items-center gap-1.5 py-1 text-f-link text-ink transition-colors hover:text-brand focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+	href={href}
+	target={target}
+	rel={rel}
 >
-  {label}
-  {external && <span class="text-xs font-mono font-bold">↗</span>}
+	{label}
+	{external && <span class="text-f-head text-ink-secondary">↗</span>}
 </a>

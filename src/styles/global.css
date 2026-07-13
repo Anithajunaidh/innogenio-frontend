@@ -13,12 +13,271 @@
   --color-ring: #a1a1aa;
   --color-destructive: #ef4444;
 
+  /* ════════════════════════════════════════════════════════════
+     INNOGENIO DESIGN SYSTEM — canonical tokens (see design-system.css,
+     derived 1:1 from mistral.ai). Values shared with client scripts
+     live in src/constants/design-token.ts — keep in sync.
+     ════════════════════════════════════════════════════════════ */
+
+  /* ── color ── */
+  --color-ink: #17121f; /* near-black, all primary text */
+  --color-ink-secondary: #6a6277; /* secondary text */
+  --color-paper: #faf9f6; /* warm off-white page */
+  --color-line: #e8e3f0; /* hairline borders (1px everywhere) */
+  --color-tile: #ffffff; /* content tile face */
+  --color-fill-warm: #f1ede4; /* warm beige filler blocks */
+  --color-panel-dark: #1a1424; /* dark feature panels (charcoal-purple) */
+  --color-panel: #faf8fd; /* light lavender panel (hero lead box) */
+  --color-canvas-dark: #160323; /* hero canvas backdrop (deep violet) */
+  --color-art-pin: #f0d4fb; /* survey pins on the hero canvas */
+  --color-art-tag: #efcff9; /* mono tags on the hero canvas */
+  --color-news-thumb-1: #7a05a8; /* featured-news thumb gradient start */
+  --color-news-thumb-2: #c177e9; /* featured-news thumb gradient end */
+  --color-card-hover: #ffffff; /* service/industry card hover face */
+  --color-card-night: #12021f; /* industry image-card base (theme-independent) */
+  --color-case-1: #9f00d4; /* case-study card tones (theme-independent) */
+  --color-case-2: #8a06bc;
+  --color-case-3: #6d0797;
+  --color-case-deep: #4b0765; /* mini feature-row squares (theme-independent) */
+  --color-case-bright: #b93fe6;
+  --color-grey-big: #ccc5da; /* oversized grey type / inactive dots */
+  --color-cycle-panel: #dfcbf4; /* lifecycle diagram panel (theme-independent) */
+  /* testimonials dark panel — fixed dark values; like every Mistral dark
+     panel it reads the same in page light & dark modes */
+  --color-tst-head: #f6f1fc; /* panel headings / author names */
+  --color-tst-muted: #b9aecb; /* panel secondary text (kicker, lead, labels) */
+  --color-tst-accent: #c155ec; /* bright brand on dark (stars, company line) */
+  --color-tst-body: #f1edf7; /* panel base text (fixed dark-mode ink) */
+  --color-tst-dim: #9a92a8; /* panel secondary text (fixed dark-mode ink-2) */
+  --color-tst-hover: #ebd0fa; /* panel link hover wash */
+  --color-tst-stage: #faf9f6; /* avatar stage base (fixed paper) */
+  --color-tst-stage-tint: #edcdf8; /* avatar stage top tint */
+  --color-brand: #9f00d4;
+  --color-sprite-soft: #e2b5f7; /* pixel-sprite secondary fill on themed
+    surfaces (reference --px2); pairs with brand as the primary */
+  --color-brand-soft: #f7e9fd;
+
+  /* sequence ramp — evenly-spaced perceptual steps; dark text on ALL steps */
+  --color-ramp-1: #ecc8fa;
+  --color-ramp-2: #d18bf4;
+  --color-ramp-3: #b44be8;
+  --color-ramp-4: #9317cf;
+  --color-ramp-text: #1d0429; /* dark aubergine on ramp steps */
+  --color-ramp-ink: #22042c; /* step-number chip text on ramp chips */
+
+  /* fixed (theme-independent) inks — for text on fixed-color surfaces
+     (white blooms, always-dark panels) where the theme-flipping ink
+     tokens would invert against a background that never changes */
+  --color-ink-fixed: #17121f; /* = light-mode --color-ink */
+  --color-ink-secondary-fixed: #6a6277; /* = light-mode --color-ink-secondary */
+
+  /* dark-surface tokens (navbar, dark panels) */
+  --color-surface-dark: #000000;
+  --color-hairline-dark: rgb(255 255 255 / 15%);
+  --color-hover-dark: rgb(255 255 255 / 10%);
+  --color-ink-inverse: #ffffff;
+  --color-ink-inverse-muted: rgb(255 255 255 / 60%);
+  --color-charcoal: #2e2c34; /* charcoal button face (innogenio-home-v2 --cc) */
+  --color-charcoal-hover: #201e26; /* charcoal button face on hover (--cc2) */
+
+  /* ── typography — one grotesque + one monospace ── */
+  --font-sans:
+    'Helvetica Now Display', 'Neue Haas Grotesk Display', 'Helvetica Neue', Helvetica, 'Segoe UI',
+    Arial, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', Menlo, monospace;
+
+  /* type scale (desktop targets; clamped to viewport) */
+  --text-hero: clamp(48px, 7.9vw, 116px); /* page hero */
+  --text-hero--line-height: 1;
+  --text-hero--letter-spacing: -0.04em;
+  --text-hero--font-weight: 500;
+  --text-h2: clamp(38px, 5.4vw, 66px); /* statement heads */
+  --text-h2--letter-spacing: -0.03em;
+  --text-h2--font-weight: 500;
+  --text-h3: clamp(34px, 4.6vw, 54px); /* section heads "Services." */
+  --text-h3--letter-spacing: -0.03em;
+  --text-h3--font-weight: 500;
+  --text-lead: clamp(19px, 1.85vw, 26.5px); /* hero lead box */
+  --text-lead--line-height: 1.32;
+  --text-lead--letter-spacing: -0.015em;
+  --text-lead--font-weight: 500;
+  --text-card-h: clamp(24px, 2.9vw, 37px); /* dark-card headlines */
+  --text-card-h--line-height: 1.16;
+  --text-card-h--letter-spacing: -0.02em;
+  --text-card-h--font-weight: 500;
+  --text-case-brand: 17px; /* case-card brand row */
+  --text-case-brand--letter-spacing: -0.01em;
+  --text-case-brand--font-weight: 700;
+  --text-case-chip: 10px; /* case-card category chip, mono uppercase */
+  --text-case-chip--letter-spacing: 0.12em;
+  --text-title: 20px; /* tile/card titles */
+  --text-title--letter-spacing: -0.015em;
+  --text-title--font-weight: 600;
+  --text-body: 15px; /* body copy */
+  --text-body--line-height: 1.5;
+  --text-small: 13.5px; /* descriptions */
+  --text-small--line-height: 1.45;
+  --text-btn: 15px; /* buttons */
+  --text-btn--font-weight: 600;
+  --text-nav: 14.5px; /* header nav links */
+  /* mono labels — TWO sizes only */
+  --text-mono-panel: 14.5px; /* labels inside dark panels/cards */
+  --text-mono-panel--line-height: 1.75;
+  --text-mono-panel--letter-spacing: 0.08em;
+  --text-mono-panel--font-weight: 500;
+  --text-kicker: 10px; /* kickers/tags, uppercase */
+  --text-kicker--letter-spacing: 0.16em;
+  /* impact-section scale (innogenio-home-v2) */
+  --text-section-head: clamp(34px, 4.4vw, 58px); /* two-line section heading */
+  --text-section-head--line-height: 1.02;
+  --text-section-head--letter-spacing: -0.03em;
+  --text-section-head--font-weight: 500;
+  --text-sub: clamp(15px, 1.5vw, 18px); /* section sub copy */
+  --text-sub--line-height: 1.5;
+  --text-chip: 14px; /* accordion chip labels */
+  --text-chip--font-weight: 600;
+  --text-pill: 11px; /* kicker pill, mono */
+  --text-pill--letter-spacing: 0.02em;
+  --text-stat: clamp(44px, 5.4vw, 78px); /* bento stat numbers */
+  --text-stat--line-height: 0.98;
+  --text-stat--letter-spacing: -0.03em;
+  --text-stat--font-weight: 500;
+  --text-card-title: clamp(19px, 1.7vw, 22px); /* service card titles */
+  --text-card-title--letter-spacing: -0.015em;
+  --text-card-title--font-weight: 600;
+  --text-intro: clamp(16px, 1.6vw, 19px); /* section intro row copy */
+  --text-intro--line-height: 1.5;
+  --text-ac-head: clamp(19px, 1.9vw, 24px); /* lifecycle accordion headers */
+  --text-ac-head--letter-spacing: -0.02em;
+  --text-ac-head--font-weight: 500;
+  --text-mini-h: 15.5px; /* mini feature-row titles */
+  --text-mini-h--letter-spacing: -0.01em;
+  --text-mini-h--font-weight: 600;
+  --text-work-h2: clamp(30px, 4.2vw, 50px); /* work-detail section heading */
+  --text-work-h2--line-height: 1.1;
+  --text-work-h2--letter-spacing: -0.03em;
+  --text-work-h2--font-weight: 500;
+  --text-work-stat: clamp(30px, 3.4vw, 46px); /* work-detail results numbers */
+  --text-work-stat--line-height: 1;
+  --text-work-stat--letter-spacing: -0.03em;
+  --text-work-stat--font-weight: 500;
+  --text-story-h: 17px; /* work-detail story-block headings */
+  --text-story-h--letter-spacing: -0.01em;
+  --text-story-h--font-weight: 600;
+  --text-listing-h: clamp(44px, 6.6vw, 92px); /* listing-page hero heading */
+  --text-listing-h--line-height: 1;
+  --text-listing-h--letter-spacing: -0.04em;
+  --text-listing-h--font-weight: 500;
+  --text-cta-h: clamp(34px, 5vw, 60px); /* final CTA heading */
+  --text-cta-h--line-height: 1.02;
+  --text-cta-h--letter-spacing: -0.03em;
+  --text-cta-h--font-weight: 500;
+  --text-note: 11px; /* mono footnote (newsletter subscribe hint) */
+  --text-note--letter-spacing: 0.06em;
+  --text-f-head: 10px; /* footer column headings, mono uppercase */
+  --text-f-head--letter-spacing: 0.14em;
+  --text-f-head--font-weight: 500;
+  --text-f-link: 14px; /* footer column links */
+  --text-cyc-card: 12.5px; /* cycle diagram cards, mono uppercase */
+  --text-cyc-card--letter-spacing: 0.1em;
+  --text-proc-card: clamp(11.5px, 1.2vw, 14.5px); /* process phase tiles, mono uppercase */
+  --text-proc-card--line-height: 1.75;
+  --text-proc-card--letter-spacing: 0.08em;
+  --text-proc-card--font-weight: 500;
+  /* testimonials dark panel (innogenio-testimonials .tst) */
+  --text-tst-lead: clamp(16.5px, 1.55vw, 19.5px); /* panel lead copy */
+  --text-tst-lead--line-height: 1.45;
+  --text-tst-quote: 16.5px; /* testimonial quotes */
+  --text-tst-quote--line-height: 1.55;
+  --text-tst-name: 16px; /* testimonial author names */
+  --text-tst-name--font-weight: 600;
+  --text-tst-name--letter-spacing: -0.015em;
+  --text-tst-score: 30px; /* panel-footer rating number */
+  --text-tst-score--font-weight: 500;
+  --text-tst-score--letter-spacing: -0.03em;
+
+  /* ── spacing (8px base grid): dense hairline chrome, huge section air ── */
+  --spacing-section-x: 44px; /* standard section x-padding — responsive:
+    44px from lg (64rem) up, 30px below, 20px ≤720px (overridden below
+    the theme) */
+  --spacing-section-y: 96px; /* standard section y-padding */
+  --spacing-block-y: 60px; /* responsive block y-padding — 60px from lg
+    (64rem) up, 40px from md (48rem), 30px below (overridden below the
+    theme) */
+  --spacing-statement-y: 136px; /* statement sections y-padding */
+  --spacing-panel-y: clamp(64px, 9vw, 120px); /* inside dark panels */
+  --spacing-tile: 20px; /* inside tiles/cards (26px for tall) */
+  --spacing-card-gap: 40px; /* between colored cards in panels */
+  --spacing-slide-gap: 22px; /* between works-carousel slides (the script
+    reads the track's computed gap, so this is the single source) */
+  --spacing-impact-y: clamp(56px, 7vw, 104px); /* impact lead cell y-padding */
+  --spacing-bento-y: clamp(40px, 4.6vw, 76px); /* impact bento cell y-padding */
+  --container-shell: 1240px; /* shell width, hairline left+right */
+  --spacing-icon: 44px; /* canonical line-icon size (Services/Industries
+    ContourIcon) — every icon glyph (ContourIcon, EtchedIcon) renders at
+    this size for a uniform scale; generates size-icon/w-icon/h-icon */
+
+  /* ── shape — structural tiles/buttons/bars stay SHARP (radius 0) ── */
+  --radius-card: 8px; /* photographic/case-study cards only */
+  --radius-chip: 3px; /* small chips/pills */
+  --radius-tile: 4px; /* markitecture mini icon tiles */
+
+  /* ── elevation ── */
+  --shadow-box: 0 6px 18px rgb(23 18 31 / 0.18); /* markitecture hover lift */
+  --drop-shadow-star: 0 0 5px
+    color-mix(in srgb, var(--color-tst-accent) 55%, transparent); /* lit pixel-star glow */
+
+  /* ── motion ── */
+  --ease-arrow: cubic-bezier(0.2, 0.7, 0.3, 1); /* design-system --ease-out: arrows, lifts */
+  --ease-move: cubic-bezier(0.25, 0.8, 0.25, 1); /* tile/carousel travel */
+  --animate-cycle-spin: cycle-spin 80s linear infinite; /* lifecycle ring */
+  @keyframes cycle-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   /* Layout spacing utilities */
   --spacing-inner-sides: 1.5rem;
   --spacing-sides: 2.5rem;
 
   --transition-property-base: color, background-color, border-color,
     text-decoration-color, fill, stroke, opacity, box-shadow, transform;
+}
+
+/* Clip horizontal overflow at the page scroller: the hero's GSAP scroll-
+   takeover pins its section (position: fixed) from the very top, and
+   ScrollTrigger's pin-spacer bookkeeping can briefly overrun the width of
+   our flex-centered max-w shell. Vertical scroll (the page scroller) is
+   preserved; fixed-position pinning is unaffected by this. */
+html {
+  overflow-x: clip;
+}
+
+/* Responsive section gutter — px-section-x etc. compile to
+   var(--spacing-section-x), so overriding the variable here steps the
+   gutter down for every section, current and future, with no per-section
+   classes: 44px from lg up, 30px below it, 20px at ≤720px.
+   The lg/md steps are in REM (63.99 ≈ below 64rem, 47.99 ≈ below 48rem)
+   so they flip on exactly the same boundary as Tailwind's rem-based lg:/md:
+   utilities even when the browser's default font size is enlarged; the
+   720px step stays px because it pairs with px-based max-[720px] variants
+   in components. */
+@media (max-width: 63.99rem) {
+  :root {
+    --spacing-section-x: 30px;
+    --spacing-block-y: 40px;
+  }
+}
+@media (max-width: 47.99rem) {
+  :root {
+    --spacing-block-y: 30px;
+  }
+}
+@media (max-width: 720px) {
+  :root {
+    --spacing-section-x: 20px;
+  }
 }
 
 :root {
@@ -33,6 +292,45 @@
   --color-accent-foreground: #fafafa;
   --color-border: #27272a;
   --color-ring: #52525b;
+
+  /* design-system dark-mode counterpart values */
+  --color-ink: #f1edf7;
+  --color-ink-secondary: #9a92a8;
+  --color-paper: #0f0b16;
+  --color-line: #291f3c;
+  --color-tile: #171021;
+  --color-fill-warm: #1a1224;
+  --color-brand: #c155ec;
+  --color-brand-soft: #2b0a3a;
+  --color-sprite-soft: #ebd0fa;
+  --color-panel: #171021;
+  --color-card-hover: #1d1129;
+  --color-grey-big: #3a3149;
+  --color-charcoal: #37343f;
+  --color-charcoal-hover: #2a2733;
+}
+
+/* Follow the system theme like innogenio-home: the dark token values apply
+   automatically under prefers-color-scheme: dark. html.dark still forces
+   dark mode explicitly, and html.light opts a dark-system user back out. */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    color-scheme: dark;
+    --color-ink: #f1edf7;
+    --color-ink-secondary: #9a92a8;
+    --color-paper: #0f0b16;
+    --color-line: #291f3c;
+    --color-tile: #171021;
+    --color-fill-warm: #1a1224;
+    --color-brand: #c155ec;
+    --color-brand-soft: #2b0a3a;
+    --color-sprite-soft: #ebd0fa;
+    --color-panel: #171021;
+    --color-card-hover: #1d1129;
+    --color-grey-big: #3a3149;
+    --color-charcoal: #37343f;
+    --color-charcoal-hover: #2a2733;
+  }
 }
 
 /* Convenience utility mirroring the reference markup */
@@ -46,15 +344,475 @@
   image-rendering: pixelated;
 }
 
-@keyframes footer-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
+/* ── Markitecture section (MarkitectureSection organism) ──
+   Staggered build-up: every block carries --i and fades/rises in once the
+   section gets .in-view; rotated diamonds keep their own translate offsets
+   so they fade in place. Kept as plain CSS: the stagger needs
+   calc(var(--i)) and parent-state selectors utilities can't express. */
+.mk-block,
+.mk-block-rotated {
+  opacity: 0;
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+.mk-block {
+  translate: 0 24px;
+  transition:
+    opacity 0.6s ease,
+    translate 0.6s var(--ease-arrow);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+.mk-block-rotated {
+  transition: opacity 0.6s ease;
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+.in-view .mk-block {
+  translate: 0 0;
+}
+.in-view .mk-block,
+.in-view .mk-block-rotated {
+  opacity: 1;
+}
+/* Generic scroll entrance — same recipe as the markitecture build-up, for
+   any section that opts in: the section carries data-reveal (observed by
+   src/utils/reveal.ts, which stamps .in-view once it scrolls into view)
+   and each child block carries rv-block plus --i for its stagger slot.
+   Uses the `translate` property, so it never fights transform-based
+   animations on the same element. */
+.rv-block {
+  opacity: 0;
+  translate: 0 24px;
+  transition:
+    opacity 0.6s ease,
+    translate 0.6s var(--ease-arrow);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+.in-view .rv-block {
+  opacity: 1;
+  translate: 0 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rv-block {
+    opacity: 1;
+    translate: none;
+    transition: none;
   }
 }
 
-@utility animate-footer-marquee {
-  animation: footer-marquee 40s linear infinite;
+/* square corner markers pinned to block corners */
+.tech-dot {
+  position: relative;
+}
+.tech-dot::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  width: 5px;
+  height: 5px;
+  background: var(--color-ink);
+}
+.tech-dot-top-left::after {
+  top: -2.5px;
+  left: -2.5px;
+}
+.tech-dot-top-right::after {
+  top: -2.5px;
+  right: -2.5px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mk-block,
+  .mk-block-rotated {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+}
+
+/* Lifecycle diagram panel — lilac base with soft radial highlights and an
+   86px survey grid (texture recipe, not tokens). */
+@utility bg-cycle-grid {
+  background:
+    radial-gradient(500px 380px at 30% 25%, rgba(255, 255, 255, 0.5), transparent 65%),
+    radial-gradient(460px 360px at 75% 80%, rgba(255, 255, 255, 0.35), transparent 65%),
+    linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px) 0 0/86px 86px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px) 0 0/86px 86px,
+    var(--color-cycle-panel);
+}
+
+/* Faint lilac survey grid overlaid on the hero canvas panel —
+   4 columns / 3 rows, 1px lines (texture recipe, not tokens). */
+@utility bg-art-grid {
+  background:
+    linear-gradient(90deg, rgba(223, 169, 246, 0.16) 1px, transparent 1px) 0 0 / 25% 100%,
+    linear-gradient(rgba(223, 169, 246, 0.16) 1px, transparent 1px) 0 0 / 100% 33.34%;
+}
+
+/* ── Etched icons (EtchedIcon atom, innogenio-home-v2 .tn) ──
+   Two layers: ink foreground over a misregistered translucent brand ghost
+   plate. Paths carry pathLength=1 so they draw in when a script adds
+   .draw; the glyph redraws when the hosting [data-card] is hovered.
+   Kept as plain CSS: the boil/draw choreography needs parent-state and
+   nth-layer selectors that utility classes can't express. */
+.tn {
+  width: 50px;
+  height: 50px;
+  overflow: visible;
+}
+/* bare contour icons — frameless glyphs for small icon slots (mini row) */
+.tn.bare {
+  width: var(--spacing-icon);
+  height: var(--spacing-icon);
+}
+.tn path {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.tn .bg {
+  transform-origin: 32px 32px;
+  transform: rotate(-6deg);
+  animation: tnboil 0.55s steps(1, end) infinite;
+}
+.tn .bg path {
+  stroke: var(--tn-stroke-bg, var(--color-brand));
+  opacity: var(--tn-bg-opacity, 0.38);
+}
+.tn .fg path {
+  stroke: var(--tn-stroke-fg, var(--color-ink));
+}
+@keyframes tnboil {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  33% {
+    transform: rotate(-4.6deg) translate(0.3px, -0.2px);
+  }
+  66% {
+    transform: rotate(-7.2deg) translate(-0.3px, 0.2px);
+  }
+}
+.tn.draw path {
+  animation: tndraw 0.7s ease forwards;
+}
+.tn.draw .fg > path {
+  animation-delay: 0.15s;
+}
+.tn.draw .fg .gl path {
+  animation-delay: 0.32s;
+}
+@keyframes tndraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+[data-card]:hover .tn.draw .fg .gl path {
+  animation: tndraw 0.5s ease forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tn path {
+    stroke-dashoffset: 0;
+    animation: none !important;
+  }
+  .tn .bg {
+    animation: none !important;
+    transform: rotate(-6deg);
+  }
+}
+
+/* ── Contour icons (ContourIcon atom, innogenio-home-v2 .ctr) ──
+   24×24 line glyphs on the service cards: ink strokes (.st) plus one
+   filled brand node (.nd). Static by default; hovering the card replays
+   the redraw/node-blip keyframes. Kept as plain CSS: restarting a
+   keyframe animation on hover isn't expressible as a utility class. */
+.ctr {
+  width: var(--spacing-icon);
+  height: var(--spacing-icon);
+}
+.ctr .st {
+  fill: none;
+  stroke: var(--ctr-st, var(--color-ink));
+  stroke-width: 1.5;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+}
+.ctr .nd {
+  fill: var(--ctr-nd, var(--color-brand));
+}
+[data-card]:hover .ctr .st,
+[data-card]:focus-visible .ctr .st {
+  animation: ctr-redraw 0.8s ease;
+}
+[data-card]:hover .ctr .nd,
+[data-card]:focus-visible .ctr .nd {
+  animation: ctr-nodeblip 0.8s ease;
+}
+@keyframes ctr-redraw {
+  from {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes ctr-nodeblip {
+  0%,
+  55% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ctr .st,
+  .ctr .nd {
+    animation: none !important;
+  }
+}
+
+/* ── Testimonials dark panel (innogenio-testimonials .tst) ──
+   Full Mistral dark-panel texture recipe (grid + clouds under the
+   content, film grain over it) plus the glass-card choreography:
+   cards rise in staggered by --i when scrolled into view, lift on
+   hover while a signal diamond travels their top rail. Kept as plain
+   CSS: pseudo-element textures, parent-state hover selectors, and the
+   stagger calc aren't expressible as utilities. */
+.tst-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(640px 420px at 80% 8%, rgb(255 255 255 / 0.05), transparent 62%),
+    radial-gradient(760px 560px at 10% 92%, rgb(159 0 212 / 0.12), transparent 62%),
+    radial-gradient(460px 340px at 50% 48%, rgb(255 255 255 / 0.035), transparent 65%),
+    linear-gradient(rgb(255 255 255 / 0.055) 1px, transparent 1px) 0 0/110px 110px,
+    linear-gradient(90deg, rgb(255 255 255 / 0.055) 1px, transparent 1px) 0 0/110px 110px;
+}
+.tst-texture::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.45;
+  pointer-events: none;
+}
+.tst-texture > * {
+  position: relative;
+  z-index: 1;
+}
+.tst-texture > .tst-bin {
+  position: absolute;
+  z-index: 0;
+}
+
+/* ── Development-process dark panel (innogenio-home .proc-panel) ──
+   Same Mistral dark-panel recipe with its own cloud placement. Unlike the
+   testimonials panel, the grain carries no z-index here, so the z-1 phase
+   tiles paint above it (matching the reference's stacking). */
+.proc-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(640px 420px at 78% 16%, rgb(255 255 255 / 0.055), transparent 62%),
+    radial-gradient(720px 520px at 12% 88%, rgb(159 0 212 / 0.12), transparent 62%),
+    radial-gradient(420px 320px at 45% 55%, rgb(255 255 255 / 0.035), transparent 65%),
+    linear-gradient(rgb(255 255 255 / 0.055) 1px, transparent 1px) 0 0/110px 110px,
+    linear-gradient(90deg, rgb(255 255 255 / 0.055) 1px, transparent 1px) 0 0/110px 110px;
+}
+.proc-texture::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* glass card — entrance (staggered by --i), hover lift, top-rail signal */
+.tst-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  background: rgb(255 255 255 / 0.045);
+  border: 1px solid rgb(255 255 255 / 0.13);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.6s var(--ease-arrow),
+    transform 0.6s var(--ease-arrow),
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+  transition-delay: calc(20ms + var(--i, 0) * 80ms);
+}
+.tst-card.in {
+  opacity: 1;
+  transform: none;
+}
+.tst-card:hover {
+  background: rgb(255 255 255 / 0.07);
+  border-color: rgb(255 255 255 / 0.28);
+  box-shadow: 0 18px 44px rgb(8 2 14 / 0.45);
+  transform: translateY(-4px);
+}
+.tst-rail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgb(255 255 255 / 0.28);
+}
+.tst-rail i {
+  position: absolute;
+  top: -3.5px;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  background: #fff;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+.tst-card:hover .tst-rail i {
+  opacity: 1;
+  animation: rail-travel 2.2s linear infinite;
+}
+@keyframes rail-travel {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% - 7px);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tst-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .tst-rail i {
+    animation: none !important;
+  }
+  .tst-card:hover {
+    transform: none;
+  }
+}
+
+/* ── Footer "pixel dusk" scene (innogenio-home-v2 .footer) ──
+   A striped sunset sky, a moon-logo that rises when the footer scrolls
+   into view, plus a pixel crane, tulips, grass and soil. Kept as plain
+   CSS: the 16-band gradients, the scroll-triggered moonrise choreography,
+   and the pixel-dirt tiles need selectors/values utilities can't express.
+   The sky and moon flip with the theme; the ground pixels are fixed. */
+
+/* sunset sky — 44px bands, cream→saturated→lighter, hue-mapped to purple */
+.footer-sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    #f9f4fb 0 44px, #f6edf9 44px 88px, #f3e5f7 88px 132px, #efdcf5 132px 176px,
+    #ead2f2 176px 220px, #e5c7ef 220px 264px, #dfbbec 264px 308px, #d9afe8 308px 352px,
+    #d2a2e4 352px 396px, #cc95e1 396px 440px, #d2a0e5 440px 484px, #d9ace9 484px 528px,
+    #dfb4ef 528px 572px, #e2bcf2 572px 616px, #e6c4f4 616px 660px, #eaccf6 660px 100%
+  );
+}
+.footer-sky.bright {
+  background: linear-gradient(
+    180deg,
+    #fcf9ff 0 44px, #fbf5ff 44px 88px, #f4e0ff 88px 132px, #ecc8ff 132px 176px,
+    #e3adfe 176px 220px, #d990fe 220px 264px, #cf71fe 264px 308px, #c34efe 308px 352px,
+    #b82bfd 352px 396px, #ad0afd 396px 440px, #b729fd 440px 484px, #c24afe 484px 528px,
+    #cc67fe 528px 572px, #d47ffe 572px 616px, #db94fe 616px 660px, #e1a9fe 660px 100%
+  );
+}
+:root.dark .footer-sky,
+:root.dark .footer-sky.bright {
+  background: linear-gradient(
+    180deg,
+    #100c17 0 44px, #131020 44px 88px, #171329 88px 132px, #1c1632 132px 176px,
+    #211a3c 176px 220px, #261e46 220px 264px, #2c2250 264px 308px, #32265a 308px 352px,
+    #382b64 352px 396px, #3f306e 396px 440px, #443475 440px 484px, #4a397c 484px 528px,
+    #503e83 528px 572px, #56438a 572px 616px, #5c4891 616px 660px, #624d98 660px 100%
+  );
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) .footer-sky,
+  :root:not(.light) .footer-sky.bright {
+    background: linear-gradient(
+      180deg,
+      #100c17 0 44px, #131020 44px 88px, #171329 88px 132px, #1c1632 132px 176px,
+      #211a3c 176px 220px, #261e46 220px 264px, #2c2250 264px 308px, #32265a 308px 352px,
+      #382b64 352px 396px, #3f306e 396px 440px, #443475 440px 484px, #4a397c 484px 528px,
+      #503e83 528px 572px, #56438a 572px 616px, #5c4891 616px 660px, #624d98 660px 100%
+    );
+  }
+}
+
+/* moonrise — the logo climbs from behind the horizon, then breathes */
+.footer-moon {
+  transform: translateY(270px);
+  transition: transform 2.8s cubic-bezier(0.22, 0.75, 0.3, 1);
+  filter: drop-shadow(0 0 14px rgb(244 214 255 / 0.7));
+}
+[data-footer].risen .footer-moon {
+  transform: translateY(0);
+}
+[data-footer].moon-seated .footer-moon {
+  animation: moonpulse 4.5s ease-in-out infinite;
+}
+[data-footer].risen .footer-sun {
+  filter: brightness(1.18);
+}
+.footer-sun {
+  transition: filter 2.8s ease;
+}
+@keyframes moonpulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 11px rgb(244 214 255 / 0.55));
+  }
+  50% {
+    filter: drop-shadow(0 0 26px rgb(244 214 255 / 0.95));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-moon {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  .footer-sun {
+    transition: none !important;
+  }
+}
+
+/* pixel ground — theme-independent dirt tiles */
+.footer-grass {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Crect width='14' height='14' fill='%233FA34D'/%3E%3Crect width='7' height='7' fill='%232E7D32'/%3E%3Crect x='7' y='7' width='7' height='7' fill='%232E7D32'/%3E%3C/svg%3E");
+}
+.footer-soil {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Crect width='14' height='14' fill='%23221029'/%3E%3Crect width='7' height='7' fill='%232B1633'/%3E%3Crect x='7' y='7' width='7' height='7' fill='%232B1633'/%3E%3C/svg%3E");
 }

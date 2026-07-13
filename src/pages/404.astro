@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/atoms/Button.astro';
+---
+
+<Layout title="Page not found — Innogenio">
+	<main
+		class="flex min-h-screen flex-col items-center justify-center gap-[22px] border-x border-line bg-paper px-section-x text-center font-sans text-ink"
+	>
+		<span class="font-mono text-note text-ink-secondary uppercase">Error · 404</span>
+		<h1 class="text-balance text-cta-h">This page doesn't exist.</h1>
+		<p class="max-w-[46ch] text-intro text-ink-secondary">
+			The address may have changed, or it never was. The homepage has everything that is.
+		</p>
+		<Button variant="pixel" href="/" label="Back to the homepage" class="mt-1.5" />
+	</main>
+</Layout>

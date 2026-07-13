@@ -1,0 +1,82 @@
+---
+/* Work-detail (case study) template (innogenio-work-vineo) — hero with
+   product mock, meta strip, capability tiles, story tabs, results band,
+   delivered tiles, prev/next rail, slim CTA, footer. Everything is
+   prop-driven so one template renders every case study in every locale;
+   site chrome (navbar/footer copy) comes from the locale's site.json
+   like the other page templates. */
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../organisms/Navbar.astro';
+import Footer from '../organisms/Footer.astro';
+import type { FooterColumn } from '../molecules/FooterNav.astro';
+import WorkHero from '../organisms/WorkHero.astro';
+import WorkMeta from '../molecules/WorkMeta.astro';
+import type { MetaItem } from '../molecules/WorkMeta.astro';
+import WorkTiles from '../organisms/WorkTiles.astro';
+import WorkStory from '../organisms/WorkStory.astro';
+import type { StoryTab } from '../organisms/WorkStory.astro';
+import WorkResults from '../organisms/WorkResults.astro';
+import type { WorkStat } from '../organisms/WorkResults.astro';
+import WorkNav from '../molecules/WorkNav.astro';
+import type { WorkNavRef } from '../molecules/WorkNav.astro';
+import CtaSection from '../organisms/CtaSection.astro';
+import type { Action } from '../organisms/CtaSection.astro';
+import type { HeroAction } from '../organisms/ListingHero.astro';
+import type { MockData } from '../molecules/WorkMock.astro';
+import type { TileItem } from '../molecules/ListingTile.astro';
+import { getSite } from '../../i18n';
+import type { Locale } from '../../i18n';
+
+export interface Work {
+	slug: string;
+	seo: { title: string; description: string };
+	name: string;
+	hero: { title: string; lead?: string; actions?: HeroAction[]; overlayText?: string };
+	mock: MockData;
+	meta: MetaItem[];
+	features: { title: string; sub?: string; items: TileItem[] };
+	story: { tabs: StoryTab[] };
+	results: { title: string; stats: WorkStat[] };
+	delivered: { title: string; items: TileItem[] };
+	cta: { titleLines: string[]; body?: string; actions: Action[] };
+}
+
+interface Props {
+	locale: Locale;
+	/** shared UI strings from the locale's work-details.json */
+	labels: { crumbRoot: string; prev: string; next: string };
+	work: Work;
+	prev: WorkNavRef;
+	next: WorkNavRef;
+}
+const { locale, labels, work, prev, next } = Astro.props;
+
+const site = getSite(locale);
+const footerColumns = site.footer.columns as FooterColumn[];
+---
+
+<Layout lang={locale} title={work.seo.title} description={work.seo.description}>
+	<Navbar slot="header" locale={locale} />
+	<WorkHero
+		crumbRoot={labels.crumbRoot}
+		name={work.name}
+		title={work.hero.title}
+		lead={work.hero.lead}
+		actions={work.hero.actions}
+		overlayText={work.hero.overlayText}
+		mock={work.mock}
+	/>
+	<WorkMeta items={work.meta} />
+	<WorkTiles
+		title={work.features.title}
+		sub={work.features.sub}
+		items={work.features.items}
+		columns={3}
+	/>
+	<WorkStory tabs={work.story.tabs} />
+	<WorkResults title={work.results.title} stats={work.results.stats} />
+	<WorkTiles title={work.delivered.title} items={work.delivered.items} columns={4} />
+	<WorkNav prev={prev} next={next} prevLabel={labels.prev} nextLabel={labels.next} />
+	<CtaSection titleLines={work.cta.titleLines} body={work.cta.body} actions={work.cta.actions} />
+	<Footer columns={footerColumns} copyright={site.footer.copyright} tagline={site.footer.tagline} />
+</Layout>

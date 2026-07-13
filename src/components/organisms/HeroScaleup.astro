@@ -1,0 +1,216 @@
+---
+/* Scroll-takeover hero (ported from the Studio "card-scaleup" prototype,
+   rebuilt on design tokens and made reusable). Layout is a header block
+   (eyebrow/breadcrumb + heading) over a flex row: a copy column on the
+   left and a feature panel on the right. On scroll at lg+ the section
+   pins and, scrubbed across one viewport, the copy column collapses to
+   zero, the row gap closes, and the panel grows to fill the width
+   (negative margins cancel the section gutter so it bleeds to the shell
+   edges); halfway through, the panel's overlay headline reveals. Below
+   lg it's a plain stacked hero with no pinning. Everything is prop-driven
+   and the script is instance-safe (scoped by data-hero-scaleup), so the
+   same organism drives the works case-study hero, the Studio hero, or any
+   future takeover hero. The panel visual comes through the default slot. */
+import Button from '../atoms/Button.astro';
+
+export interface HeroScaleupAction {
+	label: string;
+	href?: string;
+	variant?: 'pixel' | 'ghost' | 'pill';
+}
+
+interface Props {
+	/** plain uppercase eyebrow (used when no breadcrumb) */
+	eyebrow?: string;
+	/** breadcrumb pair — root muted, leaf in brand (e.g. Work / Vineo) */
+	crumb?: { root: string; leaf: string };
+	/** heading, one array entry per line */
+	titleLines?: string[];
+	/** the collapsing left-column paragraph */
+	copy?: string;
+	actions?: HeroScaleupAction[];
+	/** headline that reveals over the panel as it takes over */
+	overlayText?: string;
+	/** panel face utilities (default: shared dark textured panel) */
+	panelClass?: string;
+	/** aria-label for the panel (its content is decorative artwork) */
+	panelLabel?: string;
+	/** extra classes on the section */
+	sectionClass?: string;
+}
+
+const {
+	eyebrow,
+	crumb,
+	titleLines = [],
+	copy,
+	actions = [],
+	overlayText,
+	panelClass = 'proc-texture bg-panel-dark',
+	panelLabel,
+	sectionClass = '',
+} = Astro.props;
+---
+
+<section
+	data-hero-scaleup
+	class:list={[
+		'relative overflow-x-clip border-x border-b border-line bg-paper px-section-x font-sans text-ink lg:flex lg:min-h-screen lg:flex-col',
+		sectionClass,
+	]}
+>
+	<header class="pt-[clamp(56px,8vw,110px)] pb-10 lg:shrink-0">
+		{
+			crumb ? (
+				<div class="flex gap-2 font-mono text-kicker uppercase text-ink-secondary">
+					<span>{crumb.root}</span>
+					<span>/</span>
+					<b class="font-medium text-brand">{crumb.leaf}</b>
+				</div>
+			) : (
+				eyebrow && <p class="font-mono text-kicker uppercase text-ink-secondary">{eyebrow}</p>
+			)
+		}
+		{
+			titleLines.length > 0 && (
+				<h1 class="mt-5 text-listing-h">
+					{titleLines.map((line) => (
+						<span class="block">{line}</span>
+					))}
+				</h1>
+			)
+		}
+	</header>
+
+	<div data-hs-row class="flex flex-col gap-4 pb-12 lg:min-h-0 lg:flex-1 lg:flex-row lg:pb-0">
+		<div
+			data-hs-copy
+			class="relative z-0 min-w-0 overflow-hidden pt-6 pb-12 lg:flex-[0.3] lg:pt-8 lg:pb-16"
+		>
+			<div class="flex min-h-[16rem] flex-col justify-end lg:min-h-full lg:max-w-lg">
+				<div class="flex flex-col gap-8">
+					{copy && <p class="max-w-[34em] text-intro">{copy}</p>}
+					{actions.length > 0 && (
+						<div class="flex flex-wrap gap-3.5">
+							{actions.map((action) => (
+								<Button
+									variant={action.variant ?? 'pixel'}
+									href={action.href ?? '/'}
+									label={action.label}
+									arrow
+								/>
+							))}
+						</div>
+					)}
+				</div>
+			</div>
+		</div>
+
+		<div
+			data-hs-panel
+			role="img"
+			aria-label={panelLabel}
+			class:list={[
+				'relative z-10 flex flex-col items-center justify-center overflow-hidden border-line px-8 py-12 max-lg:border-t sm:px-10 lg:flex-[0.5] lg:px-14 lg:py-16',
+				panelClass,
+			]}
+		>
+			{
+				overlayText && (
+					<p
+						data-hs-overlay
+						class="relative z-[1] mb-8 max-w-3xl text-balance text-center text-work-h2 text-white lg:opacity-0"
+					>
+						{overlayText}
+					</p>
+				)
+			}
+			<div class="relative z-[1] flex w-full justify-center"><slot /></div>
+		</div>
+	</div>
+</section>
+
+<script>
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	document.querySelectorAll<HTMLElement>('[data-hero-scaleup]').forEach((section) => {
+		const row = section.querySelector<HTMLElement>('[data-hs-row]');
+		const copy = section.querySelector<HTMLElement>('[data-hs-copy]');
+		const panel = section.querySelector<HTMLElement>('[data-hs-panel]');
+		const overlay = section.querySelector<HTMLElement>('[data-hs-overlay]');
+		if (!row || !copy || !panel || REDUCED) return;
+
+		const sectionPad = (side: 'paddingLeft' | 'paddingRight') =>
+			parseFloat(getComputedStyle(section)[side]);
+
+		const mm = gsap.matchMedia();
+
+		// Takeover only from lg up (rem-based query, matches the CSS lg so the
+		// two agree under enlarged browser fonts). Below lg the hero stays a
+		// plain stacked column with no pinning.
+		mm.add('(min-width: 64rem)', () => {
+			// Lock the copy's content at its rendered width so the paragraph keeps
+			// its layout and gets clipped, not re-wrapped, as the column collapses.
+			Array.from(copy.children).forEach((el) => {
+				gsap.set(el, { width: el.getBoundingClientRect().width });
+			});
+
+			// Don't begin the takeover until the panel is fully on screen: on tall
+			// or enlarged viewports the heading wraps and pushes the panel below the
+			// fold, so pinning at the section top would run the collapse while the
+			// mock is still half-clipped. Triggering on the panel's bottom reaching
+			// the viewport bottom means the scrub only starts once it's fully visible
+			// (clamped to the section top so a short hero still pins at the top). The
+			// section is what gets pinned, so its gutter context — and the panel's
+			// full-bleed negative margins — stay intact through the scrub.
+			const tl = gsap.timeline({
+				scrollTrigger: {
+					trigger: panel,
+					start: 'bottom bottom',
+					end: '+=100%',
+					scrub: true,
+					pin: section,
+					anticipatePin: 1,
+					invalidateOnRefresh: true,
+				},
+			});
+
+			tl.to(copy, { flexGrow: 0, ease: 'none' }, 0)
+				.to(row, { gap: 0, ease: 'none' }, 0)
+				.to(
+					panel,
+					{
+						flexGrow: 1,
+						marginLeft: () => -sectionPad('paddingLeft'),
+						marginRight: () => -sectionPad('paddingRight'),
+						ease: 'none',
+					},
+					0
+				);
+
+			// Reserve the overlay's natural height at rest (it's kept invisible via
+			// lg:opacity-0, not collapsed) and simply fade + rise it in on takeover.
+			// Animating height:auto here clipped the text, because "auto" was
+			// measured against the panel's pre-takeover width and went stale as the
+			// panel widened and the line re-wrapped.
+			if (overlay) {
+				tl.fromTo(
+					overlay,
+					{ opacity: 0, y: 16 },
+					{ opacity: 1, y: 0, duration: 0.5, ease: 'none' },
+					0.5
+				);
+			}
+
+			return () => {
+				gsap.set([copy, row, panel], { clearProps: 'all' });
+				if (overlay) gsap.set(overlay, { clearProps: 'all' });
+			};
+		});
+	});
+</script>

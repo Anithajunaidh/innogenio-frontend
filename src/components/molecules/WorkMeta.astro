@@ -1,0 +1,30 @@
+---
+/* Work-detail meta strip (innogenio-work-vineo .meta) — four project
+   facts (client, industry, services, engagement) in hairline-divided
+   cells; two columns under 720px. Hairlines come from the gap-px /
+   line-colored-backdrop trick used by the listing grids. */
+export interface MetaItem {
+	label: string;
+	value: string;
+}
+
+interface Props {
+	items: MetaItem[];
+	label?: string;
+}
+const { items, label = 'Project facts' } = Astro.props;
+---
+
+<section
+	aria-label={label}
+	class="grid grid-cols-2 gap-px border-x border-b border-line bg-line font-sans text-ink min-[720px]:grid-cols-4"
+>
+	{
+		items.map((item) => (
+			<div class="bg-paper px-6 py-5">
+				<h6 class="font-mono text-f-head uppercase text-ink-secondary">{item.label}</h6>
+				<p class="mt-1.5 text-nav font-semibold">{item.value}</p>
+			</div>
+		))
+	}
+</section>

@@ -1,0 +1,272 @@
+---
+/* "We simplify full-stack development." (innogenio-home development
+   process) — section head and intro row with a text link, then a dark
+   textured panel where four ramp-colored phase tiles are joined by
+   signal lines with travelling SMIL diamonds, and finally a four-column
+   numbered step breakdown. Step numbers run continuously across the
+   phases (1…20 in the reference). */
+import DimensionArrow from '../atoms/DimensionArrow.astro';
+
+export interface Phase {
+	/** column heading in the step breakdown */
+	title: string;
+	/** tile label lines inside the dark panel (defaults to [title]) */
+	cardLines?: string[];
+	steps: string[];
+}
+
+interface Props {
+	title?: string;
+	intro?: string;
+	cta?: { label: string; href?: string };
+	phases?: Phase[];
+}
+
+const {
+	title = 'We simplify full-stack development.',
+	intro = "We don't just build software, we architect solutions that adapt. Every project is designed to meet your business goals, tested thoroughly for reliability, and deployed with security and performance at its core.",
+	cta = { label: 'Start a project', href: '/' },
+	phases = [
+		{
+			title: 'Discovery & Planning',
+			cardLines: ['Discovery &', 'Planning'],
+			steps: [
+				'Requirements workshop',
+				'Technical & market research',
+				'Feasibility & idea validation',
+				'Solution architecture planning',
+				'Road & milestone planning',
+				'Tech stack finalization',
+			],
+		},
+		{
+			title: 'UI/UX Design',
+			cardLines: ['UI/UX', 'Design'],
+			steps: [
+				'User flows & IA',
+				'Wireframes',
+				'Design system',
+				'High-fidelity prototypes',
+				'Usability testing & handoff',
+			],
+		},
+		{
+			title: 'Development',
+			steps: [
+				'Responsive UI development',
+				'Integrations',
+				'Backend, APIs & database',
+				'Perf, security & accessibility',
+				'Automated tests',
+			],
+		},
+		{
+			title: 'Deployment & Support',
+			cardLines: ['Deployment &', 'Support'],
+			steps: ['CI/CD & releases', 'Cloud setup', 'Monitoring & analytics', 'Post-launch iterations'],
+		},
+	],
+} = Astro.props;
+
+/* ramp tone per phase column (tiles + step-number chips) */
+const RAMP_BG = ['bg-ramp-1', 'bg-ramp-2', 'bg-ramp-3', 'bg-ramp-4'];
+
+/* step numbers run continuously across the four phases */
+let stepNo = 0;
+const numbered = phases.map((p) => ({
+	...p,
+	steps: p.steps.map((label) => ({ n: ++stepNo, label })),
+}));
+
+/* signal lines between the tiles — the reference draws these in a fixed
+   1200×560 viewBox stretched over the panel, which only lines up with the
+   CSS-grid tiles near its design width. Here the `d` geometry is computed
+   at runtime from the measured tile rects (see the script below) so the
+   connectors attach to the tiles at every breakpoint; only the ids and
+   diamond timings are declared statically. */
+const LINES = [
+	{ id: 'pp1', dur: '7s', begin: undefined },
+	{ id: 'pp2', dur: '9s', begin: undefined },
+	{ id: 'pp3', dur: '8s', begin: '1.2s' },
+];
+---
+
+<section data-reveal aria-label="Development process" class="border-t border-line py-block-y border-x border-line bg-paper font-sans text-ink">
+	<div class="rv-block px-section-x pb-7">
+		<h2 class="text-h3">{title}</h2>
+	</div>
+
+	<div class="rv-block flex flex-wrap items-center justify-between gap-4 px-section-x pt-6 pb-[30px]" style="--i:1">
+		<p class="max-w-[36em] text-intro">{intro}</p>
+		<a
+			href={cta.href}
+			class="group inline-flex items-center gap-2.5 text-btn transition-colors hover:text-brand focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+		>
+			{cta.label}
+			<DimensionArrow class="w-[26px]" />
+		</a>
+	</div>
+
+	<div
+		data-proc-panel
+		class="proc-texture rv-block relative mx-section-x overflow-hidden bg-panel-dark px-10 py-panel-y max-[720px]:px-[22px] max-[720px]:py-11"
+		style="--i:2"
+		role="img"
+		aria-label="Four development phases connected by signal lines: discovery and planning, UI/UX design, development, deployment and support."
+	>
+		<svg data-proc-lines class="absolute inset-0 h-full w-full" aria-hidden="true">
+			{
+				LINES.map((l) => (
+					<path
+						id={l.id}
+						data-proc-path
+						fill="none"
+						stroke="#fff"
+						stroke-opacity="0.3"
+						stroke-width="1"
+					/>
+				))
+			}
+			{
+				LINES.map((l) => (
+					<g fill="#fff">
+						<rect x="-4" y="-4" width="8" height="8" transform="rotate(45)" />
+						<animateMotion dur={l.dur} begin={l.begin} repeatCount="indefinite">
+							<mpath href={`#${l.id}`} />
+						</animateMotion>
+					</g>
+				))
+			}
+		</svg>
+
+		<div
+			class="relative z-1 mx-auto grid max-w-[1080px] grid-cols-2 gap-[clamp(20px,3.4vw,40px)] min-[720px]:grid-cols-4"
+		>
+			{
+				numbered.map((p, i) => (
+					<div
+						data-proc-tile
+						class:list={[
+							'flex aspect-square items-center justify-center p-5 text-center',
+							RAMP_BG[i % 4],
+						]}
+					>
+						<span class="font-mono text-proc-card text-ramp-text uppercase">
+							{(p.cardLines ?? [p.title]).map((line) => (
+								<span class="block">{line}</span>
+							))}
+						</span>
+					</div>
+				))
+			}
+		</div>
+	</div>
+
+	<div
+		class="rv-block mt-[34px] grid grid-cols-1 border-y border-line min-[560px]:grid-cols-2 min-[880px]:grid-cols-4"
+		style="--i:3"
+	>
+		{
+			/* columns keep the reference's inner 26px rhythm, but the grid's
+			   outer edges align to the section gutter: below 560px every
+			   stacked column pads px-section-x; in the 2-col band the outer
+			   side of each half does; at 4-col only the first/last column. */
+			numbered.map((p, i) => (
+				<div class="border-line p-[26px] pb-8 max-[560px]:px-section-x min-[560px]:max-[880px]:odd:pl-section-x min-[560px]:max-[880px]:even:pr-section-x max-[880px]:border-b min-[880px]:border-r min-[880px]:first:pl-section-x min-[880px]:last:border-r-0 min-[880px]:last:pr-section-x">
+					<h4 class="mb-3.5 text-btn tracking-[-0.01em]">{p.title}</h4>
+					{p.steps.map((s) => (
+						<div class="flex items-center gap-[11px] py-1.5 text-small text-ink">
+							<span
+								class:list={[
+									'flex size-[23px] flex-none items-center justify-center rounded-full text-[10.5px] font-semibold',
+									RAMP_BG[i % 4],
+									i % 4 === 3 ? 'text-white' : 'text-ramp-ink',
+								]}
+							>
+								{s.n}
+							</span>
+							{s.label}
+						</div>
+					))}
+				</div>
+			))
+		}
+	</div>
+</section>
+
+<script>
+	import { initReveal } from '../../utils/reveal';
+	initReveal();
+
+	/* Route the signal lines from the measured tile rects so the connectors
+	   stay attached to the tiles at every viewport width (a fixed stretched
+	   viewBox, as in the reference, only aligns at its design width). Each
+	   bridge starts hidden under one tile's centre, runs along a rail above
+	   or below the row, and dives back under the target tile. Attach-point
+	   fractions echo the reference's asymmetric geometry. */
+	interface Rect {
+		x: number;
+		y: number;
+		w: number;
+		h: number;
+	}
+
+	document.querySelectorAll<HTMLElement>('[data-proc-panel]').forEach((panel) => {
+		const svg = panel.querySelector<SVGSVGElement>('[data-proc-lines]');
+		const tiles = [...panel.querySelectorAll<HTMLElement>('[data-proc-tile]')];
+		const paths = [...panel.querySelectorAll<SVGPathElement>('[data-proc-path]')];
+		if (!svg || tiles.length < 4 || paths.length < 3) return;
+
+		// SMIL ignores prefers-reduced-motion, so strip the travelling diamonds
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			svg.querySelectorAll('animateMotion').forEach((a) => a.remove());
+		}
+
+		const R = 8; // corner radius of the trace bends
+
+		/* a bridge from tile a to tile b via a horizontal rail at `railY`;
+		   fa/fb are the horizontal attach fractions within each tile */
+		function bridge(a: Rect, b: Rect, fa: number, fb: number, railY: number) {
+			const ax = a.x + a.w * fa;
+			const bx = b.x + b.w * fb;
+			const ay = a.y + a.h / 2;
+			const by = b.y + b.h / 2;
+			const dx = bx > ax ? 1 : -1;
+			const dy = railY < ay ? 1 : -1; // rail above (+) or below (-) the start
+			return (
+				`M${ax} ${ay} V${railY + dy * R} ` +
+				`Q${ax} ${railY} ${ax + dx * R} ${railY} ` +
+				`H${bx - dx * R} ` +
+				`Q${bx} ${railY} ${bx} ${railY + (railY < by ? R : -R)} ` +
+				`V${by}`
+			);
+		}
+
+		function layout() {
+			const p = panel.getBoundingClientRect();
+			if (!p.width || !p.height) return;
+			svg!.setAttribute('viewBox', `0 0 ${p.width} ${p.height}`);
+			const r: Rect[] = tiles.map((t) => {
+				const b = t.getBoundingClientRect();
+				return { x: b.left - p.left, y: b.top - p.top, w: b.width, h: b.height };
+			});
+			const top = Math.min(...r.map((t) => t.y));
+			const bottom = Math.max(...r.map((t) => t.y + t.h));
+			const topRail = Math.max(12, top - 28);
+			const bottomRail = Math.min(p.height - 12, bottom + 46);
+			const ds = [
+				bridge(r[1], r[2], 0.89, 0.74, topRail), // tile 2 → 3, over the top
+				bridge(r[0], r[1], 0.15, 0.78, bottomRail), // tile 1 → 2, under
+				bridge(r[2], r[3], 0.8, 0.85, bottomRail), // tile 3 → 4, under
+			];
+			paths.forEach((el, i) => el.setAttribute('d', ds[i]));
+		}
+
+		layout();
+		let rsT = 0;
+		window.addEventListener('resize', () => {
+			clearTimeout(rsT);
+			rsT = window.setTimeout(layout, 120);
+		});
+	});
+</script>

@@ -1,0 +1,37 @@
+---
+/* 2×2 stat bento (innogenio-home-v2 .bento) — a tall stat spanning the
+   left column, a second stat top-right, and a four-square mosaic deco
+   bottom-right. Hairline gaps come from the line-colored grid backdrop. */
+interface Stat {
+	value: string;
+	caption: string;
+}
+
+interface Props {
+	/** Two stats: [0] fills the left column, [1] sits top-right. */
+	stats: Stat[];
+}
+const { stats } = Astro.props;
+
+const cellClass =
+	'flex min-h-[clamp(150px,19vw,210px)] flex-col justify-between gap-5 bg-paper p-[clamp(20px,2.5vw,32px)]';
+---
+
+<div class="grid w-full grid-cols-2 grid-rows-2 gap-px border border-line bg-line">
+	<div class:list={[cellClass, 'col-start-1 row-span-2']}>
+		<span class="text-stat tabular-nums">{stats[0]?.value}</span>
+		<span class="max-w-[24ch] text-sm leading-[1.42] text-ink-secondary">{stats[0]?.caption}</span>
+	</div>
+	<div class:list={[cellClass, 'col-start-2 row-start-1']}>
+		<span class="text-stat tabular-nums">{stats[1]?.value}</span>
+		<span class="max-w-[24ch] text-sm leading-[1.42] text-ink-secondary">{stats[1]?.caption}</span>
+	</div>
+	<div class="col-start-2 row-start-2 bg-line" aria-hidden="true">
+		<div class="grid size-full grid-cols-2 grid-rows-2 gap-px">
+			<i class="bg-fill-warm"></i>
+			<i class="bg-brand-soft"></i>
+			<i class="bg-paper"></i>
+			<i class="bg-fill-warm"></i>
+		</div>
+	</div>
+</div>

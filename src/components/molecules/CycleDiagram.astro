@@ -1,0 +1,49 @@
+---
+/* Rotating lifecycle diagram (innogenio-home-v2 .cyc-stage) — a slowly
+   spinning ring with diamond waypoints on the lilac grid panel, and four
+   phase cards pinned at the compass points. The active card (data-on)
+   highlights in brand purple, synced by the owning section's script.
+   Ring/card colors are artwork constants, deliberately theme-independent. */
+interface Props {
+	/** Four phase labels, clockwise from the top. */
+	labels: string[];
+}
+const { labels } = Astro.props;
+
+const positions = [
+	'top-[17.3%] left-1/2',
+	'top-1/2 left-[82.7%]',
+	'top-[82.7%] left-1/2',
+	'top-1/2 left-[17.3%]',
+];
+---
+
+<div class="relative aspect-square w-[min(480px,92%)]">
+	<svg class="absolute inset-0 h-full w-full" viewBox="0 0 520 520">
+		<g class="animate-cycle-spin origin-[260px_260px] motion-reduce:animate-none">
+			<circle cx="260" cy="260" r="170" class="fill-none stroke-[#3A2150] stroke-[1.2]"></circle>
+			<rect x="376.5" y="136.5" width="7" height="7" transform="rotate(45 380 140)" fill="#17121F"
+			></rect>
+			<rect x="376.5" y="376.5" width="7" height="7" transform="rotate(45 380 380)" fill="#17121F"
+			></rect>
+			<rect x="136.5" y="376.5" width="7" height="7" transform="rotate(45 140 380)" fill="#17121F"
+			></rect>
+			<rect x="136.5" y="136.5" width="7" height="7" transform="rotate(45 140 140)" fill="#17121F"
+			></rect>
+		</g>
+	</svg>
+	{
+		labels.slice(0, 4).map((label, i) => (
+			<span
+				data-cycle-card
+				data-on={String(i === 0)}
+				class:list={[
+					'text-cyc-card absolute -translate-x-1/2 -translate-y-1/2 border border-[rgba(23,18,31,0.08)] bg-white px-[27px] py-[17px] font-mono whitespace-nowrap text-[#17121f] uppercase shadow-[0_6px_18px_rgba(40,10,60,0.10)] transition-[color,border-color,box-shadow] duration-250 data-[on=true]:border-brand data-[on=true]:text-brand data-[on=true]:shadow-[0_8px_22px_rgba(159,0,212,0.25)]',
+					positions[i],
+				]}
+			>
+				{label}
+			</span>
+		))
+	}
+</div>

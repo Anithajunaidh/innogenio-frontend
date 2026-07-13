@@ -1,0 +1,102 @@
+---
+/* Etched line icon (innogenio-home-v2 "tn" icons) — a hand-wobbled square
+   frame plus a thin-line glyph, layered twice: ink foreground over a
+   rotated translucent brand ghost plate. Styling/animation lives in
+   global.css under "Etched icons"; the script below draws each icon in
+   when it scrolls into view. */
+const FRAME = 'M15 14.2 L49.6 14.8 L49 49.6 L14.4 49 Z';
+
+const GLYPHS = {
+	code: ['M27 24.5 L20 32 L27 39.5', 'M37 24.5 L44 32 L37 39.5', 'M34.4 22.5 L29.6 41.5'],
+	ai: [
+		'M32 20.5 V43.5',
+		'M20.5 32 H43.5',
+		'M24 24 L40 40',
+		'M40 24 L24 40',
+		'M29.4 32 a2.6 2.6 0 1 0 5.2 0 a2.6 2.6 0 1 0 -5.2 0',
+	],
+	erp: ['M21.5 21.5 h21 v5.2 h-21 Z', 'M21.5 29.4 h21 v5.2 h-21 Z', 'M21.5 37.3 h21 v5.2 h-21 Z'],
+	data: [
+		'M22.5 42 V33',
+		'M29.5 42 V27',
+		'M36.5 42 V31',
+		'M43 42 V23.5',
+		'M39.6 27 L43 23.5 L46.4 27',
+		'M20 42 H46.5',
+	],
+	factory: [
+		'M20.5 42 V27 l7 5 v-5 l7 5 v-5 h9.5 V42 Z',
+		'M25.5 42 v-5.5 h4.5 V42',
+		'M37 34.5 h3.5',
+	],
+	bank: [
+		'M20 27.5 L32 20.5 L44 27.5 Z',
+		'M22.5 30.5 V39.5',
+		'M28.8 30.5 V39.5',
+		'M35.2 30.5 V39.5',
+		'M41.5 30.5 V39.5',
+		'M20 42 H44',
+	],
+	cart: [
+		'M19.5 23 h4 l3.6 13.5 h13 l3-9.5 H25',
+		'M27.3 41 a1.9 1.9 0 1 0 3.8 0 a1.9 1.9 0 1 0 -3.8 0',
+		'M36.8 41 a1.9 1.9 0 1 0 3.8 0 a1.9 1.9 0 1 0 -3.8 0',
+	],
+	health: ['M28.6 21.5 h6.8 v7.1 h7.1 v6.8 h-7.1 v7.1 h-6.8 v-7.1 h-7.1 v-6.8 h7.1 Z'],
+	clock: ['M20 32 a12 12 0 1 0 24 0 a12 12 0 1 0 -24 0', 'M32 25.5 V32 L37.5 35.2'],
+	flag: ['M24.5 20.5 V43.5', 'M24.5 22 H41.5 L37.5 27.5 L41.5 33 H24.5'],
+	ops: [
+		'M24 32 a8 8 0 1 0 16 0 a8 8 0 1 0 -16 0',
+		'M32 20.5 v5',
+		'M43.5 32 h-5',
+		'M32 43.5 v-5',
+		'M20.5 32 h5',
+	],
+} as const;
+
+export type EtchedIconName = keyof typeof GLYPHS;
+
+interface Props {
+	name: EtchedIconName;
+	/** Frameless contour glyph for small icon slots (innogenio-home-v2 .tn.bare) */
+	bare?: boolean;
+	class?: string;
+}
+const { name, bare = false, class: className = '' } = Astro.props;
+const glyph = GLYPHS[name];
+---
+
+<svg class:list={['tn', bare && 'bare', className]} viewBox="0 0 64 64" aria-hidden="true">
+	{
+		['bg', 'fg'].map((layer) => (
+			<g class={layer}>
+				{!bare && <path pathLength="1" d={FRAME} />}
+				<g class="gl">
+					{glyph.map((d) => (
+						<path pathLength="1" d={d} />
+					))}
+				</g>
+			</g>
+		))
+	}
+</svg>
+
+<script>
+	// draw each icon in when it scrolls into view
+	if ('IntersectionObserver' in window) {
+		const io = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((e) => {
+					if (e.isIntersecting) {
+						e.target.classList.add('draw');
+						io.unobserve(e.target);
+					}
+				});
+			},
+			{ threshold: 0.3 }
+		);
+		document.querySelectorAll('svg.tn').forEach((el) => io.observe(el));
+	} else {
+		document.querySelectorAll('svg.tn').forEach((el) => el.classList.add('draw'));
+	}
+</script>

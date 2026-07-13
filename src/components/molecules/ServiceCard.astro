@@ -1,0 +1,335 @@
+---
+/* Service/industry/case card (innogenio-home-v2 .card / .card-img / .wk-card).
+   Variants:
+   - default: paper face that brightens to card-hover; contour icon + title +
+              expanding description. Optionally toned (`pixelTone`) so the
+              face dissolves into a charcoal→purple or grey→white pixel
+              bloom on hover, alternating per card (.card.px-charcoal /
+              .card.px-grey in the reference).
+   - image:   cinematic night backdrop (IndustryBackdrop) behind white text;
+              the scene zooms slightly on hover and can be mirrored.
+   - case:    colored carousel slide — brand row, category chip, headline,
+              white CTA with dimension arrow, faint deco sprite, and a
+              pixel-dissolve hover (canvas driven by the carousel script). */
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import ContourIcon from '../atoms/ContourIcon.astro';
+import type { ContourIconName } from '../atoms/ContourIcon.astro';
+import type { EtchedIconName } from '../atoms/EtchedIcon.astro';
+import IndustryBackdrop from '../atoms/IndustryBackdrop.astro';
+import PixelSprite from '../atoms/PixelSprite.astro';
+import type { PixelSpriteName } from '../atoms/PixelSprite.astro';
+import DimensionArrow from '../atoms/DimensionArrow.astro';
+
+interface Props {
+	variant?: 'default' | 'image' | 'case';
+	title: string;
+	/* default/image variants */
+	icon?: EtchedIconName;
+	body?: string;
+	/** default variant only: alternating pixel-bloom hover tone */
+	pixelTone?: 'charcoal' | 'grey';
+	/** image variant only: flip the backdrop horizontally */
+	mirror?: boolean;
+	/* case variant */
+	brand?: string;
+	brandIcon?: PixelSpriteName;
+	chip?: string;
+	ctaLabel?: string;
+	href?: string;
+	deco?: PixelSpriteName;
+	/** case variant: card tone (bg-case-1/2/3) */
+	tone?: 1 | 2 | 3;
+	/** case variant: photo background in place of the pixel-dissolve tone;
+	 * falls back to the tone + dissolve animation when omitted */
+	image?: ImageMetadata;
+}
+const {
+	variant = 'default',
+	title,
+	icon,
+	body,
+	pixelTone,
+	mirror = false,
+	brand,
+	brandIcon = 'logo',
+	chip,
+	ctaLabel = 'Learn more',
+	href = '/',
+	deco,
+	tone = 1,
+	image,
+} = Astro.props;
+
+const isImage = variant === 'image';
+const isCase = variant === 'case';
+const toneClass = { 1: 'bg-case-1', 2: 'bg-case-2', 3: 'bg-case-3' }[tone];
+const isCharcoal = pixelTone === 'charcoal';
+/* the grey bloom is fixed white, so hover text can't stay on the
+   theme-flipping ink tokens (white-on-white in dark mode): the title goes
+   brand purple (ghost-button style, theme-independent case-1) and the
+   body/icon ground to fixed dark values */
+const isGrey = pixelTone === 'grey';
+const raised = isImage || Boolean(pixelTone);
+---
+
+{
+	isCase ? (
+		<article
+			data-case-card
+			class:list={[
+				'relative flex min-h-[400px] shrink-0 basis-[88%] cursor-default flex-col items-start overflow-hidden rounded-card px-6 py-[26px] text-white min-[720px]:min-h-[474px] min-[720px]:basis-[min(900px,80%)] min-[720px]:px-12 min-[720px]:pt-[42px] min-[720px]:pb-10',
+				toneClass,
+			]}
+		>
+			{image ? (
+				<>
+					<Image
+						src={image}
+						alt=""
+						class="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
+					/>
+					<div
+						class="pointer-events-none absolute inset-0 z-0 bg-linear-to-t from-black/75 via-black/25 to-black/5"
+						aria-hidden="true"
+					/>
+				</>
+			) : (
+				<canvas
+					data-case-canvas
+					aria-hidden="true"
+					class="pointer-events-none absolute inset-0 z-0 h-full w-full"
+				/>
+			)}
+			{/* {deco && (
+				<PixelSprite
+					name={deco}
+					primary="#F0D4FB"
+					secondary="#B93FE6"
+					class="pointer-events-none absolute right-[-3%] bottom-[-8%] z-1 w-[42%] opacity-[.22]"
+				/>
+			)} */}
+			<div class="relative z-1 flex items-center gap-[11px] text-case-brand">
+				<PixelSprite name={brandIcon} primary="#ffffff" secondary="#C4B5FD" class="w-[22px]" />
+				{brand}
+			</div>
+			{chip && (
+				<span class="text-case-chip relative z-1 mt-[clamp(44px,6vw,82px)] rounded-chip bg-white px-2.5 py-[5px] font-mono text-ink-fixed uppercase">
+					{chip}
+				</span>
+			)}
+			<h3 class="relative z-1 mt-[17px] max-w-[13em] text-card-h">{title}</h3>
+			<a
+				href={href}
+				class="group relative z-1 mt-auto inline-flex items-center gap-3 rounded-card bg-white px-[21px] py-[13px] text-nav font-medium text-ink-fixed transition-colors hover:bg-brand-soft focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+			>
+				{ctaLabel}
+				<DimensionArrow />
+			</a>
+		</article>
+	) : (
+		<article
+			data-card
+			data-tone={pixelTone}
+			tabindex="0"
+			class:list={[
+				'group flex min-h-[clamp(340px,34vw,470px)] cursor-default flex-col items-start p-[26px] focus-visible:outline-none',
+				isImage
+					? 'relative overflow-hidden bg-card-night text-white'
+					: 'bg-paper transition-[background-color] duration-250 hover:bg-card-hover focus-within:bg-card-hover',
+				pixelTone && 'relative overflow-hidden',
+			]}
+		>
+			{isImage &&
+				(image ? (
+					<>
+						<div
+							class:list={[
+								'pointer-events-none absolute inset-0 z-0 overflow-hidden',
+								mirror && '-scale-x-100',
+							]}
+							aria-hidden="true"
+						>
+							<Image
+								src={image}
+								alt=""
+								class="h-full w-full object-cover transition-transform duration-[600ms] group-hover:scale-105"
+							/>
+						</div>
+						<div
+							class="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(120%_90%_at_50%_40%,transparent_45%,rgba(6,0,10,0.6)_100%),linear-gradient(180deg,rgba(13,1,23,0.42)_0%,rgba(13,1,23,0.12)_42%,rgba(13,1,23,0.88)_100%)]"
+							aria-hidden="true"
+						/>
+					</>
+				) : (
+					<IndustryBackdrop class={mirror ? '-scale-x-100' : ''} />
+				))}
+			{
+				pixelTone && (
+					<canvas
+						data-service-canvas
+						aria-hidden="true"
+						class="pointer-events-none absolute inset-0 z-0 h-full w-full"
+					/>
+				)
+			}
+			{
+				icon && (
+					<ContourIcon
+						name={icon as ContourIconName}
+						class:list={[
+							raised && 'relative z-1',
+							isImage && '[--ctr-st:#fff] [--ctr-nd:#E2A9F7]',
+							isCharcoal &&
+								'[&_.st]:transition-colors [&_.st]:duration-350 group-hover:[&_.st]:stroke-white group-focus-within:[&_.st]:stroke-white',
+							isGrey &&
+								'[&_.st]:transition-colors [&_.st]:duration-350 group-hover:[--ctr-st:var(--color-ink-fixed)] group-focus-within:[--ctr-st:var(--color-ink-fixed)]',
+						]}
+					/>
+				)
+			}
+			<div class:list={['mt-auto', raised && 'relative z-1']}>
+				<h3
+					class:list={[
+						'text-card-title',
+						isCharcoal &&
+							'transition-colors duration-350 group-hover:text-white group-focus-within:text-white',
+						isGrey &&
+							'transition-colors duration-350 group-hover:text-case-1 group-focus-within:text-case-1',
+					]}
+				>
+					{title}
+				</h3>
+				<p
+					class:list={[
+						'max-h-0 overflow-hidden text-sm leading-normal opacity-0 transition-[max-height,opacity,margin-top,color] duration-350 group-hover:mt-[11px] group-hover:max-h-[130px] group-hover:opacity-100 group-focus-within:mt-[11px] group-focus-within:max-h-[130px] group-focus-within:opacity-100',
+						isImage ? 'text-white/78' : 'text-ink-secondary',
+						isCharcoal && 'group-hover:text-white/82 group-focus-within:text-white/82',
+						isGrey &&
+							'group-hover:text-ink-secondary-fixed group-focus-within:text-ink-secondary-fixed',
+					]}
+				>
+					{body}
+				</p>
+			</div>
+		</article>
+	)
+}
+
+<script>
+	/* ── service-card pixel-dissolve (innogenio-home-v2 design-language
+	   bloom) — the toned card face breaks into a mosaic of cells radiating
+	   from the centre on hover, graded charcoal→purple or grey→white
+	   depending on data-tone, with an idle shimmer while hovered. Same
+	   model as the button/case-card dissolves, just a bigger 14px cell to
+	   match the reference's card-scale bloom. */
+	import { charcoalPixelShades, greyPixelShades } from '../../constants/design/color';
+
+	const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	interface Cell {
+		x: number;
+		y: number;
+		delay: number;
+		shade: string;
+		p: number;
+	}
+
+	const CELL = 14,
+		FADE = 150,
+		SPREAD = 240,
+		HIDE = 190;
+
+	document.querySelectorAll<HTMLElement>('[data-tone]').forEach((card) => {
+		const cv = card.querySelector<HTMLCanvasElement>('[data-service-canvas]');
+		if (!cv) return;
+		const SHADES = card.dataset.tone === 'grey' ? greyPixelShades : charcoalPixelShades;
+
+		let ctx: CanvasRenderingContext2D | null = null;
+		let cells: Cell[] | null = null;
+		let cols = 0,
+			rows = 0;
+		let raf = 0,
+			dir = 0,
+			t0 = 0,
+			shimmerLast = 0;
+
+		function build() {
+			const r = card.getBoundingClientRect();
+			const d = devicePixelRatio || 1;
+			cv!.width = Math.round(r.width * d);
+			cv!.height = Math.round(r.height * d);
+			ctx = cv!.getContext('2d')!;
+			ctx.setTransform(d, 0, 0, d, 0, 0);
+			cols = Math.ceil(r.width / CELL);
+			rows = Math.ceil(r.height / CELL);
+			const cxm = (cols - 1) / 2,
+				cym = (rows - 1) / 2;
+			const maxD = Math.hypot(cxm, cym) || 1;
+			cells = [];
+			for (let y = 0; y < rows; y++)
+				for (let x = 0; x < cols; x++) {
+					cells.push({
+						x,
+						y,
+						delay: (Math.hypot(x - cxm, y - cym) / maxD) * SPREAD + Math.random() * 50,
+						shade: SHADES[(Math.random() * SHADES.length) | 0],
+						p: 0,
+					});
+				}
+		}
+
+		function paint(ts: number) {
+			const t = ts - t0;
+			let busy = false;
+			ctx!.clearRect(0, 0, cols * CELL, rows * CELL);
+			for (const c of cells!) {
+				let p;
+				if (dir > 0) {
+					p = Math.max(c.p, Math.min(1, (t - c.delay) / FADE));
+				} else {
+					const hd = ((SPREAD - c.delay) / SPREAD) * HIDE;
+					p = Math.max(0, Math.min(c.p, 1 - (t - hd) / FADE));
+				}
+				c.p = p;
+				if (p > 0) {
+					ctx!.globalAlpha = p;
+					ctx!.fillStyle = c.shade;
+					ctx!.fillRect(c.x * CELL, c.y * CELL, CELL, CELL);
+				}
+				if ((dir > 0 && p < 1) || (dir < 0 && p > 0)) busy = true;
+			}
+			ctx!.globalAlpha = 1;
+			if (dir > 0 && !busy && ts - shimmerLast > 180) {
+				shimmerLast = ts;
+				const n = Math.ceil(cells!.length * 0.04);
+				for (let i = 0; i < n; i++) {
+					const c = cells![(Math.random() * cells!.length) | 0];
+					c.shade = SHADES[(Math.random() * SHADES.length) | 0];
+					ctx!.fillStyle = c.shade;
+					ctx!.fillRect(c.x * CELL, c.y * CELL, CELL, CELL);
+				}
+			}
+			if (dir > 0 || busy) raf = requestAnimationFrame(paint);
+			else raf = 0;
+		}
+
+		function go(d2: number) {
+			if (REDUCED) return;
+			if (d2 > 0 && dir <= 0) build();
+			if (!cells) return;
+			dir = d2;
+			t0 = performance.now();
+			cancelAnimationFrame(raf);
+			raf = requestAnimationFrame(paint);
+		}
+
+		card.addEventListener('mouseenter', () => go(1));
+		card.addEventListener('mouseleave', () => go(-1));
+		card.addEventListener('focusin', () => go(1));
+		card.addEventListener('focusout', () => go(-1));
+		window.addEventListener('resize', () => {
+			if (dir > 0) build();
+		});
+	});
+</script>

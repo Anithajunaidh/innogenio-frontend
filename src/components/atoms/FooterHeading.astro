@@ -1,8 +1,10 @@
 ---
+/* Footer column heading (innogenio-home-v2 .f-col h5) — mono, uppercase,
+   muted. */
 interface Props {
-  text: string;
+	text: string;
 }
 const { text } = Astro.props;
 ---
 
-<h3 class="text-xs font-semibold uppercase font-mono">{text}</h3>
+<h3 class="font-mono text-f-head text-ink-secondary uppercase">{text}</h3>

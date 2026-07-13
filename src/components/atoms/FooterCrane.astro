@@ -1,0 +1,104 @@
+---
+/* Pixel crane (innogenio-home-v2 #craneCv) — a canvas where a crane lowers
+   glowing cubes onto a growing stack; at four cubes it holds, clears, and
+   restarts. Static three-cube frame under reduced motion. */
+interface Props {
+	class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<canvas
+	data-crane-canvas
+	width="92"
+	height="72"
+	class:list={['[image-rendering:pixelated]', className]}
+	aria-hidden="true"></canvas>
+
+<script>
+	document.querySelectorAll<HTMLCanvasElement>('[data-crane-canvas]').forEach((cv) => {
+		const ctx = cv.getContext('2d');
+		if (!ctx) return;
+		const W = cv.width,
+			H = cv.height; // 92 × 72 logical pixels
+		const SIL = '#2B1633',
+			CUBE = '#C155EC',
+			CUBE_L = '#ECC8FA';
+		const CUBE_S = 9,
+			STACK_X = 60,
+			JIB_Y = 8,
+			MAX = 4;
+		let placed = 0,
+			phase = 'lower',
+			phaseT = 0,
+			cubeY = JIB_Y + 4,
+			last = 0;
+
+		function drawCrane() {
+			ctx!.fillStyle = SIL;
+			ctx!.fillRect(12, JIB_Y, 3, H - JIB_Y); // mast
+			ctx!.fillRect(12, JIB_Y, 56, 3); // jib
+			ctx!.fillRect(4, JIB_Y + 3, 8, 5); // counterweight
+			ctx!.fillRect(26, JIB_Y + 3, 2, 6); // strut
+			ctx!.fillRect(8, H - 3, 12, 3); // base
+		}
+		function drawCube(x: number, y: number, flash: boolean) {
+			ctx!.fillStyle = flash ? '#FFFFFF' : CUBE;
+			ctx!.fillRect(x, y, CUBE_S, CUBE_S);
+			ctx!.fillStyle = flash ? '#FFFFFF' : CUBE_L;
+			ctx!.fillRect(x, y, CUBE_S, 2); // lit top face
+		}
+		function drawStack(n: number, flashTop: boolean) {
+			for (let i = 0; i < n; i++) {
+				drawCube(STACK_X, H - CUBE_S * (i + 1), flashTop && i === n - 1);
+			}
+		}
+		function frame(ts: number) {
+			const dt = Math.min(50, ts - last);
+			last = ts;
+			ctx!.clearRect(0, 0, W, H);
+			drawCrane();
+			const targetY = H - CUBE_S * (placed + 1);
+			if (phase === 'lower') {
+				cubeY = Math.min(targetY, cubeY + dt * 0.028);
+				ctx!.fillStyle = SIL;
+				ctx!.fillRect(STACK_X + 4, JIB_Y + 3, 1, Math.max(0, cubeY - JIB_Y - 3)); // cable
+				drawStack(placed, false);
+				drawCube(STACK_X, cubeY, false);
+				if (cubeY >= targetY) {
+					phase = 'flash';
+					phaseT = ts;
+				}
+			} else if (phase === 'flash') {
+				drawStack(placed + 1, ts - phaseT < 160);
+				if (ts - phaseT > 320) {
+					placed++;
+					if (placed >= MAX) {
+						phase = 'hold';
+						phaseT = ts;
+					} else {
+						phase = 'lower';
+						cubeY = JIB_Y + 4;
+					}
+				}
+			} else {
+				// hold, then clear and restart
+				drawStack(placed, false);
+				if (ts - phaseT > 1600) {
+					placed = 0;
+					phase = 'lower';
+					cubeY = JIB_Y + 4;
+				}
+			}
+			requestAnimationFrame(frame);
+		}
+
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			ctx.clearRect(0, 0, W, H);
+			drawCrane();
+			drawStack(3, false);
+		} else {
+			requestAnimationFrame(frame);
+		}
+	});
+</script>

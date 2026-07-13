@@ -1,0 +1,27 @@
+---
+/* Stepped sun disc (innogenio-home-v2 .f-sun) — six stacked pixel bands
+   fading up from the horizon. Brightens when the footer rises (see the
+   .footer-sun rule in global.css). */
+interface Props {
+	class?: string;
+}
+const { class: className = '' } = Astro.props;
+
+const bands = [
+	{ x: 120, y: 0, w: 60, o: 0.14 },
+	{ x: 95, y: 16, w: 110, o: 0.22 },
+	{ x: 70, y: 32, w: 160, o: 0.33 },
+	{ x: 45, y: 48, w: 210, o: 0.48 },
+	{ x: 20, y: 64, w: 260, o: 0.66 },
+	{ x: 0, y: 80, w: 300, o: 0.85 },
+];
+---
+
+<svg
+	class:list={['footer-sun', className]}
+	viewBox="0 0 300 96"
+	preserveAspectRatio="xMidYMax meet"
+	aria-hidden="true"
+>
+	{bands.map((b) => <rect x={b.x} y={b.y} width={b.w} height="16" fill="#F5E6FF" opacity={b.o} />)}
+</svg>

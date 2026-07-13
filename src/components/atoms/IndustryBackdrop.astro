@@ -1,0 +1,90 @@
+---
+/* Cinematic industry backdrop (innogenio-home-v2 INDUSTRY_BG) — one SVG
+   "photograph": dusk sky, gel-lit facade slats, monument silhouette with
+   rim light, haze, film grain, vignette. Duplicate gradient/filter ids
+   across instances are fine — every instance defines identical defs, so
+   references resolve to the same artwork. Sits behind card content; the
+   hosting card's `group` hover zooms the scene. */
+interface Props {
+	class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['pointer-events-none absolute inset-0 z-0', className]} aria-hidden="true">
+	<svg
+		viewBox="0 0 900 1100"
+		preserveAspectRatio="xMidYMid slice"
+		class="block h-full w-full transition-transform duration-[600ms] group-hover:scale-105"
+	>
+		<defs>
+			<linearGradient id="ibSky" x1="0" y1="0" x2="0" y2="1">
+				<stop offset="0" stop-color="#0E0118"></stop>
+				<stop offset=".45" stop-color="#1D0230"></stop>
+				<stop offset="1" stop-color="#0A0110"></stop>
+			</linearGradient>
+			<linearGradient id="ibSlat" x1="0" y1="0" x2="0" y2="1">
+				<stop offset="0" stop-color="#F0B3FF"></stop>
+				<stop offset=".35" stop-color="#D45CFF"></stop>
+				<stop offset="1" stop-color="#5E0783"></stop>
+			</linearGradient>
+			<linearGradient id="ibSlat2" x1="0" y1="0" x2="0" y2="1">
+				<stop offset="0" stop-color="#FF9DE8"></stop>
+				<stop offset=".4" stop-color="#B833F0"></stop>
+				<stop offset="1" stop-color="#3F0555"></stop>
+			</linearGradient>
+			<linearGradient id="ibRim" x1="0" y1="0" x2="0" y2="1">
+				<stop offset="0" stop-color="#F3C8FF" stop-opacity=".95"></stop>
+				<stop offset=".6" stop-color="#D45CFF" stop-opacity=".5"></stop>
+				<stop offset="1" stop-color="#D45CFF" stop-opacity="0"></stop>
+			</linearGradient>
+			<filter id="ibSoft" x="-60%" y="-60%" width="220%" height="220%">
+				<feGaussianBlur stdDeviation="70"></feGaussianBlur>
+			</filter>
+			<filter id="ibGrain">
+				<feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"
+				></feTurbulence>
+				<feColorMatrix type="saturate" values="0"></feColorMatrix>
+				<feComponentTransfer>
+					<feFuncA type="linear" slope="0.09" intercept="0"></feFuncA>
+				</feComponentTransfer>
+			</filter>
+			<radialGradient id="ibVin" cx=".5" cy=".42" r=".75">
+				<stop offset=".55" stop-color="#000" stop-opacity="0"></stop>
+				<stop offset="1" stop-color="#06000A" stop-opacity=".8"></stop>
+			</radialGradient>
+		</defs>
+		<rect width="900" height="1100" fill="url(#ibSky)"></rect>
+		<g transform="skewY(-7)">
+			<rect x="300" y="140" width="640" height="1100" fill="#17022A"></rect>
+			<rect x="330" y="180" width="58" height="620" rx="6" fill="url(#ibSlat2)" opacity=".8"></rect>
+			<rect x="425" y="165" width="58" height="680" rx="6" fill="url(#ibSlat)" opacity=".95"></rect>
+			<rect x="520" y="150" width="58" height="740" rx="6" fill="url(#ibSlat2)" opacity=".7"></rect>
+			<rect x="615" y="140" width="58" height="800" rx="6" fill="url(#ibSlat)" opacity=".9"></rect>
+			<rect x="710" y="130" width="58" height="860" rx="6" fill="url(#ibSlat2)" opacity=".8"></rect>
+			<rect x="805" y="120" width="58" height="920" rx="6" fill="url(#ibSlat)" opacity=".95"></rect>
+		</g>
+		<g filter="url(#ibSoft)">
+			<ellipse cx="640" cy="420" rx="260" ry="180" fill="#B833F0" opacity=".33"></ellipse>
+			<ellipse cx="820" cy="700" rx="200" ry="160" fill="#FF6BD5" opacity=".16"></ellipse>
+		</g>
+		<path
+			d="M300 1100 V720 h30 V560 h30 V430 h30 V330 h80 v100 h30 v130 h30 v160 h30 v380 Z"
+			fill="#0D0117"></path>
+		<path
+			d="M470 330 v100 h30 v130 h30 v160 h30 v380"
+			fill="none"
+			stroke="url(#ibRim)"
+			stroke-width="3"></path>
+		<path d="M390 330 h80" stroke="#F3C8FF" stroke-width="3" opacity=".9"></path>
+		<path d="M0 0 L240 90 V1100 H0 Z" fill="#080011"></path>
+		<path d="M240 90 V1100" stroke="#4A0768" stroke-width="2" opacity=".6"></path>
+		<rect width="900" height="1100" fill="url(#ibVin)"></rect>
+		<rect width="900" height="1100" filter="url(#ibGrain)" class="mix-blend-overlay"></rect>
+	</svg>
+	<!-- cinematic grade: vignette + top/bottom legibility gradients -->
+	<div
+		class="absolute inset-0 z-[2] bg-[radial-gradient(120%_90%_at_50%_40%,transparent_55%,rgba(6,0,10,0.55)_100%),linear-gradient(180deg,rgba(13,1,23,0.32)_0%,rgba(13,1,23,0.06)_42%,rgba(13,1,23,0.84)_100%)]"
+	>
+	</div>
+</div>

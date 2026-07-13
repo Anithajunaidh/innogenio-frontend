@@ -1,0 +1,34 @@
+---
+/* Bare input atom — borderless, transparent field for composed rows
+   (newsletter strip); the wrapping molecule owns the border/background.
+   Sizing/layout (grow, width) comes in via the class prop. */
+interface Props {
+	type?: string;
+	name?: string;
+	placeholder?: string;
+	ariaLabel?: string;
+	required?: boolean;
+	class?: string;
+}
+
+const {
+	type = 'text',
+	name,
+	placeholder,
+	ariaLabel,
+	required = false,
+	class: className = '',
+} = Astro.props;
+---
+
+<input
+	{type}
+	{name}
+	{placeholder}
+	{required}
+	aria-label={ariaLabel}
+	class:list={[
+		'bg-transparent px-4 py-[13px] text-nav text-ink placeholder:text-ink-secondary focus:outline-none',
+		className,
+	]}
+/>

@@ -1,0 +1,110 @@
+---
+/* "One continuous loop, from idea to impact." (innogenio-home-v2
+   lifecycle section) — section head and intro row with a text link, then
+   a two-column cycle: single-open phase accordion on the left, rotating
+   cycle diagram on the right. Opening a phase highlights the matching
+   diagram card. */
+import DimensionArrow from '../atoms/DimensionArrow.astro';
+import CycleAccordionItem from '../molecules/CycleAccordionItem.astro';
+import CycleDiagram from '../molecules/CycleDiagram.astro';
+
+interface Step {
+	title: string;
+	body: string;
+	/** Short label for the diagram card (defaults to the first word of title) */
+	label?: string;
+}
+
+interface Props {
+	title?: string;
+	intro?: string;
+	cta?: { label: string; href?: string };
+	steps?: Step[];
+}
+
+const {
+	title = 'One continuous loop, from idea to impact.',
+	intro = 'Our four phases run as a cycle, not a waterfall — every release feeds what we learn back into discovery, so the product improves with every turn.',
+	cta = { label: 'See full process', href: '/' },
+	steps = [
+		{
+			title: 'Discovery & planning.',
+			label: 'Discovery',
+			body: 'We bring your goals, constraints, and market context into one unified picture. Requirements workshops, feasibility checks, and architecture planning end in a roadmap and a tech stack you can commit to.',
+		},
+		{
+			title: 'UI/UX design.',
+			label: 'Design',
+			body: 'User flows, wireframes, and a design system grow into high-fidelity prototypes — usability-tested before a single line of production code, so what we build is what users actually need.',
+		},
+		{
+			title: 'Development.',
+			label: 'Development',
+			body: 'Responsive interfaces, integrations, backend and APIs — engineered against performance, security, and accessibility budgets, and covered by automated tests from day one.',
+		},
+		{
+			title: 'Deployment & support.',
+			label: 'Deployment',
+			body: 'CI/CD pipelines, cloud setup, and monitoring take the product live. Post-launch iterations keep it improving with real usage data — and feed the next turn of the loop.',
+		},
+	],
+} = Astro.props;
+
+const labels = steps.map((s) => s.label ?? s.title.split(' ')[0].replace(/[.&]/g, ''));
+---
+
+<section aria-label="Development process — lifecycle view" class="bg-paper font-sans text-ink">
+	<div class="border-t border-line px-section-x pb-7">
+		<h2 class="text-h3">{title}</h2>
+	</div>
+
+	<div class="flex flex-wrap items-center justify-between gap-4 px-section-x pt-6 pb-[30px]">
+		<p class="max-w-[36em] text-intro">{intro}</p>
+		<a
+			href={cta.href}
+			class="group inline-flex items-center gap-2.5 text-btn transition-colors hover:text-brand focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+		>
+			{cta.label}
+			<DimensionArrow class="w-[26px]" />
+		</a>
+	</div>
+
+	<div class="px-section-x pb-section-y">
+		<div data-cycle class="grid grid-cols-1 border border-line min-[880px]:grid-cols-[1.1fr_1fr]">
+			<div class="flex flex-col border-b border-line min-[880px]:border-r min-[880px]:border-b-0">
+				{
+					steps.map((step, i) => (
+						<CycleAccordionItem title={step.title} body={step.body} open={i === 0} />
+					))
+				}
+			</div>
+			<div
+				class="bg-cycle-grid flex min-h-[480px] items-center justify-center p-[30px] min-[880px]:min-h-[600px] min-[880px]:p-11"
+				aria-hidden="true"
+			>
+				<CycleDiagram labels={labels} />
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	/* single-open accordion; the active item carries the accent bar and the
+	   matching cycle-diagram card highlights in sync */
+	document.querySelectorAll<HTMLElement>('[data-cycle]').forEach((root) => {
+		const items = [...root.querySelectorAll<HTMLElement>('[data-cycle-item]')];
+		const cards = [...root.querySelectorAll<HTMLElement>('[data-cycle-card]')];
+
+		function set(i: number) {
+			items.forEach((it, k) => {
+				it.setAttribute('data-on', String(k === i));
+				it.querySelector('button')?.setAttribute('aria-expanded', String(k === i));
+			});
+			cards.forEach((c, k) => c.setAttribute('data-on', String(k === i)));
+		}
+
+		items.forEach((it, i) => {
+			it.querySelector('button')?.addEventListener('click', () => set(i));
+		});
+	});
+</script>

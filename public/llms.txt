@@ -1,0 +1,33 @@
+# Innogenio
+
+> Innogenio is a design and technology agency that builds custom software,
+> AI & automation systems, ERP implementations, and data platforms for
+> enterprises. Design and engineering under one roof — from first sketch
+> to production, deployment, and ongoing support.
+
+## Services
+
+- **Custom software**: product engineering from first sketch to production — web, mobile, and APIs built to scale.
+- **AI & automation**: practical AI that removes busywork — agents, document intelligence, and workflow automation in production.
+- **ERP implementation**: ERPNext, Zoho, and Odoo rollouts tailored to how a business actually runs.
+- **Data, DevOps & IoT**: dashboards, pipelines, and connected devices, with the infrastructure and observability to keep them running.
+
+## Industries
+
+Manufacturing (plant-floor ERP, production planning, IoT telemetry),
+financial services (automation and analytics for lenders, insurers, and
+fintechs), retail & D2C (commerce platforms, inventory sync, customer
+analytics), and healthcare & education (compliant systems, records, and
+portals).
+
+## How we work
+
+Four phases — discovery & planning, UI/UX design, development, and
+deployment & support — with fixed scope, weekly demos, and post-launch
+iteration. Enterprise-grade hosting, monitoring, launch support, and
+SOC 2 / HIPAA / GDPR-ready compliance are built in.
+
+## Site
+
+- Homepage (English): https://innogenio.com/
+- Homepage (German): https://innogenio.com/de/

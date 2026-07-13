@@ -1,0 +1,27 @@
+---
+/* Listing tile (innogenio-services .tcard) — compact grid cell: pixel
+   sprite up top, title anchored to the bottom, small body. The face
+   washes brand-soft on hover; hairline gaps come from the parent grid's
+   line-colored backdrop. */
+import PixelSprite from '../atoms/PixelSprite.astro';
+import type { PixelSpriteName } from '../atoms/PixelSprite.astro';
+
+export interface TileItem {
+	icon: string;
+	title: string;
+	body: string;
+}
+type Props = TileItem;
+const { icon, title, body } = Astro.props;
+---
+
+<div class="flex min-h-[190px] flex-col bg-tile p-6 transition-colors hover:bg-brand-soft">
+	<PixelSprite
+		name={icon as PixelSpriteName}
+		class="w-[30px]"
+		primary="var(--color-brand)"
+		secondary="var(--color-sprite-soft)"
+	/>
+	<h3 class="mt-auto pt-6 text-[17.5px] font-semibold tracking-[-0.01em]">{title}</h3>
+	<p class="mt-[7px] text-[13.5px] leading-[1.45] text-ink-secondary">{body}</p>
+</div>

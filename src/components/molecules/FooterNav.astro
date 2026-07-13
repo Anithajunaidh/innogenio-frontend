@@ -1,65 +1,23 @@
 ---
-import FooterLinkGroup from "./FooterLinkGroup.astro";
-import type { FooterLinkItem } from "./FooterLinkGroup.astro";
+/* Footer link columns (innogenio-home-v2 .f-cols) — up to six columns,
+   passed in as data. */
+import FooterLinkGroup from './FooterLinkGroup.astro';
+import type { FooterLinkItem } from './FooterLinkGroup.astro';
 
-const groups: { title: string; links: FooterLinkItem[] }[] = [
-  {
-    title: "WHY MISTRAL",
-    links: [
-      { href: "https://mistral.ai/about", label: "About us" },
-      { href: "https://mistral.ai/customers", label: "Our customers" },
-      { href: "https://mistral.ai/careers", label: "Careers" },
-      { href: "https://mistral.ai/contact", label: "Contact us" },
-    ],
-  },
-  {
-    title: "EXPLORE",
-    links: [
-      { href: "https://mistral.ai/solutions", label: "AI Solutions" },
-      { href: "https://mistral.ai/partners", label: "Partners" },
-      { href: "https://mistral.ai/news?category=Research", label: "Research" },
-    ],
-  },
-  {
-    title: "DOCUMENTATION",
-    links: [
-      { href: "/", label: "Documentation" },
-      { href: "/community/ambassadors", label: "Ambassadors" },
-      { href: "/resources/cookbooks", label: "Cookbooks" },
-    ],
-  },
-  {
-    title: "BUILD",
-    links: [
-      { href: "https://console.mistral.ai", label: "Studio" },
-      { href: "https://mistral.ai/products/vibe", label: "Vibe" },
-      { href: "https://mistral.ai/products/mistral-code", label: "Mistral Code" },
-      { href: "https://mistral.ai/products/mistral-compute", label: "Mistral Compute" },
-      { href: "https://docs.mistral.ai/api", label: "Try the API" },
-    ],
-  },
-  {
-    title: "LEGAL",
-    links: [
-      { href: "https://mistral.ai/terms", label: "Terms of service" },
-      { href: "https://mistral.ai/terms#privacy-policy", label: "Privacy policy" },
-      { href: "https://mistral.ai/legal", label: "Legal notice" },
-      { href: "https://mistral.ai/brand", label: "Brand" },
-    ],
-  },
-  {
-    title: "COMMUNITY",
-    links: [
-      { href: "https://discord.gg/mistralai", label: "Discord", external: true },
-      { href: "https://x.com/mistralai", label: "X", external: true },
-      { href: "https://github.com/mistralai", label: "Github", external: true },
-      { href: "https://linkedin.com/company/mistralai", label: "LinkedIn", external: true },
-      { href: "/community/ambassadors", label: "Ambassadors" },
-    ],
-  },
-];
+export interface FooterColumn {
+	title: string;
+	links: FooterLinkItem[];
+}
+
+interface Props {
+	columns: FooterColumn[];
+}
+
+const { columns } = Astro.props;
 ---
 
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-2">
-  {groups.map((group) => <FooterLinkGroup title={group.title} links={group.links} />)}
+<div
+	class="mx-auto grid max-w-[1150px] grid-cols-2 gap-x-6 gap-y-9 min-[560px]:grid-cols-3 min-[960px]:grid-cols-6"
+>
+	{columns.map((column) => <FooterLinkGroup title={column.title} links={column.links} />)}
 </div>

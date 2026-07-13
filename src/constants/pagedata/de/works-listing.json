@@ -1,0 +1,146 @@
+{
+	"seo": {
+		"title": "Arbeiten — Innogenio",
+		"description": "Ausgewählte Innogenio-Referenzen: ERP-Rollouts live in zwölf Wochen, KI-Automatisierung, die Kreditprüfung auf Minuten verkürzt, und Analytikplattformen für Millionen Bestellungen."
+	},
+	"hero": {
+		"titleLines": ["Echte Systeme.", "Echte Ergebnisse."],
+		"lead": "Eine Auswahl dessen, was wir mit unseren Kunden ausgeliefert haben — vom Hallen-ERP bis zur Produktions-KI, gemessen an Ergebnissen, nicht an Folien.",
+		"actions": [
+			{ "label": "Projekt starten", "variant": "pixel", "href": "/de/" },
+			{ "label": "Leistungen entdecken", "variant": "ghost", "href": "/de/services" }
+		]
+	},
+	"explorer": {
+		"label": "Arbeiten-Explorer",
+		"groups": [
+			{
+				"tab": "Case Studies",
+				"intro": "Sechs Projekte, durchgehend geliefert — was wir gebaut haben und was es verändert hat.",
+				"layout": "rows",
+				"items": [
+					{
+						"icon": "factory",
+						"title": "Meridian Manufacturing",
+						"body": "Ein einheitlicher ERPNext-Rollout über vier Werke, live in zwölf Wochen — Produktionsplanung und Hallen-Telemetrie in einem System.",
+						"chips": ["ERPNext", "Fertigung", "IoT-Telemetrie", "12-Wochen-Rollout"],
+						"href": "/de/works/meridian"
+					},
+					{
+						"icon": "bank",
+						"title": "NovaPay",
+						"body": "KI-Automatisierung verkürzt die Kreditbearbeitung von Tagen auf Minuten — Dokumentenintelligenz und Agenten-Workflows im Produktivbetrieb.",
+						"chips": ["Agentische KI", "Dokumentenintelligenz", "Finanzdienstleistungen"],
+						"href": "/de/works/novapay"
+					},
+					{
+						"icon": "cart",
+						"title": "Halo Retail",
+						"body": "Eine Echtzeit-Analytikplattform für 1,2 Mio. Bestellungen pro Monat — Bestand, Kampagnen und Kundensignale auf einem Dashboard.",
+						"chips": ["Datenplattform", "Dashboards", "Handel & D2C"],
+						"href": "/de/works/halo-retail"
+					},
+					{
+						"icon": "erp",
+						"title": "Corevance",
+						"body": "ERP-Workflows automatisiert, ohne eine einzige Integration zu brechen — Finance schließt das Quartal jetzt in vier statt elf Tagen.",
+						"chips": ["ERP-Automatisierung", "Integrationen", "Operations"],
+						"href": "/de/works/corevance"
+					},
+					{
+						"icon": "ux",
+						"title": "Kepler Labs",
+						"body": "Design und Engineering unter einem Dach — v2 zwei Monate vor der Deadline des Boards ausgeliefert.",
+						"chips": ["Produktdesign", "Designsystem", "Web-Anwendung"],
+						"href": "/de/works/kepler-labs"
+					},
+					{
+						"icon": "data",
+						"title": "Helixon",
+						"body": "Eine Datenpipeline in neun Wochen neu gebaut — Deploy-Frequenz verdreifacht, Bereitschaftsalarme fast auf null.",
+						"chips": ["Datenpipeline", "DevOps", "Observability"],
+						"href": "/de/works/helixon"
+					}
+				]
+			},
+			{
+				"tab": "Nach Branche",
+				"intro": "Wo unsere Arbeit ankommt — Ergebnisse nach Domäne.",
+				"layout": "grid",
+				"items": [
+					{
+						"icon": "factory",
+						"title": "Fertigung",
+						"body": "ERP-Rollouts und IoT-Telemetrie über mehrere Werke hinweg."
+					},
+					{
+						"icon": "bank",
+						"title": "Finanzdienstleistungen",
+						"body": "Kreditautomatisierung, Schaden-Copilots und konforme Datenflüsse."
+					},
+					{
+						"icon": "cart",
+						"title": "Handel & eCommerce",
+						"body": "Bestell-Analytik und Bestandsabgleich bei siebenstelligen Volumen."
+					},
+					{
+						"icon": "health",
+						"title": "Gesundheitswesen",
+						"body": "Akten, Portale und Audits, die beim ersten Review bestehen."
+					},
+					{
+						"icon": "book",
+						"title": "Bildung",
+						"body": "Lernplattformen, die mit jeder neuen Kohorte skalieren."
+					},
+					{
+						"icon": "truck",
+						"title": "Logistik",
+						"body": "Flottentransparenz und Lagerautomatisierung im Einsatz."
+					}
+				]
+			},
+			{
+				"tab": "Nach Leistung",
+				"intro": "Die Disziplinen hinter jeder Lieferung.",
+				"layout": "grid",
+				"items": [
+					{
+						"icon": "code",
+						"title": "Individuelles Engineering",
+						"body": "Web, Mobile und APIs, produktiv ausgeliefert."
+					},
+					{
+						"icon": "robot",
+						"title": "KI & Automatisierung",
+						"body": "Agenten und Copilots mit echter Arbeit, gemessen in gesparten Stunden."
+					},
+					{
+						"icon": "erp",
+						"title": "ERP-Plattformen",
+						"body": "ERPNext, Zoho und Odoo — eingeführt, angepasst, angenommen."
+					},
+					{
+						"icon": "data",
+						"title": "Daten & Analytik",
+						"body": "Pipelines und Dashboards hinter täglichen Entscheidungen."
+					},
+					{
+						"icon": "ops",
+						"title": "DevOps",
+						"body": "CI/CD und Infrastruktur, die die Deploy-Frequenz verdreifacht hat."
+					},
+					{
+						"icon": "iot",
+						"title": "IoT & Edge",
+						"body": "Gateways und smarte Systeme von der Halle bis zur Cloud."
+					}
+				]
+			}
+		]
+	},
+	"cta": {
+		"titleLines": ["Ihr Projekt könnte das nächste sein."],
+		"actions": [{ "label": "Projekt starten", "variant": "pixel", "href": "/de/" }]
+	}
+}

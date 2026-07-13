@@ -1,0 +1,63 @@
+{
+	"kicker": "Testimonials · signal 0110",
+	"titleLines": ["Signal from", "the field."],
+	"lead": "Engineering and product leaders on what shipping with Innogenio actually feels like — quoted verbatim, rendered pixel-faithful.",
+	"items": [
+		{
+			"avatar": "amara",
+			"tag": "USR·0001",
+			"stars": 5,
+			"quote": "Innogenio rebuilt our data pipeline in nine weeks. Deploy frequency tripled, and our on-call pages dropped to nearly zero.",
+			"name": "Amara Okafor",
+			"role": "VP of Engineering",
+			"company": "Helixon"
+		},
+		{
+			"avatar": "marcus",
+			"tag": "USR·0010",
+			"stars": 5,
+			"quote": "The rare partner that argues with your spec — and is usually right. Their AI copilot cut our claims processing time by 60%.",
+			"name": "Marcus Bell",
+			"role": "Chief Technology Officer",
+			"company": "Datastride"
+		},
+		{
+			"avatar": "yuki",
+			"tag": "USR·0011",
+			"stars": 5,
+			"quote": "Design and engineering under one roof — no telephone game. We shipped v2 two months ahead of the board's deadline.",
+			"name": "Yuki Tanaka",
+			"role": "Head of Product",
+			"company": "Kepler Labs"
+		},
+		{
+			"avatar": "david",
+			"tag": "USR·0100",
+			"stars": 5,
+			"quote": "They automated our ERP workflows without breaking a single integration. Finance now closes the quarter in four days, not eleven.",
+			"name": "David Kessler",
+			"role": "Director of Operations",
+			"company": "Corevance"
+		},
+		{
+			"avatar": "priya",
+			"tag": "USR·0101",
+			"stars": 5,
+			"quote": "Security review passed on the first audit. Their team writes production code with the discipline of an internal platform group.",
+			"name": "Priya Sharma",
+			"role": "Chief Information Officer",
+			"company": "Quantex"
+		},
+		{
+			"avatar": "henrik",
+			"tag": "USR·0110",
+			"stars": 5,
+			"quote": "Fixed scope, weekly demos, zero surprises. After three failed vendors, Innogenio made us believe in partnership again.",
+			"name": "Henrik Voss",
+			"role": "Founder & CEO",
+			"company": "Tessellate"
+		}
+	],
+	"score": { "value": "4.9", "label": "Avg. across 120+ delivery reviews" },
+	"cta": { "label": "Read the case studies", "href": "/" }
+}

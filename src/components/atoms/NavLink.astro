@@ -1,0 +1,19 @@
+---
+/* Bare navigation link — soft brand hover wash + focus ring only.
+   Layout (padding, borders, visibility) comes from the parent via `class`. */
+interface Props {
+	href: string;
+	class?: string;
+}
+const { href, class: className = '' } = Astro.props;
+---
+
+<a
+	href={href}
+	class:list={[
+		'transition-colors hover:bg-brand-soft focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset',
+		className,
+	]}
+>
+	<slot />
+</a>

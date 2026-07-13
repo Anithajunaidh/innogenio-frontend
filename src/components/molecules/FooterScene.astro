@@ -1,0 +1,38 @@
+---
+/* Footer dusk scene (innogenio-home-v2 .f-scene) — the sunset disc, the
+   rising moon-logo, the pixel crane, a row of tulips, and the pixel
+   grass/soil ground. Purely decorative; the moonrise itself is triggered
+   by the parent footer gaining .risen (see global.css + Footer.astro). */
+import PixelSprite from '../atoms/PixelSprite.astro';
+import SunsetRays from '../atoms/SunsetRays.astro';
+import FooterCrane from '../atoms/FooterCrane.astro';
+
+const tulips = [
+	{ pos: 'left-[2.5%] w-8', color: '#E85BC6' },
+	{ pos: 'left-[7.5%] w-8', color: '#B44BE8' },
+	{ pos: 'left-[12.5%] w-8', color: '#ECC8FA' },
+	{ pos: 'right-[4%] w-8', color: '#D18BF4' },
+	{ pos: 'right-[9%] w-[26px]', color: '#E85BC6' },
+];
+---
+
+<div class="relative mt-[18px] h-[236px]" aria-hidden="true">
+	<SunsetRays class="absolute bottom-10 left-1/2 h-auto w-[min(560px,72%)] -translate-x-1/2" />
+
+	<span class="footer-moon absolute bottom-[148px] left-1/2 -ml-[31px] w-[62px]">
+		<PixelSprite name="logo" class="w-full" primary="#F7ECFF" secondary="#E4C8F8" />
+	</span>
+
+	<FooterCrane class="absolute bottom-[39px] left-1/2 h-[144px] w-[184px] -translate-x-[40%]" />
+
+	{
+		tulips.map((t) => (
+			<span class:list={['absolute bottom-10', t.pos]}>
+				<PixelSprite name="tulip" class="w-full" primary="#2E7D32" secondary={t.color} />
+			</span>
+		))
+	}
+
+	<div class="footer-grass absolute inset-x-0 bottom-[26px] h-[14px]"></div>
+	<div class="footer-soil absolute inset-x-0 bottom-0 h-[26px]"></div>
+</div>

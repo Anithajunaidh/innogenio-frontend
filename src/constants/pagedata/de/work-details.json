@@ -1,0 +1,639 @@
+{
+	"labels": {
+		"crumbRoot": "Arbeiten",
+		"prev": "Zurück",
+		"next": "Weiter"
+	},
+	"works": [
+		{
+			"slug": "meridian",
+			"name": "Meridian",
+			"seo": {
+				"title": "Meridian Manufacturing — Arbeiten — Innogenio",
+				"description": "Wie Innogenio ein einheitliches ERPNext in zwölf Wochen über vier Meridian-Werke ausgerollt hat — Produktionsplanung, Hallen-Telemetrie und Finance in einem System."
+			},
+			"hero": {
+				"title": "Meridian. Vier Werke, ein System.",
+				"overlayText": "Vier Werke. Eine Quelle der Wahrheit.",
+				"lead": "Ein einheitlicher ERPNext-Rollout über vier Fertigungswerke, live in zwölf Wochen — Produktionsplanung, Hallen-Telemetrie und Finance sprechen endlich dieselbe Sprache.",
+				"actions": [
+					{ "label": "Projekt starten", "variant": "pixel", "href": "/de/" },
+					{ "label": "Mehr Arbeiten ansehen", "variant": "ghost", "href": "/de/works" }
+				]
+			},
+			"mock": {
+				"bar": "MERIDIAN.OPS",
+				"rec": "Hallenboden · live",
+				"cards": [
+					{ "icon": "factory", "tag": "P-01" },
+					{ "icon": "iot", "tag": "P-02", "hot": true },
+					{ "icon": "data", "tag": "P-03" }
+				],
+				"footLeft": "OEE · 94%",
+				"footRight": "SYNCED"
+			},
+			"meta": [
+				{ "label": "Kunde", "value": "Meridian Manufacturing" },
+				{ "label": "Branche", "value": "Fertigung" },
+				{ "label": "Leistungen", "value": "ERPNext · IoT · Daten" },
+				{ "label": "Zusammenarbeit", "value": "Design → Build → Scale" }
+			],
+			"features": {
+				"title": "Ein ERP für den gesamten Hallenboden.",
+				"sub": "Vier Werke arbeiteten auf vier Arten. Der Rollout brachte Planung, Bestand, Telemetrie und Finance auf ein System — ohne eine einzige Linie anzuhalten.",
+				"items": [
+					{ "icon": "erp", "title": "Einheitlicher ERPNext-Kern", "body": "Eine Instanz für Planung, Einkauf, Bestand und Buchhaltung in allen Werken." },
+					{ "icon": "factory", "title": "Produktionsplanung", "body": "Arbeitsaufträge und Kapazitäten gegen reale Maschinenverfügbarkeit geplant." },
+					{ "icon": "iot", "title": "Hallen-Telemetrie", "body": "Maschinen streamen Status und Stückzahlen direkt ins ERP." },
+					{ "icon": "data", "title": "Live-Dashboards", "body": "OEE, Ausschuss und Durchsatz sichtbar pro Linie, Schicht und Werk." },
+					{ "icon": "ops", "title": "Rollout ohne Stillstand", "body": "Werk für Werk umgestellt, mit Parallelbetrieb — keine gestoppten Linien." },
+					{ "icon": "code", "title": "Individuelle Integrationen", "body": "Legacy-MES und Etikettendrucker angebunden statt herausgerissen." }
+				]
+			},
+			"story": {
+				"tabs": [
+					{
+						"tab": "Herausforderung",
+						"blocks": [
+							{ "title": "Vier Werke, vier Systeme", "body": "Jeder Standort nutzte seinen eigenen Mix aus Tabellen und Altsystemen — dasselbe Teil trug je nach Ansprechpartner drei verschiedene Nummern." },
+							{ "title": "Keine gemeinsame Wahrheit", "body": "Die Zentrale konsolidierte Produktions- und Bestandszahlen von Hand, Wochen später — und plante gegen bereits veraltete Daten." },
+							{ "title": "Eine harte Deadline", "body": "Ein neuer Distributionsvertrag verlangte einheitliche Bestandstransparenz innerhalb eines Quartals — zwölf Wochen, nicht zwölf Monate." },
+							{ "title": "Kein Raum für Stillstand", "body": "Die Linien laufen rund um die Uhr. Eine Umstellung, die die Produktion auch nur eine Schicht stoppt, kam nicht in Frage." }
+						]
+					},
+					{
+						"tab": "Lösung",
+						"blocks": [
+							{ "title": "Eine ERPNext-Instanz", "body": "Eine klare, gemeinsame Konfiguration — geteilte Artikelstämme, Stücklisten und Kalkulation — ersetzt vier auseinanderlaufende Arbeitsweisen." },
+							{ "title": "Telemetrie ins ERP", "body": "Gateways am Hallenboden streamen Maschinenzähler und -zustände in ERPNext, sodass Arbeitsaufträge sich gegen die Realität selbst abschließen." },
+							{ "title": "Umstellung Werk für Werk", "body": "Jedes Werk lief zwei Wochen parallel, bevor es umschaltete — Probleme zeigten sich an Live-Daten, ohne die Produktion zu gefährden." },
+							{ "title": "Geschult an eigenen Daten", "body": "Bediener und Planer lernten das System an ihren eigenen Teilen und Aufträgen, nicht an Demodaten — die Akzeptanz kam mit dem Rollout, nicht danach." }
+						]
+					},
+					{
+						"tab": "Umsetzung",
+						"blocks": [
+							{ "title": "Wochen 1–3 · Discovery", "body": "Prozessaufnahme an allen vier Standorten, ein kanonischer Artikelstamm und ein mit jedem Werksleiter abgestimmter Migrationsplan." },
+							{ "title": "Wochen 4–8 · Build", "body": "Konfiguration, individuelle Integrationen zu MES- und Etikettensystemen sowie Telemetrie-Gateways, Linie für Linie installiert." },
+							{ "title": "Wochen 9–12 · Cutover", "body": "Parallelbetrieb, Datenmigration und Go-live im Wochentakt — das vierte Werk schaltete planmäßig um, an Tag 84." },
+							{ "title": "Nach dem Go-live", "body": "Hypercare vor Ort bis zum ersten Abschluss, danach eine vierteljährliche Roadmap mit Verbesserungen aus dem Feedback der Halle." }
+						]
+					}
+				]
+			},
+			"results": {
+				"title": "Geliefert und gemessen.",
+				"stats": [
+					{ "value": "12", "label": "Wochen bis zum Rollout" },
+					{ "value": "4", "label": "Werke auf einem System" },
+					{ "value": "94%", "label": "OEE-Transparenz, live" },
+					{ "value": "−70%", "label": "Manueller Reporting-Aufwand" },
+					{ "value": "0", "label": "Gestoppte Linien im Cutover" },
+					{ "value": "3 Tage", "label": "Schnellerer Monatsabschluss" }
+				]
+			},
+			"delivered": {
+				"title": "Geliefert, durchgehend.",
+				"items": [
+					{ "icon": "erp", "title": "ERPNext-Einführung", "body": "Konfiguriert, angepasst und in vier Werken etabliert." },
+					{ "icon": "iot", "title": "IoT-Telemetrie", "body": "Gateways am Hallenboden streamen Maschinendaten ins ERP." },
+					{ "icon": "data", "title": "Operations-Dashboards", "body": "OEE, Ausschuss und Durchsatz live pro Linie und Schicht." },
+					{ "icon": "ops", "title": "Laufende Betreuung", "body": "Hypercare, Monitoring und eine vierteljährliche Verbesserungs-Roadmap." }
+				]
+			},
+			"cta": {
+				"titleLines": ["Ihr Werk könnte das nächste sein."],
+				"body": "Bauen, anpassen und ausliefern — mit einem Partner, der den ganzen Loop bleibt.",
+				"actions": [
+					{ "label": "Projekt starten", "variant": "pixel", "href": "/de/" },
+					{ "label": "Kontakt aufnehmen", "variant": "ghost", "href": "/de/" }
+				]
+			}
+		},
+		{
+			"slug": "novapay",
+			"name": "NovaPay",
+			"seo": {
+				"title": "NovaPay — Arbeiten — Innogenio",
+				"description": "Wie Innogenios Dokumentenintelligenz und Agenten-Workflows NovaPays Kreditbearbeitung von Tagen auf Minuten verkürzt haben — KI-Automatisierung im echten Produktivbetrieb."
+			},
+			"hero": {
+				"title": "NovaPay. Kredite, entschieden in Minuten.",
+				"overlayText": "Kreditprüfung, die selbst liest.",
+				"lead": "KI-Automatisierung, die Kreditanträge liest, prüft und weiterleitet — Dokumentenintelligenz und Agenten-Workflows verkürzen die Bearbeitung von Tagen auf Minuten, im Produktivbetrieb.",
+				"actions": [
+					{ "label": "Projekt starten", "variant": "pixel", "href": "/de/" },
+					{ "label": "Mehr Arbeiten ansehen", "variant": "ghost", "href": "/de/works" }
+				]
+			},
+			"mock": {
+				"bar": "NOVAPAY.APP",
+				"rec": "Queue · automatisch",
+				"cards": [
+					{ "icon": "bank", "tag": "DOKS ✓" },
+					{ "icon": "ai", "tag": "SCORED", "hot": true },
+					{ "icon": "ops", "tag": "ROUTED" }
+				],
+				"footLeft": "Ø ENTSCHEIDUNG · 4 MIN",
+				"footRight": "APPROVE"
+			},
+			"meta": [
+				{ "label": "Kunde", "value": "NovaPay" },
+				{ "label": "Branche", "value": "Finanzdienstleistungen" },
+				{ "label": "Leistungen", "value": "Agentische KI · Dokumentenintelligenz" },
+				{ "label": "Zusammenarbeit", "value": "Design → Build → Scale" }
+			],
+			"features": {
+				"title": "Eine Kreditstrecke, die selbst liest.",
+				"sub": "Früher wartete jeder Antrag darauf, dass ein Mensch ihn öffnet. Heute lesen Modelle die Dokumente, Agenten führen die Prüfungen aus — Menschen entscheiden nur dort, wo Urteilsvermögen wirklich gefragt ist.",
+				"items": [
+					{ "icon": "ai", "title": "Dokumentenintelligenz", "body": "Kontoauszüge, Gehaltsnachweise und Ausweise automatisch extrahiert und validiert." },
+					{ "icon": "robot", "title": "Agenten-Workflows", "body": "Agenten führen Bonitätsprüfungen, Verifikationen und Routing durchgehend aus." },
+					{ "icon": "bank", "title": "Risiko-Scoring", "body": "Konsistentes, erklärbares Scoring für jeden Antrag." },
+					{ "icon": "flag", "title": "Human-in-the-Loop", "body": "Grenzfälle eskalieren mit vollem Kontext an die Kreditprüfung." },
+					{ "icon": "data", "title": "Lückenloser Audit-Trail", "body": "Jede Extraktion und Entscheidung für die Compliance protokolliert." },
+					{ "icon": "ops", "title": "Produktions-Monitoring", "body": "Modelldrift und Queue-Gesundheit rund um die Uhr überwacht." }
+				]
+			},
+			"story": {
+				"tabs": [
+					{
+						"tab": "Herausforderung",
+						"blocks": [
+							{ "title": "Tage in der Warteschlange", "body": "Ein einziger Antrag bedeutete Stunden manuellen Lesens, verteilt über Tage des Wartens — Antragsteller sprangen regelmäßig ab." },
+							{ "title": "Inkonsistente Entscheidungen", "body": "Dasselbe Profil konnte bei einem Prüfer durchgehen und beim nächsten scheitern; Konsistenz existierte nur im Richtliniendokument." },
+							{ "title": "Compliance-Druck", "body": "Jede Entscheidung brauchte einen belastbaren Nachweis — Automatisierung durfte keine Blackbox werden, die Aufsichtsbehörden nicht prüfen können." },
+							{ "title": "Skalieren ohne Personalaufbau", "body": "Das Volumen verdoppelte sich jährlich; in diesem Tempo Prüfer einzustellen war weder bezahlbar noch schnell genug." }
+						]
+					},
+					{
+						"tab": "Lösung",
+						"blocks": [
+							{ "title": "Extraktion mit Gegenprüfung", "body": "Dokumentenmodelle extrahieren Felder, regelbasierte Validatoren gleichen sie mit Auskunfteidaten ab, bevor irgendetwas weiterläuft." },
+							{ "title": "Agenten tragen den Workflow", "body": "Eine Agenten-Pipeline übernimmt Verifikation, Scoring und Routing — jeder Schritt beobachtbar, wiederholbar und einzeln testbar." },
+							{ "title": "Menschen, wo es zählt", "body": "Saubere Anträge laufen direkt durch; mehrdeutige landen mit bereits zusammengestellter Evidenz in der Queue der Kreditprüfung." },
+							{ "title": "Erklärbarkeit eingebaut", "body": "Jede automatisierte Entscheidung trägt ihre Eingaben, Modellversion und Begründung — ein Audit-Trail, den Prüfer wirklich lesen können." }
+						]
+					},
+					{
+						"tab": "Umsetzung",
+						"blocks": [
+							{ "title": "Zuerst im Schattenmodus", "body": "Die Pipeline lief sechs Wochen still neben der menschlichen Prüfung und wurde an echten Entscheidungen gemessen, bevor sie eine einzige traf." },
+							{ "title": "Schrittweiser Rollout", "body": "Die Automatisierung übernahm zuerst das risikoärmste Segment und wuchs Band für Band, solange die Genauigkeit über dem Zielwert blieb." },
+							{ "title": "Der Loop", "body": "Geliefert in unserem Vier-Phasen-Zyklus — Discovery, Design, Development, Deployment — mit Iterationen nach dem Launch als Treibstoff für die nächste Runde." },
+							{ "title": "Übergabe, die trägt", "body": "NovaPays Team trainiert Modelle heute selbst nach und justiert Schwellwerte — auf Tooling, das zum Betreiben gebaut wurde, nicht zum Bestaunen." }
+						]
+					}
+				]
+			},
+			"results": {
+				"title": "Geliefert und gemessen.",
+				"stats": [
+					{ "value": "4 Min", "label": "Durchschnittliche Entscheidungszeit" },
+					{ "value": "−96%", "label": "Bearbeitungszeit vs. vorher" },
+					{ "value": "83%", "label": "Anträge voll automatisiert" },
+					{ "value": "2,4×", "label": "Volumen, gleiches Team" },
+					{ "value": "100%", "label": "Entscheidungen mit Audit-Trail" },
+					{ "value": "+31%", "label": "Antrags-Abschlussquote" }
+				]
+			},
+			"delivered": {
+				"title": "Geliefert, durchgehend.",
+				"items": [
+					{ "icon": "ai", "title": "KI-Implementierung", "body": "Dokumentenmodelle und Scoring, produktiv betrieben und überwacht." },
+					{ "icon": "robot", "title": "Agenten-Plattform", "body": "Verifikation, Scoring und Routing als eine Pipeline." },
+					{ "icon": "data", "title": "Compliance-Tooling", "body": "Audit-Trails und Reporting, gebaut für die Aufsichtsprüfung." },
+					{ "icon": "ops", "title": "Laufende Betreuung", "body": "Drift-Monitoring, Retraining-Tooling und Roadmap-Partnerschaft." }
+				]
+			},
+			"cta": {
+				"titleLines": ["Ihr Workflow könnte der nächste sein."],
+				"body": "Bauen, anpassen und ausliefern — mit einem Partner, der den ganzen Loop bleibt.",
+				"actions": [
+					{ "label": "Projekt starten", "variant": "pixel", "href": "/de/" },
+					{ "label": "Kontakt aufnehmen", "variant": "ghost", "href": "/de/" }
+				]
+			}
+		},
+		{
+			"slug": "halo-retail",
+			"name": "Halo Retail",
+			"seo": {
+				"title": "Halo Retail — Arbeiten — Innogenio",
+				"description": "Wie Innogenio für Halo Retail eine Echtzeit-Analytikplattform für 1,2 Mio. Bestellungen pro Monat gebaut hat — Bestand, Kampagnen und Kundensignale auf einem Dashboard."
+			},
+			"hero": {
+				"title": "Halo. 1,2 Mio. Bestellungen, ein Dashboard.",
+				"overlayText": "Jede Bestellung, live auf einem Dashboard.",
+				"lead": "Eine Echtzeit-Analytikplattform für 1,2 Millionen Bestellungen pro Monat — Bestand, Kampagnen und Kundensignale vereint auf einem Dashboard, dem das ganze Unternehmen vertraut.",
+				"actions": [
+					{ "label": "Projekt starten", "variant": "pixel", "href": "/de/" },
+					{ "label": "Mehr Arbeiten ansehen", "variant": "ghost", "href": "/de/works" }
+				]
+			},
+			"mock": {
+				"bar": "HALO.LIVE",
+				"rec": "Jetzt · streaming",
+				"cards": [
+					{ "icon": "cart", "tag": "41K/H" },
+					{ "icon": "data", "tag": "LIVE", "hot": true },
+					{ "icon": "truck", "tag": "98,2%" }
+				],
+				"footLeft": "LATENZ · <1S",
+				"footRight": "DASHBOARD"
+			},
+			"meta": [
+				{ "label": "Kunde", "value": "Halo Retail" },
+				{ "label": "Branche", "value": "Handel & eCommerce" },
+				{ "label": "Leistungen", "value": "Datenplattform · Dashboards" },
+				{ "label": "Zusammenarbeit", "value": "Design → Build → Scale" }
+			],
+			"features": {
+				"title": "Handelsentscheidungen in Streaming-Geschwindigkeit.",
+				"sub": "Bestellungen, Bestand und Kampagnenbudget lebten in fünf Tools und einem nächtlichen Batch. Heute landet jedes Signal binnen einer Sekunde auf einem Dashboard.",
+				"items": [
+					{ "icon": "data", "title": "Streaming-Pipeline", "body": "Bestellungen und Events in Echtzeit verarbeitet, nicht in Nacht-Batches." },
+					{ "icon": "cart", "title": "Bestell-Analytik", "body": "1,2 Mio. Bestellungen pro Monat nach Kanal, Region und SKU." },
+					{ "icon": "truck", "title": "Bestandssignale", "body": "Bestände und Nachbestell-Alarme über alle Lager synchronisiert." },
+					{ "icon": "flag", "title": "Kampagnen-Tracking", "body": "Budget und Conversion live verknüpft, pro Kampagne und Kohorte." },
+					{ "icon": "ux", "title": "Ein Dashboard", "body": "Eine Oberfläche für Merchandising, Marketing und Operations." },
+					{ "icon": "ops", "title": "Gebaut für Spitzen", "body": "Ausgelegt auf Saisonspitzen — Black Friday ist nur ein voller Dienstag." }
+				]
+			},
+			"story": {
+				"tabs": [
+					{
+						"tab": "Herausforderung",
+						"blocks": [
+							{ "title": "Fünf Tools, keine Antwort", "body": "Umsatz in einem System, Bestand im zweiten, Kampagnen im dritten — einfache Fragen kosteten einen Analysten und einen Tag." },
+							{ "title": "Die Zahlen von gestern", "body": "Der nächtliche Batch hieß: jede Entscheidung lief auf veralteten Daten; Fehlbestände entdeckten Kunden vor den Dashboards." },
+							{ "title": "Siebenstelliges Volumen", "body": "Bei 1,2 Mio. Bestellungen im Monat waren Tabellen-Workarounds nicht langsam — sie waren unmöglich." },
+							{ "title": "Vertrauen in die Zahlen", "body": "Teams pflegten private Kopien der 'echten Zahlen'. Eine Plattform, der niemand vertraut, nutzt auch niemand." }
+						]
+					},
+					{
+						"tab": "Lösung",
+						"blocks": [
+							{ "title": "Ein Streaming-Rückgrat", "body": "Jede Bestellung, Bestandsbewegung und jedes Kampagnen-Event fließt durch eine Pipeline — verarbeitet, verknüpft und in unter einer Sekunde abfragbar." },
+							{ "title": "Kennzahlen einmal definiert", "body": "Eine semantische Schicht legt Umsatz-, Margen- und Conversion-Definitionen fest — jedes Team liest dieselbe Zahl." },
+							{ "title": "Dashboards pro Rolle", "body": "Merchandising, Marketing und Operations bekommen je ihre Sicht — dieselben Daten darunter, andere Fragen darüber." },
+							{ "title": "Alarme statt Archäologie", "body": "Fehlbestände, Kampagnen-Anomalien und Lieferverzögerungen erreichen das richtige Team in dem Moment, in dem Schwellwerte reißen." }
+						]
+					},
+					{
+						"tab": "Umsetzung",
+						"blocks": [
+							{ "title": "Pipeline zuerst", "body": "Das Streaming-Rückgrat ging zuerst live und lief parallel zum alten Batch, bis die Zahlen dreißig Tage in Folge übereinstimmten." },
+							{ "title": "Tool für Tool", "body": "Jeder Alt-Report wurde auf der Plattform neu gebaut, mit seinen Ownern validiert und dann abgeschaltet — kein Big-Bang-Wechsel." },
+							{ "title": "Der Loop", "body": "Geliefert in unserem Vier-Phasen-Zyklus — Discovery, Design, Development, Deployment — mit Iterationen nach dem Launch als Treibstoff für die nächste Runde." },
+							{ "title": "Bewährt in der Spitze", "body": "Der erste Black Friday der Plattform verarbeitete das Sechsfache des Normalvolumens — mit Sub-Sekunden-Latenz und null Vorfällen." }
+						]
+					}
+				]
+			},
+			"results": {
+				"title": "Geliefert und gemessen.",
+				"stats": [
+					{ "value": "1,2M", "label": "Bestellungen pro Monat" },
+					{ "value": "<1s", "label": "Event-zu-Dashboard-Latenz" },
+					{ "value": "−38%", "label": "Fehlbestands-Vorfälle" },
+					{ "value": "6×", "label": "Bewältigtes Spitzenvolumen" },
+					{ "value": "1", "label": "Quelle der Wahrheit" },
+					{ "value": "+24%", "label": "Kampagnen-ROI-Transparenz" }
+				]
+			},
+			"delivered": {
+				"title": "Geliefert, durchgehend.",
+				"items": [
+					{ "icon": "data", "title": "Datenplattform", "body": "Streaming-Pipeline, Warehouse und semantische Schicht als ein System." },
+					{ "icon": "ux", "title": "Dashboard-Suite", "body": "Rollenbasierte Sichten für Merchandising, Marketing und Operations." },
+					{ "icon": "flag", "title": "Alerting", "body": "Schwellwert- und Anomalie-Alarme, geroutet an das zuständige Team." },
+					{ "icon": "ops", "title": "Laufende Betreuung", "body": "Monitoring, Skalierung und Roadmap-Partnerschaft nach dem Launch." }
+				]
+			},
+			"cta": {
+				"titleLines": ["Ihre Daten könnten die nächsten sein."],
+				"body": "Bauen, anpassen und ausliefern — mit einem Partner, der den ganzen Loop bleibt.",
+				"actions": [
+					{ "label": "Projekt starten", "variant": "pixel", "href": "/de/" },
+					{ "label": "Kontakt aufnehmen", "variant": "ghost", "href": "/de/" }
+				]
+			}
+		},
+		{
+			"slug": "corevance",
+			"name": "Corevance",
+			"seo": {
+				"title": "Corevance — Arbeiten — Innogenio",
+				"description": "Wie Innogenio Corevances ERP-Workflows automatisiert hat, ohne eine einzige Integration zu brechen — Finance schließt das Quartal jetzt in vier statt elf Tagen."
+			},
+			"hero": {
+				"title": "Corevance. Das Quartal, geschlossen in vier Tagen.",
+				"overlayText": "Das Quartal, geschlossen in vier Tagen.",
+				"lead": "ERP-Workflows automatisiert, ohne eine einzige Integration zu brechen — Freigaben, Abstimmung und Reporting, die elf Tage dauerten, sind heute in vier erledigt.",
+				"actions": [
+					{ "label": "Projekt starten", "variant": "pixel", "href": "/de/" },
+					{ "label": "Mehr Arbeiten ansehen", "variant": "ghost", "href": "/de/works" }
+				]
+			},
+			"mock": {
+				"bar": "COREVANCE.ERP",
+				"rec": "Quartalsabschluss · Tag 4",
+				"cards": [
+					{ "icon": "erp", "tag": "MATCHED" },
+					{ "icon": "bank", "tag": "TAG 4", "hot": true },
+					{ "icon": "data", "tag": "FILED" }
+				],
+				"footLeft": "ABGESTIMMT · 99,7%",
+				"footRight": "CLOSE"
+			},
+			"meta": [
+				{ "label": "Kunde", "value": "Corevance" },
+				{ "label": "Branche", "value": "Enterprise Operations" },
+				{ "label": "Leistungen", "value": "ERP-Automatisierung · Integrationen" },
+				{ "label": "Zusammenarbeit", "value": "Design → Build → Scale" }
+			],
+			"features": {
+				"title": "Automatisierung, die respektiert, was schon funktioniert.",
+				"sub": "Corevances ERP berührte neunzehn andere Systeme. Der Auftrag: die Routinearbeit darin automatisieren, ohne ein einziges davon zu brechen.",
+				"items": [
+					{ "icon": "erp", "title": "Workflow-Automatisierung", "body": "Freigaben, Abgleich und Buchungen laufen planmäßig von selbst." },
+					{ "icon": "code", "title": "Integrationssicher", "body": "Alle neunzehn angebundenen Systeme behielten ihre Schnittstellen intakt." },
+					{ "icon": "bank", "title": "Schneller Abschluss", "body": "Abstimmung und Konsolidierung von Tagen auf Stunden verdichtet." },
+					{ "icon": "data", "title": "Ausnahmen sichtbar", "body": "Nur echte Abweichungen erreichen einen Menschen — mit Kontext im Gepäck." },
+					{ "icon": "ops", "title": "Planbare Zuverlässigkeit", "body": "Jeder automatisierte Lauf überwacht, wiederholt und berichtet." },
+					{ "icon": "flag", "title": "Kontrollen erhalten", "body": "Funktionstrennung und Audit-Anforderungen im Workflow selbst verankert." }
+				]
+			},
+			"story": {
+				"tabs": [
+					{
+						"tab": "Herausforderung",
+						"blocks": [
+							{ "title": "Elf-Tage-Abschlüsse", "body": "Jedes Quartal verbrachte Finance elf Tage mit manuellem Abgleich, dem Nachjagen von Freigaben und dem Neuaufbau derselben Tabellen." },
+							{ "title": "Neunzehn Integrationen", "body": "Das ERP versorgte Payroll, Banking, CRM und Lagersysteme — jede Änderung riskierte eine Verbindung, auf die sich jemand verließ." },
+							{ "title": "Gescheiterte Anläufe vor uns", "body": "Zwei frühere Automatisierungsprojekte wurden zurückgerollt, nachdem sie nachgelagerte Systeme gebrochen hatten; das Vertrauen in 'Automatisierung' lag bei fast null." },
+							{ "title": "Audit ist nicht verhandelbar", "body": "Schneller durfte nicht lockerer heißen — jede Kontrolle und Freigabekette musste intakt bleiben." }
+						]
+					},
+					{
+						"tab": "Lösung",
+						"blocks": [
+							{ "title": "Erst kartieren, dann anfassen", "body": "Wir haben zuerst alle neunzehn Integrationen mit Contract-Tests abgesichert — jede Automatisierung konnte beweisen, dass sie nichts bricht, bevor sie live ging." },
+							{ "title": "Die langweiligen 90% automatisieren", "body": "Dreiwege-Abgleich, wiederkehrende Buchungen und Freigabe-Routing automatisiert; Menschen bearbeiten nur markierte Ausnahmen." },
+							{ "title": "Kontrollen als Code", "body": "Funktionstrennung und Freigabegrenzen erzwingt der Workflow selbst — strenger als der manuelle Prozess, nicht lockerer." },
+							{ "title": "Der Abschluss als Pipeline", "body": "Der Quartalsabschluss wurde eine orchestrierte Sequenz mit Live-Status — jeder sieht, was fertig ist, läuft oder blockiert." }
+						]
+					},
+					{
+						"tab": "Umsetzung",
+						"blocks": [
+							{ "title": "Integrations-Testgeschirr", "body": "Lieferung der ersten Woche: automatisierte Contract-Tests um jedes angebundene System — das Sicherheitsnetz für alles Weitere." },
+							{ "title": "Ein Workflow nach dem anderen", "body": "Jede Automatisierung ging hinter einem Schalter live, lief einen Zyklus parallel zum manuellen Prozess und übernahm dann." },
+							{ "title": "Der Loop", "body": "Geliefert in unserem Vier-Phasen-Zyklus — Discovery, Design, Development, Deployment — mit Iterationen nach dem Launch als Treibstoff für die nächste Runde." },
+							{ "title": "Bewiesen an einem echten Abschluss", "body": "Das erste voll automatisierte Quartal schloss in vier Tagen, ohne einen einzigen Integrationsvorfall — und die Prüfer zeichneten ab." }
+						]
+					}
+				]
+			},
+			"results": {
+				"title": "Geliefert und gemessen.",
+				"stats": [
+					{ "value": "4 Tage", "label": "Quartalsabschluss, vorher 11" },
+					{ "value": "0", "label": "Gebrochene Integrationen" },
+					{ "value": "19", "label": "Systeme synchron gehalten" },
+					{ "value": "90%", "label": "Buchungen automatisiert" },
+					{ "value": "−64%", "label": "Manuelle Finance-Stunden" },
+					{ "value": "100%", "label": "Audit-Kontrollen erhalten" }
+				]
+			},
+			"delivered": {
+				"title": "Geliefert, durchgehend.",
+				"items": [
+					{ "icon": "erp", "title": "ERP-Automatisierung", "body": "Abgleich, Buchungen und Freigabeflüsse laufen unbeaufsichtigt." },
+					{ "icon": "code", "title": "Integrations-Testgeschirr", "body": "Contract-Tests sichern alle neunzehn angebundenen Systeme." },
+					{ "icon": "data", "title": "Abschluss-Dashboard", "body": "Live-Status jedes Schritts in der Abschluss-Pipeline." },
+					{ "icon": "ops", "title": "Laufende Betreuung", "body": "Lauf-Monitoring, Feinjustierung und Roadmap-Partnerschaft." }
+				]
+			},
+			"cta": {
+				"titleLines": ["Ihr Abschluss könnte der nächste sein."],
+				"body": "Bauen, anpassen und ausliefern — mit einem Partner, der den ganzen Loop bleibt.",
+				"actions": [
+					{ "label": "Projekt starten", "variant": "pixel", "href": "/de/" },
+					{ "label": "Kontakt aufnehmen", "variant": "ghost", "href": "/de/" }
+				]
+			}
+		},
+		{
+			"slug": "kepler-labs",
+			"name": "Kepler Labs",
+			"seo": {
+				"title": "Kepler Labs — Arbeiten — Innogenio",
+				"description": "Wie Innogenios Design und Engineering unter einem Dach Kepler Labs' v2 zwei Monate vor der Deadline des Boards ausgeliefert haben — inklusive Designsystem."
+			},
+			"hero": {
+				"title": "Kepler. v2, zwei Monate früher.",
+				"overlayText": "Ein Team, von Figma bis Produktion.",
+				"lead": "Design und Engineering unter einem Dach — ein neu gebautes Produkt, ein lebendiges Designsystem und eine v2 in den Händen der Nutzer, zwei Monate vor der Deadline des Boards.",
+				"actions": [
+					{ "label": "Projekt starten", "variant": "pixel", "href": "/de/" },
+					{ "label": "Mehr Arbeiten ansehen", "variant": "ghost", "href": "/de/works" }
+				]
+			},
+			"mock": {
+				"bar": "KEPLER.APP",
+				"rec": "v2 · ausgeliefert",
+				"cards": [
+					{ "icon": "ux", "tag": "DS 1.0" },
+					{ "icon": "code", "tag": "V2", "hot": true },
+					{ "icon": "flag", "tag": "−2 MON" }
+				],
+				"footLeft": "NPS · +23",
+				"footRight": "RELEASE"
+			},
+			"meta": [
+				{ "label": "Kunde", "value": "Kepler Labs" },
+				{ "label": "Branche", "value": "SaaS / Technologie" },
+				{ "label": "Leistungen", "value": "Produktdesign · Engineering" },
+				{ "label": "Zusammenarbeit", "value": "Design → Build → Scale" }
+			],
+			"features": {
+				"title": "Ein Team von Figma bis Produktion.",
+				"sub": "Kein Handoff, kein Übersetzungsverlust. Designer und Entwickler an einem Board lieferten ein neu gebautes Produkt und das Designsystem, das es konsistent hält.",
+				"items": [
+					{ "icon": "ux", "title": "Produkt-Redesign", "body": "Jeder Kernablauf neu gedacht — entlang dessen, was Nutzer wirklich tun." },
+					{ "icon": "code", "title": "Neu gebautes Frontend", "body": "Eine moderne Web-Anwendung auf Komponenten-Architektur." },
+					{ "icon": "flag", "title": "Lebendiges Designsystem", "body": "Tokens und Komponenten, geteilt von Design und Code — eine Quelle." },
+					{ "icon": "robot", "title": "Workflow ohne Handoff", "body": "Designer und Entwickler iterieren am selben Board, im selben Sprint." },
+					{ "icon": "data", "title": "Instrumentierte Abläufe", "body": "Jeder neu gestaltete Ablauf vor und nach dem Release gemessen." },
+					{ "icon": "ops", "title": "Wöchentliche Releases", "body": "Continuous Delivery löste den alten Quartals-Releasezug ab." }
+				]
+			},
+			"story": {
+				"tabs": [
+					{
+						"tab": "Herausforderung",
+						"blocks": [
+							{ "title": "Ein gealtertes Produkt", "body": "Keplers v1 war Feature für Feature zu einer Oberfläche gewachsen, für die selbst Power-User eine Schulung brauchten." },
+							{ "title": "Eine Board-Deadline", "body": "Finanzierungsmeilensteine banden v2 an ein festes Datum; die interne Schätzung sagte, das Datum sei bereits verloren." },
+							{ "title": "Design-Dev-Pingpong", "body": "Frühere Arbeit pendelte zwischen einer Agentur und Freelancern — jeder Handoff verlor Absicht und kostete Wochen." },
+							{ "title": "Konsistenz-Schulden", "body": "Fünf Töne desselben Blaus und drei Button-Stile: jeder neue Screen machte das Produkt weniger stimmig." }
+						]
+					},
+					{
+						"tab": "Lösung",
+						"blocks": [
+							{ "title": "Ein eingebettetes Team", "body": "Designer und Entwickler aus einem Studio, ein Standup, ein Board — Entscheidungen in Stunden statt in Handoff-Zyklen." },
+							{ "title": "Designsystem zuerst", "body": "Tokens, Komponenten und Muster in Woche eins gebaut und zwischen Figma und Code geteilt — Konsistenz wurde der Standard." },
+							{ "title": "Abläufe statt Screens", "body": "Das Redesign begann bei den fünf Jobs, für die Nutzer das Produkt einsetzen, und baute jeden davon durchgehend neu." },
+							{ "title": "Dünn liefern, wöchentlich liefern", "body": "Jeder neu gebaute Ablauf ersetzte sein v1-Gegenstück hinter einem Flag, sobald er es im Test schlug." }
+						]
+					},
+					{
+						"tab": "Umsetzung",
+						"blocks": [
+							{ "title": "Wochen 1–2 · Fundament", "body": "Design-Tokens, Komponentenbibliothek, CI-Pipeline und der erste neu gebaute Ablauf als Testfeld." },
+							{ "title": "Alle zwei Wochen ein Ablauf", "body": "Kernabläufe lieferten im Zwei-Wochen-Takt, jeder mit echten Nutzern validiert, bevor der nächste begann." },
+							{ "title": "Der Loop", "body": "Geliefert in unserem Vier-Phasen-Zyklus — Discovery, Design, Development, Deployment — mit Iterationen nach dem Launch als Treibstoff für die nächste Runde." },
+							{ "title": "Früh, nicht nur pünktlich", "body": "v2 war zwei Monate vor dem Board-Termin vollständig live — der Puffer floss in Feinschliff statt in Feuerwehreinsätze." }
+						]
+					}
+				]
+			},
+			"results": {
+				"title": "Geliefert und gemessen.",
+				"stats": [
+					{ "value": "2 Mon", "label": "Vor der Deadline" },
+					{ "value": "+23", "label": "NPS nach v2" },
+					{ "value": "52", "label": "Designsystem-Komponenten" },
+					{ "value": "wöchentl.", "label": "Release-Takt" },
+					{ "value": "−41%", "label": "Support-Tickets zu Kernabläufen" },
+					{ "value": "1", "label": "Team, von Design bis Deploy" }
+				]
+			},
+			"delivered": {
+				"title": "Geliefert, durchgehend.",
+				"items": [
+					{ "icon": "ux", "title": "Produktdesign", "body": "Research, Abläufe und UI für jede Kern-Journey." },
+					{ "icon": "flag", "title": "Designsystem", "body": "Tokens und Komponenten, geteilt von Figma und Produktionscode." },
+					{ "icon": "code", "title": "Web-Anwendung", "body": "Das neu gebaute v2-Frontend, wöchentlich ausgeliefert." },
+					{ "icon": "ops", "title": "Laufende Betreuung", "body": "Iteration, Instrumentierung und Roadmap-Partnerschaft." }
+				]
+			},
+			"cta": {
+				"titleLines": ["Ihr Produkt könnte das nächste sein."],
+				"body": "Bauen, anpassen und ausliefern — mit einem Partner, der den ganzen Loop bleibt.",
+				"actions": [
+					{ "label": "Projekt starten", "variant": "pixel", "href": "/de/" },
+					{ "label": "Kontakt aufnehmen", "variant": "ghost", "href": "/de/" }
+				]
+			}
+		},
+		{
+			"slug": "helixon",
+			"name": "Helixon",
+			"seo": {
+				"title": "Helixon — Arbeiten — Innogenio",
+				"description": "Wie Innogenio Helixons Datenpipeline in neun Wochen neu gebaut hat — Deploy-Frequenz verdreifacht und Bereitschaftsalarme fast auf null."
+			},
+			"hero": {
+				"title": "Helixon. Neun Wochen bis zum stillen Pager.",
+				"overlayText": "Eine Datenpipeline, auf der man schlafen kann.",
+				"lead": "Eine Datenpipeline, in neun Wochen neu gebaut — Deploy-Frequenz verdreifacht, Bereitschaftsalarme fast auf null und eine Plattform, der das Team endlich auch um 2 Uhr nachts vertraut.",
+				"actions": [
+					{ "label": "Projekt starten", "variant": "pixel", "href": "/de/" },
+					{ "label": "Mehr Arbeiten ansehen", "variant": "ghost", "href": "/de/works" }
+				]
+			},
+			"mock": {
+				"bar": "HELIXON.CI",
+				"rec": "Pipeline · grün",
+				"cards": [
+					{ "icon": "data", "tag": "PASS" },
+					{ "icon": "ops", "tag": "3×/TAG", "hot": true },
+					{ "icon": "code", "tag": "0 PAGES" }
+				],
+				"footLeft": "UPTIME · 99,98%",
+				"footRight": "DEPLOY"
+			},
+			"meta": [
+				{ "label": "Kunde", "value": "Helixon" },
+				{ "label": "Branche", "value": "Daten / Biotech" },
+				{ "label": "Leistungen", "value": "Datenpipeline · DevOps" },
+				{ "label": "Zusammenarbeit", "value": "Design → Build → Scale" }
+			],
+			"features": {
+				"title": "Eine Pipeline, bei der die Bereitschaft schlafen kann.",
+				"sub": "Die alte Pipeline scheiterte leise und deployte selten. Der Neubau machte jeden Lauf beobachtbar, jeden Deploy langweilig und jeden Fehler laut, früh und klein.",
+				"items": [
+					{ "icon": "data", "title": "Neu gebaute Pipeline", "body": "Idempotente, wiederholbare Stufen statt einer fragilen Kette." },
+					{ "icon": "ops", "title": "CI/CD durchgängig", "body": "Jede Änderung automatisch getestet und deployt, dreimal am Tag." },
+					{ "icon": "code", "title": "Infrastructure as Code", "body": "Umgebungen reproduzierbar aus einem Repo, nicht aus dem Gedächtnis." },
+					{ "icon": "flag", "title": "Datenqualitäts-Gates", "body": "Schlechte Daten stoppen am Gate, statt Dashboards zu erreichen." },
+					{ "icon": "ai", "title": "Observability", "body": "Lineage, Metriken und Traces für jeden Lauf und jeden Datensatz." },
+					{ "icon": "robot", "title": "Selbstheilung", "body": "Transiente Fehler wiederholen und backfillen sich ohne Menschen." }
+				]
+			},
+			"story": {
+				"tabs": [
+					{
+						"tab": "Herausforderung",
+						"blocks": [
+							{ "title": "Stille Ausfälle", "body": "Pipelines scheiterten lautlos — falsche Zahlen entdeckte meist das CEO-Dashboard, nicht ein Alarm." },
+							{ "title": "Deploys als Ereignis", "body": "Eine Änderung zu releasen kostete einen koordinierten Abend samt Rollback-Plan; das Team lieferte monatlich, nervös." },
+							{ "title": "Eine ausgebrannte Rotation", "body": "Bereitschaft hieß Alarme in den meisten Nächten — und jede Reparatur war Archäologie in einem undokumentierten DAG." },
+							{ "title": "Neun Wochen, harter Stopp", "body": "Ein Partnerschafts-Launch setzte das Datum — der Neubau musste landen, ohne die täglichen Daten anzuhalten, von denen das Geschäft lebte." }
+						]
+					},
+					{
+						"tab": "Lösung",
+						"blocks": [
+							{ "title": "Wiederholbar per Design", "body": "Jede Stufe idempotent und einzeln neu ausführbar — Recovery wurde 'die Stunde neu abspielen' statt 'den Tag neu bauen'." },
+							{ "title": "Qualitäts-Gates an der Tür", "body": "Schema- und Verteilungs-Checks an jeder Grenze; schlechte Daten stoppen ihren eigenen Zweig — laut und bevor sie sich ausbreiten." },
+							{ "title": "Langweilige Deploys", "body": "CI/CD mit gestuften Rollouts machte aus Releases Nicht-Ereignisse, die dreimal am Tag passieren." },
+							{ "title": "Observability zuerst", "body": "Lineage, Laufmetriken und Alarme von Stufe eins an verdrahtet — das Team sah der neuen Pipeline in Echtzeit beim Vertrauen-Verdienen zu." }
+						]
+					},
+					{
+						"tab": "Umsetzung",
+						"blocks": [
+							{ "title": "Strangler-Migration", "body": "Neue Stufen wuchsen um die alte Pipeline herum und übernahmen Datensatz für Datensatz, während die täglichen Zahlen weiterflossen." },
+							{ "title": "Wochen 1–4 · Rückgrat", "body": "Kern-Ingestion und die zwei fragilsten Transformationen zuerst neu gebaut, mit Gates versehen und umgeschaltet." },
+							{ "title": "Wochen 5–9 · Der Rest", "body": "Verbleibende Stufen migriert, IaC finalisiert, die alte Pipeline abgeschaltet — eine Woche vor dem Partnerschafts-Launch." },
+							{ "title": "Nach dem Go-live", "body": "Zwei ruhige Bereitschaftszyklen später übergaben wir Runbooks, die das Team seither kaum gebraucht hat." }
+						]
+					}
+				]
+			},
+			"results": {
+				"title": "Geliefert und gemessen.",
+				"stats": [
+					{ "value": "9", "label": "Wochen für den Neubau" },
+					{ "value": "3×", "label": "Deploy-Frequenz" },
+					{ "value": "−92%", "label": "Bereitschaftsalarme" },
+					{ "value": "99,98%", "label": "Pipeline-Uptime" },
+					{ "value": "100%", "label": "Läufe mit Lineage" },
+					{ "value": "0", "label": "Verpasste Launches" }
+				]
+			},
+			"delivered": {
+				"title": "Geliefert, durchgehend.",
+				"items": [
+					{ "icon": "data", "title": "Datenpipeline", "body": "Von der Ingestion bis zum Serving, neu gebaut als wiederholbare Stufen." },
+					{ "icon": "ops", "title": "DevOps-Plattform", "body": "CI/CD, Infrastructure as Code und gestufte Rollouts." },
+					{ "icon": "ai", "title": "Observability", "body": "Lineage, Metriken und Alerting über jeden Lauf." },
+					{ "icon": "robot", "title": "Laufende Betreuung", "body": "Runbooks, Monitoring und Roadmap-Partnerschaft." }
+				]
+			},
+			"cta": {
+				"titleLines": ["Ihre Pipeline könnte die nächste sein."],
+				"body": "Bauen, anpassen und ausliefern — mit einem Partner, der den ganzen Loop bleibt.",
+				"actions": [
+					{ "label": "Projekt starten", "variant": "pixel", "href": "/de/" },
+					{ "label": "Kontakt aufnehmen", "variant": "ghost", "href": "/de/" }
+				]
+			}
+		}
+	]
+}

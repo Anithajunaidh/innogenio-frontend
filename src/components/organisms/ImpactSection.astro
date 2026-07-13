@@ -1,0 +1,115 @@
+---
+/* "We design with impact" section (innogenio-home-v2 .impact) — kicker
+   pill, two-line heading, sub copy, accordion service chips, and a CTA on
+   the left; a 2×2 stat bento on the right. All content is prop-driven. */
+import KickerPill from '../atoms/KickerPill.astro';
+import Button from '../atoms/Button.astro';
+import AccordionChip from '../molecules/AccordionChip.astro';
+import StatsBento from '../molecules/StatsBento.astro';
+
+interface Item {
+	label: string;
+	body: string;
+}
+
+interface Stat {
+	value: string;
+	caption: string;
+}
+
+interface Props {
+	kicker?: string;
+	/** Heading lines — each entry renders on its own line. */
+	headingLines?: string[];
+	sub?: string;
+	items?: Item[];
+	cta?: { label: string; href?: string };
+	stats?: Stat[];
+}
+
+const {
+	kicker = 'Trusted by visionary tech teams',
+	headingLines = ['We design with impact', 'We build with vision'],
+	sub = 'We craft strategies, experiences, and digital solutions for leaders and organizations — transforming ideas into meaningful impact.',
+	items = [
+		{
+			label: 'Custom Software',
+			body: 'Bespoke platforms, web apps, and internal tools — engineered for scale, speed, and reliability.',
+		},
+		{
+			label: 'AI & Automation',
+			body: 'Intelligent agents and workflow automation that put frontier AI to work across your business.',
+		},
+		{
+			label: 'ERP Implementation',
+			body: 'ERPNext and custom ERP rollouts that unify operations, finance, and supply chain on one system.',
+		},
+		{
+			label: 'Data & DevOps',
+			body: 'Pipelines, dashboards, and cloud infrastructure that make your data fast, observable, and dependable.',
+		},
+	],
+	cta = { label: 'Learn more about us', href: '/' },
+	stats = [
+		{
+			value: '100%',
+			caption: 'Client satisfaction rate for ongoing support and software delivery.',
+		},
+		{
+			value: '100K+',
+			caption: 'Transactions, workflows, and automations powered across client systems.',
+		},
+	],
+} = Astro.props;
+---
+
+<section
+	data-reveal
+	class="border-t border-line bg-paper font-sans text-ink"
+	aria-labelledby="impact-h"
+>
+	<div class="grid grid-cols-1 min-[900px]:grid-cols-[1.05fr_1fr]">
+		<div class="py-block-y flex flex-col items-start justify-center gap-[22px] px-section-x ">
+			<KickerPill class="rv-block">{kicker}</KickerPill>
+			<h2 id="impact-h" class="rv-block text-section-head text-balance" style="--i:1">
+				{headingLines.map((line) => <span class="block">{line}</span>)}
+			</h2>
+			<p class="rv-block max-w-[52ch] text-sub text-ink-secondary" style="--i:2">{sub}</p>
+
+			<div class="rv-block mt-1 flex w-full max-w-[520px] flex-col gap-2.5" style="--i:3">
+				{items.map((item) => <AccordionChip label={item.label} body={item.body} />)}
+			</div>
+
+			<div class="rv-block mt-2 inline-flex items-center gap-2.5" style="--i:4">
+				<Button variant="pill" href={cta.href} label={cta.label} />
+				<a
+					href={cta.href}
+					aria-label={cta.label}
+					class="inline-flex size-[46px] items-center justify-center rounded-full border border-line text-ink transition-[border-color,translate] duration-150 hover:translate-x-[2px] hover:translate-y-[-2px] hover:border-brand focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+				>
+					<svg viewBox="0 0 24 24" fill="none" class="size-4" aria-hidden="true">
+						<path
+							d="M7 17 L17 7 M9 7 h8 v8"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"></path>
+					</svg>
+				</a>
+			</div>
+		</div>
+
+		<div
+			class="flex items-center border-t border-line px-section-x py-bento-y min-[900px]:border-t-0 min-[900px]:border-l"
+		>
+			<div class="rv-block w-full" style="--i:5">
+				<StatsBento stats={stats} />
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	import { initReveal } from '../../utils/reveal';
+	initReveal();
+</script>

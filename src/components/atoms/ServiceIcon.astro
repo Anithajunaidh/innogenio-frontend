@@ -1,0 +1,74 @@
+---
+/* Service contour icons (innogenio-home-v2 nav mega-menu .mi glyphs) —
+   squared-cap 1.5px strokes on a 24px grid, each with one filled node. The
+   stroke follows currentColor and the node takes --svc-node (a fixed light
+   purple by default), so the same glyph reads on a solid brand tile (white
+   stroke) or a light art cell (brand stroke). Used by the navbar Services
+   mega-menu and the services listing rows. The reference's combined
+   "DevOps & IoT" glyph drives `devops`; `iot` is a matching chip in the
+   same 1.5px contour language. */
+export type ServiceIconName =
+	| 'engineering'
+	| 'design'
+	| 'advisory'
+	| 'erp'
+	| 'data'
+	| 'devops'
+	| 'iot'
+	// work / industry glyphs (same reference contour set)
+	| 'factory'
+	| 'card'
+	| 'chart';
+
+interface Props {
+	name: ServiceIconName;
+	class?: string;
+	/** node fill color (theme-independent by default) */
+	node?: string;
+}
+const { name, class: className = 'w-5', node = '#e2b5f7' } = Astro.props;
+
+const ICONS: Record<ServiceIconName, string> = {
+	engineering:
+		'<path class="st" d="M9 6.5 L4.5 12 L9 17.5"/><path class="st" d="M15 6.5 L19.5 12 L15 17.5"/><rect class="nd" x="10.8" y="10.8" width="2.4" height="2.4"/>',
+	design:
+		'<path class="st" d="M4.8 19.2 L5.8 15.4 L15.4 5.8 L18.2 8.6 L8.6 18.2 Z"/><path class="st" d="M13.6 7.6 L16.4 10.4"/><rect class="nd" x="16" y="4.5" width="2.4" height="2.4"/>',
+	advisory:
+		'<path class="st" d="M12 4.5 L18.5 7 V12.5 L12 19.5 L5.5 12.5 V7 Z"/><rect class="nd" x="10.8" y="9.8" width="2.4" height="2.4"/>',
+	erp:
+		'<rect class="st" x="4" y="4" width="7" height="7"/><rect class="st" x="13" y="4" width="7" height="7"/><rect class="st" x="4" y="13" width="7" height="7"/><rect class="nd" x="13" y="13" width="7" height="7"/>',
+	data:
+		'<circle class="st" cx="12" cy="12" r="3.4"/><path class="st" d="M12 8.6 V4 M12 15.4 V20 M8.6 12 H4 M15.4 12 H20"/><circle class="nd" cx="12" cy="12" r="1.5"/>',
+	devops:
+		'<circle class="st" cx="5.6" cy="12" r="2.5"/><path class="st" d="M8.2 10.3 H16 M14.4 8.7 L16 10.3 L14.4 11.9"/><path class="st" d="M15.8 13.7 H8 M9.6 12.1 L8 13.7 L9.6 15.3"/><circle class="nd" cx="18.4" cy="12" r="2.5"/>',
+	iot:
+		'<rect class="st" x="8.5" y="8.5" width="7" height="7"/><path class="st" d="M10.5 8.5 V5.5 M13.5 8.5 V5.5 M10.5 15.5 V18.5 M13.5 15.5 V18.5 M8.5 10.5 H5.5 M8.5 13.5 H5.5 M15.5 10.5 H18.5 M15.5 13.5 H18.5"/><rect class="nd" x="10.8" y="10.8" width="2.4" height="2.4"/>',
+	factory:
+		'<path class="st" d="M4.5 19.5 V11 l4.2 3 v-3 l4.2 3 v-3 h6.6 V19.5 Z"/><path class="st" d="M7.5 19.5 v-3.3 h2.7 v3.3"/><rect class="nd" x="15.2" y="13.4" width="2.2" height="2.2"/>',
+	card:
+		'<rect class="st" x="4" y="6.5" width="16" height="11"/><path class="st" d="M4 10 H20"/><rect class="nd" x="6.5" y="13" width="3.2" height="2.2"/>',
+	chart:
+		'<path class="st" d="M4.5 19.5 H19.5"/><rect class="st" x="5.5" y="11" width="3" height="5.5"/><rect class="st" x="10.5" y="6.5" width="3" height="10"/><rect class="nd" x="15.5" y="12.8" width="3" height="3.7"/>',
+};
+---
+
+<svg
+	viewBox="0 0 24 24"
+	aria-hidden="true"
+	class:list={['svc-icon block', className]}
+	style={`--svc-node:${node}`}
+	set:html={ICONS[name]}
+></svg>
+
+<style>
+	.svc-icon :global(.st) {
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.5;
+		stroke-linecap: butt;
+		stroke-linejoin: miter;
+	}
+	.svc-icon :global(.nd) {
+		fill: var(--svc-node);
+	}
+</style>

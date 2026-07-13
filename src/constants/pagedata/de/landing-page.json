@@ -1,0 +1,295 @@
+{
+	"hero": {
+		"titleLines": [
+			"innovative design-",
+			"& tech-agentur",
+			"für wirkungsvolle produkte."
+		],
+		"tagline": "Wir arbeiten mit innovativen Organisationen zusammen, um Ideen voranzutreiben, digitale Erlebnisse zu gestalten und Wirkung mit Absicht zu erzielen.",
+		"news": {
+			"label": "Aktuelles",
+			"items": [
+				{
+					"title": "Innogenio AI & Automation Studio ist da",
+					"href": "/"
+				},
+				{
+					"title": "Innogenio als Top-ERPNext-Implementierungspartner ausgezeichnet",
+					"href": "/"
+				},
+				{
+					"title": "Case Study: KI-Automatisierung verkürzt Kreditprüfung auf Minuten",
+					"href": "/"
+				}
+			]
+		}
+	},
+	"impact": {
+		"kicker": "Von visionären Tech-Teams geschätzt",
+		"headingLines": ["Wir gestalten mit Wirkung", "Wir bauen mit Weitblick"],
+		"sub": "Wir entwickeln Strategien, Erlebnisse und digitale Lösungen für Führungsteams und Organisationen — und verwandeln Ideen in messbare Wirkung.",
+		"items": [
+			{
+				"label": "Individuelle Software",
+				"body": "Maßgeschneiderte Plattformen, Web-Apps und interne Tools — gebaut für Skalierung, Tempo und Zuverlässigkeit."
+			},
+			{
+				"label": "KI & Automatisierung",
+				"body": "Intelligente Agenten und Workflow-Automatisierung, die moderne KI in Ihrem Unternehmen produktiv machen."
+			},
+			{
+				"label": "ERP-Einführung",
+				"body": "ERPNext- und individuelle ERP-Rollouts, die Betrieb, Finanzen und Lieferkette in einem System vereinen."
+			},
+			{
+				"label": "Daten & DevOps",
+				"body": "Pipelines, Dashboards und Cloud-Infrastruktur, die Ihre Daten schnell, beobachtbar und verlässlich machen."
+			}
+		],
+		"cta": { "label": "Mehr über uns erfahren", "href": "/" },
+		"stats": [
+			{
+				"value": "100%",
+				"caption": "Kundenzufriedenheit bei laufendem Support und Software-Lieferung."
+			},
+			{
+				"value": "100K+",
+				"caption": "Transaktionen, Workflows und Automatisierungen in Kundensystemen."
+			}
+		]
+	},
+	"services": {
+		"title": "Leistungen.",
+		"items": [
+			{
+				"icon": "code",
+				"title": "Individuelle Software.",
+				"body": "Produktentwicklung von der ersten Skizze bis zur Produktion — Web, Mobile und APIs, die mit Ihnen skalieren."
+			},
+			{
+				"icon": "ai",
+				"title": "KI & Automatisierung.",
+				"body": "Praktische KI, die Routinearbeit abnimmt: Agenten, Dokumentenintelligenz und Workflow-Automatisierung im Produktivbetrieb."
+			},
+			{
+				"icon": "erp",
+				"title": "ERP-Einführung.",
+				"body": "ERPNext-, Zoho- und Odoo-Rollouts, zugeschnitten darauf, wie Ihr Unternehmen wirklich arbeitet — nicht umgekehrt."
+			},
+			{
+				"icon": "data",
+				"title": "Daten, DevOps & IoT.",
+				"body": "Dashboards, Pipelines und vernetzte Geräte — mit der Infrastruktur und Observability, die sie am Laufen halten."
+			}
+		]
+	},
+	"industries": {
+		"title": "Branchen.",
+		"cardVariant": "image",
+		"items": [
+			{
+				"icon": "factory",
+				"title": "Fertigung.",
+				"image": "service1",
+				"body": "Hallennahes ERP, Produktionsplanung und IoT-Telemetrie für Unternehmen, die physische Produkte herstellen."
+			},
+			{
+				"icon": "bank",
+				"title": "Finanzdienstleistungen.",
+				"image": "service2",
+				"body": "Automatisierung und Analytik für Kreditgeber, Versicherer und Fintechs, die Geld sicher bewegen müssen."
+			},
+			{
+				"icon": "cart",
+				"title": "Handel & D2C.",
+				"image": "service3",
+				"body": "Commerce-Plattformen, Bestandsabgleich und Kundenanalytik für moderne Handelsmarken."
+			},
+			{
+				"icon": "health",
+				"title": "Gesundheit & Bildung.",
+				"image": "service4",
+				"body": "Konforme Systeme, Akten und Portale für Kliniken, Krankenhäuser und Bildungseinrichtungen."
+			}
+		]
+	},
+	"works": {
+		"cases": [
+			{
+				"brand": "Meridian Manufacturing",
+				"brandIcon": "logo",
+				"chip": "Fertigung",
+				"title": "Ein einheitlicher ERPNext-Rollout über vier Werke, live in zwölf Wochen.",
+				"deco": "erp",
+				"image": "image1"
+			},
+			{
+				"brand": "NovaPay",
+				"brandIcon": "robot",
+				"chip": "Finanzdienstleistungen",
+				"title": "KI-Automatisierung verkürzt die Kreditbearbeitung von Tagen auf Minuten.",
+				"deco": "ai",
+				"image": "image2"
+			},
+			{
+				"brand": "Halo Retail",
+				"brandIcon": "flag",
+				"chip": "Handel & D2C",
+				"title": "Eine Echtzeit-Analytikplattform für 1,2 Mio. Bestellungen pro Monat.",
+				"deco": "data",
+				"image": "image3"
+			}
+		]
+	},
+	"process": {
+		"title": "Wir vereinfachen Full-Stack-Entwicklung.",
+		"intro": "Wir bauen nicht nur Software, wir entwerfen Lösungen, die sich anpassen. Jedes Projekt wird auf Ihre Geschäftsziele ausgerichtet, gründlich auf Zuverlässigkeit getestet und mit Sicherheit und Performance im Kern ausgeliefert.",
+		"cta": {
+			"label": "Projekt starten",
+			"href": "/"
+		},
+		"phases": [
+			{
+				"title": "Discovery & Planung",
+				"cardLines": ["Discovery &", "Planung"],
+				"steps": [
+					"Anforderungs-Workshop",
+					"Technik- & Marktrecherche",
+					"Machbarkeit & Ideenvalidierung",
+					"Planung der Lösungsarchitektur",
+					"Roadmap- & Meilensteinplanung",
+					"Festlegung des Tech-Stacks"
+				]
+			},
+			{
+				"title": "UI/UX-Design",
+				"cardLines": ["UI/UX-", "Design"],
+				"steps": [
+					"User-Flows & IA",
+					"Wireframes",
+					"Designsystem",
+					"High-Fidelity-Prototypen",
+					"Usability-Tests & Übergabe"
+				]
+			},
+			{
+				"title": "Entwicklung",
+				"steps": [
+					"Responsive UI-Entwicklung",
+					"Integrationen",
+					"Backend, APIs & Datenbank",
+					"Performance, Sicherheit & Barrierefreiheit",
+					"Automatisierte Tests"
+				]
+			},
+			{
+				"title": "Deployment & Support",
+				"cardLines": ["Deployment &", "Support"],
+				"steps": [
+					"CI/CD & Releases",
+					"Cloud-Setup",
+					"Monitoring & Analytik",
+					"Iterationen nach dem Launch"
+				]
+			}
+		]
+	},
+	"markitecture": {
+		"titleLines": [
+			"Gebaut für Unternehmen.",
+			"Feinjustiert für Wachstum."
+		],
+		"cards": [
+			{
+				"title": "AI & Automation Studio",
+				"description": "Agenten und Workflow-Automatisierung im Produktivbetrieb.",
+				"icon": "robot",
+				"plate": "case-1",
+				"href": "/"
+			},
+			{
+				"title": "Individuelle Software",
+				"description": "Web, Mobile und APIs, gebaut zum Skalieren.",
+				"icon": "logo",
+				"plate": "case-2",
+				"href": "/"
+			},
+			{
+				"title": "ERP-Systeme",
+				"description": "ERPNext-, Zoho- und Odoo-Rollouts.",
+				"icon": "erp",
+				"plate": "case-1",
+				"href": "/"
+			},
+			{
+				"title": "Angewandte KI-Services",
+				"icon": "ai",
+				"plate": "paper",
+				"href": "/"
+			},
+			{
+				"title": "Datenplattformen",
+				"icon": "data",
+				"plate": "panel",
+				"href": "/"
+			},
+			{
+				"title": "Cloud & DevOps",
+				"description": "CI/CD, Cloud und Observability in Skalierung.",
+				"icon": "flag",
+				"plate": "case-2",
+				"href": "/"
+			}
+		],
+		"minis": [
+			{
+				"title": "Hohe Verfügbarkeit",
+				"description": "Hosting und Monitoring auf Enterprise-Niveau, direkt integriert.",
+				"icon": "clock",
+				"plate": "case-1"
+			},
+			{
+				"title": "Launch-Begleitung",
+				"description": "Persönliche Unterstützung durch ein dediziertes Deployment-Team.",
+				"icon": "flag",
+				"plate": "case-1"
+			},
+			{
+				"title": "Sicherheit inklusive",
+				"description": "Schutzmechanismen und Compliance von Tag eins an.",
+				"icon": "ops",
+				"plate": "case-1"
+			},
+			{
+				"title": "Compliance-bereit",
+				"description": "SOC 2, HIPAA und DSGVO-Standards abgedeckt.",
+				"icon": "erp",
+				"plate": "case-1"
+			}
+		]
+	},
+	"cta": {
+		"titleLines": [
+			"Bereit, das Chaos zu beenden?",
+			"Sprechen wir."
+		],
+		"body": "Erzählen Sie uns, was Sie bauen. Wir bringen Strategie, Design und Engineering mit, um es auszuliefern — und am Laufen zu halten.",
+		"actions": [
+			{
+				"label": "Projekt starten",
+				"variant": "pixel",
+				"href": "/"
+			},
+			{
+				"label": "Demo buchen",
+				"variant": "ghost",
+				"href": "/"
+			}
+		],
+		"newsletter": {
+			"placeholder": "sie@firma.de",
+			"buttonLabel": "Benachrichtigen",
+			"note": "Oder abonnieren Sie gelegentliche Produkt-Updates."
+		}
+	}
+}

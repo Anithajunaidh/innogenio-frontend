@@ -1,0 +1,37 @@
+---
+/* Pixel-diamond star rating (innogenio-testimonials .stars) — five 5×5
+   diamond sprites, lit ones in glowing bright brand, the rest a faint
+   white ghost. Rendered at build time (the reference builds them with
+   runtime JS). */
+const DIAMOND = 'M2 0h1v1h-1zM1 1h3v1h-3zM0 2h5v1h-5zM1 3h3v1h-3zM2 4h1v1h-1z';
+
+interface Props {
+	/** lit stars out of 5 */
+	count?: number;
+	class?: string;
+}
+const { count = 5, class: className = '' } = Astro.props;
+---
+
+<div
+	class:list={['flex gap-1.5', className]}
+	role="img"
+	aria-label={`Rated ${count} out of 5`}
+>
+	{
+		Array.from({ length: 5 }, (_, i) => (
+			<svg
+				viewBox="0 0 5 5"
+				aria-hidden="true"
+				class:list={[
+					'block size-3 [shape-rendering:crispEdges]',
+					i < count
+						? 'fill-tst-accent drop-shadow-star'
+						: 'fill-white/16',
+				]}
+			>
+				<path d={DIAMOND} />
+			</svg>
+		))
+	}
+</div>

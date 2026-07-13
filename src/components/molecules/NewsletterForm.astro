@@ -1,0 +1,28 @@
+---
+/* Newsletter signup strip (innogenio-home-v2 .cta-news) — a bordered row
+   holding a bare email input and a solid ink submit button that flushes
+   brand on hover. */
+import Input from '../atoms/Input.astro';
+
+interface Props {
+	placeholder?: string;
+	buttonLabel?: string;
+	class?: string;
+}
+
+const {
+	placeholder = 'you@company.com',
+	buttonLabel = 'Notify me',
+	class: className = '',
+} = Astro.props;
+---
+
+<form class:list={['flex border border-line bg-paper', className]} onsubmit="return false">
+	<Input type="email" placeholder={placeholder} ariaLabel="Email address" class="min-w-0 flex-1" />
+	<button
+		type="submit"
+		class="bg-ink px-[18px] text-small font-semibold whitespace-nowrap text-paper transition-colors duration-200 hover:bg-brand hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+	>
+		{buttonLabel}
+	</button>
+</form>

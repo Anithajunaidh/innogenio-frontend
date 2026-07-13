@@ -1,28 +1,144 @@
 ---
-import FooterBackground from "../atoms/FooterBackground.astro";
-import MistralLogo from "../atoms/MistralLogo.astro";
-import FooterNav from "../molecules/FooterNav.astro";
-import FooterBottom from "../molecules/FooterBottom.astro";
-import PixelMarquee from "../molecules/PixelMarquee.astro";
+/* Site footer (innogenio-home-v2 .footer "pixel dusk") — a striped sunset
+   sky behind the brand mark, six link columns, and a meta row, closing on
+   the animated dusk scene (rising moon, pixel crane, tulips). Link columns
+   and meta text come in as props. */
+import PixelSprite from '../atoms/PixelSprite.astro';
+import FooterNav from '../molecules/FooterNav.astro';
+import FooterScene from '../molecules/FooterScene.astro';
+import type { FooterColumn } from '../molecules/FooterNav.astro';
+
+interface Props {
+	columns?: FooterColumn[];
+	copyright?: string;
+	tagline?: string;
+}
+
+const {
+	columns = [
+		{
+			title: 'Why Innogenio',
+			links: [
+				{ href: '/', label: 'About us' },
+				{ href: '/', label: 'Our customers' },
+				{ href: '/', label: 'Careers' },
+				{ href: '/', label: 'Contact us' },
+			],
+		},
+		{
+			title: 'Explore',
+			links: [
+				{ href: '/', label: 'Services' },
+				{ href: '/', label: 'Industries' },
+				{ href: '/', label: 'Our work' },
+				{ href: '/', label: 'Blog' },
+			],
+		},
+		{
+			title: 'Services',
+			links: [
+				{ href: '/', label: 'Custom software' },
+				{ href: '/', label: 'AI & automation' },
+				{ href: '/', label: 'ERP implementation' },
+				{ href: '/', label: 'Data & DevOps' },
+			],
+		},
+		{
+			title: 'Build',
+			links: [
+				{ href: '/', label: 'Start a project' },
+				{ href: '/', label: 'Book a demo' },
+				{ href: '/', label: 'AI & Automation Studio' },
+			],
+		},
+		{
+			title: 'Legal',
+			links: [
+				{ href: '/', label: 'Terms of service' },
+				{ href: '/', label: 'Privacy policy' },
+				{ href: '/', label: 'Legal notice' },
+			],
+		},
+		{
+			title: 'Community',
+			links: [
+				{ href: '/', label: 'LinkedIn', external: true },
+				{ href: '/', label: 'X', external: true },
+				{ href: '/', label: 'GitHub', external: true },
+				{ href: '/', label: 'Instagram', external: true },
+			],
+		},
+	],
+	copyright = 'Innogenio © 2026',
+	tagline = 'Built with intention',
+} = Astro.props;
 ---
 
 <footer
-  class="mt-10 w-[-webkit-fill-available] max-lg:-mx-inner-sides lg:w-full flex flex-col"
+	data-footer
+	aria-label="Site footer"
+	class="relative overflow-hidden border-t border-line font-sans text-ink"
 >
-  <div class="relative overflow-clip pt-40">
-    <FooterBackground />
+	<div class="footer-sky bright"></div>
 
-    <div
-      class="relative z-10 lg:max-w-5xl lg:mx-auto flex flex-col gap-6 px-inner-sides lg:px-sides"
-    >
-      <div class="flex justify-center mb-12">
-        <MistralLogo class="w-16 text-foreground" />
-      </div>
+	<div class="relative z-1 px-section-x pt-[78px]">
+		<PixelSprite name="logo" class="mx-auto mb-[60px] w-[34px]" />
 
-      <FooterNav />
-      <FooterBottom />
-    </div>
+		<FooterNav columns={columns} />
 
-    <PixelMarquee />
-  </div>
+		<div
+			class="mx-auto mt-[68px] flex max-w-[1150px] flex-wrap items-center justify-between gap-4 text-small text-ink-secondary"
+		>
+			<span>{copyright}</span>
+			<button
+				type="button"
+				data-sky-toggle
+				aria-pressed="true"
+				class="rounded-full border border-brand bg-brand/10 px-3.5 py-1.5 font-mono text-f-head text-brand uppercase transition-colors hover:bg-brand/20 aria-pressed:bg-brand aria-pressed:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+			>
+				Sky · bright
+			</button>
+			<span class="font-mono text-f-head uppercase">{tagline}</span>
+		</div>
+	</div>
+
+	<FooterScene />
 </footer>
+
+<script>
+	// moonrise: lift the logo-moon (and brighten the sun) when the footer
+	// scrolls into view, then let the moon settle into its idle pulse
+	document.querySelectorAll<HTMLElement>('[data-footer]').forEach((footer) => {
+		const seat = () => {
+			footer.classList.add('risen');
+			setTimeout(() => footer.classList.add('moon-seated'), 3000);
+		};
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			footer.classList.add('risen', 'moon-seated');
+		} else if ('IntersectionObserver' in window) {
+			const io = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((e) => {
+						if (e.isIntersecting) {
+							seat();
+							io.unobserve(e.target);
+						}
+					});
+				},
+				{ threshold: 0.2 }
+			);
+			io.observe(footer);
+		} else {
+			seat();
+		}
+
+		// sky toggle: swap the bright ↔ classic sunset gradient
+		const toggle = footer.querySelector<HTMLButtonElement>('[data-sky-toggle]');
+		const sky = footer.querySelector<HTMLElement>('.footer-sky');
+		toggle?.addEventListener('click', () => {
+			const bright = sky?.classList.toggle('bright') ?? false;
+			toggle.setAttribute('aria-pressed', String(bright));
+			toggle.textContent = bright ? 'Sky · bright' : 'Sky · classic';
+		});
+	});
+</script>

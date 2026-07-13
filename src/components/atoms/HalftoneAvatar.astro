@@ -1,0 +1,157 @@
+---
+/* Living halftone portrait (innogenio-testimonials .avatar) — a canvas
+   that renders a photo-derived 56×70 tone grid as plus-shaped ink marks.
+   Marks materialize center-first when scrolled into view, then the
+   subject sways / breathes / shimmers at ~10fps like halftoned film.
+   Grid data lives in src/utils/halftone-portraits.ts. */
+import type { HalftoneName } from '../../utils/halftone-portraits';
+
+interface Props {
+	name: HalftoneName;
+	class?: string;
+}
+const { name, class: className = '' } = Astro.props;
+---
+
+<canvas data-avatar={name} class:list={['block', className]}></canvas>
+
+<script>
+	import {
+		HALFTONE_GRIDS as GRIDS,
+		HALFTONE_SEEDS as SEEDS,
+		HALFTONE_INK as INK,
+		type HalftoneName,
+	} from '../../utils/halftone-portraits';
+
+	const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	function mulberry32(a: number) {
+		return () => {
+			a |= 0;
+			a = (a + 0x6d2b79f5) | 0;
+			let t = Math.imul(a ^ (a >>> 15), 1 | a);
+			t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+			return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+		};
+	}
+	/* stateless per-cell hash — stable shimmer that varies by frame */
+	function hash(x: number, y: number, s: number) {
+		let h = (x * 374761393 + y * 668265263 + s * 1274126177) | 0;
+		h = Math.imul(h ^ (h >>> 13), 1103515245);
+		return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+	}
+	const cl = (x: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, x));
+
+	/* per-canvas animator — renders one photo-derived tone grid */
+	function livePortrait(cv: HTMLCanvasElement) {
+		const name = cv.dataset.avatar as HalftoneName;
+		const src = GRIDS[name];
+		if (!src) return;
+		const grid = src.split('\n').map((r) => [...r].map((c) => parseInt(c, 16) / 15));
+		const ROWS = grid.length,
+			COLS = grid[0].length,
+			CELL = 8;
+		const seed = SEEDS[name] || 1;
+		cv.width = COLS * CELL;
+		cv.height = ROWS * CELL;
+		const ctx = cv.getContext('2d')!;
+
+		/* bilinear sample of the tone grid at a fractional position */
+		function tex(fx: number, fy: number) {
+			fx = cl(fx, 0, COLS - 1.001);
+			fy = cl(fy, 0, ROWS - 1.001);
+			const x0 = fx | 0,
+				y0 = fy | 0,
+				ax = fx - x0,
+				ay = fy - y0;
+			const x1 = Math.min(x0 + 1, COLS - 1),
+				y1 = Math.min(y0 + 1, ROWS - 1);
+			return (
+				grid[y0][x0] * (1 - ax) * (1 - ay) +
+				grid[y0][x1] * ax * (1 - ay) +
+				grid[y1][x0] * (1 - ax) * ay +
+				grid[y1][x1] * ax * ay
+			);
+		}
+
+		const N = COLS * ROWS,
+			rvl = new Float32Array(N);
+		const rnd = mulberry32(seed * 7919 + 13);
+		/* center-first reveal order */
+		for (let y = 0; y < ROWS; y++)
+			for (let x = 0; x < COLS; x++) {
+				const du = (x + 0.5) / COLS - 0.5,
+					dv = (y + 0.5) / ROWS - 0.4;
+				rvl[y * COLS + x] = cl(Math.hypot(du, dv) * 1.5, 0, 1) * 0.72 + rnd() * 0.28;
+			}
+		const phase = seed % 7;
+		let frame = 0,
+			revealed = REDUCED ? 1 : 0,
+			raf = 0,
+			last = 0,
+			running = false;
+
+		function mark(cx: number, cy: number, s: number) {
+			const w = Math.max(s * 0.34, 1.6);
+			if (s <= CELL * 0.42) {
+				ctx.fillRect(cx - s / 2, cy - s / 2, s, s); /* tiny → dot */
+				return;
+			}
+			ctx.fillRect(cx - s / 2, cy - w / 2, s, w); /* else → plus */
+			ctx.fillRect(cx - w / 2, cy - s / 2, w, s);
+		}
+		function draw() {
+			ctx.clearRect(0, 0, cv.width, cv.height);
+			ctx.fillStyle = INK;
+			const ts = frame / 10;
+			/* handheld-film motion: slow sway, breath, micro-zoom about the head */
+			const sway = REDUCED ? 0 : 0.55 * Math.sin(ts * 0.8 + phase);
+			const breath = REDUCED ? 0 : 0.38 * Math.sin(ts * 1.15 + phase * 2);
+			const zoom = REDUCED ? 1 : 1 + 0.004 * Math.sin(ts * 0.6 + phase);
+			for (let y = 0; y < ROWS; y++)
+				for (let x = 0; x < COLS; x++) {
+					if (rvl[y * COLS + x] > revealed) continue;
+					const fx = (x - COLS / 2) / zoom + COLS / 2 + sway;
+					const fy = (y - ROWS * 0.42) / zoom + ROWS * 0.42 + breath * (y / ROWS);
+					let t = tex(fx, fy) + (hash(x, y, (frame >> 1) + seed * 3) - 0.5) * 0.08; /* shimmer */
+					if (t < 0.06) continue;
+					if (t < 0.2 && hash(x, y, frame + seed) > t * 5) continue; /* flickering rim */
+					t = cl(t, 0, 1);
+					const s = CELL * 1.16 * t;
+					if (s < CELL * 0.15) continue;
+					mark(x * CELL + CELL / 2, y * CELL + CELL / 2, s);
+				}
+			frame++;
+			if (revealed < 1) revealed = Math.min(1, revealed + 0.15);
+		}
+		function tick(now: number) {
+			if (!running) return;
+			if (now - last >= 100) {
+				last = now;
+				draw(); /* ~10 fps, chunky */
+			}
+			raf = requestAnimationFrame(tick);
+		}
+		if (REDUCED) {
+			draw(); /* static frame */
+			return;
+		}
+		new IntersectionObserver(
+			(es) =>
+				es.forEach((e) => {
+					if (e.isIntersecting) {
+						if (!running) {
+							running = true;
+							last = 0;
+							raf = requestAnimationFrame(tick);
+						}
+					} else {
+						running = false;
+						if (raf) cancelAnimationFrame(raf);
+					}
+				}),
+			{ threshold: 0.05 }
+		).observe(cv);
+	}
+	document.querySelectorAll<HTMLCanvasElement>('canvas[data-avatar]').forEach(livePortrait);
+</script>

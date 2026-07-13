@@ -1,0 +1,36 @@
+---
+/* Work-detail results band (innogenio-work-vineo .results) — an inset
+   dark panel (shared proc-texture recipe over panel-dark, fixed in both
+   themes) with a centered heading and up to six outcome stats. Numbers
+   take ramp-1, the lightest step of the brand ramp, exactly like the
+   reference's #ECC8FA. */
+export interface WorkStat {
+	value: string;
+	label: string;
+}
+
+interface Props {
+	title: string;
+	stats: WorkStat[];
+	label?: string;
+}
+const { title, stats, label = 'Results' } = Astro.props;
+---
+
+<section aria-label={label} class="border-x border-line bg-paper px-section-x pt-block-y font-sans">
+	<div class="proc-texture relative overflow-hidden bg-panel-dark px-10 py-[clamp(48px,6vw,80px)]">
+		<h2 class="relative z-[1] mb-10 text-center text-card-h text-white">{title}</h2>
+		<div
+			class="relative z-[1] mx-auto grid max-w-[1080px] grid-cols-2 gap-6 text-center max-[880px]:gap-y-10 min-[560px]:grid-cols-3 min-[880px]:grid-cols-6"
+		>
+			{
+				stats.map((stat) => (
+					<div>
+						<b class="block text-work-stat text-ramp-1">{stat.value}</b>
+						<span class="mt-2.5 block text-kicker uppercase leading-relaxed text-white/65">{stat.label}</span>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

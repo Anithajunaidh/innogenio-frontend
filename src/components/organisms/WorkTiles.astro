@@ -1,0 +1,32 @@
+---
+/* Work-detail tile board (innogenio-work-vineo .feat / .dlv) — section
+   heading + optional sub over a hairline tile grid, reusing ListingTile
+   faces. `columns` picks the desktop count: 3 for the capability grid,
+   4 for the "delivered" grid; both collapse 2 → 1 on the way down. */
+import ListingTile from '../molecules/ListingTile.astro';
+import type { TileItem } from '../molecules/ListingTile.astro';
+
+interface Props {
+	title: string;
+	sub?: string;
+	items: TileItem[];
+	columns?: 3 | 4;
+	label?: string;
+}
+const { title, sub, items, columns = 3, label } = Astro.props;
+---
+
+<section aria-label={label ?? title} class="border-x border-line bg-paper font-sans text-ink">
+	<div class="px-section-x pt-block-y pb-2.5">
+		<h2 class="text-work-h2">{title}</h2>
+		{sub && <p class="mt-4 max-w-[44em] text-body text-ink-secondary">{sub}</p>}
+	</div>
+	<div
+		class:list={[
+			'mt-9 grid grid-cols-1 gap-px border-t border-line bg-line min-[560px]:grid-cols-2',
+			columns === 4 ? 'min-[880px]:grid-cols-4' : 'min-[880px]:grid-cols-3',
+		]}
+	>
+		{items.map((item) => <ListingTile {...item} />)}
+	</div>
+</section>

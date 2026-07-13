@@ -1,0 +1,208 @@
+---
+/* Site button — one atom, six variants:
+   - pixel: charcoal face whose fill dissolves into a flickering pixel
+     field on hover (design-language "Charcoal dark"); arrow by default.
+   - ghost: outlined button; border follows the surface's text color and
+     flushes brand on hover, so it works on light and dark surfaces.
+   - pill:  solid rounded-full ink button (innogenio-home-v2 .impact-btn).
+   - nav-ghost / nav-cta: full-height header cells (innogenio-home-v2
+     .hdr-more / .hdr-cta). Both share the pixel-dissolve hover — nav-ghost
+     is a transparent face that blooms grey→white + turns brand on hover
+     (with a caret), nav-cta is a charcoal face that darkens + blooms
+     charcoal→purple. Meant to sit flush in the sticky header row.
+   - icon: square icon-only cell (news-card next/prev) that flushes brand
+     on hover; renders a real <button> unless an href is passed, and needs
+     an aria-label since the slot is just a glyph.
+   Label comes from the slot or the `label` prop; `arrow` toggles the
+   dimension arrow (animates on hover via the `group` class). Extra
+   attributes (aria-label, data-* hooks) pass through to the element. */
+import type { HTMLAttributes } from 'astro/types';
+import DimensionArrow from './DimensionArrow.astro';
+
+type Variant = 'pixel' | 'ghost' | 'pill' | 'nav-ghost' | 'nav-cta' | 'icon';
+
+interface Props extends HTMLAttributes<'a'> {
+	variant?: Variant;
+	label?: string;
+	arrow?: boolean;
+}
+
+const {
+	variant = 'pixel',
+	href,
+	label,
+	arrow = variant === 'pixel',
+	class: className = '',
+	...rest
+} = Astro.props;
+
+/* icon buttons trigger scripts, not navigation — no href means <button> */
+const asButton = variant === 'icon' && href === undefined;
+const Tag = asButton ? 'button' : 'a';
+
+const base = 'group focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none';
+
+const variants: Record<Variant, string> = {
+	pixel:
+		'relative isolate inline-flex items-center gap-3 overflow-hidden border border-charcoal bg-charcoal px-6 py-3.5 text-btn text-ink-inverse focus-visible:ring-inset',
+	ghost:
+		'inline-flex items-center gap-3 border border-current px-6 py-3 text-btn transition-colors hover:border-brand hover:text-brand focus-visible:ring-inset',
+	pill: 'inline-flex items-center gap-3 rounded-full bg-ink px-6 py-[13px] text-btn text-paper transition-opacity duration-150 hover:opacity-[.88] focus-visible:ring-offset-2',
+	'nav-ghost':
+		'relative isolate flex items-center gap-[9px] overflow-hidden border-l border-line px-[22px] text-nav transition-colors hover:text-brand focus-visible:ring-inset',
+	'nav-cta':
+		'relative isolate flex items-center gap-3 overflow-hidden bg-charcoal px-6 text-btn text-ink-inverse transition-colors hover:bg-charcoal-hover focus-visible:ring-inset',
+	icon: 'inline-flex size-10 shrink-0 items-center justify-center text-xs text-ink transition-colors hover:bg-brand hover:text-ink-inverse focus-visible:ring-inset',
+};
+
+/* variants that carry the pixel-dissolve canvas, and their bloom palette */
+const pixelVariant = variant === 'pixel' || variant === 'nav-ghost' || variant === 'nav-cta';
+const pixelShades = variant === 'nav-ghost' ? 'grey' : undefined;
+---
+
+<Tag
+	href={asButton ? undefined : (href ?? '/')}
+	type={asButton ? 'button' : undefined}
+	data-pixel-btn={pixelVariant || undefined}
+	data-pixel-shades={pixelShades}
+	class:list={[base, variants[variant], className]}
+	{...rest}
+>
+	{
+		pixelVariant && (
+			<canvas
+				data-pixel-canvas
+				aria-hidden="true"
+				class="pointer-events-none absolute inset-0 -z-10 h-full w-full"
+			/>
+		)
+	}
+	<slot>{label}</slot>
+	{arrow && <DimensionArrow />}
+</Tag>
+
+<script>
+	/* pixel variant: center-bloom pixel dissolve — radial per-cell delay,
+	   soft fade, edge-first recede, idle shimmer while hovered */
+	import { charcoalPixelShades, greyPixelShades } from '../../constants/design/color';
+
+	const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	interface Cell {
+		x: number;
+		y: number;
+		delay: number;
+		shade: string;
+		p: number;
+	}
+
+	document.querySelectorAll<HTMLElement>('[data-pixel-btn]').forEach((btn) => {
+		const cv = btn.querySelector<HTMLCanvasElement>('[data-pixel-canvas]');
+		if (!cv) return;
+
+		/* charcoal→purple by default; grey→white for ghost/transparent faces */
+		const SHADES = btn.dataset.pixelShades === 'grey' ? greyPixelShades : charcoalPixelShades;
+
+		const CELL = 7,
+			FADE = 150,
+			SPREAD = 240,
+			HIDE = 190;
+		let ctx: CanvasRenderingContext2D | null = null;
+		let cells: Cell[] | null = null;
+		let cols = 0,
+			rows = 0;
+		let raf = 0,
+			dir = 0,
+			t0 = 0,
+			shimmerLast = 0;
+
+		function build() {
+			const r = btn.getBoundingClientRect();
+			const d = devicePixelRatio || 1;
+			cv!.width = Math.round(r.width * d);
+			cv!.height = Math.round(r.height * d);
+			ctx = cv!.getContext('2d')!;
+			ctx.setTransform(d, 0, 0, d, 0, 0);
+			cols = Math.ceil(r.width / CELL);
+			rows = Math.ceil(r.height / CELL);
+			const cx = (cols - 1) / 2,
+				cy = (rows - 1) / 2,
+				maxD = Math.hypot(cx, cy) || 1;
+			cells = [];
+			for (let y = 0; y < rows; y++)
+				for (let x = 0; x < cols; x++) {
+					cells.push({
+						x,
+						y,
+						delay: (Math.hypot(x - cx, y - cy) / maxD) * SPREAD + Math.random() * 50,
+						shade: SHADES[(Math.random() * SHADES.length) | 0],
+						p: 0,
+					});
+				}
+		}
+
+		function paint(ts: number) {
+			const t = ts - t0;
+			let busy = false;
+			ctx!.clearRect(0, 0, cols * CELL, rows * CELL);
+			for (const c of cells!) {
+				let p;
+				if (dir > 0) {
+					p = Math.max(c.p, Math.min(1, (t - c.delay) / FADE));
+				} else {
+					const hd = ((SPREAD - c.delay) / SPREAD) * HIDE;
+					p = Math.max(0, Math.min(c.p, 1 - (t - hd) / FADE));
+				}
+				c.p = p;
+				if (p > 0) {
+					ctx!.globalAlpha = p;
+					ctx!.fillStyle = c.shade;
+					ctx!.fillRect(c.x * CELL, c.y * CELL, CELL, CELL);
+				}
+				if ((dir > 0 && p < 1) || (dir < 0 && p > 0)) busy = true;
+			}
+			ctx!.globalAlpha = 1;
+			if (dir > 0 && !busy && ts - shimmerLast > 180) {
+				shimmerLast = ts;
+				const n = Math.ceil(cells!.length * 0.04);
+				for (let i = 0; i < n; i++) {
+					const c = cells![(Math.random() * cells!.length) | 0];
+					c.shade = SHADES[(Math.random() * SHADES.length) | 0];
+					ctx!.fillStyle = c.shade;
+					ctx!.fillRect(c.x * CELL, c.y * CELL, CELL, CELL);
+				}
+			}
+			if (dir > 0 || busy) raf = requestAnimationFrame(paint);
+			else raf = 0;
+		}
+
+		function go(d2: number) {
+			if (REDUCED) {
+				build();
+				if (d2 > 0) {
+					for (const c of cells!) {
+						ctx!.fillStyle = c.shade;
+						ctx!.fillRect(c.x * CELL, c.y * CELL, CELL, CELL);
+					}
+				} else {
+					ctx!.clearRect(0, 0, cols * CELL, rows * CELL);
+				}
+				return;
+			}
+			if (d2 > 0 && dir <= 0) build();
+			if (!cells) return;
+			dir = d2;
+			t0 = performance.now();
+			cancelAnimationFrame(raf);
+			raf = requestAnimationFrame(paint);
+		}
+
+		btn.addEventListener('mouseenter', () => go(1));
+		btn.addEventListener('mouseleave', () => go(-1));
+		btn.addEventListener('focusin', () => go(1));
+		btn.addEventListener('focusout', () => go(-1));
+		window.addEventListener('resize', () => {
+			if (dir > 0) build();
+		});
+	});
+</script>

@@ -1,0 +1,83 @@
+---
+/* Final CTA (innogenio-home-v2 .cta-final) — centered closing pitch:
+   two-line heading, supporting copy, action buttons (existing Button
+   variants), then the newsletter strip with its mono footnote. Body and
+   newsletter are optional — omit both for the slim listing-page variant
+   (heading + buttons only, innogenio-services .cta-sec). */
+import Button from '../atoms/Button.astro';
+import NewsletterForm from '../molecules/NewsletterForm.astro';
+
+export interface Action {
+	label: string;
+	href?: string;
+	variant?: 'pixel' | 'ghost' | 'pill';
+}
+
+interface Props {
+	/** Heading, one array item per line */
+	titleLines?: string[];
+	/** supporting copy; omitted → not rendered */
+	body?: string;
+	actions?: Action[];
+	/** newsletter strip; omitted → not rendered */
+	newsletter?: { placeholder?: string; buttonLabel?: string; note?: string };
+}
+
+const {
+	titleLines = ['Ready to eliminate chaos?', "Let's talk."],
+	body,
+	actions = [
+		{ label: 'Start a project', variant: 'pixel' },
+		{ label: 'Book a demo', variant: 'ghost' },
+	],
+	newsletter,
+} = Astro.props;
+---
+
+<section
+	data-reveal
+	aria-label="Contact call to action"
+	class="flex flex-col items-center gap-[22px] border-t border-line bg-panel px-section-x py-block-y text-center font-sans text-ink"
+>
+	<h2 class="rv-block max-w-[15em] text-balance text-cta-h">
+		{titleLines.map((line) => <span class="block">{line}</span>)}
+	</h2>
+	{body && <p class="rv-block max-w-[46ch] text-intro text-ink-secondary" style="--i:1">{body}</p>}
+
+	<div class="rv-block mt-1.5 flex flex-wrap justify-center gap-3.5" style="--i:2">
+		{
+			actions.map((action) => (
+				<Button
+					variant={action.variant ?? 'pixel'}
+					href={action.href ?? '/'}
+					label={action.label}
+					arrow={false}
+				/>
+			))
+		}
+	</div>
+
+	{
+		newsletter && (
+			<div class="rv-block mt-4 w-[min(420px,90%)]" style="--i:3">
+				<NewsletterForm
+					placeholder={newsletter.placeholder}
+					buttonLabel={newsletter.buttonLabel}
+					class="w-full"
+				/>
+			</div>
+		)
+	}
+	{
+		newsletter?.note && (
+			<span class="rv-block font-mono text-note" style="--i:4">
+				{newsletter.note}
+			</span>
+		)
+	}
+</section>
+
+<script>
+	import { initReveal } from '../../utils/reveal';
+	initReveal();
+</script>

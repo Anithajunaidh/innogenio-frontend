@@ -1,0 +1,146 @@
+{
+	"seo": {
+		"title": "Work — Innogenio",
+		"description": "Selected Innogenio case studies: ERP rollouts live in twelve weeks, AI automation cutting loan processing to minutes, and analytics platforms serving millions of orders."
+	},
+	"hero": {
+		"titleLines": ["Real systems.", "Real results."],
+		"lead": "A selection of what we've shipped with our clients — from plant-floor ERP to production AI, measured in outcomes, not slides.",
+		"actions": [
+			{ "label": "Start a project", "variant": "pixel", "href": "/" },
+			{ "label": "Explore services", "variant": "ghost", "href": "/services" }
+		]
+	},
+	"explorer": {
+		"label": "Work explorer",
+		"groups": [
+			{
+				"tab": "Case studies",
+				"intro": "Six engagements, end-to-end — what we built and what it changed.",
+				"layout": "rows",
+				"items": [
+					{
+						"icon": "factory",
+						"title": "Meridian Manufacturing",
+						"body": "A unified ERPNext rollout across four plants, live in twelve weeks — production planning and plant-floor telemetry on one system.",
+						"chips": ["ERPNext", "Manufacturing", "IoT telemetry", "12-week rollout"],
+							"href": "/works/meridian"
+					},
+					{
+						"icon": "bank",
+						"title": "NovaPay",
+						"body": "AI automation cuts loan processing from days to minutes — document intelligence and agent workflows in production.",
+						"chips": ["Agentic AI", "Document intelligence", "Financial services"],
+							"href": "/works/novapay"
+					},
+					{
+						"icon": "cart",
+						"title": "Halo Retail",
+						"body": "A real-time analytics platform serving 1.2M monthly orders — inventory, campaigns, and customer signals on one dashboard.",
+						"chips": ["Data platform", "Dashboards", "Retail & D2C"],
+							"href": "/works/halo-retail"
+					},
+					{
+						"icon": "erp",
+						"title": "Corevance",
+						"body": "ERP workflows automated without breaking a single integration — finance now closes the quarter in four days, not eleven.",
+						"chips": ["ERP automation", "Integrations", "Operations"],
+							"href": "/works/corevance"
+					},
+					{
+						"icon": "ux",
+						"title": "Kepler Labs",
+						"body": "Design and engineering under one roof shipped v2 two months ahead of the board's deadline.",
+						"chips": ["Product design", "Design system", "Web application"],
+							"href": "/works/kepler-labs"
+					},
+					{
+						"icon": "data",
+						"title": "Helixon",
+						"body": "A data pipeline rebuilt in nine weeks — deploy frequency tripled and on-call pages dropped to nearly zero.",
+						"chips": ["Data pipeline", "DevOps", "Observability"],
+							"href": "/works/helixon"
+					}
+				]
+			},
+			{
+				"tab": "By industry",
+				"intro": "Where our work lands — outcomes by domain.",
+				"layout": "grid",
+				"items": [
+					{
+						"icon": "factory",
+						"title": "Manufacturing",
+						"body": "ERP rollouts and IoT telemetry across multi-plant operations."
+					},
+					{
+						"icon": "bank",
+						"title": "Financial services",
+						"body": "Loan automation, claims copilots, and compliant data flows."
+					},
+					{
+						"icon": "cart",
+						"title": "Retail & eCommerce",
+						"body": "Order analytics and inventory sync at seven-figure volumes."
+					},
+					{
+						"icon": "health",
+						"title": "Healthcare",
+						"body": "Records, portals, and audits passed on the first review."
+					},
+					{
+						"icon": "book",
+						"title": "Education",
+						"body": "Learning platforms that scale with every new cohort."
+					},
+					{
+						"icon": "truck",
+						"title": "Logistics",
+						"body": "Fleet visibility and warehouse automation in the field."
+					}
+				]
+			},
+			{
+				"tab": "By service",
+				"intro": "The disciplines behind each delivery.",
+				"layout": "grid",
+				"items": [
+					{
+						"icon": "code",
+						"title": "Custom engineering",
+						"body": "Web, mobile, and APIs shipped to production."
+					},
+					{
+						"icon": "robot",
+						"title": "AI & automation",
+						"body": "Agents and copilots doing real work, measured in hours saved."
+					},
+					{
+						"icon": "erp",
+						"title": "ERP platforms",
+						"body": "ERPNext, Zoho, and Odoo — implemented, customized, adopted."
+					},
+					{
+						"icon": "data",
+						"title": "Data & analytics",
+						"body": "Pipelines and dashboards behind daily decisions."
+					},
+					{
+						"icon": "ops",
+						"title": "DevOps",
+						"body": "CI/CD and infrastructure that tripled deploy frequency."
+					},
+					{
+						"icon": "iot",
+						"title": "IoT & edge",
+						"body": "Gateways and smart systems from plant floor to cloud."
+					}
+				]
+			}
+		]
+	},
+	"cta": {
+		"titleLines": ["Your project could be next."],
+		"actions": [{ "label": "Start a project", "variant": "pixel", "href": "/" }]
+	}
+}

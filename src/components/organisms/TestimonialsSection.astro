@@ -1,0 +1,281 @@
+---
+/* Testimonials dark feature panel (innogenio-testimonials .tst) — fixed
+   dark values (like every Mistral dark panel it reads the same in page
+   light & dark modes) with the full texture recipe: grid + cloud glows
+   under the content, film grain over it, and faint flickering binary
+   columns at the edges. Kicker + two-column head, a grid of glass
+   testimonial cards that rise in staggered on scroll, then a footer
+   with the aggregate rating and a case-studies link. */
+import DimensionArrow from '../atoms/DimensionArrow.astro';
+import TestimonialCard from '../molecules/TestimonialCard.astro';
+import type { HalftoneName } from '../../utils/halftone-portraits';
+
+export interface Testimonial {
+	quote: string;
+	name: string;
+	role?: string;
+	company?: string;
+	avatar?: HalftoneName;
+	tag?: string;
+	stars?: number;
+}
+
+interface Props {
+	kicker?: string;
+	/** Heading, one array item per line */
+	titleLines?: string[];
+	lead?: string;
+	testimonials?: Testimonial[];
+	score?: { value: string; label: string };
+	cta?: { label: string; href?: string };
+}
+
+const {
+	kicker = 'Testimonials · signal 0110',
+	titleLines = ['Signal from', 'the field.'],
+	lead = 'Engineering and product leaders on what shipping with Innogenio actually feels like — quoted verbatim, rendered pixel-faithful.',
+	testimonials = [],
+	score = { value: '4.9', label: 'Avg. across 120+ delivery reviews' },
+	cta = { label: 'Read the case studies', href: '/' },
+} = Astro.props;
+---
+
+<section
+	data-testimonials
+	aria-label="Client testimonials"
+	class="tst-texture relative overflow-hidden border-x border-t border-line bg-panel-dark px-section-x py-block-y font-sans text-tst-body"
+>
+	<!-- faint binary columns at the panel edges -->
+	<div
+		data-bin-col
+		class="tst-bin pointer-events-none inset-y-0 left-3 hidden w-[18px] overflow-hidden font-mono text-[11px] leading-[18px] tracking-[.55em] whitespace-nowrap text-tst-accent/30 opacity-55 select-none [writing-mode:vertical-rl] [text-orientation:upright] min-[900px]:block"
+		aria-hidden="true"
+	>
+	</div>
+	<div
+		data-bin-col
+		class="tst-bin pointer-events-none inset-y-0 right-3 hidden w-[18px] overflow-hidden font-mono text-[11px] leading-[18px] tracking-[.55em] whitespace-nowrap text-tst-accent/30 opacity-55 select-none [writing-mode:vertical-rl] [text-orientation:upright] min-[900px]:block"
+		aria-hidden="true"
+	>
+	</div>
+
+	<p class="m-0 flex items-center gap-3.5 font-mono text-mono-panel text-tst-muted uppercase">
+		<span class="size-[7px] shrink-0 rotate-45 bg-white" aria-hidden="true"></span>{kicker}
+	</p>
+
+	<div
+		class="mt-[26px] grid grid-cols-1 items-end gap-[22px] min-[880px]:grid-cols-[1.25fr_1fr] min-[880px]:gap-10"
+	>
+		<h2 class="text-balance text-h3 leading-[1.05] text-tst-head">
+			{titleLines.map((line) => <span class="block">{line}</span>)}
+		</h2>
+		<p class="max-w-[30em] text-tst-lead text-tst-muted min-[880px]:justify-self-end">{lead}</p>
+	</div>
+
+	<!-- carousel: 3 cards ≥lg, 2 ≥md, 1 below; next/prev steps by one card
+	     (same translating-track swiper as the works carousel) -->
+	<div data-tst-carousel class="mt-[clamp(44px,6vw,72px)]">
+		<div class="overflow-hidden">
+			<div
+				data-tst-track
+				class="flex touch-pan-y gap-slide-gap transition-transform duration-[550ms] ease-move"
+			>
+				{
+					testimonials.map((t, i) => (
+						<div class="w-full shrink-0 md:w-[calc((100%_-_var(--spacing-slide-gap))_/_2)] lg:w-[calc((100%_-_2_*_var(--spacing-slide-gap))_/_3)] [&>*]:h-full">
+							<TestimonialCard {...t} index={i} />
+						</div>
+					))
+				}
+			</div>
+		</div>
+
+		<div class="mt-7 flex items-center justify-between">
+			<div
+				data-tst-dots
+				class="flex items-center gap-[7px] rounded-full border border-white/15 bg-white/5 px-[13px] py-[9px]"
+				aria-hidden="true"
+			>
+			</div>
+			<div class="flex gap-2.5">
+				<button
+					data-tst-prev
+					aria-label="Previous testimonials"
+					class="size-[35px] rounded-[6px] border border-white/20 bg-white/5 text-[13px] text-white transition-colors hover:border-brand hover:bg-brand hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-35"
+				>
+					&#10094;
+				</button>
+				<button
+					data-tst-next
+					aria-label="Next testimonials"
+					class="size-[35px] rounded-[6px] border border-white/20 bg-white/5 text-[13px] text-white transition-colors hover:border-brand hover:bg-brand hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-35"
+				>
+					&#10095;
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<div
+		class="mt-[clamp(40px,5vw,60px)] flex flex-wrap items-center gap-x-7 gap-y-[18px] border-t border-white/14 pt-[26px]"
+	>
+		<div class="flex items-center gap-3.5">
+			<span class="text-tst-score text-tst-head">{score.value}<span class="text-tst-dim">/5</span></span>
+			<span class="font-mono text-mono-panel text-tst-muted uppercase">{score.label}</span>
+		</div>
+		<a
+			href={cta.href}
+			class="group inline-flex items-center gap-3 text-btn text-white transition-colors hover:text-tst-hover focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none min-[680px]:ml-auto"
+		>
+			{cta.label}
+			<DimensionArrow class="w-[26px]" />
+		</a>
+	</div>
+</section>
+
+<script>
+	const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	document.querySelectorAll<HTMLElement>('[data-testimonials]').forEach((section) => {
+		/* ── binary edge columns — a slow, stepped digit flicker ── */
+		const binCols = section.querySelectorAll<HTMLElement>('[data-bin-col]');
+		const binStr = (len: number) =>
+			Array.from({ length: len }, () => (Math.random() < 0.5 ? '0' : '1')).join('');
+		binCols.forEach((el) => (el.textContent = binStr(160)));
+		if (!REDUCED && binCols.length) {
+			setInterval(() => {
+				binCols.forEach((el) => {
+					const chars = (el.textContent ?? '').split('');
+					for (let k = 0; k < 6; k++) {
+						const p = Math.floor(Math.random() * chars.length);
+						chars[p] = chars[p] === '0' ? '1' : '0';
+					}
+					el.textContent = chars.join('');
+				});
+			}, 700);
+		}
+
+		/* ── card entrance on scroll ── */
+		const cards = section.querySelectorAll<HTMLElement>('.tst-card');
+		if (REDUCED || !('IntersectionObserver' in window)) {
+			cards.forEach((c) => c.classList.add('in'));
+		} else {
+			const io = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((en) => {
+						if (en.isIntersecting) {
+							en.target.classList.add('in');
+							io.unobserve(en.target);
+						}
+					});
+				},
+				// wide horizontal margin so cards parked off-screen in the carousel
+				// still reveal (staggered) once the panel scrolls into view
+				{ threshold: 0.18, rootMargin: '0px 1500px -40px 1500px' }
+			);
+			cards.forEach((c) => io.observe(c));
+		}
+
+		/* ── testimonials carousel: 3 / 2 / 1 cards per view, step by one ──
+		   same translating-track swiper as the works carousel; the per-view
+		   count is derived from the card width so it adapts on resize. */
+		const carousel = section.querySelector<HTMLElement>('[data-tst-carousel]');
+		const track = carousel?.querySelector<HTMLElement>('[data-tst-track]');
+		const dotsBox = carousel?.querySelector<HTMLElement>('[data-tst-dots]');
+		const prev = carousel?.querySelector<HTMLButtonElement>('[data-tst-prev]');
+		const next = carousel?.querySelector<HTMLButtonElement>('[data-tst-next]');
+
+		if (carousel && track && dotsBox && prev && next && track.children.length) {
+			const count = track.children.length;
+			let idx = 0;
+			let maxIdx = 0;
+			let dots: HTMLElement[] = [];
+
+			// slide step = card width + the track gap (--spacing-slide-gap)
+			const step = () =>
+				(track.children[0] as HTMLElement).getBoundingClientRect().width +
+				(parseFloat(getComputedStyle(track).columnGap) || 0);
+
+			const measure = () => {
+				const view = (track.parentElement as HTMLElement).getBoundingClientRect().width;
+				const visible = Math.max(1, Math.round(view / step()));
+				maxIdx = Math.max(0, count - visible);
+				// one dot per reachable position
+				dotsBox.replaceChildren();
+				dots = Array.from({ length: maxIdx + 1 }, () => {
+					const d = document.createElement('i');
+					d.className = 'h-1.5 rounded-full transition-[width,background-color] duration-300';
+					dotsBox.appendChild(d);
+					return d;
+				});
+			};
+
+			const go = (i: number) => {
+				idx = Math.max(0, Math.min(maxIdx, i));
+				track.style.transform = `translateX(${-step() * idx}px)`;
+				dots.forEach((d, di) => {
+					d.classList.toggle('w-6', di === idx);
+					d.classList.toggle('bg-white', di === idx);
+					d.classList.toggle('w-1.5', di !== idx);
+					d.classList.toggle('bg-white/30', di !== idx);
+				});
+				prev.disabled = idx === 0;
+				next.disabled = idx >= maxIdx;
+			};
+
+			prev.addEventListener('click', () => go(idx - 1));
+			next.addEventListener('click', () => go(idx + 1));
+
+			/* swipe / drag — track follows the pointer, then snaps by one slide */
+			const SWIPE = 50;
+			let x0 = 0;
+			let dx = 0;
+			let dragging = false;
+			track.addEventListener('pointerdown', (e) => {
+				if (e.pointerType === 'mouse' && e.button !== 0) return;
+				dragging = true;
+				x0 = e.clientX;
+				dx = 0;
+				track.setPointerCapture(e.pointerId);
+				track.style.transition = 'none';
+				e.preventDefault();
+			});
+			track.addEventListener('pointermove', (e) => {
+				if (!dragging) return;
+				dx = e.clientX - x0;
+				track.style.transform = `translateX(${-step() * idx + dx}px)`;
+			});
+			const settle = () => {
+				if (!dragging) return;
+				dragging = false;
+				track.style.transition = '';
+				go(Math.abs(dx) > SWIPE ? idx + (dx < 0 ? 1 : -1) : idx);
+			};
+			track.addEventListener('pointerup', settle);
+			track.addEventListener('pointercancel', settle);
+			track.addEventListener('dragstart', (e) => e.preventDefault());
+			track.addEventListener(
+				'click',
+				(e) => {
+					if (Math.abs(dx) > 6) {
+						e.preventDefault();
+						e.stopPropagation();
+					}
+					dx = 0;
+				},
+				true
+			);
+
+			let rsT = 0;
+			window.addEventListener('resize', () => {
+				clearTimeout(rsT);
+				rsT = window.setTimeout(() => {
+					measure();
+					go(idx);
+				}, 150);
+			});
+			measure();
+			go(0);
+		}
+	});
+</script>

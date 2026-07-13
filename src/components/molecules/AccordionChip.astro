@@ -1,0 +1,49 @@
+---
+/* Accordion chip (innogenio-home-v2 .impact-acc) — a rounded chip button
+   whose plus icon rotates to an X while a text panel slides open below.
+   State lives on the wrapper's data-open attribute; the shared script
+   toggles every instance on the page. */
+interface Props {
+	label: string;
+	body: string;
+}
+const { label, body } = Astro.props;
+---
+
+<div data-accordion data-open="false" class="group">
+	<button
+		type="button"
+		data-accordion-toggle
+		aria-expanded="false"
+		class="inline-flex items-center gap-2.5 rounded-full border border-line bg-fill-warm py-[9px] pr-[17px] pl-[13px] text-chip text-ink transition-colors duration-150 group-data-[open=true]:border-brand group-data-[open=true]:bg-brand-soft hover:border-brand focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+	>
+		<svg
+			viewBox="0 0 24 24"
+			fill="none"
+			class="size-[13px] shrink-0 text-brand transition-transform duration-300 ease-arrow group-data-[open=true]:rotate-45"
+			aria-hidden="true"
+		>
+			<path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+			></path>
+		</svg>
+		{label}
+	</button>
+	<div
+		class="max-h-0 overflow-hidden transition-[max-height] duration-[320ms] ease-arrow group-data-[open=true]:max-h-[140px]"
+	>
+		<p class="mx-1.5 mt-[11px] mb-0.5 max-w-[48ch] text-sm leading-normal text-ink-secondary">
+			{body}
+		</p>
+	</div>
+</div>
+
+<script>
+	document.querySelectorAll<HTMLElement>('[data-accordion]').forEach((acc) => {
+		const btn = acc.querySelector<HTMLButtonElement>('[data-accordion-toggle]');
+		btn?.addEventListener('click', () => {
+			const open = acc.getAttribute('data-open') === 'true';
+			acc.setAttribute('data-open', String(!open));
+			btn.setAttribute('aria-expanded', String(!open));
+		});
+	});
+</script>

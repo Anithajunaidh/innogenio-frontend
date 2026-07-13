@@ -1,0 +1,43 @@
+---
+/* Pixel-grid hamburger toggle — 9-dot menu icon that swaps to a pixel X
+   while open. Pure markup: the owning molecule wires up the behavior via
+   the data-menu-toggle / data-icon attributes. */
+interface Props {
+	class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<button
+	data-menu-toggle
+	class:list={[
+		'flex w-14 shrink-0 items-center justify-center border-l border-line transition-colors hover:bg-brand-soft focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset',
+		className,
+	]}
+	aria-label="Toggle menu"
+	aria-expanded="false"
+	aria-controls="nav-panel"
+>
+	<svg data-icon="open" viewBox="0 0 30 30" fill="currentColor" class="w-5" aria-hidden="true">
+		<path d="M8.4 26H4V21.6H8.4V26Z"></path>
+		<path d="M17.2 26H12.8V21.6H17.2V26Z"></path>
+		<path d="M26 26H21.6V21.6H26V26Z"></path>
+		<path d="M8.4 17.2H4V12.8H8.4V17.2Z"></path>
+		<path d="M17.2 17.2H12.8V12.8H17.2V17.2Z"></path>
+		<path d="M26 17.2H21.6V12.8H26V17.2Z"></path>
+		<path d="M8.4 8.4H4V4H8.4V8.4Z"></path>
+		<path d="M17.2 8.4H12.8V4H17.2V8.4Z"></path>
+		<path d="M26 8.4H21.6V4H26V8.4Z"></path>
+	</svg>
+	<svg data-icon="close" viewBox="0 0 30 30" fill="currentColor" class="hidden w-5" aria-hidden="true">
+		<path d="M8.4 26H4V21.6H8.4V26Z"></path>
+		<path d="M26 26H21.6V21.6H26V26Z"></path>
+		<path d="M12.8 21.6H8.4V17.2H12.8V21.6Z"></path>
+		<path d="M21.6 21.6H17.2V17.2H21.6V21.6Z"></path>
+		<path d="M17.2 17.2H12.8V12.8H17.2V17.2Z"></path>
+		<path d="M12.8 12.8H8.4V8.4H12.8V12.8Z"></path>
+		<path d="M21.6 12.8H17.2V8.4H21.6V12.8Z"></path>
+		<path d="M8.4 8.4H4V4H8.4V8.4Z"></path>
+		<path d="M26 8.4H21.6V4H26V8.4Z"></path>
+	</svg>
+</button>

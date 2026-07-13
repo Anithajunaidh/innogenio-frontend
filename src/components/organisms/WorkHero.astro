@@ -1,0 +1,39 @@
+---
+/* Work-detail hero (innogenio-work-vineo .hero) — the case-study hero,
+   built on the reusable HeroScaleup takeover organism: breadcrumb, case
+   headline, lead, and a solid + ghost CTA pair in the collapsing copy
+   column, with the fixed dark art panel (shared proc-texture) hosting the
+   prop-driven product mock. On scroll at lg+ the panel grows to full-bleed
+   and its overlay headline reveals; below lg it's a plain stacked hero. */
+import HeroScaleup from './HeroScaleup.astro';
+import type { HeroScaleupAction } from './HeroScaleup.astro';
+import WorkMock from '../molecules/WorkMock.astro';
+import type { MockData } from '../molecules/WorkMock.astro';
+import type { HeroAction } from './ListingHero.astro';
+
+interface Props {
+	/** breadcrumb root, e.g. "Work" */
+	crumbRoot: string;
+	/** breadcrumb leaf — the case-study name */
+	name: string;
+	title: string;
+	lead?: string;
+	actions?: HeroAction[];
+	/** headline that reveals over the panel as it takes over */
+	overlayText?: string;
+	mock: MockData;
+	artLabel?: string;
+}
+const { crumbRoot, name, title, lead, actions = [], overlayText, mock, artLabel } = Astro.props;
+---
+
+<HeroScaleup
+	crumb={{ root: crumbRoot, leaf: name }}
+	titleLines={[title]}
+	copy={lead}
+	actions={actions as HeroScaleupAction[]}
+	overlayText={overlayText}
+	panelLabel={artLabel ?? `${name} interface illustration`}
+>
+	<WorkMock {...mock} />
+</HeroScaleup>

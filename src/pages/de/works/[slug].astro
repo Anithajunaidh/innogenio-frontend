@@ -1,0 +1,22 @@
+---
+import WorkDetailPage from '../../../components/templates/WorkDetailPage.astro';
+import type { Work } from '../../../components/templates/WorkDetailPage.astro';
+import data from '../../../constants/pagedata/de/work-details.json';
+
+export function getStaticPaths() {
+	return data.works.map((work) => ({ params: { slug: work.slug } }));
+}
+
+const { slug } = Astro.params;
+const index = data.works.findIndex((work) => work.slug === slug);
+/* JSON imports widen literals, so the record is narrowed once here */
+const work = data.works[index] as Work;
+
+/* prev/next wrap around the case-study ring */
+const prevWork = data.works[(index - 1 + data.works.length) % data.works.length];
+const nextWork = data.works[(index + 1) % data.works.length];
+const prev = { title: prevWork.hero.title, href: `/de/works/${prevWork.slug}` };
+const next = { title: nextWork.hero.title, href: `/de/works/${nextWork.slug}` };
+---
+
+<WorkDetailPage locale="de" labels={data.labels} work={work} prev={prev} next={next} />

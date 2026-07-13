@@ -1,0 +1,639 @@
+{
+	"labels": {
+		"crumbRoot": "Work",
+		"prev": "Previous",
+		"next": "Next"
+	},
+	"works": [
+		{
+			"slug": "meridian",
+			"name": "Meridian",
+			"seo": {
+				"title": "Meridian Manufacturing — Work — Innogenio",
+				"description": "How Innogenio rolled out a unified ERPNext across four Meridian plants in twelve weeks — production planning, plant-floor telemetry, and finance on one system."
+			},
+			"hero": {
+				"title": "Meridian. Four plants, one system.",
+				"overlayText": "Four plants. One source of truth.",
+				"lead": "A unified ERPNext rollout across four manufacturing plants, live in twelve weeks — production planning, plant-floor telemetry, and finance finally speaking the same language.",
+				"actions": [
+					{ "label": "Start a project", "variant": "pixel", "href": "/" },
+					{ "label": "See more work", "variant": "ghost", "href": "/works" }
+				]
+			},
+			"mock": {
+				"bar": "MERIDIAN.OPS",
+				"rec": "Plant floor · live",
+				"cards": [
+					{ "icon": "factory", "tag": "P-01" },
+					{ "icon": "iot", "tag": "P-02", "hot": true },
+					{ "icon": "data", "tag": "P-03" }
+				],
+				"footLeft": "OEE · 94%",
+				"footRight": "SYNCED"
+			},
+			"meta": [
+				{ "label": "Client", "value": "Meridian Manufacturing" },
+				{ "label": "Industry", "value": "Manufacturing" },
+				{ "label": "Services", "value": "ERPNext · IoT · Data" },
+				{ "label": "Engagement", "value": "Design → build → scale" }
+			],
+			"features": {
+				"title": "One ERP for the whole plant floor.",
+				"sub": "Four plants ran four ways of working. The rollout put planning, inventory, telemetry, and finance on a single system — without stopping a single line.",
+				"items": [
+					{ "icon": "erp", "title": "Unified ERPNext core", "body": "One instance for planning, purchasing, inventory, and accounts across all plants." },
+					{ "icon": "factory", "title": "Production planning", "body": "Work orders and capacity scheduled against real machine availability." },
+					{ "icon": "iot", "title": "Plant-floor telemetry", "body": "Machines stream status and counts straight into the ERP." },
+					{ "icon": "data", "title": "Live dashboards", "body": "OEE, scrap, and throughput visible per line, per shift, per plant." },
+					{ "icon": "ops", "title": "Zero-downtime rollout", "body": "Plant-by-plant cutover with parallel running — no stopped lines." },
+					{ "icon": "code", "title": "Custom integrations", "body": "Legacy MES and label printers wired in instead of ripped out." }
+				]
+			},
+			"story": {
+				"tabs": [
+					{
+						"tab": "Challenge",
+						"blocks": [
+							{ "title": "Four plants, four systems", "body": "Each site ran its own mix of spreadsheets and legacy tools — the same part could carry three different numbers depending on who you asked." },
+							{ "title": "No shared truth", "body": "Head office consolidated production and stock figures by hand, weeks after the fact, and planned against data that was already stale." },
+							{ "title": "A hard deadline", "body": "A new distribution contract required unified stock visibility within one quarter — the rollout had a twelve-week window, not a twelve-month one." },
+							{ "title": "No room for downtime", "body": "Lines run around the clock. A cutover that stopped production for even a shift was off the table." }
+						]
+					},
+					{
+						"tab": "Solution",
+						"blocks": [
+							{ "title": "One ERPNext instance", "body": "A single, opinionated configuration — shared item masters, BOMs, and costing — replacing four divergent ways of working with one." },
+							{ "title": "Telemetry into the ERP", "body": "Gateways on the plant floor stream machine counts and states into ERPNext, so work orders close themselves against reality." },
+							{ "title": "Plant-by-plant cutover", "body": "Each plant ran two weeks in parallel before switching — issues surfaced against live data without risking production." },
+							{ "title": "Trained on their own data", "body": "Operators and planners learned the system on their own parts and orders, not demo data — adoption came with the rollout, not after it." }
+						]
+					},
+					{
+						"tab": "Delivery",
+						"blocks": [
+							{ "title": "Weeks 1–3 · Discovery", "body": "Process mapping across all four sites, one canonical item master, and a migration plan agreed with every plant manager." },
+							{ "title": "Weeks 4–8 · Build", "body": "Configuration, custom integrations to MES and label systems, and telemetry gateways installed line by line." },
+							{ "title": "Weeks 9–12 · Cutover", "body": "Parallel running, data migration, and go-live one plant per week — the fourth plant switched on schedule, day 84." },
+							{ "title": "After go-live", "body": "Hypercare on-site through the first close, then a quarterly roadmap of refinements driven by floor feedback." }
+						]
+					}
+				]
+			},
+			"results": {
+				"title": "What shipped, measured.",
+				"stats": [
+					{ "value": "12", "label": "Weeks to full rollout" },
+					{ "value": "4", "label": "Plants on one system" },
+					{ "value": "94%", "label": "OEE visibility, live" },
+					{ "value": "−70%", "label": "Manual reporting effort" },
+					{ "value": "0", "label": "Lines stopped in cutover" },
+					{ "value": "3 days", "label": "Faster monthly close" }
+				]
+			},
+			"delivered": {
+				"title": "Delivered, end to end.",
+				"items": [
+					{ "icon": "erp", "title": "ERPNext implementation", "body": "Configured, customized, and adopted across four plants." },
+					{ "icon": "iot", "title": "IoT telemetry", "body": "Plant-floor gateways streaming machine data into the ERP." },
+					{ "icon": "data", "title": "Operations dashboards", "body": "OEE, scrap, and throughput live per line and shift." },
+					{ "icon": "ops", "title": "Ongoing support", "body": "Hypercare, monitoring, and a quarterly improvement roadmap." }
+				]
+			},
+			"cta": {
+				"titleLines": ["Your plant could be next."],
+				"body": "Build, customize, and ship with a partner that stays for the whole loop.",
+				"actions": [
+					{ "label": "Start a project", "variant": "pixel", "href": "/" },
+					{ "label": "Contact us", "variant": "ghost", "href": "/" }
+				]
+			}
+		},
+		{
+			"slug": "novapay",
+			"name": "NovaPay",
+			"seo": {
+				"title": "NovaPay — Work — Innogenio",
+				"description": "How Innogenio's document intelligence and agent workflows cut NovaPay's loan processing from days to minutes — AI automation in real production."
+			},
+			"hero": {
+				"title": "NovaPay. Loans, decided in minutes.",
+				"overlayText": "Underwriting that reads for itself.",
+				"lead": "AI automation that reads, checks, and routes loan applications — document intelligence and agent workflows cutting processing from days to minutes, in production.",
+				"actions": [
+					{ "label": "Start a project", "variant": "pixel", "href": "/" },
+					{ "label": "See more work", "variant": "ghost", "href": "/works" }
+				]
+			},
+			"mock": {
+				"bar": "NOVAPAY.APP",
+				"rec": "Queue · auto-processing",
+				"cards": [
+					{ "icon": "bank", "tag": "DOCS ✓" },
+					{ "icon": "ai", "tag": "SCORED", "hot": true },
+					{ "icon": "ops", "tag": "ROUTED" }
+				],
+				"footLeft": "AVG DECISION · 4 MIN",
+				"footRight": "APPROVE"
+			},
+			"meta": [
+				{ "label": "Client", "value": "NovaPay" },
+				{ "label": "Industry", "value": "Financial services" },
+				{ "label": "Services", "value": "Agentic AI · Document intelligence" },
+				{ "label": "Engagement", "value": "Design → build → scale" }
+			],
+			"features": {
+				"title": "An underwriting pipeline that reads for itself.",
+				"sub": "Every application used to wait for a human to open it. Now models read the documents, agents run the checks, and people decide only where judgment is actually needed.",
+				"items": [
+					{ "icon": "ai", "title": "Document intelligence", "body": "Statements, payslips, and IDs extracted and validated automatically." },
+					{ "icon": "robot", "title": "Agent workflows", "body": "Agents run credit checks, verifications, and routing end to end." },
+					{ "icon": "bank", "title": "Risk scoring", "body": "Consistent, explainable scoring on every application." },
+					{ "icon": "flag", "title": "Human-in-the-loop", "body": "Edge cases escalate to underwriters with full context attached." },
+					{ "icon": "data", "title": "Full audit trail", "body": "Every extraction and decision logged for compliance review." },
+					{ "icon": "ops", "title": "Production monitoring", "body": "Model drift and queue health watched around the clock." }
+				]
+			},
+			"story": {
+				"tabs": [
+					{
+						"tab": "Challenge",
+						"blocks": [
+							{ "title": "Days in the queue", "body": "A single application meant hours of manual reading spread across days of waiting — applicants routinely gave up and went elsewhere." },
+							{ "title": "Inconsistent decisions", "body": "The same profile could pass with one underwriter and fail with another; consistency existed only in policy documents, not practice." },
+							{ "title": "Compliance pressure", "body": "Every decision needed a defensible trail — automation could not become a black box regulators couldn't inspect." },
+							{ "title": "Scale without headcount", "body": "Volume was doubling yearly; hiring underwriters at that pace was neither affordable nor fast enough." }
+						]
+					},
+					{
+						"tab": "Solution",
+						"blocks": [
+							{ "title": "Extraction that's checked", "body": "Document models extract fields, then rule-based validators cross-check them against bureau data before anything moves forward." },
+							{ "title": "Agents own the workflow", "body": "An agent pipeline runs verifications, scoring, and routing — each step observable, replayable, and individually testable." },
+							{ "title": "Humans where it matters", "body": "Clean applications flow straight through; ambiguous ones land in an underwriter's queue with the evidence already assembled." },
+							{ "title": "Explainability built in", "body": "Every automated decision carries its inputs, model version, and reasoning — an audit trail regulators can actually read." }
+						]
+					},
+					{
+						"tab": "Delivery",
+						"blocks": [
+							{ "title": "Shadow mode first", "body": "The pipeline ran silently alongside human underwriting for six weeks, measured against real decisions before touching one." },
+							{ "title": "Progressive rollout", "body": "Automation took the lowest-risk segment first, expanding band by band as accuracy held above target." },
+							{ "title": "The loop", "body": "Delivered through our four-phase cycle — discovery, design, development, deployment — with post-launch iterations feeding the next turn." },
+							{ "title": "Handover that sticks", "body": "NovaPay's team now retrains models and tunes thresholds themselves, on tooling we built to be operated, not just admired." }
+						]
+					}
+				]
+			},
+			"results": {
+				"title": "What shipped, measured.",
+				"stats": [
+					{ "value": "4 min", "label": "Average decision time" },
+					{ "value": "−96%", "label": "Processing time vs before" },
+					{ "value": "83%", "label": "Applications fully automated" },
+					{ "value": "2.4×", "label": "Volume, same team" },
+					{ "value": "100%", "label": "Decisions with audit trail" },
+					{ "value": "+31%", "label": "Application completion" }
+				]
+			},
+			"delivered": {
+				"title": "Delivered, end to end.",
+				"items": [
+					{ "icon": "ai", "title": "AI implementation", "body": "Document models and scoring deployed and monitored in production." },
+					{ "icon": "robot", "title": "Agent platform", "body": "Verification, scoring, and routing workflows as one pipeline." },
+					{ "icon": "data", "title": "Compliance tooling", "body": "Audit trails and reporting built for regulator review." },
+					{ "icon": "ops", "title": "Ongoing support", "body": "Drift monitoring, retraining tooling, and roadmap partnership." }
+				]
+			},
+			"cta": {
+				"titleLines": ["Your workflow could be next."],
+				"body": "Build, customize, and ship with a partner that stays for the whole loop.",
+				"actions": [
+					{ "label": "Start a project", "variant": "pixel", "href": "/" },
+					{ "label": "Contact us", "variant": "ghost", "href": "/" }
+				]
+			}
+		},
+		{
+			"slug": "halo-retail",
+			"name": "Halo Retail",
+			"seo": {
+				"title": "Halo Retail — Work — Innogenio",
+				"description": "How Innogenio built Halo Retail a real-time analytics platform serving 1.2M monthly orders — inventory, campaigns, and customer signals on one dashboard."
+			},
+			"hero": {
+				"title": "Halo. 1.2M orders, one dashboard.",
+				"overlayText": "Every order, live on one dashboard.",
+				"lead": "A real-time analytics platform serving 1.2 million monthly orders — inventory, campaigns, and customer signals unified on one dashboard the whole company trusts.",
+				"actions": [
+					{ "label": "Start a project", "variant": "pixel", "href": "/" },
+					{ "label": "See more work", "variant": "ghost", "href": "/works" }
+				]
+			},
+			"mock": {
+				"bar": "HALO.LIVE",
+				"rec": "Now · streaming",
+				"cards": [
+					{ "icon": "cart", "tag": "41K/H" },
+					{ "icon": "data", "tag": "LIVE", "hot": true },
+					{ "icon": "truck", "tag": "98.2%" }
+				],
+				"footLeft": "LATENCY · <1S",
+				"footRight": "DASHBOARD"
+			},
+			"meta": [
+				{ "label": "Client", "value": "Halo Retail" },
+				{ "label": "Industry", "value": "Retail & eCommerce" },
+				{ "label": "Services", "value": "Data platform · Dashboards" },
+				{ "label": "Engagement", "value": "Design → build → scale" }
+			],
+			"features": {
+				"title": "Retail decisions at streaming speed.",
+				"sub": "Orders, stock, and campaign spend used to live in five tools and one overnight batch. Now every signal lands on one dashboard within a second of happening.",
+				"items": [
+					{ "icon": "data", "title": "Streaming pipeline", "body": "Orders and events processed in real time, not overnight batches." },
+					{ "icon": "cart", "title": "Order analytics", "body": "1.2M monthly orders sliced by channel, region, and SKU." },
+					{ "icon": "truck", "title": "Inventory signals", "body": "Stock positions and reorder alerts synced across warehouses." },
+					{ "icon": "flag", "title": "Campaign tracking", "body": "Spend and conversion joined live, per campaign and cohort." },
+					{ "icon": "ux", "title": "One dashboard", "body": "A single interface for merchandising, marketing, and ops." },
+					{ "icon": "ops", "title": "Built for peaks", "body": "Sized for seasonal spikes — Black Friday is just a busy Tuesday." }
+				]
+			},
+			"story": {
+				"tabs": [
+					{
+						"tab": "Challenge",
+						"blocks": [
+							{ "title": "Five tools, no answer", "body": "Sales in one system, stock in another, campaigns in a third — simple questions took an analyst and a day to answer." },
+							{ "title": "Yesterday's numbers", "body": "The nightly batch meant every decision ran on stale data; stockouts were discovered by customers before dashboards." },
+							{ "title": "Seven-figure volume", "body": "At 1.2M orders a month, spreadsheet workarounds weren't slow — they were impossible." },
+							{ "title": "Trust in the numbers", "body": "Teams kept private copies of 'the real figures.' A platform nobody trusts is a platform nobody uses." }
+						]
+					},
+					{
+						"tab": "Solution",
+						"blocks": [
+							{ "title": "One streaming backbone", "body": "Every order, stock movement, and campaign event flows through a single pipeline — processed, joined, and queryable in under a second." },
+							{ "title": "Metrics defined once", "body": "A semantic layer pins down revenue, margin, and conversion definitions so every team reads the same number." },
+							{ "title": "Dashboards per role", "body": "Merchandising, marketing, and ops each get their view — same data underneath, different questions on top." },
+							{ "title": "Alerts, not archaeology", "body": "Stockouts, campaign anomalies, and delivery slips push to the right team the moment thresholds break." }
+						]
+					},
+					{
+						"tab": "Delivery",
+						"blocks": [
+							{ "title": "Pipeline first", "body": "The streaming backbone shipped first and ran in parallel with the old batch until the numbers matched for thirty straight days." },
+							{ "title": "Tool by tool", "body": "Each legacy report was rebuilt on the platform, validated with its owners, then retired — no big-bang switch." },
+							{ "title": "The loop", "body": "Delivered through our four-phase cycle — discovery, design, development, deployment — with post-launch iterations feeding the next turn." },
+							{ "title": "Peak-season proof", "body": "The platform's first Black Friday processed 6× normal volume with sub-second latency and zero incidents." }
+						]
+					}
+				]
+			},
+			"results": {
+				"title": "What shipped, measured.",
+				"stats": [
+					{ "value": "1.2M", "label": "Monthly orders served" },
+					{ "value": "<1s", "label": "Event-to-dashboard latency" },
+					{ "value": "−38%", "label": "Stockout incidents" },
+					{ "value": "6×", "label": "Peak volume handled" },
+					{ "value": "1", "label": "Source of truth" },
+					{ "value": "+24%", "label": "Campaign ROI visibility" }
+				]
+			},
+			"delivered": {
+				"title": "Delivered, end to end.",
+				"items": [
+					{ "icon": "data", "title": "Data platform", "body": "Streaming pipeline, warehouse, and semantic layer as one system." },
+					{ "icon": "ux", "title": "Dashboard suite", "body": "Role-based views for merchandising, marketing, and ops." },
+					{ "icon": "flag", "title": "Alerting", "body": "Threshold and anomaly alerts routed to the owning team." },
+					{ "icon": "ops", "title": "Ongoing support", "body": "Monitoring, scaling, and roadmap partnership post-launch." }
+				]
+			},
+			"cta": {
+				"titleLines": ["Your data could be next."],
+				"body": "Build, customize, and ship with a partner that stays for the whole loop.",
+				"actions": [
+					{ "label": "Start a project", "variant": "pixel", "href": "/" },
+					{ "label": "Contact us", "variant": "ghost", "href": "/" }
+				]
+			}
+		},
+		{
+			"slug": "corevance",
+			"name": "Corevance",
+			"seo": {
+				"title": "Corevance — Work — Innogenio",
+				"description": "How Innogenio automated Corevance's ERP workflows without breaking a single integration — finance now closes the quarter in four days instead of eleven."
+			},
+			"hero": {
+				"title": "Corevance. The quarter, closed in four days.",
+				"overlayText": "The quarter, closed in four days.",
+				"lead": "ERP workflows automated without breaking a single integration — approvals, reconciliation, and reporting that used to take eleven days now finish in four.",
+				"actions": [
+					{ "label": "Start a project", "variant": "pixel", "href": "/" },
+					{ "label": "See more work", "variant": "ghost", "href": "/works" }
+				]
+			},
+			"mock": {
+				"bar": "COREVANCE.ERP",
+				"rec": "Quarter close · day 4",
+				"cards": [
+					{ "icon": "erp", "tag": "MATCHED" },
+					{ "icon": "bank", "tag": "DAY 4", "hot": true },
+					{ "icon": "data", "tag": "FILED" }
+				],
+				"footLeft": "RECONCILED · 99.7%",
+				"footRight": "CLOSE"
+			},
+			"meta": [
+				{ "label": "Client", "value": "Corevance" },
+				{ "label": "Industry", "value": "Enterprise operations" },
+				{ "label": "Services", "value": "ERP automation · Integrations" },
+				{ "label": "Engagement", "value": "Design → build → scale" }
+			],
+			"features": {
+				"title": "Automation that respects what already works.",
+				"sub": "Corevance's ERP touched nineteen other systems. The mandate: automate the busywork inside it without breaking a single one of them.",
+				"items": [
+					{ "icon": "erp", "title": "Workflow automation", "body": "Approvals, matching, and postings run themselves on schedule." },
+					{ "icon": "code", "title": "Integration-safe", "body": "All nineteen connected systems kept their contracts intact." },
+					{ "icon": "bank", "title": "Fast close", "body": "Reconciliation and consolidation compressed from days to hours." },
+					{ "icon": "data", "title": "Exception surfacing", "body": "Only genuine mismatches reach a human — with context attached." },
+					{ "icon": "ops", "title": "Scheduled reliability", "body": "Every automated run monitored, retried, and reported." },
+					{ "icon": "flag", "title": "Controls preserved", "body": "Segregation of duties and audit requirements enforced in the flow." }
+				]
+			},
+			"story": {
+				"tabs": [
+					{
+						"tab": "Challenge",
+						"blocks": [
+							{ "title": "Eleven-day closes", "body": "Every quarter, finance spent eleven days on manual matching, chasing approvals, and rebuilding the same spreadsheets." },
+							{ "title": "Nineteen integrations", "body": "The ERP fed payroll, banking, CRM, and warehouse systems — any change risked breaking a connection someone depended on." },
+							{ "title": "Failed attempts before us", "body": "Two previous automation projects had been rolled back after breaking downstream systems; trust in 'automation' was near zero." },
+							{ "title": "Audit is non-negotiable", "body": "Faster couldn't mean looser — every control and approval chain had to survive intact." }
+						]
+					},
+					{
+						"tab": "Solution",
+						"blocks": [
+							{ "title": "Map before touching", "body": "We contract-tested all nineteen integrations first, so every automation change could prove it broke nothing before shipping." },
+							{ "title": "Automate the boring 90%", "body": "Three-way matching, recurring postings, and approval routing automated; humans handle only flagged exceptions." },
+							{ "title": "Controls as code", "body": "Segregation of duties and approval thresholds enforced by the workflow itself — tighter than the manual process, not looser." },
+							{ "title": "Close as a pipeline", "body": "The quarter close became an orchestrated sequence with live status — everyone sees what's done, running, or blocked." }
+						]
+					},
+					{
+						"tab": "Delivery",
+						"blocks": [
+							{ "title": "Integration test harness", "body": "Week one deliverable: automated contract tests around every connected system — the safety net everything else relied on." },
+							{ "title": "One workflow at a time", "body": "Each automation shipped behind a toggle, ran in parallel with the manual process for a cycle, then took over." },
+							{ "title": "The loop", "body": "Delivered through our four-phase cycle — discovery, design, development, deployment — with post-launch iterations feeding the next turn." },
+							{ "title": "Proven on a real close", "body": "The first fully automated quarter closed in four days with zero integration incidents — and the auditors signed off." }
+						]
+					}
+				]
+			},
+			"results": {
+				"title": "What shipped, measured.",
+				"stats": [
+					{ "value": "4 days", "label": "Quarter close, from 11" },
+					{ "value": "0", "label": "Integrations broken" },
+					{ "value": "19", "label": "Systems kept in sync" },
+					{ "value": "90%", "label": "Postings automated" },
+					{ "value": "−64%", "label": "Manual finance hours" },
+					{ "value": "100%", "label": "Audit controls preserved" }
+				]
+			},
+			"delivered": {
+				"title": "Delivered, end to end.",
+				"items": [
+					{ "icon": "erp", "title": "ERP automation", "body": "Matching, postings, and approval flows running unattended." },
+					{ "icon": "code", "title": "Integration harness", "body": "Contract tests guarding all nineteen connected systems." },
+					{ "icon": "data", "title": "Close dashboard", "body": "Live status of every step in the closing pipeline." },
+					{ "icon": "ops", "title": "Ongoing support", "body": "Run monitoring, tuning, and roadmap partnership." }
+				]
+			},
+			"cta": {
+				"titleLines": ["Your close could be next."],
+				"body": "Build, customize, and ship with a partner that stays for the whole loop.",
+				"actions": [
+					{ "label": "Start a project", "variant": "pixel", "href": "/" },
+					{ "label": "Contact us", "variant": "ghost", "href": "/" }
+				]
+			}
+		},
+		{
+			"slug": "kepler-labs",
+			"name": "Kepler Labs",
+			"seo": {
+				"title": "Kepler Labs — Work — Innogenio",
+				"description": "How Innogenio's design and engineering under one roof shipped Kepler Labs' v2 two months ahead of the board's deadline — design system included."
+			},
+			"hero": {
+				"title": "Kepler. v2, two months early.",
+				"overlayText": "One team, from Figma to production.",
+				"lead": "Design and engineering under one roof — a rebuilt product, a living design system, and a v2 in users' hands two months before the board's deadline.",
+				"actions": [
+					{ "label": "Start a project", "variant": "pixel", "href": "/" },
+					{ "label": "See more work", "variant": "ghost", "href": "/works" }
+				]
+			},
+			"mock": {
+				"bar": "KEPLER.APP",
+				"rec": "v2 · shipped",
+				"cards": [
+					{ "icon": "ux", "tag": "DS 1.0" },
+					{ "icon": "code", "tag": "V2", "hot": true },
+					{ "icon": "flag", "tag": "−2 MO" }
+				],
+				"footLeft": "NPS · +23",
+				"footRight": "RELEASE"
+			},
+			"meta": [
+				{ "label": "Client", "value": "Kepler Labs" },
+				{ "label": "Industry", "value": "SaaS / Technology" },
+				{ "label": "Services", "value": "Product design · Engineering" },
+				{ "label": "Engagement", "value": "Design → build → scale" }
+			],
+			"features": {
+				"title": "One team from Figma to production.",
+				"sub": "No handoff, no translation loss. Designers and engineers on one board shipped a rebuilt product and the design system that keeps it consistent.",
+				"items": [
+					{ "icon": "ux", "title": "Product redesign", "body": "Every core flow rethought around what users actually do." },
+					{ "icon": "code", "title": "Rebuilt front end", "body": "A modern web application on a component architecture." },
+					{ "icon": "flag", "title": "Living design system", "body": "Tokens and components shared by design and code — one source." },
+					{ "icon": "robot", "title": "No-handoff workflow", "body": "Designers and engineers iterate on the same board, same sprint." },
+					{ "icon": "data", "title": "Instrumented flows", "body": "Every redesigned flow measured before and after release." },
+					{ "icon": "ops", "title": "Weekly releases", "body": "Continuous delivery replaced the old quarterly release train." }
+				]
+			},
+			"story": {
+				"tabs": [
+					{
+						"tab": "Challenge",
+						"blocks": [
+							{ "title": "A dated product", "body": "Kepler's v1 had grown feature by feature into an interface even power users needed training to navigate." },
+							{ "title": "A board deadline", "body": "Funding milestones tied v2 to a fixed date; the internal estimate said the date was already lost." },
+							{ "title": "Design-dev ping-pong", "body": "Previous work bounced between an agency and contractors — every handoff lost intent and added weeks." },
+							{ "title": "Consistency debt", "body": "Five shades of the same blue and three button styles: every new screen made the product less coherent." }
+						]
+					},
+					{
+						"tab": "Solution",
+						"blocks": [
+							{ "title": "One embedded team", "body": "Designers and engineers from one studio, one standup, one board — decisions made in hours, not handoff cycles." },
+							{ "title": "Design system first", "body": "Tokens, components, and patterns built in week one and shared between Figma and code — consistency became the default." },
+							{ "title": "Flows over screens", "body": "The redesign started from the five jobs users hire the product for, and rebuilt each end to end." },
+							{ "title": "Ship thin, ship weekly", "body": "Each rebuilt flow replaced its v1 counterpart behind a flag as soon as it beat it in testing." }
+						]
+					},
+					{
+						"tab": "Delivery",
+						"blocks": [
+							{ "title": "Weeks 1–2 · Foundations", "body": "Design tokens, component library, CI pipeline, and the first rebuilt flow as the proving ground." },
+							{ "title": "A flow a fortnight", "body": "Core flows shipped every two weeks, each validated with real users before the next began." },
+							{ "title": "The loop", "body": "Delivered through our four-phase cycle — discovery, design, development, deployment — with post-launch iterations feeding the next turn." },
+							{ "title": "Early, not just on time", "body": "v2 was fully live two months before the board's date — the buffer went into polish, not firefighting." }
+						]
+					}
+				]
+			},
+			"results": {
+				"title": "What shipped, measured.",
+				"stats": [
+					{ "value": "2 mo", "label": "Ahead of deadline" },
+					{ "value": "+23", "label": "NPS after v2" },
+					{ "value": "52", "label": "Design-system components" },
+					{ "value": "weekly", "label": "Release cadence" },
+					{ "value": "−41%", "label": "Support tickets on core flows" },
+					{ "value": "1", "label": "Team, design to deploy" }
+				]
+			},
+			"delivered": {
+				"title": "Delivered, end to end.",
+				"items": [
+					{ "icon": "ux", "title": "Product design", "body": "Research, flows, and UI for every core journey." },
+					{ "icon": "flag", "title": "Design system", "body": "Tokens and components shared by Figma and production code." },
+					{ "icon": "code", "title": "Web application", "body": "The rebuilt v2 front end, shipped weekly." },
+					{ "icon": "ops", "title": "Ongoing support", "body": "Iteration, instrumentation, and roadmap partnership." }
+				]
+			},
+			"cta": {
+				"titleLines": ["Your product could be next."],
+				"body": "Build, customize, and ship with a partner that stays for the whole loop.",
+				"actions": [
+					{ "label": "Start a project", "variant": "pixel", "href": "/" },
+					{ "label": "Contact us", "variant": "ghost", "href": "/" }
+				]
+			}
+		},
+		{
+			"slug": "helixon",
+			"name": "Helixon",
+			"seo": {
+				"title": "Helixon — Work — Innogenio",
+				"description": "How Innogenio rebuilt Helixon's data pipeline in nine weeks — deploy frequency tripled and on-call pages dropped to nearly zero."
+			},
+			"hero": {
+				"title": "Helixon. Nine weeks to a quiet pager.",
+				"overlayText": "A data pipeline you can sleep on.",
+				"lead": "A data pipeline rebuilt in nine weeks — deploy frequency tripled, on-call pages down to nearly zero, and a platform the team finally trusts at 2 a.m.",
+				"actions": [
+					{ "label": "Start a project", "variant": "pixel", "href": "/" },
+					{ "label": "See more work", "variant": "ghost", "href": "/works" }
+				]
+			},
+			"mock": {
+				"bar": "HELIXON.CI",
+				"rec": "Pipeline · green",
+				"cards": [
+					{ "icon": "data", "tag": "PASS" },
+					{ "icon": "ops", "tag": "3×/DAY", "hot": true },
+					{ "icon": "code", "tag": "0 PAGES" }
+				],
+				"footLeft": "UPTIME · 99.98%",
+				"footRight": "DEPLOY"
+			},
+			"meta": [
+				{ "label": "Client", "value": "Helixon" },
+				{ "label": "Industry", "value": "Data / Biotech" },
+				{ "label": "Services", "value": "Data pipeline · DevOps" },
+				{ "label": "Engagement", "value": "Design → build → scale" }
+			],
+			"features": {
+				"title": "A pipeline the on-call engineer can sleep on.",
+				"sub": "The old pipeline failed silently and deployed rarely. The rebuild made every run observable, every deploy boring, and every failure loud, early, and small.",
+				"items": [
+					{ "icon": "data", "title": "Rebuilt pipeline", "body": "Idempotent, replayable stages instead of one fragile chain." },
+					{ "icon": "ops", "title": "CI/CD throughout", "body": "Every change tested and deployed automatically, three times a day." },
+					{ "icon": "code", "title": "Infrastructure as code", "body": "Environments reproducible from a repo, not from memory." },
+					{ "icon": "flag", "title": "Data quality gates", "body": "Bad data stops at the gate instead of reaching dashboards." },
+					{ "icon": "ai", "title": "Observability", "body": "Lineage, metrics, and traces for every run and dataset." },
+					{ "icon": "robot", "title": "Auto-recovery", "body": "Transient failures retry and backfill without a human." }
+				]
+			},
+			"story": {
+				"tabs": [
+					{
+						"tab": "Challenge",
+						"blocks": [
+							{ "title": "Silent failures", "body": "Pipelines failed without a sound — bad numbers were usually discovered by the CEO's dashboard, not by an alert." },
+							{ "title": "Deploys as events", "body": "Releasing a change took a coordinated evening and a rollback plan; the team shipped monthly, nervously." },
+							{ "title": "A burned-out rotation", "body": "On-call meant pages most nights, and each fix was archaeology in an undocumented DAG." },
+							{ "title": "Nine weeks, hard stop", "body": "A partnership launch fixed the date — the rebuild had to land without pausing the daily data the business ran on." }
+						]
+					},
+					{
+						"tab": "Solution",
+						"blocks": [
+							{ "title": "Replayable by design", "body": "Every stage idempotent and independently re-runnable — recovery became 'replay the hour,' not 'rebuild the day.'" },
+							{ "title": "Quality gates at the door", "body": "Schema and distribution checks at every boundary; bad data halts its own branch, loudly, before spreading." },
+							{ "title": "Boring deploys", "body": "CI/CD with staged rollouts turned releases from evening events into non-events that happen three times a day." },
+							{ "title": "Observability first", "body": "Lineage, run metrics, and alerts wired in from stage one — the team watched the new pipeline earn trust in real time." }
+						]
+					},
+					{
+						"tab": "Delivery",
+						"blocks": [
+							{ "title": "Strangler migration", "body": "New stages shipped around the old pipeline, taking over dataset by dataset while daily numbers kept flowing." },
+							{ "title": "Weeks 1–4 · Backbone", "body": "Core ingestion and the two most fragile transformations rebuilt, gated, and cut over first." },
+							{ "title": "Weeks 5–9 · The rest", "body": "Remaining stages migrated, IaC finalized, the old pipeline switched off — one week before the partnership launch." },
+							{ "title": "After go-live", "body": "Two quiet on-call cycles later, we handed over runbooks the team has barely needed since." }
+						]
+					}
+				]
+			},
+			"results": {
+				"title": "What shipped, measured.",
+				"stats": [
+					{ "value": "9", "label": "Weeks to rebuild" },
+					{ "value": "3×", "label": "Deploy frequency" },
+					{ "value": "−92%", "label": "On-call pages" },
+					{ "value": "99.98%", "label": "Pipeline uptime" },
+					{ "value": "100%", "label": "Runs with lineage" },
+					{ "value": "0", "label": "Launches missed" }
+				]
+			},
+			"delivered": {
+				"title": "Delivered, end to end.",
+				"items": [
+					{ "icon": "data", "title": "Data pipeline", "body": "Ingestion to serving, rebuilt as replayable stages." },
+					{ "icon": "ops", "title": "DevOps platform", "body": "CI/CD, infrastructure as code, and staged rollouts." },
+					{ "icon": "ai", "title": "Observability", "body": "Lineage, metrics, and alerting across every run." },
+					{ "icon": "robot", "title": "Ongoing support", "body": "Runbooks, monitoring, and roadmap partnership." }
+				]
+			},
+			"cta": {
+				"titleLines": ["Your pipeline could be next."],
+				"body": "Build, customize, and ship with a partner that stays for the whole loop.",
+				"actions": [
+					{ "label": "Start a project", "variant": "pixel", "href": "/" },
+					{ "label": "Contact us", "variant": "ghost", "href": "/" }
+				]
+			}
+		}
+	]
+}

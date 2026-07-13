@@ -1,0 +1,80 @@
+---
+/* "Services." section (innogenio-home-v2) — section head over a hairline
+   card grid (4 → 2 → 1 columns). Cards are passed in as props. */
+import ServiceCard from '../molecules/ServiceCard.astro';
+import type { ImageMetadata } from 'astro';
+import type { EtchedIconName } from '../atoms/EtchedIcon.astro';
+
+export interface Service {
+	icon: EtchedIconName;
+	title: string;
+	body: string;
+	image?: ImageMetadata;
+}
+
+interface Props {
+	title?: string;
+	services?: Service[];
+	/** 'image' renders cinematic night cards (industries) instead of paper cards */
+	cardVariant?: 'default' | 'image';
+}
+
+const {
+	title = 'Services.',
+	cardVariant = 'default',
+	services = [
+		{
+			icon: 'code',
+			title: 'Custom software.',
+			body: 'Product engineering from first sketch to production — web, mobile, and APIs built to scale with you.',
+		},
+		{
+			icon: 'ai',
+			title: 'AI & automation.',
+			body: 'Practical AI that removes busywork: agents, document intelligence, and workflow automation in production.',
+		},
+		{
+			icon: 'erp',
+			title: 'ERP implementation.',
+			body: 'ERPNext, Zoho, and Odoo rollouts tailored to how your business actually runs — not the other way around.',
+		},
+		{
+			icon: 'data',
+			title: 'Data, DevOps & IoT.',
+			body: 'Dashboards, pipelines, and connected devices — with the infrastructure and observability to keep them running.',
+		},
+	],
+} = Astro.props;
+---
+
+<section data-reveal aria-label={title} class="border-t border-line bg-paper font-sans text-ink py-block-y">
+	<div class="rv-block px-section-x pb-7">
+		<h2 class="text-h3">{title}</h2>
+	</div>
+	<div class="px-section-x">
+		<div
+			class="grid grid-cols-1 gap-px border border-line bg-line min-[560px]:grid-cols-2 min-[960px]:grid-cols-4"
+		>
+			{
+				services.map((s, i) => (
+					<div class="rv-block grid" style={`--i:${i + 1}`}>
+						<ServiceCard
+							icon={s.icon}
+							title={s.title}
+							body={s.body}
+							image={s.image}
+							variant={cardVariant}
+							mirror={cardVariant === 'image' && i % 2 === 1}
+							pixelTone={cardVariant === 'default' ? (i % 2 === 0 ? 'charcoal' : 'grey') : undefined}
+						/>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<script>
+	import { initReveal } from '../../utils/reveal';
+	initReveal();
+</script>

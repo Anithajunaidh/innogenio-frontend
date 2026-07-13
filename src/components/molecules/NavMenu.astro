@@ -1,0 +1,42 @@
+---
+/* Desktop primary-nav row — full-height divided links, hidden below lg. A
+   link carrying a `menu` array renders as a NavDropdown mega-menu instead of
+   a plain link (e.g. Services); everything else stays a simple NavLink. */
+import NavLink from '../atoms/NavLink.astro';
+import NavDropdown from './NavDropdown.astro';
+import type { MenuCardItem } from './MenuCard.astro';
+
+interface NavItem {
+	label: string;
+	href: string;
+	menu?: { icon: string; title: string; body: string; href: string }[];
+	menuFooter?: string;
+}
+interface Props {
+	links: NavItem[];
+}
+const { links } = Astro.props;
+---
+
+<nav class="hidden items-stretch lg:flex" aria-label="Main">
+	{
+		links.map((link, i) =>
+			link.menu && link.menu.length > 0 ? (
+				<NavDropdown
+					label={link.label}
+					href={link.href}
+					items={link.menu as MenuCardItem[]}
+					footerLabel={link.menuFooter}
+					id={`nav-dd-${i}`}
+				/>
+			) : (
+				<NavLink
+					href={link.href}
+					class="flex items-center border-l border-line px-5 text-nav last:border-r"
+				>
+					{link.label}
+				</NavLink>
+			)
+		)
+	}
+</nav>

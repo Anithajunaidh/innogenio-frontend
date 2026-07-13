@@ -1,0 +1,189 @@
+{
+	"seo": {
+		"title": "Leistungen — Innogenio",
+		"description": "Software, Automatisierung & KI in Ihren Händen: Engineering, Design, Beratung, ERP, Daten & KI, DevOps und IoT — entdecken Sie Innogenios Leistungen nach Disziplin, Branche oder Fähigkeit."
+	},
+	"hero": {
+		"titleLines": ["Software, Automatisierung & KI.", "In Ihren Händen."],
+		"lead": "Anpassbare Lösungen, die Produktivität steigern und Umsatz treiben — entwickelt für SaaS- und Growth-Teams.",
+		"actions": [
+			{ "label": "Mit uns starten", "variant": "pixel", "href": "/de/" },
+			{ "label": "Unsere Arbeiten", "variant": "ghost", "href": "/de/" }
+		]
+	},
+	"explorer": {
+		"label": "Leistungs-Explorer",
+		"groups": [
+			{
+				"tab": "Nach Leistung",
+				"intro": "Sieben Disziplinen, ein Team — jedes Projekt durchgehend besetzt.",
+				"layout": "rows",
+				"iconSet": "service",
+				"items": [
+					{
+						"icon": "engineering",
+						"title": "Engineering",
+						"body": "Wir bauen skalierbare, sichere digitale Produkte — vom einfachen Tool bis zur Enterprise-Anwendung.",
+						"chips": [
+							"KI- & Gen-KI-Lösungen",
+							"POC-Entwicklung",
+							"Web-Anwendungen",
+							"Mobile Apps",
+							"Daten & Analytik",
+							"Legacy-Modernisierung"
+						]
+					},
+					{
+						"icon": "design",
+						"title": "Design & Strategie",
+						"body": "Nutzerzentrierte digitale Erlebnisse, die Geschäftsziele mit zukunftsfähigen Produkten verbinden.",
+						"chips": [
+							"UI/UX-Design",
+							"Produktdesign",
+							"Designsysteme",
+							"Branding",
+							"Motion Graphics"
+						]
+					},
+					{
+						"icon": "advisory",
+						"title": "Beratung",
+						"body": "Digitale Transformation mit Strategie und Expertise — Fundamente für dauerhafte Innovation.",
+						"chips": [
+							"Cyber-Sicherheit",
+							"Agile Transformation",
+							"Nachhaltigkeitsberatung",
+							"Technische Machbarkeit"
+						]
+					},
+					{
+						"icon": "erp",
+						"title": "ERP",
+						"body": "Holen Sie das Maximum aus Ihrer Technik — mit ERPNext, Zoho und Odoo optimierte Systeme.",
+						"chips": ["ERP-Einführung", "ERPNext", "Zoho Suite", "Odoo", "Anpassung"]
+					},
+					{
+						"icon": "data",
+						"title": "Daten & KI",
+						"body": "Daten und KI, die Erkenntnisse liefern, Workflows automatisieren und klügere Entscheidungen ermöglichen.",
+						"chips": [
+							"Agentische KI",
+							"Conversational AI",
+							"NLP",
+							"Machine Learning",
+							"Generative KI",
+							"Automatisierung"
+						]
+					},
+					{
+						"icon": "devops",
+						"title": "DevOps",
+						"body": "Zuverlässig liefern mit Pipelines, Infrastructure as Code und kontinuierlichem Monitoring.",
+						"chips": [
+							"CI/CD",
+							"Infrastructure as Code",
+							"Container & K8s",
+							"Monitoring",
+							"DevOps-Automatisierung"
+						]
+					},
+					{
+						"icon": "iot",
+						"title": "IoT",
+						"body": "Vernetzte Lösungen für komplexe operative Herausforderungen — vom Gateway bis zur Cloud.",
+						"chips": [
+							"Enterprise IoT",
+							"IoT-Cloud",
+							"Gateway-Entwicklung",
+							"Smarte Systeme",
+							"Beratung"
+						]
+					}
+				]
+			},
+			{
+				"tab": "Nach Branche",
+				"intro": "Domänenwissen dort, wo Software auf die physische Welt trifft.",
+				"layout": "grid",
+				"items": [
+					{
+						"icon": "factory",
+						"title": "Fertigung",
+						"body": "Hallennahes ERP, Produktionsplanung und IoT-Telemetrie."
+					},
+					{
+						"icon": "bank",
+						"title": "Finanzdienstleistungen",
+						"body": "Automatisierung und Analytik für Kreditgeber, Versicherer und Fintechs."
+					},
+					{
+						"icon": "cart",
+						"title": "Handel & eCommerce",
+						"body": "Commerce-Plattformen, Bestandsabgleich und Kundenanalytik."
+					},
+					{
+						"icon": "health",
+						"title": "Gesundheitswesen",
+						"body": "Konforme Systeme, Akten und Patientenportale."
+					},
+					{
+						"icon": "book",
+						"title": "Bildung",
+						"body": "Lernplattformen und Campus-Systeme, die skalieren."
+					},
+					{
+						"icon": "truck",
+						"title": "Logistik",
+						"body": "Flottentransparenz, Routenplanung und Lagerautomatisierung."
+					}
+				]
+			},
+			{
+				"tab": "Nach Fähigkeit",
+				"intro": "Die technischen Bausteine hinter jedem Projekt.",
+				"layout": "grid",
+				"items": [
+					{
+						"icon": "code",
+						"title": "Individuelles Engineering",
+						"body": "Web, Mobile und APIs, die mit Ihnen skalieren."
+					},
+					{
+						"icon": "robot",
+						"title": "Agentische & Conversational AI",
+						"body": "Agenten, Chatbots und Copilots im Produktivbetrieb."
+					},
+					{
+						"icon": "ai",
+						"title": "Machine Learning & NLP",
+						"body": "Modelle, die lesen, klassifizieren und vorhersagen."
+					},
+					{
+						"icon": "erp",
+						"title": "ERP-Plattformen",
+						"body": "ERPNext, Zoho und Odoo — eingeführt und angepasst."
+					},
+					{
+						"icon": "ops",
+						"title": "CI/CD & Infrastruktur",
+						"body": "Pipelines, IaC, Container und Monitoring."
+					},
+					{
+						"icon": "iot",
+						"title": "IoT & Edge",
+						"body": "Gateways, smarte Systeme und vernetzte Flotten."
+					},
+					{
+						"icon": "data",
+						"title": "Daten & Analytik",
+						"body": "Dashboards und Pipelines für bessere Entscheidungen."
+					}
+				]
+			}
+		]
+	},
+	"cta": {
+		"titleLines": ["Dafür gibt es einen Build."],
+		"actions": [{ "label": "Kontakt aufnehmen", "variant": "pixel", "href": "/de/" }]
+	}
+}

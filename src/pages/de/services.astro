@@ -1,0 +1,14 @@
+---
+import ListingPage from '../../components/templates/ListingPage.astro';
+import type { ExplorerGroup } from '../../components/organisms/ListingExplorer.astro';
+import type { HeroAction } from '../../components/organisms/ListingHero.astro';
+import type { Action } from '../../components/organisms/CtaSection.astro';
+import data from '../../constants/pagedata/de/services-listing.json';
+
+/* JSON imports widen literals, so the slices are narrowed once here */
+const hero = { ...data.hero, actions: data.hero.actions as HeroAction[] };
+const explorer = { label: data.explorer.label, groups: data.explorer.groups as ExplorerGroup[] };
+const cta = { titleLines: data.cta.titleLines, actions: data.cta.actions as Action[] };
+---
+
+<ListingPage locale="de" seo={data.seo} hero={hero} explorer={explorer} cta={cta} />

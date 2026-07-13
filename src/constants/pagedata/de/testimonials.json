@@ -1,0 +1,63 @@
+{
+	"kicker": "Referenzen · Signal 0110",
+	"titleLines": ["Stimmen aus", "der Praxis."],
+	"lead": "Engineering- und Produktverantwortliche darüber, wie sich Liefern mit Innogenio wirklich anfühlt — wörtlich zitiert, pixelgetreu gesetzt.",
+	"items": [
+		{
+			"avatar": "amara",
+			"tag": "USR·0001",
+			"stars": 5,
+			"quote": "Innogenio hat unsere Datenpipeline in neun Wochen neu gebaut. Die Deploy-Frequenz hat sich verdreifacht, und unsere Bereitschaftsalarme sind fast auf null gefallen.",
+			"name": "Amara Okafor",
+			"role": "VP of Engineering",
+			"company": "Helixon"
+		},
+		{
+			"avatar": "marcus",
+			"tag": "USR·0010",
+			"stars": 5,
+			"quote": "Der seltene Partner, der mit deiner Spezifikation streitet — und meistens recht hat. Ihr KI-Copilot hat unsere Schadenbearbeitung um 60 % verkürzt.",
+			"name": "Marcus Bell",
+			"role": "Chief Technology Officer",
+			"company": "Datastride"
+		},
+		{
+			"avatar": "yuki",
+			"tag": "USR·0011",
+			"stars": 5,
+			"quote": "Design und Engineering unter einem Dach — keine Stille Post. Wir haben v2 zwei Monate vor der Deadline des Boards ausgeliefert.",
+			"name": "Yuki Tanaka",
+			"role": "Head of Product",
+			"company": "Kepler Labs"
+		},
+		{
+			"avatar": "david",
+			"tag": "USR·0100",
+			"stars": 5,
+			"quote": "Sie haben unsere ERP-Workflows automatisiert, ohne eine einzige Integration zu brechen. Finance schließt das Quartal jetzt in vier Tagen statt elf.",
+			"name": "David Kessler",
+			"role": "Director of Operations",
+			"company": "Corevance"
+		},
+		{
+			"avatar": "priya",
+			"tag": "USR·0101",
+			"stars": 5,
+			"quote": "Security-Review beim ersten Audit bestanden. Das Team schreibt Produktionscode mit der Disziplin einer internen Plattform-Gruppe.",
+			"name": "Priya Sharma",
+			"role": "Chief Information Officer",
+			"company": "Quantex"
+		},
+		{
+			"avatar": "henrik",
+			"tag": "USR·0110",
+			"stars": 5,
+			"quote": "Fester Umfang, wöchentliche Demos, null Überraschungen. Nach drei gescheiterten Dienstleistern hat Innogenio uns wieder an Partnerschaft glauben lassen.",
+			"name": "Henrik Voss",
+			"role": "Founder & CEO",
+			"company": "Tessellate"
+		}
+	],
+	"score": { "value": "4,9", "label": "Durchschnitt aus 120+ Projekt-Reviews" },
+	"cta": { "label": "Zu den Case Studies", "href": "/" }
+}

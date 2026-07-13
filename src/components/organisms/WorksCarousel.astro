@@ -1,0 +1,375 @@
+---
+/* Featured case-studies carousel (innogenio-home-v2 .works) — colored
+   ServiceCard "case" slides in a translating track, with a dots pill and
+   prev/next buttons below. Slides are passed as props; tones cycle 1→2→3
+   unless set per item. */
+import type { ImageMetadata } from 'astro';
+import Button from '../atoms/Button.astro';
+import ServiceCard from '../molecules/ServiceCard.astro';
+import type { PixelSpriteName } from '../atoms/PixelSprite.astro';
+
+export interface CaseItem {
+	brand: string;
+	brandIcon?: PixelSpriteName;
+	chip: string;
+	title: string;
+	href?: string;
+	deco?: PixelSpriteName;
+	tone?: 1 | 2 | 3;
+	/** photo background in place of the pixel-dissolve tone; falls back to
+	 * the tone + dissolve animation when omitted */
+	image?: ImageMetadata;
+}
+
+interface Props {
+	cases?: CaseItem[];
+	kicker?: string;
+	title?: string;
+	description?: string;
+	ctaLabel?: string;
+	ctaHref?: string;
+}
+
+const {
+	kicker = 'Our Work',
+	title = 'Featured Development + AI Project Portfolio',
+	description = 'We partner with startups, enterprises, and digital-first brands to build scalable software solutions powered by automation and AI - solutions that perform, grow, and transform businesses.',
+	ctaLabel = 'See more projects',
+	ctaHref = '/works',
+	cases = [
+		{
+			brand: 'Meridian Manufacturing',
+			brandIcon: 'logo',
+			chip: 'Manufacturing',
+			title: 'A unified ERPNext rollout across four plants, live in twelve weeks.',
+			deco: 'erp',
+		},
+		{
+			brand: 'NovaPay',
+			brandIcon: 'robot',
+			chip: 'Financial services',
+			title: 'AI automation cuts loan processing from days to minutes.',
+			deco: 'ai',
+		},
+		{
+			brand: 'Halo Retail',
+			brandIcon: 'flag',
+			chip: 'Retail & D2C',
+			title: 'A real-time analytics platform serving 1.2M monthly orders.',
+			deco: 'data',
+		},
+	],
+} = Astro.props;
+
+const tones = [1, 2, 3] as const;
+---
+
+<section data-reveal aria-label="Customer stories" class="bg-[#050505] font-sans text-white">
+	<div class="rv-block border-t border-white/10 px-section-x pt-block-y pb-[clamp(42px,7vw,84px)]">
+		<div class="grid gap-10 min-[980px]:grid-cols-[1.05fr_.95fr] min-[980px]:items-start">
+			<div>
+				<p class="mb-6 flex items-center gap-3 font-mono text-mono-panel text-white uppercase">
+					<span class="size-3 rotate-45 bg-brand" aria-hidden="true"></span>
+					{kicker}
+				</p>
+				<h2 class="max-w-[760px] text-section-head text-balance">
+					{title}
+				</h2>
+			</div>
+			<div class="max-w-[680px] min-[980px]:ml-auto">
+				<p class="max-w-[52ch] text-sub text-white/70">
+					{description}
+				</p>
+				<Button
+					variant="nav-cta"
+					href={ctaHref}
+					label={ctaLabel}
+					class="mt-6 h-14 w-fit max-w-[220px] border border-white/10"
+				/>
+			</div>
+		</div>
+	</div>
+	<div data-works class="rv-block overflow-hidden pb-block-y">
+		<div
+			data-wk-track
+			class="flex touch-pan-y gap-slide-gap px-section-x transition-transform duration-[550ms] ease-move"
+		>
+			{
+				cases.map((c, i) => (
+					<ServiceCard
+						variant="case"
+						brand={c.brand}
+						brandIcon={c.brandIcon}
+						chip={c.chip}
+						title={c.title}
+						href={c.href}
+						deco={c.deco}
+						tone={c.tone ?? tones[i % 3]}
+						image={c.image}
+					/>
+				))
+			}
+		</div>
+		<div class="flex items-center justify-between px-section-x pt-[18px] pb-2">
+			<div
+				data-wk-dots
+				class="flex items-center gap-[7px] rounded-full border border-white/15 bg-white/8 px-[13px] py-[9px]"
+				aria-hidden="true"
+			>
+				{
+					cases.map((_, i) => (
+						<i
+							class:list={[
+								'h-1.5 rounded-full transition-[width,background-color] duration-300',
+								i === 0 ? 'w-6 bg-white' : 'w-1.5 bg-white/35',
+							]}
+						/>
+					))
+				}
+			</div>
+			<div class="flex gap-2.5">
+				<button
+					data-wk-prev
+					aria-label="Previous case study"
+					class="size-[35px] rounded-[6px] border border-white/20 bg-white/8 text-[13px] text-white transition-colors hover:border-brand hover:bg-brand hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-35"
+				>
+					&#10094;
+				</button>
+				<button
+					data-wk-next
+					aria-label="Next case study"
+					class="size-[35px] rounded-[6px] border border-white/20 bg-white/8 text-[13px] text-white transition-colors hover:border-brand hover:bg-brand hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-35"
+				>
+					&#10095;
+				</button>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	import { initReveal } from '../../utils/reveal';
+	import { color, designColor, hexRgb } from '../../constants/design/color';
+
+	initReveal();
+
+	/* ── carousel: translate the track one slide per step ── */
+	document.querySelectorAll<HTMLElement>('[data-works]').forEach((root) => {
+		const track = root.querySelector<HTMLElement>('[data-wk-track]');
+		const dots = root.querySelectorAll<HTMLElement>('[data-wk-dots] i');
+		const prev = root.querySelector<HTMLButtonElement>('[data-wk-prev]');
+		const next = root.querySelector<HTMLButtonElement>('[data-wk-next]');
+		if (!track || !prev || !next) return;
+
+		const n = track.children.length;
+		let idx = 0;
+
+		// slide step = card width + the track's gap (--spacing-slide-gap),
+		// read from computed style so the token stays the single source
+		const step = () =>
+			track!.children[0].getBoundingClientRect().width +
+			(parseFloat(getComputedStyle(track!).columnGap) || 0);
+
+		function go(i: number) {
+			idx = Math.max(0, Math.min(n - 1, i));
+			track!.style.transform = `translateX(${-step() * idx}px)`;
+			dots.forEach((d, di) => {
+				d.classList.toggle('w-6', di === idx);
+				d.classList.toggle('bg-white', di === idx);
+				d.classList.toggle('w-1.5', di !== idx);
+				d.classList.toggle('bg-white/35', di !== idx);
+			});
+			prev!.disabled = idx === 0;
+			next!.disabled = idx === n - 1;
+		}
+
+		prev.addEventListener('click', () => go(idx - 1));
+		next.addEventListener('click', () => go(idx + 1));
+
+		/* swipe / drag — same pattern as the news-card slider: the track
+		   follows the pointer live (transition off), then snaps to the next,
+		   previous, or current slide. touch-pan-y on the track leaves vertical
+		   page scrolling to the browser. */
+		const SWIPE = 50; // px of horizontal travel needed to change slide
+		let x0 = 0;
+		let dx = 0;
+		let active = false;
+
+		track.addEventListener('pointerdown', (e) => {
+			if (e.pointerType === 'mouse' && e.button !== 0) return;
+			active = true;
+			x0 = e.clientX;
+			dx = 0;
+			track.setPointerCapture(e.pointerId);
+			track.style.transition = 'none';
+			e.preventDefault(); // no text selection / native link drag
+		});
+
+		track.addEventListener('pointermove', (e) => {
+			if (!active) return;
+			dx = e.clientX - x0;
+			track.style.transform = `translateX(${-step() * idx + dx}px)`;
+		});
+
+		const settle = () => {
+			if (!active) return;
+			active = false;
+			track.style.transition = '';
+			// go() clamps at the ends, so an over-swipe just springs back
+			go(Math.abs(dx) > SWIPE ? idx + (dx < 0 ? 1 : -1) : idx);
+		};
+		track.addEventListener('pointerup', settle);
+		track.addEventListener('pointercancel', settle);
+		track.addEventListener('dragstart', (e) => e.preventDefault());
+
+		// a drag ends on a card link — swallow the click it would produce
+		track.addEventListener(
+			'click',
+			(e) => {
+				if (Math.abs(dx) > 6) {
+					e.preventDefault();
+					e.stopPropagation();
+				}
+				dx = 0;
+			},
+			true
+		);
+
+		let rsT = 0;
+		window.addEventListener('resize', () => {
+			clearTimeout(rsT);
+			rsT = window.setTimeout(() => go(idx), 150);
+		});
+		go(0);
+	});
+
+	/* ── pixel-dissolve hover: the flat card face breaks into a mosaic of
+	   randomly shaded cells graded toward charcoal from the card's own base
+	   color, blooming from the center and flickering while hovered ── */
+	const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	interface Cell {
+		x: number;
+		y: number;
+		delay: number;
+		shade: string;
+		p: number;
+	}
+
+	document.querySelectorAll<HTMLElement>('[data-case-card]').forEach((card) => {
+		const cv = card.querySelector<HTMLCanvasElement>('[data-case-canvas]');
+		if (!cv) return;
+
+		// charcoal-graded shades of this card's own base color
+		// (falls back to brand purple if the bg can't be parsed)
+		const bg = getComputedStyle(card).backgroundColor;
+		const m = bg.match(/(\d+)[, ]+(\d+)[, ]+(\d+)/);
+		const base = m ? [+m[1], +m[2], +m[3]] : hexRgb(designColor.brand);
+		const CHARCOAL = hexRgb(color.charcoal);
+		const tint = (k: number) =>
+			'rgb(' + base.map((c, i) => Math.round(c + (CHARCOAL[i] - c) * k)).join(',') + ')';
+		const SHADES = [0.12, 0.26, 0.4, 0.55, 0.7, 0.85].map(tint);
+
+		const CELL = 16,
+			FADE = 170,
+			SPREAD = 460,
+			HIDE = 320;
+		let ctx: CanvasRenderingContext2D | null = null;
+		let cells: Cell[] | null = null;
+		let cols = 0,
+			rows = 0;
+		let raf = 0,
+			dir = 0,
+			t0 = 0,
+			shimmerLast = 0;
+
+		function build() {
+			const r = card.getBoundingClientRect();
+			const d = devicePixelRatio || 1;
+			cv!.width = Math.round(r.width * d);
+			cv!.height = Math.round(r.height * d);
+			ctx = cv!.getContext('2d')!;
+			ctx.setTransform(d, 0, 0, d, 0, 0);
+			cols = Math.ceil(r.width / CELL);
+			rows = Math.ceil(r.height / CELL);
+			const cxm = (cols - 1) / 2,
+				cym = (rows - 1) / 2,
+				maxD = Math.hypot(cxm, cym) || 1;
+			cells = [];
+			for (let y = 0; y < rows; y++)
+				for (let x = 0; x < cols; x++) {
+					cells.push({
+						x,
+						y,
+						delay: (Math.hypot(x - cxm, y - cym) / maxD) * SPREAD + Math.random() * 70,
+						shade: SHADES[(Math.random() * SHADES.length) | 0],
+						p: 0,
+					});
+				}
+		}
+
+		function paint(ts: number) {
+			const t = ts - t0;
+			let busy = false;
+			ctx!.clearRect(0, 0, cols * CELL, rows * CELL);
+			for (const c of cells!) {
+				let p;
+				if (dir > 0) {
+					// keep progress achieved before a direction flip
+					p = Math.max(c.p, Math.min(1, (t - c.delay) / FADE));
+				} else {
+					// recede: edges collapse first, back toward center
+					const hd = ((SPREAD - c.delay) / SPREAD) * HIDE;
+					p = Math.max(0, Math.min(c.p, 1 - (t - hd) / FADE));
+				}
+				c.p = p;
+				if (p > 0) {
+					ctx!.globalAlpha = p;
+					ctx!.fillStyle = c.shade;
+					ctx!.fillRect(c.x * CELL, c.y * CELL, CELL, CELL);
+				}
+				if ((dir > 0 && p < 1) || (dir < 0 && p > 0)) busy = true;
+			}
+			ctx!.globalAlpha = 1;
+			// gentle shimmer once fully revealed
+			if (dir > 0 && !busy && ts - shimmerLast > 200) {
+				shimmerLast = ts;
+				const n = Math.ceil(cells!.length * 0.015);
+				for (let i = 0; i < n; i++) {
+					const c = cells![(Math.random() * cells!.length) | 0];
+					c.shade = SHADES[(Math.random() * SHADES.length) | 0];
+					ctx!.fillStyle = c.shade;
+					ctx!.fillRect(c.x * CELL, c.y * CELL, CELL, CELL);
+				}
+			}
+			if (dir > 0 || busy) raf = requestAnimationFrame(paint);
+			else raf = 0;
+		}
+
+		function go(d2: number) {
+			if (REDUCED) {
+				build();
+				if (d2 > 0) {
+					for (const c of cells!) {
+						ctx!.fillStyle = c.shade;
+						ctx!.fillRect(c.x * CELL, c.y * CELL, CELL, CELL);
+					}
+				} else {
+					ctx!.clearRect(0, 0, cols * CELL, rows * CELL);
+				}
+				return;
+			}
+			if (d2 > 0 && dir <= 0) build();
+			if (!cells) return;
+			dir = d2;
+			t0 = performance.now();
+			cancelAnimationFrame(raf);
+			raf = requestAnimationFrame(paint);
+		}
+
+		card.addEventListener('mouseenter', () => go(1));
+		card.addEventListener('mouseleave', () => go(-1));
+		card.addEventListener('focusin', () => go(1));
+		card.addEventListener('focusout', () => go(-1));
+	});
+</script>

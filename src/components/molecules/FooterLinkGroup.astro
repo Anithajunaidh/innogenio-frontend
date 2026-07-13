@@ -1,24 +1,25 @@
 ---
-import FooterHeading from "../atoms/FooterHeading.astro";
-import FooterLink from "../atoms/FooterLink.astro";
+/* A single footer column — heading over a stack of links. */
+import FooterHeading from '../atoms/FooterHeading.astro';
+import FooterLink from '../atoms/FooterLink.astro';
 
 export interface FooterLinkItem {
-  href: string;
-  label: string;
-  external?: boolean;
+	href: string;
+	label: string;
+	external?: boolean;
 }
 
 interface Props {
-  title: string;
-  links: FooterLinkItem[];
+	title: string;
+	links: FooterLinkItem[];
 }
 
 const { title, links } = Astro.props;
 ---
 
-<div class="flex flex-col space-y-4">
-  <FooterHeading text={title} />
-  <div class="flex flex-col space-y-3">
-    {links.map((link) => <FooterLink {...link} />)}
-  </div>
+<div class="flex flex-col gap-4">
+	<FooterHeading text={title} />
+	<div class="flex flex-col gap-0.5">
+		{links.map((link) => <FooterLink {...link} />)}
+	</div>
 </div>

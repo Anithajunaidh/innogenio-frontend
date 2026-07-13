@@ -1,0 +1,112 @@
+---
+/* Reusable navbar mega-menu (reference: mistral top-nav dropdown). A
+   full-height trigger cell reveals a two-column panel of MenuCards on hover
+   (and on keyboard focus); the trigger itself still links to its section.
+   The panel is anchored under the trigger, scrolls if it exceeds the
+   viewport, and the script is instance-safe (scoped by data-nav-dropdown) —
+   closing on mouse-leave, focus-out, or Escape. Drop it into the primary nav
+   for any grouping (Services, Solutions, …); all content is prop-driven. */
+import MenuCard from './MenuCard.astro';
+import type { MenuCardItem } from './MenuCard.astro';
+import DimensionArrow from '../atoms/DimensionArrow.astro';
+
+interface Props {
+	label: string;
+	/** where the trigger links, and the footer link points */
+	href: string;
+	items: MenuCardItem[];
+	/** optional footer link text (e.g. "See all services"); omitted → no footer */
+	footerLabel?: string;
+	/** unique id wiring the trigger's aria-controls to its panel */
+	id: string;
+}
+const { label, href, items, footerLabel, id } = Astro.props;
+
+/* show at most 6 items in the panel; the rest live behind the footer link */
+const MAX_ITEMS = 6;
+const shown = items.slice(0, MAX_ITEMS);
+/* odd item counts get a full-width last card so the grid never leaves a
+   stray hairline cell */
+const spanLast = shown.length % 2 === 1;
+---
+
+<div class="relative flex items-stretch" data-nav-dropdown>
+	<a
+		href={href}
+		data-nd-trigger
+		aria-expanded="false"
+		aria-controls={id}
+		aria-haspopup="true"
+		class="flex items-center border-l border-line px-5 text-nav transition-colors hover:bg-brand-soft aria-expanded:bg-brand-soft focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset"
+	>
+		{label}
+	</a>
+
+	<div
+		id={id}
+		data-nd-panel
+		class="absolute top-full left-0 z-50 hidden max-h-[calc(100vh-4rem)] w-[min(700px,calc(100vw-2rem))] overflow-y-auto border border-line bg-paper shadow-[0_24px_60px_rgba(17,4,31,0.16)]"
+	>
+		<div class="grid grid-cols-2 gap-px bg-line">
+			{
+				shown.map((item, i) => (
+					<MenuCard {...item} class={spanLast && i === shown.length - 1 ? 'col-span-2' : ''} />
+				))
+			}
+		</div>
+		{
+			footerLabel && (
+				<a
+					href={href}
+					class="group flex items-center justify-between border-t border-line px-5 py-3.5 text-mini-h text-ink transition-colors hover:bg-brand-soft focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset"
+				>
+					{footerLabel}
+					<DimensionArrow class="w-6 text-brand" />
+				</a>
+			)
+		}
+	</div>
+</div>
+
+<script>
+	const HOVER = matchMedia('(hover: hover)').matches;
+	const roots = document.querySelectorAll<HTMLElement>('[data-nav-dropdown]');
+
+	const close = (root: Element) => {
+		root.querySelector('[data-nd-panel]')?.classList.add('hidden');
+		root.querySelector('[data-nd-trigger]')?.setAttribute('aria-expanded', 'false');
+	};
+
+	roots.forEach((root) => {
+		const trigger = root.querySelector<HTMLElement>('[data-nd-trigger]');
+		const panel = root.querySelector<HTMLElement>('[data-nd-panel]');
+		if (!trigger || !panel) return;
+
+		let closeTimer = 0;
+		const setOpen = (open: boolean) => {
+			clearTimeout(closeTimer);
+			if (open) roots.forEach((r) => r !== root && close(r)); // one open at a time
+			panel.classList.toggle('hidden', !open);
+			trigger.setAttribute('aria-expanded', String(open));
+		};
+		// small grace delay so crossing any sub-pixel seam doesn't flicker it shut
+		const scheduleClose = () => {
+			clearTimeout(closeTimer);
+			closeTimer = window.setTimeout(() => setOpen(false), 120);
+		};
+
+		if (HOVER) {
+			root.addEventListener('mouseenter', () => setOpen(true));
+			root.addEventListener('mouseleave', scheduleClose);
+		}
+		// keyboard: open when focus enters, close when it leaves the whole group
+		root.addEventListener('focusin', () => setOpen(true));
+		root.addEventListener('focusout', (e) => {
+			if (!root.contains((e as FocusEvent).relatedTarget as Node | null)) setOpen(false);
+		});
+	});
+
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') roots.forEach(close);
+	});
+</script>

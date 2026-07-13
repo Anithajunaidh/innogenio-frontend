@@ -1,0 +1,189 @@
+{
+	"seo": {
+		"title": "Services — Innogenio",
+		"description": "Software, automation & AI in your hands: engineering, design, advisory, ERP, data & AI, DevOps, and IoT — explore Innogenio's services by discipline, industry, or capability."
+	},
+	"hero": {
+		"titleLines": ["Software, automation & AI.", "In your hands."],
+		"lead": "Customizable solutions that improve productivity and drive revenue — engineered for SaaS and growth teams.",
+		"actions": [
+			{ "label": "Get started with us", "variant": "pixel", "href": "/" },
+			{ "label": "See our work", "variant": "ghost", "href": "/" }
+		]
+	},
+	"explorer": {
+		"label": "Services explorer",
+		"groups": [
+			{
+				"tab": "By service",
+				"intro": "Seven disciplines, one team — every engagement staffed end-to-end.",
+				"layout": "rows",
+				"iconSet": "service",
+				"items": [
+					{
+						"icon": "engineering",
+						"title": "Engineering",
+						"body": "We build scalable, secure digital products — from simple tools to enterprise applications.",
+						"chips": [
+							"AI & Gen-AI solutions",
+							"POC development",
+							"Web applications",
+							"Mobile apps",
+							"Data & analytics",
+							"Legacy modernization"
+						]
+					},
+					{
+						"icon": "design",
+						"title": "Design & Strategy",
+						"body": "User-first digital experiences that align business goals with future-ready products.",
+						"chips": [
+							"UI/UX design",
+							"Product design",
+							"Design systems",
+							"Branding",
+							"Motion graphics"
+						]
+					},
+					{
+						"icon": "advisory",
+						"title": "Advisory",
+						"body": "Digital transformation guided with strategy and expertise — foundations for lasting innovation.",
+						"chips": [
+							"Cyber security",
+							"Agile transformation",
+							"Sustainability consulting",
+							"Technical feasibility"
+						]
+					},
+					{
+						"icon": "erp",
+						"title": "ERP",
+						"body": "Maximize your tech investment by streamlining systems with ERPNext, Zoho, and Odoo.",
+						"chips": ["ERP implementation", "ERPNext", "Zoho Suite", "Odoo", "Customization"]
+					},
+					{
+						"icon": "data",
+						"title": "Data & AI",
+						"body": "Data and AI that surface insight, automate workflows, and drive smarter decisions.",
+						"chips": [
+							"Agentic AI",
+							"Conversational AI",
+							"NLP",
+							"Machine learning",
+							"Generative AI",
+							"Automation"
+						]
+					},
+					{
+						"icon": "devops",
+						"title": "DevOps",
+						"body": "Ship reliably with pipelines, infrastructure as code, and continuous monitoring.",
+						"chips": [
+							"CI/CD",
+							"Infrastructure as code",
+							"Containers & K8s",
+							"Monitoring",
+							"DevOps automation"
+						]
+					},
+					{
+						"icon": "iot",
+						"title": "IoT",
+						"body": "Connected solutions for complex operational challenges — from gateway to cloud.",
+						"chips": [
+							"Enterprise IoT",
+							"IoT cloud",
+							"Gateway development",
+							"Smart systems",
+							"Consultancy"
+						]
+					}
+				]
+			},
+			{
+				"tab": "By industry",
+				"intro": "Domain expertise where software meets the physical world.",
+				"layout": "grid",
+				"items": [
+					{
+						"icon": "factory",
+						"title": "Manufacturing",
+						"body": "Plant-floor ERP, production planning, and IoT telemetry."
+					},
+					{
+						"icon": "bank",
+						"title": "Financial services",
+						"body": "Automation and analytics for lenders, insurers, and fintechs."
+					},
+					{
+						"icon": "cart",
+						"title": "Retail & eCommerce",
+						"body": "Commerce platforms, inventory sync, and customer analytics."
+					},
+					{
+						"icon": "health",
+						"title": "Healthcare",
+						"body": "Compliant systems, records, and patient portals."
+					},
+					{
+						"icon": "book",
+						"title": "Education",
+						"body": "Learning platforms and campus systems that scale."
+					},
+					{
+						"icon": "truck",
+						"title": "Logistics",
+						"body": "Fleet visibility, routing, and warehouse automation."
+					}
+				]
+			},
+			{
+				"tab": "By capability",
+				"intro": "The technical building blocks behind every engagement.",
+				"layout": "grid",
+				"items": [
+					{
+						"icon": "code",
+						"title": "Custom engineering",
+						"body": "Web, mobile, and APIs built to scale with you."
+					},
+					{
+						"icon": "robot",
+						"title": "Agentic & conversational AI",
+						"body": "Agents, chatbots, and copilots in production."
+					},
+					{
+						"icon": "ai",
+						"title": "Machine learning & NLP",
+						"body": "Models that read, classify, and predict."
+					},
+					{
+						"icon": "erp",
+						"title": "ERP platforms",
+						"body": "ERPNext, Zoho, and Odoo — implemented and customized."
+					},
+					{
+						"icon": "ops",
+						"title": "CI/CD & infrastructure",
+						"body": "Pipelines, IaC, containers, and monitoring."
+					},
+					{
+						"icon": "iot",
+						"title": "IoT & edge",
+						"body": "Gateways, smart systems, and connected fleets."
+					},
+					{
+						"icon": "data",
+						"title": "Data & analytics",
+						"body": "Dashboards and pipelines that drive decisions."
+					}
+				]
+			}
+		]
+	},
+	"cta": {
+		"titleLines": ["There's a build for that."],
+		"actions": [{ "label": "Get in touch", "variant": "pixel", "href": "/" }]
+	}
+}

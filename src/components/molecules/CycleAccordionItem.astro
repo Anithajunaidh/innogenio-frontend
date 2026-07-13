@@ -1,0 +1,31 @@
+---
+/* Lifecycle accordion row (innogenio-home-v2 .ac-item) — single-open:
+   the active row brightens to tile, grows a 4px brand bar on its left
+   edge, and slides its body open. State lives on data-on; the owning
+   section's script keeps exactly one row (and the matching cycle-diagram
+   card) active. */
+interface Props {
+	title: string;
+	body: string;
+	open?: boolean;
+}
+const { title, body, open = false } = Astro.props;
+---
+
+<div
+	data-cycle-item
+	data-on={String(open)}
+	class="group relative border-b border-line bg-panel before:absolute before:inset-y-0 before:left-0 before:w-1 before:bg-brand before:opacity-0 before:content-[''] last:border-b-0 data-[on=true]:bg-tile data-[on=true]:before:opacity-100"
+>
+	<button
+		aria-expanded={String(open)}
+		class="block w-full cursor-pointer px-9 py-[27px] text-left text-ac-head text-ink-secondary transition-colors duration-200 group-data-[on=true]:text-ink hover:text-ink focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset"
+	>
+		{title}
+	</button>
+	<div
+		class="max-h-0 overflow-hidden transition-[max-height] duration-[450ms] ease-move group-data-[on=true]:max-h-60"
+	>
+		<p class="max-w-[36em] px-9 pb-[30px] text-body leading-[1.55]">{body}</p>
+	</div>
+</div>

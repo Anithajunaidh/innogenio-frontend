@@ -1,0 +1,38 @@
+---
+/* Nav mega-menu card (reference: mistral top-nav product rows) — a single
+   link row with a pixel-sprite icon tile, title, one-line description, and
+   the shared dimension arrow. Reused for every item inside a NavDropdown;
+   the whole row washes brand-soft on hover and drives the arrow via `group`.
+   Sprite fills ride the theme tokens like the listing art. */
+import ServiceIcon from '../atoms/ServiceIcon.astro';
+import DimensionArrow from '../atoms/DimensionArrow.astro';
+import type { ServiceIconName } from '../atoms/ServiceIcon.astro';
+
+export interface MenuCardItem {
+	icon: ServiceIconName;
+	title: string;
+	body: string;
+	href: string;
+}
+interface Props extends MenuCardItem {
+	class?: string;
+}
+const { icon, title, body, href, class: className = '' } = Astro.props;
+---
+
+<a
+	href={href}
+	class:list={[
+		'group flex items-center gap-4 bg-paper px-5 py-3.5 transition-colors hover:bg-brand-soft focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:z-10 focus-visible:ring-inset',
+		className,
+	]}
+>
+	<span class="flex size-11 shrink-0 items-center justify-center bg-brand text-white" aria-hidden="true">
+		<ServiceIcon name={icon} class="w-[22px]" />
+	</span>
+	<span class="min-w-0 flex-1">
+		<span class="block text-mini-h text-ink">{title}</span>
+		<span class="mt-0.5 block text-sm leading-snug text-ink-secondary">{body}</span>
+	</span>
+	<DimensionArrow class="w-6 shrink-0 text-ink-secondary" />
+</a>

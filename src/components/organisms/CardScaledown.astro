@@ -1,0 +1,538 @@
+---
+/* Scroll-takeover hero — on scroll the lavender panel expands to fill the
+   viewport while the title lifts away and the violet "binary city" canvas
+   panel slides left. Content (title, tagline, icons, news card) is
+   prop-driven; the section is instance-safe, so it can be reused. */
+import FeaturedNewsCard from '../molecules/FeaturedNewsCard.astro';
+import type { NewsItem } from '../molecules/FeaturedNewsCard.astro';
+import PixelSprite from '../atoms/PixelSprite.astro';
+
+interface Cta {
+	label: string;
+	href?: string;
+}
+
+interface News {
+	label?: string;
+	items: NewsItem[];
+}
+
+interface Props {
+	/** Headline lines — each entry renders on its own line. */
+	titleLines?: string[];
+	tagline?: string;
+	cta?: Cta;
+	news?: News;
+}
+
+const {
+	titleLines = "Innovative design & tech agency",
+	tagline = 'We team up with innovative organizations to fuel ideas, shape digital journeys, and create impact with intention.',
+	cta = { label: 'Start a project', href: '/' },
+	news = {
+		label: 'Featured news',
+		items: [{ title: 'Introducing Innogenio AI & Automation Studio' }],
+	},
+} = Astro.props;
+
+const normalizedTitleLines = Array.isArray(titleLines) ? titleLines : [titleLines];
+const titleLabel = normalizedTitleLines.join(' ');
+---
+
+<!-- No h-full: the body shell is a flex container, so a percentage height
+     here resolves against the stretched shell and balloons the section to
+     near page height. The grid sizes the section — min-h-screen stacked on
+     mobile, exactly 100vh (56+44) at lg where the takeover pins; the lg cap
+     just guards that invariant. -->
+<section data-scaledown class="overflow-x-clip bg-paper font-sans text-ink lg:max-h-screen">
+	<div
+		data-sd-grid
+		class="relative grid min-h-screen min-w-0 grid-cols-1 border border-line lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)] lg:grid-rows-[56vh_44vh] lg:overflow-hidden"
+	>
+		<div
+			class="flex min-w-0 items-end border-line px-section-x pt-[clamp(70px,14vw,215px)] pb-[62px] lg:col-start-1 lg:row-start-1"
+		>
+			<div class="min-w-0">
+				<h1
+					data-sd-title
+					aria-label={titleLabel}
+					class="text-balance text-[clamp(2.75rem,5vw,5.2rem)] font-medium leading-[0.98] tracking-[-0.04em]"
+				>
+					{
+						normalizedTitleLines.map((line) => (
+						<span data-sd-title-line class="block" aria-hidden="true">
+								{Array.from(line).map((char) => (
+									<span data-sd-title-char class="inline-block will-change-transform">
+										{char === ' ' ? '\u00A0' : char}
+									</span>
+								))}
+							</span>
+						))
+					}
+				</h1>
+				<!-- below lg the grow panel is hidden, so the tagline moves here -->
+				<p data-sd-tagline class="mt-6 max-w-[30ch] text-lead opacity-0 lg:hidden">{tagline}</p>
+			</div>
+		</div>
+
+		<aside
+			data-sd-grow
+			class="hidden min-w-0 flex-col items-start justify-end border-line bg-panel px-8 py-[30px] opacity-0 lg:col-start-2 lg:row-start-1 lg:flex lg:overflow-hidden lg:border-l"
+		>
+			<div data-sd-grow-content class="flex flex-col items-start gap-5">
+				<p class="max-w-[26ch] text-lead">{tagline}</p>
+				<!-- <Button variant="pixel" href={cta.href} label={cta.label} /> -->
+			</div>
+		</aside>
+
+		<div
+			data-sd-art
+			class="relative order-4 min-h-[46vh] overflow-hidden border-t border-line bg-canvas-dark opacity-0 lg:absolute lg:top-[56vh] lg:left-0 lg:z-10 lg:h-[44vh] lg:min-h-0 lg:w-[70.6%]"
+			role="img"
+			aria-label="Animated isometric city built from binary digits"
+		>
+			<canvas data-sd-canvas class="absolute inset-0 block h-full w-full"></canvas>
+			<div class="bg-art-grid pointer-events-none absolute inset-0" aria-hidden="true"></div>
+			<span
+				class="pointer-events-none absolute top-[calc(33.34%-3px)] left-[calc(25%-3px)] size-1.5 bg-art-pin"
+				aria-hidden="true"></span>
+			<span
+				class="pointer-events-none absolute top-[calc(33.34%-3px)] left-[calc(75%-3px)] size-1.5 bg-art-pin"
+				aria-hidden="true"></span>
+			<span
+				class="pointer-events-none absolute top-[calc(66.67%-3px)] left-[calc(25%-3px)] size-1.5 bg-art-pin"
+				aria-hidden="true"></span>
+			<span
+				class="pointer-events-none absolute top-[calc(66.67%-3px)] left-[calc(75%-3px)] size-1.5 bg-art-pin"
+				aria-hidden="true"></span>
+			<span
+				class="text-kicker pointer-events-none absolute top-[62%] left-[4.5%] flex items-center gap-2 font-mono text-art-tag uppercase opacity-90"
+			>
+				<span class="size-[5px] bg-current"></span>Building systems
+			</span>
+			<span
+				class="text-kicker pointer-events-none absolute top-[23%] right-[5%] flex items-center gap-2 font-mono text-art-tag uppercase opacity-90"
+			>
+				<span class="size-[5px] bg-current"></span>In your hands
+			</span>
+			<PixelSprite
+				name="robot"
+				class="pointer-events-none absolute right-[3.4%] bottom-[6%] w-[58px]"
+				primary="#B93FE6"
+				secondary="#F3DFFC"
+			/>
+		</div>
+
+		<aside
+			data-sd-hide
+			class="relative order-3 min-w-0 border-t border-line p-4 opacity-0 lg:col-start-2 lg:row-start-2 lg:overflow-hidden lg:border-l lg:px-7 lg:pt-[26px] lg:pb-[30px]"
+		>
+			<div class="flex h-full flex-col">
+				<div
+					class="hidden flex-col gap-3 text-small leading-none text-ink-secondary lg:flex"
+					aria-hidden="true"
+				>
+					<!-- <span>↓</span>
+					<span>↓</span>
+					<span>↓</span> -->
+				</div>
+
+				<div class="mt-auto lg:pt-[46px]">
+					<FeaturedNewsCard label={news.label} items={news.items} />
+				</div>
+			</div>
+		</aside>
+	</div>
+</section>
+
+<script>
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { heroCanvasBg, heroVoxelRamp } from '../../constants/design/color';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	/* Tailwind's lg breakpoint is 64rem — rem-based, so it scales with the
+	   browser's default font size (Chrome's "Font size: Very large" makes it
+	   ~1536px). The script must flip on the SAME query as the CSS, never on
+	   hardcoded pixels, or the two disagree in the enlarged-font band. */
+	const LG = matchMedia('(min-width: 64rem)');
+
+	document.querySelectorAll<HTMLElement>('[data-scaledown]').forEach((section) => {
+		const grid = section.querySelector<HTMLElement>('[data-sd-grid]');
+		const hide = section.querySelector<HTMLElement>('[data-sd-hide]');
+		const growContent = section.querySelector<HTMLElement>('[data-sd-grow-content]');
+		const grow = section.querySelector<HTMLElement>('[data-sd-grow]');
+		const art = section.querySelector<HTMLElement>('[data-sd-art]');
+		const titleText = section.querySelector<HTMLElement>('[data-sd-title]');
+		const mobileTagline = section.querySelector<HTMLElement>('[data-sd-tagline]');
+		const titleChars = gsap.utils.toArray<HTMLElement>(
+			section.querySelectorAll('[data-sd-title-char]')
+		);
+		const titleLineElements = gsap.utils.toArray<HTMLElement>(
+			section.querySelectorAll('[data-sd-title-line]')
+		);
+		const titleLineChars = titleLineElements
+			.map((line) => gsap.utils.toArray<HTMLElement>(line.querySelectorAll('[data-sd-title-char]')));
+
+		if (!grid || !hide || !growContent || !grow || !art || !titleText) return;
+
+		const titleStartY = (_index: number, target: HTMLElement) => {
+			if (!LG.matches) return target.offsetHeight * 1.2;
+
+			const artTop = art.getBoundingClientRect().top;
+			const charTop = target.getBoundingClientRect().top;
+			return Math.max(target.offsetHeight * 1.2, artTop - charTop + 24);
+		};
+
+		if (REDUCED) {
+			gsap.set([art, grow, hide], { opacity: 1, x: 0, y: 0 });
+			gsap.set(titleLineElements, { y: 0 });
+			gsap.set(titleChars, { opacity: 1, y: 0 });
+			if (mobileTagline) gsap.set(mobileTagline, { opacity: 1 });
+		} else {
+			const introTl = gsap.timeline({ delay: 0.05 });
+
+			if (titleChars.length) {
+				const lineHeight = () => titleLineElements[0]?.offsetHeight ?? 0;
+				gsap.set(titleLineElements, {
+					y: (index) => (titleLineElements.length - 1 - index) * lineHeight(),
+				});
+				gsap.set(titleChars, { opacity: 0, y: titleStartY });
+			}
+
+			introTl
+				.fromTo(
+					art,
+					{ opacity: 0, y: 56 },
+					{ opacity: 1, y: 0, duration: 0.85, ease: 'power3.out' },
+					0
+				)
+				.fromTo(
+					[grow, hide],
+					{ opacity: 0, x: 36 },
+					{
+						opacity: 1,
+						x: 0,
+						duration: 0.75,
+						ease: 'power3.out',
+						stagger: 0.08,
+					},
+					0.1
+				);
+
+			titleLineChars.forEach((lineChars, index) => {
+				if (!lineChars.length) return;
+
+				if (index > 0) {
+					introTl.to(
+						titleLineElements.slice(0, index),
+						{
+							y: () =>
+								(titleLineElements.length - 1 - index) *
+								(titleLineElements[0]?.offsetHeight ?? 0),
+							duration: 0.4,
+							ease: 'power3.inOut',
+						},
+						'>'
+					);
+				}
+
+				introTl.to(
+					lineChars,
+					{
+						opacity: 1,
+						y: 0,
+						duration: 0.45,
+						ease: 'power3.out',
+						stagger: {
+							each: 0.012,
+							from: 'random',
+						},
+					},
+					index === 0 ? '>' : '<'
+				);
+			});
+
+			// mobile-only tagline (display:none from lg up) fades in once the
+			// headline has finished settling
+			if (mobileTagline) {
+				introTl.fromTo(
+					mobileTagline,
+					{ opacity: 0, y: 14 },
+					{ opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
+					'>'
+				);
+			}
+		}
+
+		const mm = gsap.matchMedia();
+
+		// Takeover animation only from the lg breakpoint up; below that the grid
+		// stays a plain stacked column with no pinning.
+		mm.add('(min-width: 64rem)', () => {
+			const setArtX = gsap.quickSetter(art, 'x', 'px');
+
+			// Use the grow panel's layout position, not its visual bounding box.
+			// getBoundingClientRect() includes its intro x transform, which would
+			// otherwise leave the art panel offset after the entrance finishes.
+			const pushArt = () => {
+				// Overshoot by 1px to avoid subpixel bleed leaving a faint seam.
+				setArtX(grow.offsetLeft - art.offsetWidth - 1);
+			};
+
+			const tl = gsap.timeline({
+				scrollTrigger: {
+					trigger: section,
+					start: 'top top',
+					end: '+=100%',
+					scrub: true,
+					pin: true,
+					invalidateOnRefresh: true,
+					onRefresh: pushArt,
+				},
+				onUpdate: pushArt,
+			});
+
+			// Collapse the left column to 0 and the bottom row to 0 so the beige
+			// "grow" panel (top-right cell) expands to fill the whole viewport.
+			// minmax(0, …) lets the tracks shrink below their content's min size.
+			tl.fromTo(
+				grid,
+				{
+					gridTemplateColumns: 'minmax(0,3fr) minmax(0,1.25fr)',
+					gridTemplateRows: 'minmax(0,56vh) minmax(0,44vh)',
+				},
+				{
+					gridTemplateColumns: 'minmax(0,0fr) minmax(0,1fr)',
+					gridTemplateRows: 'minmax(0,100vh) minmax(0,0vh)',
+					ease: 'none',
+				},
+				0
+			)
+				.to(hide, { opacity: 0, ease: 'none' }, 0)
+				// Drift the art panel slightly upward as it slides left.
+				// Its x is driven per-frame by pushArt().
+				.to(art, { yPercent: -50, ease: 'none' }, 0)
+				// Lift the title up and fade it out. The row grows downward (~44vh),
+				// so move up a full viewport height to guarantee a net upward motion
+				// from the very start.
+				.to(titleText, { y: () => -window.innerHeight, opacity: 0, ease: 'none' }, 0)
+				// Grow the lead content to 2x and glide it from its rest anchor
+				// (bottom-left of the panel, px 32 / pb 30) to the center of the
+				// fullscreen panel. offsetWidth/Height are layout sizes, immune to
+				// the scale transform, and the function-based values re-resolve on
+				// refresh (invalidateOnRefresh). The panel expands to the grid, not
+				// the viewport — the page shell is capped (max-w-432), so on wider
+				// screens the grid's left offset must come out of the translation.
+				.to(
+					growContent,
+					{
+						scale: 2,
+						transformOrigin: 'center center',
+						x: () => {
+							const gridLeft = grid.getBoundingClientRect().left;
+							return window.innerWidth / 2 - gridLeft - 32 - growContent.offsetWidth / 2;
+						},
+						y: () => -(window.innerHeight / 2 - 30 - growContent.offsetHeight / 2),
+						ease: 'none',
+					},
+					0
+				);
+
+			// Position the art panel once up front, and clean up on breakpoint exit.
+			pushArt();
+			return () => {
+				gsap.set(art, { clearProps: 'transform' });
+			};
+		});
+	});
+
+	/* ── "binary city" canvas (ported from innogenio-home hero) ──
+	   Isometric voxel city; every cube face is a grid of 0/1 glyphs
+	   sheared onto the face plane — the digits are the material. */
+	const MONO = 'ui-monospace,"Cascadia Mono",Consolas,monospace';
+
+	function rnd(a: number, b: number, c = 0) {
+		const x = Math.sin(a * 127.1 + b * 311.7 + c * 74.7) * 43758.5453;
+		return x - Math.floor(x);
+	}
+
+	interface VoxelCell {
+		x: number;
+		y: number;
+		ci: number;
+		h: number;
+		tg: number;
+		next: number;
+	}
+
+	function binaryCity(w: number, h: number) {
+		const gw = 13,
+			gh = 9;
+		const maxH = 3.4;
+		// Contain the full envelope: base diamond ((gw+gh)/2 rows) plus the
+		// tallest possible tower (maxH * 0.85s) must fit inside the canvas.
+		const s = Math.min((w * 0.92) / (gw + gh), (h * 0.92) / ((gw + gh) / 2 + maxH * 0.85));
+		const unit = s * 0.85;
+		const cells: VoxelCell[] = [];
+		for (let x = 0; x < gw; x++)
+			for (let y = 0; y < gh; y++) {
+				cells.push({
+					x,
+					y,
+					ci: 2 + Math.floor(rnd(x, y, 1) * 5),
+					h: 0,
+					tg: 0,
+					next: 900 + rnd(x, y, 2) * 4500,
+				});
+			}
+		cells.sort((a, b) => a.x + a.y - (b.x + b.y));
+		let minX = 1e9,
+			maxX = -1e9,
+			minY = 1e9,
+			maxY = -1e9;
+		cells.forEach((c) => {
+			const px = (c.x - c.y) * s,
+				py = ((c.x + c.y) * s) / 2;
+			minX = Math.min(minX, px - s);
+			maxX = Math.max(maxX, px + s);
+			minY = Math.min(minY, py - s / 2);
+			maxY = Math.max(maxY, py + s / 2);
+		});
+		const ox = w / 2 - (minX + maxX) / 2;
+		// Shift down by half the tower height so base + towers center as one
+		// block — keeps the tallest towers inside the top edge.
+		const oy = h / 2 - (minY + maxY) / 2 + maxH * unit * 0.5;
+
+		const D = 3,
+			F = 10;
+
+		function face(
+			ctx: CanvasRenderingContext2D,
+			t: number,
+			o_x: number,
+			o_y: number,
+			ux: number,
+			uy: number,
+			vx: number,
+			vy: number,
+			nu: number,
+			nv: number,
+			color: string,
+			cx: number,
+			cy: number,
+			fid: number
+		) {
+			ctx.fillStyle = color;
+			ctx.save();
+			ctx.globalAlpha = 0.13;
+			ctx.beginPath();
+			ctx.moveTo(o_x, o_y);
+			ctx.lineTo(o_x + ux, o_y + uy);
+			ctx.lineTo(o_x + ux + vx, o_y + uy + vy);
+			ctx.lineTo(o_x + vx, o_y + vy);
+			ctx.closePath();
+			ctx.fill();
+			ctx.globalAlpha = 1;
+			ctx.transform(ux / (nu * F), uy / (nu * F), vx / (nv * F), vy / (nv * F), o_x, o_y);
+			for (let i = 0; i < nu; i++)
+				for (let j = 0; j < nv; j++) {
+					const ch = Math.floor(
+						rnd(cx * 7 + i, cy * 7 + j, fid * 13 + Math.floor(t / 1100)) * 2
+					).toString();
+					ctx.fillText(ch, (i + 0.5) * F, (j + 0.5) * F);
+				}
+			ctx.restore();
+		}
+
+		return {
+			frame(ctx: CanvasRenderingContext2D, t: number, dt: number) {
+				const k = Math.min(1, (dt || 16) * 0.0028);
+				for (const c of cells) {
+					if (t > c.next) {
+						c.tg = Math.random() < 0.42 ? 0 : 0.4 + Math.random() * maxH;
+						c.next = t + 2200 + Math.random() * 5200;
+					}
+					c.h += (c.tg - c.h) * k;
+				}
+				ctx.font = 'bold ' + F * 0.96 + 'px ' + MONO;
+				ctx.textAlign = 'center';
+				ctx.textBaseline = 'middle';
+				for (const c of cells) {
+					const px = ox + (c.x - c.y) * s;
+					const base = oy + ((c.x + c.y) * s) / 2;
+					const hp = c.h * unit;
+					const top = base - hp;
+					if (hp < 0.8) {
+						face(ctx, t, px, base - s / 2, s, s / 2, -s, s / 2, D, D, heroVoxelRamp[c.ci], c.x, c.y, 0);
+					} else {
+						const rows = Math.max(1, Math.round(hp / (s * 0.42)));
+						face(ctx, t, px - s, top, s, s / 2, 0, hp, D, rows, heroVoxelRamp[Math.max(c.ci - 2, 0)], c.x, c.y, 1);
+						face(ctx, t, px, top + s / 2, s, -s / 2, 0, hp, D, rows, heroVoxelRamp[Math.max(c.ci - 3, 0)], c.x, c.y, 2);
+						face(ctx, t, px, top - s / 2, s, s / 2, -s, s / 2, D, D, heroVoxelRamp[Math.min(c.ci + 2, 8)], c.x, c.y, 3);
+					}
+				}
+			},
+		};
+	}
+
+	document.querySelectorAll<HTMLCanvasElement>('[data-sd-canvas]').forEach((cv) => {
+		let ctx: CanvasRenderingContext2D;
+		let W = 0,
+			H = 0;
+		let anim: ReturnType<typeof binaryCity>;
+		let t0 = 0,
+			lastTs = 0,
+			rafId = 0;
+
+		function fit() {
+			const r = cv.getBoundingClientRect();
+			const d = window.devicePixelRatio || 1;
+			cv.width = Math.max(1, Math.round(r.width * d));
+			cv.height = Math.max(1, Math.round(r.height * d));
+			ctx = cv.getContext('2d')!;
+			ctx.setTransform(d, 0, 0, d, 0, 0);
+			W = r.width;
+			H = r.height;
+		}
+
+		function loop(ts: number) {
+			const t = ts - t0,
+				dt = Math.min(50, ts - lastTs);
+			lastTs = ts;
+			ctx.fillStyle = heroCanvasBg;
+			ctx.fillRect(0, 0, W, H);
+			anim.frame(ctx, t, dt);
+			rafId = requestAnimationFrame(loop);
+		}
+
+		function initAnim() {
+			cancelAnimationFrame(rafId);
+			fit();
+			anim = binaryCity(W, H);
+			t0 = performance.now();
+			lastTs = t0;
+			if (REDUCED) {
+				// two settled frames, then hold still
+				ctx.fillStyle = heroCanvasBg;
+				ctx.fillRect(0, 0, W, H);
+				anim.frame(ctx, 16, 16);
+				ctx.fillStyle = heroCanvasBg;
+				ctx.fillRect(0, 0, W, H);
+				anim.frame(ctx, 7000, 4000);
+				return;
+			}
+			rafId = requestAnimationFrame(loop);
+		}
+
+		let rsT = 0;
+		window.addEventListener('resize', () => {
+			clearTimeout(rsT);
+			rsT = window.setTimeout(initAnim, 150);
+		});
+		initAnim();
+	});
+</script>

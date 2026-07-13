@@ -1,0 +1,39 @@
+---
+/* Listing page template (innogenio-services) — hero, tabbed explorer,
+   slim CTA, footer. Everything is prop-driven so the same template
+   serves the services listing, a works listing, or any grouped index
+   page; site chrome (navbar/footer copy) comes from the locale's
+   site.json like the landing template. */
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../organisms/Navbar.astro';
+import Footer from '../organisms/Footer.astro';
+import type { FooterColumn } from '../molecules/FooterNav.astro';
+import ListingHero from '../organisms/ListingHero.astro';
+import type { HeroAction } from '../organisms/ListingHero.astro';
+import ListingExplorer from '../organisms/ListingExplorer.astro';
+import type { ExplorerGroup } from '../organisms/ListingExplorer.astro';
+import CtaSection from '../organisms/CtaSection.astro';
+import type { Action } from '../organisms/CtaSection.astro';
+import { getSite } from '../../i18n';
+import type { Locale } from '../../i18n';
+
+interface Props {
+	locale: Locale;
+	seo: { title: string; description: string };
+	hero: { titleLines: string[]; lead?: string; actions?: HeroAction[] };
+	explorer: { label?: string; groups: ExplorerGroup[] };
+	cta: { titleLines: string[]; actions: Action[] };
+}
+const { locale, seo, hero, explorer, cta } = Astro.props;
+
+const site = getSite(locale);
+const footerColumns = site.footer.columns as FooterColumn[];
+---
+
+<Layout lang={locale} title={seo.title} description={seo.description}>
+	<Navbar slot="header" locale={locale} />
+	<ListingHero titleLines={hero.titleLines} lead={hero.lead} actions={hero.actions} />
+	<ListingExplorer label={explorer.label} groups={explorer.groups} />
+	<CtaSection titleLines={cta.titleLines} actions={cta.actions} />
+	<Footer columns={footerColumns} copyright={site.footer.copyright} tagline={site.footer.tagline} />
+</Layout>

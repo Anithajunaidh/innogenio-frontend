@@ -1,0 +1,75 @@
+---
+/* Work-detail product mock (innogenio-work-vineo .mock) — a miniature
+   browser window that floats over the hero's dark art panel: title bar
+   with traffic dots, a mono "recommended" line, three product cards
+   (pixel sprite + skeleton bars + a mono tag; one card can be "hot"),
+   and a footer strip. Pure artwork on a fixed white face, so every
+   color stays theme-independent (case-1 = fixed brand purple) like the
+   other always-lit art surfaces. Content is prop-driven so the same
+   window mocks a storefront, a dashboard, or a console per case study. */
+import PixelSprite from '../atoms/PixelSprite.astro';
+import type { PixelSpriteName } from '../atoms/PixelSprite.astro';
+
+export interface MockCard {
+	icon: PixelSpriteName;
+	/** short mono tag under the skeleton bars (a price, a status, a delta) */
+	tag: string;
+	/** highlighted card — brand border + glow */
+	hot?: boolean;
+}
+
+export interface MockData {
+	/** mono label in the title bar (e.g. "VINEO.SHOP") */
+	bar: string;
+	/** mono kicker line above the cards */
+	rec: string;
+	cards: MockCard[];
+	footLeft: string;
+	footRight: string;
+}
+
+type Props = MockData;
+const { bar, rec, cards, footLeft, footRight } = Astro.props;
+---
+
+<div class="relative z-[1] w-[min(420px,100%)] bg-white text-ink-fixed shadow-[0_24px_60px_rgba(10,0,20,0.5)]">
+	<!-- title bar -->
+	<div class="flex items-center gap-1.5 border-b border-[#EFEAF6] px-3 py-2.5">
+		<i class="size-2 rounded-full bg-[#E4DDEE]"></i>
+		<i class="size-2 rounded-full bg-[#E4DDEE]"></i>
+		<i class="size-2 rounded-full bg-[#E4DDEE]"></i>
+		<span class="ml-2 font-mono text-kicker tracking-[0.1em] text-ink-secondary-fixed">{bar}</span>
+	</div>
+
+	<!-- recommendation line -->
+	<div class="flex items-center gap-2 px-3.5 pt-3 pb-1 font-mono text-kicker uppercase text-case-1">
+		<i class="size-1.5 bg-case-1"></i>{rec}
+	</div>
+
+	<!-- product cards -->
+	<div class="grid grid-cols-3 gap-2.5 px-3.5 pt-3 pb-4">
+		{
+			cards.map((card) => (
+				<div
+					class:list={[
+						'flex flex-col items-center gap-2 border px-2.5 py-3',
+						card.hot
+							? 'border-case-1 shadow-[0_6px_16px_rgba(159,0,212,0.18)]'
+							: 'border-[#EFEAF6]',
+					]}
+				>
+					<PixelSprite name={card.icon} class="w-[22px]" primary="var(--color-case-1)" secondary="#E2B5F7" />
+					<b class="h-1.5 w-4/5 bg-ink-fixed opacity-85" />
+					<s class="h-[5px] w-3/5 bg-[#D8D2E4] no-underline" />
+					<em class="font-mono text-kicker font-bold tracking-[0.06em] text-case-1 not-italic">{card.tag}</em>
+				</div>
+			))
+		}
+	</div>
+
+	<!-- footer strip -->
+	<div class="flex items-center justify-between border-t border-[#EFEAF6] px-3.5 py-[11px]">
+		<span class="font-mono text-kicker tracking-[0.08em] text-ink-secondary-fixed">{footLeft}</span>
+		<b class="bg-ink-fixed px-3 py-1.5 font-mono text-kicker tracking-[0.1em] text-white">{footRight}</b>
+	</div>
+</div>

@@ -1,0 +1,103 @@
+---
+/* Listing explorer (innogenio-services .sol) — a sticky tab rail on the
+   left switches between item groups on the right. Each group renders as
+   either wide service rows or a hairline tile grid, so the same organism
+   drives "by service / by industry / by capability" views on the services
+   page and any grouping on a works listing. Tabs use real tab semantics
+   (role/aria-selected) and the script is instance-safe via data-attrs. */
+import DimensionArrow from '../atoms/DimensionArrow.astro';
+import ListingRow from '../molecules/ListingRow.astro';
+import ListingTile from '../molecules/ListingTile.astro';
+import type { PixelSpriteName } from '../atoms/PixelSprite.astro';
+
+export interface ListingItem {
+	icon: string;
+	title: string;
+	body: string;
+	/** rows layout only: mono capability chips */
+	chips?: string[];
+	/** rows layout only: links the whole row to a detail page */
+	href?: string;
+}
+
+export interface ExplorerGroup {
+	/** tab label in the rail */
+	tab: string;
+	/** short intro line above the group */
+	intro?: string;
+	layout: 'rows' | 'grid';
+	/** 'service' renders contour ServiceIcons in the rows (services page) */
+	iconSet?: 'sprite' | 'service';
+	items: ListingItem[];
+}
+
+interface Props {
+	label?: string;
+	groups: ExplorerGroup[];
+}
+
+const { label = 'Listing explorer', groups } = Astro.props;
+---
+
+<section
+	data-listing-explorer
+	aria-label={label}
+	class="grid grid-cols-1 border-x border-line bg-paper font-sans text-ink min-[880px]:grid-cols-[280px_1fr] min-[880px]:items-start"
+>
+	<nav
+		role="tablist"
+		aria-label={label}
+		class="mx-section-x mt-block-y border border-line bg-tile min-[880px]:sticky min-[880px]:top-[88px] min-[880px]:mr-0 min-[880px]:mb-block-y"
+	>
+		{
+			groups.map((group, i) => (
+				<button
+					data-lx-tab
+					role="tab"
+					aria-selected={i === 0 ? 'true' : 'false'}
+					class="group flex w-full items-center justify-between gap-3.5 border-b border-line px-5 py-[17px] text-left text-mini-h font-normal text-ink-secondary transition-colors last:border-b-0 hover:text-ink aria-selected:font-semibold aria-selected:text-ink focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset"
+				>
+					{group.tab}
+					<DimensionArrow class="w-6 opacity-0 transition-opacity group-aria-selected:opacity-100" />
+				</button>
+			))
+		}
+	</nav>
+
+	<div class="min-w-0 px-section-x py-block-y">
+		{
+			groups.map((group, i) => (
+				<div data-lx-panel role="tabpanel" hidden={i !== 0}>
+					{group.intro && (
+						<p class="mb-[26px] max-w-[44em] text-sm leading-normal text-ink-secondary">
+							{group.intro}
+						</p>
+					)}
+					{group.layout === 'rows' ? (
+						group.items.map((item) => <ListingRow {...item} iconSet={group.iconSet} />)
+					) : (
+						<div class="grid grid-cols-1 gap-px border border-line bg-line min-[560px]:grid-cols-2 min-[880px]:grid-cols-3">
+							{group.items.map((item) => (
+								<ListingTile icon={item.icon} title={item.title} body={item.body} />
+							))}
+						</div>
+					)}
+				</div>
+			))
+		}
+	</div>
+</section>
+
+<script>
+	// tab rail: one selected tab shows its panel, the rest stay hidden
+	document.querySelectorAll<HTMLElement>('[data-listing-explorer]').forEach((root) => {
+		const tabs = [...root.querySelectorAll<HTMLButtonElement>('[data-lx-tab]')];
+		const panels = [...root.querySelectorAll<HTMLElement>('[data-lx-panel]')];
+		tabs.forEach((tab, i) => {
+			tab.addEventListener('click', () => {
+				tabs.forEach((t, k) => t.setAttribute('aria-selected', String(k === i)));
+				panels.forEach((p, k) => p.toggleAttribute('hidden', k !== i));
+			});
+		});
+	});
+</script>

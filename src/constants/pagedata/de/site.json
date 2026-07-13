@@ -1,0 +1,101 @@
+{
+	"seo": {
+		"title": "Innogenio — Individuelle Software, KI & ERP für Unternehmen",
+		"description": "Innogenio ist eine Design- und Technologieagentur für individuelle Software, KI & Automatisierung, ERP-Einführungen und Datenplattformen — von der Idee bis zum verlässlichen Produkt."
+	},
+	"navbar": {
+		"links": [
+			{
+				"label": "Leistungen",
+				"href": "/de/services",
+				"menuFooter": "Alle Leistungen ansehen",
+				"menu": [
+					{ "icon": "engineering", "title": "Engineering", "body": "Skalierbare, sichere Produkte — vom Tool bis zur Enterprise-App.", "href": "/de/services" },
+					{ "icon": "design", "title": "Design & Strategie", "body": "Nutzerzentrierte Erlebnisse, abgestimmt auf Geschäftsziele.", "href": "/de/services" },
+					{ "icon": "advisory", "title": "Beratung", "body": "Digitale Transformation mit Strategie und Expertise.", "href": "/de/services" },
+					{ "icon": "erp", "title": "ERP", "body": "ERPNext, Zoho und Odoo — eingeführt und etabliert.", "href": "/de/services" },
+					{ "icon": "data", "title": "Daten & KI", "body": "Insights, Automatisierung und klügere Entscheidungen.", "href": "/de/services" },
+					{ "icon": "devops", "title": "DevOps", "body": "Pipelines, IaC und kontinuierliches Monitoring.", "href": "/de/services" },
+					{ "icon": "iot", "title": "IoT", "body": "Vernetzte Systeme vom Gateway bis in die Cloud.", "href": "/de/services" }
+				]
+			},
+			{ "label": "Branchen", "href": "/de/" },
+			{
+				"label": "Arbeiten",
+				"href": "/de/works",
+				"menuFooter": "Alle Arbeiten ansehen",
+				"menu": [
+					{ "icon": "factory", "title": "Meridian", "body": "Vier Werke in zwölf Wochen auf einem ERP.", "href": "/de/works/meridian" },
+					{ "icon": "card", "title": "NovaPay", "body": "KI verkürzt Kreditentscheidungen auf Minuten.", "href": "/de/works/novapay" },
+					{ "icon": "chart", "title": "Halo Retail", "body": "1,2 Mio. Bestellungen auf einem Live-Dashboard.", "href": "/de/works/halo-retail" },
+					{ "icon": "erp", "title": "Corevance", "body": "Das Quartal, geschlossen in vier statt elf Tagen.", "href": "/de/works/corevance" },
+					{ "icon": "design", "title": "Kepler Labs", "body": "Ein neu gebautes v2, zwei Monate früher.", "href": "/de/works/kepler-labs" },
+					{ "icon": "data", "title": "Helixon", "body": "Eine Datenpipeline in neun Wochen neu gebaut.", "href": "/de/works/helixon" }
+				]
+			},
+			{ "label": "Über uns", "href": "/de/" },
+			{ "label": "Blog", "href": "/de/" },
+			{ "label": "Karriere", "href": "/de/" }
+		],
+		"workCta": { "label": "Unsere Arbeiten", "href": "/de/works" },
+		"hireCta": { "label": "Mit uns arbeiten", "href": "/de/" }
+	},
+	"footer": {
+		"columns": [
+			{
+				"title": "Warum Innogenio",
+				"links": [
+					{ "href": "/de/", "label": "Über uns" },
+					{ "href": "/de/", "label": "Unsere Kunden" },
+					{ "href": "/de/", "label": "Karriere" },
+					{ "href": "/de/", "label": "Kontakt" }
+				]
+			},
+			{
+				"title": "Entdecken",
+				"links": [
+					{ "href": "/de/services", "label": "Leistungen" },
+					{ "href": "/de/", "label": "Branchen" },
+					{ "href": "/de/works", "label": "Unsere Arbeiten" },
+					{ "href": "/de/", "label": "Blog" }
+				]
+			},
+			{
+				"title": "Leistungen",
+				"links": [
+					{ "href": "/de/", "label": "Individuelle Software" },
+					{ "href": "/de/", "label": "KI & Automatisierung" },
+					{ "href": "/de/", "label": "ERP-Einführung" },
+					{ "href": "/de/", "label": "Daten & DevOps" }
+				]
+			},
+			{
+				"title": "Loslegen",
+				"links": [
+					{ "href": "/de/", "label": "Projekt starten" },
+					{ "href": "/de/", "label": "Demo buchen" },
+					{ "href": "/de/", "label": "AI & Automation Studio" }
+				]
+			},
+			{
+				"title": "Rechtliches",
+				"links": [
+					{ "href": "/de/", "label": "Nutzungsbedingungen" },
+					{ "href": "/de/", "label": "Datenschutz" },
+					{ "href": "/de/", "label": "Impressum" }
+				]
+			},
+			{
+				"title": "Community",
+				"links": [
+					{ "href": "/", "label": "LinkedIn", "external": true },
+					{ "href": "/", "label": "X", "external": true },
+					{ "href": "/", "label": "GitHub", "external": true },
+					{ "href": "/", "label": "Instagram", "external": true }
+				]
+			}
+		],
+		"copyright": "Innogenio © 2026",
+		"tagline": "Mit Absicht gebaut"
+	}
+}

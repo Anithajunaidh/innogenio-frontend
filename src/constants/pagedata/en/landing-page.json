@@ -1,0 +1,304 @@
+{
+	"hero": {
+		"titleLines": [
+			"innovative design",
+			"& tech agency",
+			"crafting impactful products."
+		],
+		"tagline": "We team up with innovative organizations to fuel ideas, shape digital journeys, and create impact with intention.",
+		"news": {
+			"label": "Featured news",
+			"items": [
+				{
+					"title": "Introducing Innogenio AI & Automation Studio",
+					"href": "/"
+				},
+				{
+					"title": "Innogenio named a top ERPNext implementation partner",
+					"href": "/"
+				},
+				{
+					"title": "Case study: AI automation cuts loan processing to minutes",
+					"href": "/"
+				}
+			]
+		}
+	},
+	"impact": {
+		"kicker": "Trusted by visionary tech teams",
+		"headingLines": ["We design with impact", "We build with vision"],
+		"sub": "We craft strategies, experiences, and digital solutions for leaders and organizations — transforming ideas into meaningful impact.",
+		"items": [
+			{
+				"label": "Custom Software",
+				"body": "Bespoke platforms, web apps, and internal tools — engineered for scale, speed, and reliability."
+			},
+			{
+				"label": "AI & Automation",
+				"body": "Intelligent agents and workflow automation that put frontier AI to work across your business."
+			},
+			{
+				"label": "ERP Implementation",
+				"body": "ERPNext and custom ERP rollouts that unify operations, finance, and supply chain on one system."
+			},
+			{
+				"label": "Data & DevOps",
+				"body": "Pipelines, dashboards, and cloud infrastructure that make your data fast, observable, and dependable."
+			}
+		],
+		"cta": { "label": "Learn more about us", "href": "/" },
+		"stats": [
+			{
+				"value": "100%",
+				"caption": "Client satisfaction rate for ongoing support and software delivery."
+			},
+			{
+				"value": "100K+",
+				"caption": "Transactions, workflows, and automations powered across client systems."
+			}
+		]
+	},
+	"services": {
+		"title": "Services.",
+		"items": [
+			{
+				"icon": "code",
+				"title": "Custom software.",
+				"body": "Product engineering from first sketch to production — web, mobile, and APIs built to scale with you."
+			},
+			{
+				"icon": "ai",
+				"title": "AI & automation.",
+				"body": "Practical AI that removes busywork: agents, document intelligence, and workflow automation in production."
+			},
+			{
+				"icon": "erp",
+				"title": "ERP implementation.",
+				"body": "ERPNext, Zoho, and Odoo rollouts tailored to how your business actually runs — not the other way around."
+			},
+			{
+				"icon": "data",
+				"title": "Data, DevOps & IoT.",
+				"body": "Dashboards, pipelines, and connected devices — with the infrastructure and observability to keep them running."
+			}
+		]
+	},
+	"industries": {
+		"title": "Industries.",
+		"cardVariant": "image",
+		"items": [
+			{
+				"icon": "factory",
+				"title": "Manufacturing.",
+				"image": "service1",
+				"body": "Plant-floor ERP, production planning, and IoT telemetry for companies that make physical things."
+			},
+			{
+				"icon": "bank",
+				"title": "Financial services.",
+				"image": "service2",
+				"body": "Automation and analytics for lenders, insurers, and fintechs that need to move money safely."
+			},
+			{
+				"icon": "cart",
+				"title": "Retail & D2C.",
+				"image": "service3",
+				"body": "Commerce platforms, inventory sync, and customer analytics for modern retail brands."
+			},
+			{
+				"icon": "health",
+				"title": "Healthcare & education.",
+				"image": "service4",
+				"body": "Compliant systems, records, and portals for clinics, hospitals, and learning institutions."
+			}
+		]
+	},
+	"works": {
+		"cases": [
+			{
+				"brand": "Meridian Manufacturing",
+				"brandIcon": "logo",
+				"chip": "Manufacturing",
+				"title": "A unified ERPNext rollout across four plants, live in twelve weeks.",
+				"deco": "erp",
+				"image": "image1"
+			},
+			{
+				"brand": "NovaPay",
+				"brandIcon": "robot",
+				"chip": "Financial services",
+				"title": "AI automation cuts loan processing from days to minutes.",
+				"deco": "ai",
+				"image": "image2"
+			},
+			{
+				"brand": "Halo Retail",
+				"brandIcon": "flag",
+				"chip": "Retail & D2C",
+				"title": "A real-time analytics platform serving 1.2M monthly orders.",
+				"deco": "data",
+				"image": "image3"
+			}
+		]
+	},
+	"process": {
+		"title": "We simplify full-stack development.",
+		"intro": "We don't just build software, we architect solutions that adapt. Every project is designed to meet your business goals, tested thoroughly for reliability, and deployed with security and performance at its core.",
+		"cta": {
+			"label": "Start a project",
+			"href": "/"
+		},
+		"phases": [
+			{
+				"title": "Discovery & Planning",
+				"cardLines": [
+					"Discovery &",
+					"Planning"
+				],
+				"steps": [
+					"Requirements workshop",
+					"Technical & market research",
+					"Feasibility & idea validation",
+					"Solution architecture planning",
+					"Road & milestone planning",
+					"Tech stack finalization"
+				]
+			},
+			{
+				"title": "UI/UX Design",
+				"cardLines": [
+					"UI/UX",
+					"Design"
+				],
+				"steps": [
+					"User flows & IA",
+					"Wireframes",
+					"Design system",
+					"High-fidelity prototypes",
+					"Usability testing & handoff"
+				]
+			},
+			{
+				"title": "Development",
+				"steps": [
+					"Responsive UI development",
+					"Integrations",
+					"Backend, APIs & database",
+					"Perf, security & accessibility",
+					"Automated tests"
+				]
+			},
+			{
+				"title": "Deployment & Support",
+				"cardLines": [
+					"Deployment &",
+					"Support"
+				],
+				"steps": [
+					"CI/CD & releases",
+					"Cloud setup",
+					"Monitoring & analytics",
+					"Post-launch iterations"
+				]
+			}
+		]
+	},
+	"markitecture": {
+		"titleLines": [
+			"Built for enterprises.",
+			"Fine-tuned for growth."
+		],
+		"cards": [
+			{
+				"title": "AI & Automation Studio",
+				"description": "Agents and workflow automation in production.",
+				"icon": "robot",
+				"plate": "case-1",
+				"href": "/"
+			},
+			{
+				"title": "Custom Software",
+				"description": "Web, mobile, and APIs built to scale.",
+				"icon": "logo",
+				"plate": "case-2",
+				"href": "/"
+			},
+			{
+				"title": "ERP Systems",
+				"description": "ERPNext, Zoho, and Odoo rollouts.",
+				"icon": "erp",
+				"plate": "case-1",
+				"href": "/"
+			},
+			{
+				"title": "Applied AI services",
+				"icon": "ai",
+				"plate": "paper",
+				"href": "/"
+			},
+			{
+				"title": "Data platforms",
+				"icon": "data",
+				"plate": "panel",
+				"href": "/"
+			},
+			{
+				"title": "Cloud & DevOps",
+				"description": "CI/CD, cloud, and observability at scale.",
+				"icon": "flag",
+				"plate": "case-2",
+				"href": "/"
+			}
+		],
+		"minis": [
+			{
+				"title": "High uptime",
+				"description": "Enterprise-grade hosting and monitoring built-in.",
+				"icon": "clock",
+				"plate": "case-1"
+			},
+			{
+				"title": "Launch support",
+				"description": "Hands-on help from a dedicated deployment team.",
+				"icon": "flag",
+				"plate": "case-1"
+			},
+			{
+				"title": "Security built-in",
+				"description": "Safeguards and compliance baked in from day one.",
+				"icon": "ops",
+				"plate": "case-1"
+			},
+			{
+				"title": "Compliance ready",
+				"description": "SOC 2, HIPAA, and GDPR standards covered.",
+				"icon": "erp",
+				"plate": "case-1"
+			}
+		]
+	},
+	"cta": {
+		"titleLines": [
+			"Ready to eliminate chaos?",
+			"Let's talk."
+		],
+		"body": "Tell us what you're building. We'll bring the strategy, design, and engineering to ship it — and keep it running.",
+		"actions": [
+			{
+				"label": "Start a project",
+				"variant": "pixel",
+				"href": "/"
+			},
+			{
+				"label": "Book a demo",
+				"variant": "ghost",
+				"href": "/"
+			}
+		],
+		"newsletter": {
+			"placeholder": "you@company.com",
+			"buttonLabel": "Notify me",
+			"note": "Or subscribe for occasional product updates."
+		}
+	}
+}

@@ -1,29 +1,82 @@
-<nav class=" lg:px-16 px-8 fixed top-0 left-0 z-50 py-8 flex items-center justify-between w-full">
-	<div class="flex items-center justify-between gap-10">
-		<a href="/">
-			<img src="/public/logo.svg" alt="Logo" class="h-6" />
+---
+/* Site header — fixed 56px bar: brand, divided nav links, a compact
+   EN/DE language switcher, two full-height CTA cells (transparent "See
+   Our Work" + charcoal "Work With Us", styled after innogenio-home-v2's
+   .hdr-more / .hdr-cta with the shared pixel-dissolve hover), and the
+   mobile hamburger menu. Copy comes from the locale's site.json. */
+import BrandLogo from '../atoms/BrandLogo.astro';
+import Button from '../atoms/Button.astro';
+import NavMenu from '../molecules/NavMenu.astro';
+import MobileMenu from '../molecules/MobileMenu.astro';
+import { defaultLocale, getSite, localeHome, localeNames, locales, pathForLocale } from '../../i18n';
+import type { Locale } from '../../i18n';
+
+interface Props {
+	locale?: Locale;
+}
+const { locale = defaultLocale } = Astro.props;
+const { navbar } = getSite(locale);
+
+/* the switcher keeps you on the SAME page in the other locale */
+const currentPath = Astro.url.pathname;
+---
+
+<header
+	class="fixed top-0 left-0 z-50 h-14 w-full border-b border-line bg-paper text-ink"
+	data-header
+>
+	<div class="mx-auto flex h-full w-full max-w-432 items-stretch">
+		<!-- brand -->
+		<a
+			href={localeHome(locale)}
+			rel="home"
+			aria-label="Go to homepage"
+			class="flex shrink-0 items-center gap-2.5 px-5 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset"
+		>
+			<BrandLogo class="h-4 w-auto" />
 		</a>
-        <div class="flex items-center justify-between text-white gap-8 text-xl">
-            <a href="/">
-                services
-            </a>
-            <a href="/">
-                services
-            </a>
-            <a href="/">
-                services
-            </a>
-            <a href="/">
-                services
-            </a>
-        </div>
-    </div>
-        <div class="flex items-center justify-between gap-4">
-            <button class="bg-white text-black px-4 py-2 rounded-md">
-                See our work
-            </button>
-            <button class="bg-white text-black px-4 py-2 rounded-md">
-                Work with us
-            </button>
-        </div>
-</nav>
+
+		<!-- primary nav -->
+		<NavMenu links={navbar.links} />
+
+		<!-- right side — full-height header cells (innogenio-home-v2 .hdr-more / .hdr-cta) -->
+		<div class="ml-auto flex items-stretch">
+			<nav aria-label="Language" class="relative flex items-center border-l border-line px-3">
+				<details class="group relative">
+					<summary class="flex h-8 w-10 cursor-pointer list-none items-center justify-center font-mono text-pill text-brand uppercase transition-colors hover:text-brand focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset [&::-webkit-details-marker]:hidden">
+						{localeNames[locale]}
+					</summary>
+					<div class="absolute top-0 right-0 z-10 w-10 border border-line bg-paper shadow-[0_10px_28px_rgba(0,0,0,.12)]">
+						{
+							locales.map((l) => (
+								<a
+									href={pathForLocale(currentPath, l)}
+									aria-current={l === locale ? 'page' : undefined}
+									class:list={[
+										'flex h-8 w-full items-center justify-center font-mono text-pill uppercase transition-colors hover:bg-ink hover:text-paper focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset',
+										l === locale ? 'text-brand' : 'text-ink-secondary',
+									]}
+								>
+									{localeNames[l]}
+								</a>
+							))
+						}
+					</div>
+				</details>
+			</nav>
+			<Button
+				variant="nav-ghost"
+				href={navbar.workCta.href}
+				label={navbar.workCta.label}
+				class="max-lg:hidden"
+			/>
+			<Button
+				variant="nav-cta"
+				href={navbar.hireCta.href}
+				label={navbar.hireCta.label}
+				class="max-lg:hidden"
+			/>
+			<MobileMenu links={navbar.links} />
+		</div>
+	</div>
+</header>

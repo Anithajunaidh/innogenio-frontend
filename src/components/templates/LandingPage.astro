@@ -1,0 +1,120 @@
+---
+/* Landing page template — one component renders the whole page for any
+   locale; the per-locale routes under src/pages/ just pick the locale.
+   All copy comes from src/constants/pagedata/<locale>/ via src/i18n. */
+import type { ImageMetadata } from 'astro';
+import HeroSection from '../organisms/CardScaledown.astro';
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../organisms/Footer.astro';
+import type { FooterColumn } from '../molecules/FooterNav.astro';
+import Navbar from '../organisms/Navbar.astro';
+import ImpactSection from '../organisms/ImpactSection.astro';
+import ServicesSection from '../organisms/ServicesSection.astro';
+import type { Service } from '../organisms/ServicesSection.astro';
+import WorksCarousel from '../organisms/WorksCarousel.astro';
+import type { CaseItem } from '../organisms/WorksCarousel.astro';
+import ProcessSection from '../organisms/ProcessSection.astro';
+import MarkitectureSection from '../organisms/MarkitectureSection.astro';
+import type { Card as MkCard, Mini as MkMini } from '../organisms/MarkitectureSection.astro';
+import TestimonialsSection from '../organisms/TestimonialsSection.astro';
+import type { Testimonial } from '../organisms/TestimonialsSection.astro';
+import CtaSection from '../organisms/CtaSection.astro';
+import type { Action } from '../organisms/CtaSection.astro';
+import { getLanding, getTestimonials, getSite } from '../../i18n';
+import type { Locale } from '../../i18n';
+import { organizationLd, servicesLd, webSiteLd } from '../../utils/seo';
+import image1 from '../../assets/image1.webp';
+import image2 from '../../assets/image2.webp';
+import image3 from '../../assets/image3.webp';
+import service1 from '../../assets/industry/service1.jpg';
+import service2 from '../../assets/industry/service2.jpg';
+import service3 from '../../assets/industry/service3.jpg';
+import service4 from '../../assets/industry/service4.jpg';
+
+interface Props {
+	locale: Locale;
+}
+const { locale } = Astro.props;
+
+const page = getLanding(locale);
+const testimonialsData = getTestimonials(locale);
+const site = getSite(locale);
+
+/* JSON imports widen every string to `string`, so each slice is narrowed
+   once here to the literal-union types the section components export. */
+const services = page.services.items as Service[];
+const markitectureCards = page.markitecture.cards as MkCard[];
+const markitectureMinis = page.markitecture.minis as MkMini[];
+const testimonials = testimonialsData.items as Testimonial[];
+const ctaActions = page.cta.actions as Action[];
+const footerColumns = site.footer.columns as FooterColumn[];
+
+/** landing-page.json case-study slides name an image by key; resolve each
+ * to its imported asset here since JSON can't hold image imports. Slides
+ * without a recognized key fall back to the pixel-dissolve animation. */
+const workImages: Record<string, ImageMetadata> = { image1, image2, image3 };
+const workCases = page.works.cases.map((c) => ({
+	...c,
+	image: workImages[c.image],
+})) as CaseItem[];
+
+const industryImages: Record<string, ImageMetadata> = { service1, service2, service3, service4 };
+const industries = page.industries.items.map((item) => ({
+	...item,
+	image: industryImages[item.image],
+})) as Service[];
+
+/* structured data — entity anchors for search and AI answer engines */
+const siteUrl = (Astro.site ?? new URL('https://innogenio.com')).href;
+const jsonLd = [
+	organizationLd(siteUrl, site.seo.description),
+	webSiteLd(siteUrl, site.seo.title, locale),
+	...servicesLd(siteUrl, page.services.items),
+];
+---
+
+<Layout lang={locale} title={site.seo.title} description={site.seo.description} jsonLd={jsonLd}>
+	<Navbar slot="header" locale={locale} />
+	<HeroSection titleLines={page.hero.titleLines} tagline={page.hero.tagline} news={page.hero.news} />
+	<ImpactSection
+		kicker={page.impact.kicker}
+		headingLines={page.impact.headingLines}
+		sub={page.impact.sub}
+		items={page.impact.items}
+		cta={page.impact.cta}
+		stats={page.impact.stats}
+	/>
+	<ServicesSection title={page.services.title} services={services} />
+	<WorksCarousel cases={workCases} />
+	<ProcessSection
+	title={page.process.title}
+	intro={page.process.intro}
+	cta={page.process.cta}
+	phases={page.process.phases}
+	/>
+	<MarkitectureSection
+	titleLines={page.markitecture.titleLines}
+	cards={markitectureCards}
+	minis={markitectureMinis}
+	/>
+	<ServicesSection
+		title={page.industries.title}
+		cardVariant={page.industries.cardVariant as 'default' | 'image'}
+		services={industries}
+	/>
+	<TestimonialsSection
+		kicker={testimonialsData.kicker}
+		titleLines={testimonialsData.titleLines}
+		lead={testimonialsData.lead}
+		testimonials={testimonials}
+		score={testimonialsData.score}
+		cta={testimonialsData.cta}
+	/>
+	<CtaSection
+		titleLines={page.cta.titleLines}
+		body={page.cta.body}
+		actions={ctaActions}
+		newsletter={page.cta.newsletter}
+	/>
+	<Footer columns={footerColumns} copyright={site.footer.copyright} tagline={site.footer.tagline} />
+</Layout>

@@ -1,0 +1,56 @@
+---
+/* Listing-page hero (innogenio-services .hero) — oversized balanced
+   heading, lead paragraph, and a solid + ghost CTA pair, over the shared
+   section gutter with a bottom hairline. Content rises in with the
+   shared rv-block entrance. */
+import Button from '../atoms/Button.astro';
+
+export interface HeroAction {
+	label: string;
+	href?: string;
+	variant?: 'pixel' | 'ghost' | 'pill';
+}
+
+interface Props {
+	/** heading, one array item per line */
+	titleLines?: string[];
+	lead?: string;
+	actions?: HeroAction[];
+}
+
+const {
+	titleLines = ['Software, automation & AI.', 'In your hands.'],
+	lead,
+	actions = [],
+} = Astro.props;
+---
+
+<section
+	data-reveal
+	aria-label="Page hero"
+	class="border-x border-b border-line bg-paper px-section-x pt-[clamp(64px,10vw,140px)] pb-14 font-sans text-ink"
+>
+	<h1 class="rv-block text-balance text-listing-h">
+		{titleLines.map((line) => <span class="block">{line}</span>)}
+	</h1>
+	{lead && <p class="rv-block mt-[26px] max-w-[34em] text-lead" style="--i:1">{lead}</p>}
+	{
+		actions.length > 0 && (
+			<div class="rv-block mt-9 flex flex-wrap gap-3.5" style="--i:2">
+				{actions.map((action) => (
+					<Button
+						variant={action.variant ?? 'pixel'}
+						href={action.href ?? '/'}
+						label={action.label}
+						arrow
+					/>
+				))}
+			</div>
+		)
+	}
+</section>
+
+<script>
+	import { initReveal } from '../../utils/reveal';
+	initReveal();
+</script>

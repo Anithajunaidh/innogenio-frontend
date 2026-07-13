@@ -1,0 +1,611 @@
+<title>Innogenio — Testimonials</title>
+<style>
+  :root{
+    --bg:#FAF9F6; --ink:#17121F; --ink-2:#6A6277; --line:#E8E3F0;
+    --panel:#FAF8FD; --tile:#FFFFFF; --fill:#F1EDE4;
+    --accent:#9F00D4; --accent-soft:#F7E9FD;
+    --px1:#9F00D4; --px2:#E2B5F7;
+    --panel-dark:#1A1424;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0F0B16; --ink:#F1EDF7; --ink-2:#9A92A8; --line:#291F3C;
+      --panel:#171021; --tile:#171021; --fill:#1A1224;
+      --accent:#C155EC; --accent-soft:#2B0A3A;
+      --px1:#C155EC; --px2:#EBD0FA;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0F0B16; --ink:#F1EDF7; --ink-2:#9A92A8; --line:#291F3C;
+    --panel:#171021; --tile:#171021; --fill:#1A1224;
+    --accent:#C155EC; --accent-soft:#2B0A3A;
+    --px1:#C155EC; --px2:#EBD0FA;
+  }
+  :root[data-theme="light"]{
+    --bg:#FAF9F6; --ink:#17121F; --ink-2:#6A6277; --line:#E8E3F0;
+    --panel:#FAF8FD; --tile:#FFFFFF; --fill:#F1EDE4;
+    --accent:#9F00D4; --accent-soft:#F7E9FD;
+    --px1:#9F00D4; --px2:#E2B5F7;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:"Helvetica Now Display","Neue Haas Grotesk Display","Helvetica Neue",Helvetica,"Segoe UI",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .shell{max-width:1240px;margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+  .kicker{font-size:10px;letter-spacing:.16em;color:var(--ink-2);text-transform:uppercase}
+
+  .px{display:block;image-rendering:pixelated}
+  .px .p1{fill:var(--px1)}
+  .px .p2{fill:var(--px2)}
+
+  /* dimension arrow */
+  .ar{display:block;flex:none;overflow:visible}
+  .ar rect{fill:currentColor;opacity:0;transform:translateX(-5px);transition:opacity .28s ease,transform .28s ease}
+  .ar line{stroke:currentColor;stroke-width:1.6;transform-origin:26px 6px;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+  .ar path{fill:none;stroke:currentColor;stroke-width:1.6;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+  .hdr-cta:hover .ar rect,.tst-cta:hover .ar rect{opacity:1;transform:none}
+  .hdr-cta:hover .ar line,.tst-cta:hover .ar line{transform:scaleX(1.45)}
+  .hdr-cta:hover .ar path,.tst-cta:hover .ar path{transform:translateX(2.5px)}
+
+  /* ── header ── */
+  header{
+    display:flex;align-items:stretch;height:56px;
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;background:var(--bg);z-index:30;
+  }
+  .brand{display:flex;align-items:center;gap:10px;padding:0 20px}
+  .brand .px{width:27px;height:auto}
+  .brand span{font-weight:700;font-size:16px;letter-spacing:-0.02em}
+  .nav{display:flex;align-items:stretch}
+  .nav a{display:flex;align-items:center;padding:0 22px;font-size:14.5px;border-left:1px solid var(--line)}
+  .nav a:last-child{border-right:1px solid var(--line)}
+  .nav a:hover{background:var(--accent-soft)}
+  .nav a.here{color:var(--accent);font-weight:600}
+  .hdr-right{margin-left:auto;display:flex;align-items:stretch}
+  .hdr-cta{
+    display:flex;align-items:center;gap:12px;padding:0 24px;
+    background:var(--ink);color:var(--bg);font-size:15px;font-weight:600;
+    transition:background .22s ease;
+  }
+  .hdr-cta:hover{background:var(--accent);color:#fff}
+  @media (max-width:1060px){.nav{display:none}}
+
+  /* ── intro strip (light) ── */
+  .intro{padding:clamp(56px,8vw,110px) 44px 54px;border-bottom:1px solid var(--line)}
+  .intro h1{margin:14px 0 0;font-size:clamp(38px,5.4vw,66px);line-height:1.04;font-weight:500;letter-spacing:-0.03em;text-wrap:balance}
+  @media (max-width:640px){.intro{padding-left:20px;padding-right:20px}}
+
+  /* ════════════════════════════════════════════════════════════
+     TESTIMONIALS — dark feature panel
+     Fixed dark values (like every Mistral dark panel, it reads the
+     same in page light & dark modes). Full texture recipe applied.
+     ════════════════════════════════════════════════════════════ */
+  .tst{
+    position:relative;background:var(--panel-dark);color:#F1EDF7;
+    padding:clamp(64px,9vw,120px) 44px;
+    overflow:hidden;
+  }
+  @media (max-width:640px){.tst{padding-left:20px;padding-right:20px}}
+  /* recipe 2+3 : grid + clouds */
+  .tst::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(640px 420px at 80% 8%,  rgba(255,255,255,.05),  transparent 62%),
+      radial-gradient(760px 560px at 10% 92%, rgba(159,0,212,.12),   transparent 62%),
+      radial-gradient(460px 340px at 50% 48%, rgba(255,255,255,.035), transparent 65%),
+      linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px) 0 0/110px 110px,
+      linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px) 0 0/110px 110px;
+  }
+  /* recipe 4 : grain, over everything in the panel */
+  .tst::after{
+    content:"";position:absolute;inset:0;z-index:5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;opacity:.45;pointer-events:none;
+  }
+  .tst > *{position:relative;z-index:1}
+
+  /* faint binary columns at the panel edges */
+  .bin-col{
+    position:absolute;top:0;bottom:0;width:18px;z-index:0;
+    writing-mode:vertical-rl;text-orientation:upright;
+    font-family:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
+    font-size:11px;letter-spacing:.55em;line-height:18px;
+    color:rgba(193,85,236,.30);opacity:.55;
+    user-select:none;pointer-events:none;white-space:nowrap;overflow:hidden;
+  }
+  .bin-col.l{left:12px}
+  .bin-col.r{right:12px}
+  @media (max-width:900px){.bin-col{display:none}}
+
+  /* panel head */
+  .tst-kicker{
+    margin:0;display:flex;align-items:center;gap:14px;
+    font-size:14.5px;letter-spacing:.08em;line-height:1.75;font-weight:500;
+    text-transform:uppercase;color:#B9AECB;
+  }
+  .tst-kicker .dm7{width:7px;height:7px;background:#fff;transform:rotate(45deg);flex:none}
+  .tst-head-grid{
+    display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:end;
+    margin-top:26px;
+  }
+  @media (max-width:880px){.tst-head-grid{grid-template-columns:1fr;gap:22px}}
+  .tst h2{
+    margin:0;font-size:clamp(34px,4.6vw,54px);
+    line-height:1.05;font-weight:500;letter-spacing:-0.03em;color:#F6F1FC;text-wrap:balance;
+  }
+  .tst-lead{
+    margin:0;max-width:30em;justify-self:end;
+    font-size:clamp(16.5px,1.55vw,19.5px);line-height:1.45;color:#B9AECB;
+  }
+  @media (max-width:880px){.tst-lead{justify-self:start}}
+
+  /* ── card grid ── */
+  .tst-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+    margin-top:clamp(44px,6vw,72px);
+  }
+  @media (max-width:1080px){.tst-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:680px){.tst-grid{grid-template-columns:1fr}}
+
+  /* ── testimonial card — glass on texture, sharp corners ── */
+  .tst-card{
+    position:relative;display:flex;flex-direction:column;margin:0;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.13);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    opacity:0;transform:translateY(26px);
+    transition:
+      opacity .6s cubic-bezier(.2,.7,.3,1),
+      transform .6s cubic-bezier(.2,.7,.3,1),
+      background .25s ease,border-color .25s ease,box-shadow .25s ease;
+  }
+  .tst-card.in{opacity:1;transform:none}
+  .tst-card:hover{
+    background:rgba(255,255,255,.07);
+    border-color:rgba(255,255,255,.28);
+    box-shadow:0 18px 44px rgba(8,2,14,.45);
+    transform:translateY(-4px);
+  }
+
+  /* top rail + forward-travelling signal diamond (hover) */
+  .rail{position:absolute;top:0;left:0;right:0;height:1px;background:rgba(255,255,255,.28)}
+  .rail i{
+    position:absolute;top:-3.5px;left:0;width:7px;height:7px;background:#fff;
+    transform:rotate(45deg);opacity:0;
+  }
+  .tst-card:hover .rail i{opacity:1;animation:railTravel 2.2s linear infinite}
+  @keyframes railTravel{
+    0%  {left:0;   opacity:0}
+    6%  {opacity:1}
+    92% {opacity:1}
+    100%{left:calc(100% - 7px);opacity:0}
+  }
+
+  /* ── avatar stage — Cleo-style gradient tile, living halftone ── */
+  .stage{
+    position:relative;display:flex;align-items:flex-end;justify-content:center;
+    height:226px;overflow:hidden;
+    margin:14px 14px 0;border-radius:8px;   /* photographic-card radius */
+    background:linear-gradient(180deg,#EDCDF8 0%,rgba(250,249,246,0) 66%),#FAF9F6;
+  }
+  .stage .tag{
+    position:absolute;top:12px;right:14px;z-index:2;
+    font-size:14.5px;letter-spacing:.08em;font-weight:500;
+    color:rgba(23,18,31,.42);
+  }
+  /* the living halftone portrait */
+  .avatar{
+    position:relative;z-index:1;display:block;
+    height:214px;aspect-ratio:56/70;margin:0;
+  }
+  /* portrait entrance + idle motion are drawn on the canvas itself:
+     marks materialize center-first in discrete steps, then the
+     subject sways / breathes / blinks at ~10fps like halftoned film */
+
+  /* ── card body ── */
+  .tst-body{display:flex;flex-direction:column;flex:1;padding:22px 24px 24px;text-align:left}
+  .stars{display:flex;gap:6px;margin:0 0 16px}
+  .stars svg{width:12px;height:12px;display:block;shape-rendering:crispEdges}
+  .stars .on {fill:#C155EC;filter:drop-shadow(0 0 5px rgba(193,85,236,.55))}
+  .stars .off{fill:rgba(255,255,255,.16)}
+  .tst-quote{
+    margin:0;flex:1;
+    font-size:16.5px;line-height:1.55;font-weight:400;
+    color:rgba(241,237,247,.84);
+  }
+  .tst-quote::before{content:"“"}
+  .tst-quote::after{content:"”"}
+  .tst-meta{
+    margin:22px 0 0;padding-top:18px;
+    border-top:1px solid rgba(255,255,255,.11);
+  }
+  .tst-name{display:block;font-size:16px;font-weight:600;letter-spacing:-0.015em;color:#F6F1FC}
+  .tst-role{display:block;margin-top:3px;font-size:13.5px;line-height:1.45;color:#9A92A8}
+  .tst-co{
+    display:block;margin-top:10px;
+    font-size:14.5px;letter-spacing:.08em;line-height:1.75;font-weight:500;
+    text-transform:uppercase;color:#C155EC;
+  }
+
+  /* ── panel footer — rating summary + link ── */
+  .tst-foot{
+    display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px;
+    margin-top:clamp(40px,5vw,60px);padding-top:26px;
+    border-top:1px solid rgba(255,255,255,.14);
+  }
+  .tst-score{display:flex;align-items:center;gap:14px}
+  .tst-score .n{font-size:30px;font-weight:500;letter-spacing:-0.03em;color:#F6F1FC}
+  .tst-score .lbl{
+    font-size:14.5px;letter-spacing:.08em;line-height:1.75;font-weight:500;
+    text-transform:uppercase;color:#B9AECB;
+  }
+  .tst-cta{
+    margin-left:auto;display:inline-flex;align-items:center;gap:12px;
+    font-size:15px;font-weight:600;color:#fff;
+  }
+  .tst-cta:hover{color:#EBD0FA}
+  @media (max-width:680px){.tst-cta{margin-left:0}}
+
+  /* stagger delays — card entrance */
+  .tst-card:nth-child(1){transition-delay:.02s}
+  .tst-card:nth-child(2){transition-delay:.10s}
+  .tst-card:nth-child(3){transition-delay:.18s}
+  .tst-card:nth-child(4){transition-delay:.26s}
+  .tst-card:nth-child(5){transition-delay:.34s}
+  .tst-card:nth-child(6){transition-delay:.42s}
+
+  @media (prefers-reduced-motion: reduce){
+    .tst-card{opacity:1;transform:none;transition:none}
+    .rail i{animation:none !important}
+    .tst-card:hover{transform:none}
+  }
+</style>
+
+<header>
+  <div class="brand">
+    <svg class="px" data-px="logo" aria-label="Innogenio logo"></svg>
+    <span>Innogenio</span>
+  </div>
+  <nav class="nav">
+    <a href="#">Services</a>
+    <a href="#">Industries</a>
+    <a href="#" class="here">Work</a>
+    <a href="#">About</a>
+    <a href="#">Blog</a>
+    <a href="#">Careers</a>
+  </nav>
+  <div class="hdr-right">
+    <a class="hdr-cta" href="#">Work With Us
+      <svg class="ar" viewBox="0 0 30 12" width="24" height="10" aria-hidden="true"><rect x="0" y="4.4" width="3.2" height="3.2"/><line x1="9" y1="6" x2="24.5" y2="6"/><path d="M19.5 1 L24.5 6 L19.5 11"/></svg>
+    </a>
+  </div>
+</header>
+
+<div class="shell">
+
+  <!-- ═══════ INTRO STRIP ═══════ -->
+  <section class="intro" aria-label="Testimonials intro">
+    <p class="kicker mono">Proof, not promises</p>
+    <h1>The people we build with,<br>pixel for pixel.</h1>
+  </section>
+
+  <!-- ═══════ TESTIMONIALS — DARK PANEL ═══════ -->
+  <section class="tst" aria-label="Client testimonials">
+    <div class="bin-col l mono" aria-hidden="true"></div>
+    <div class="bin-col r mono" aria-hidden="true"></div>
+
+    <p class="tst-kicker mono"><span class="dm7" aria-hidden="true"></span>Testimonials · signal 0110</p>
+    <div class="tst-head-grid">
+      <h2>Signal from<br>the field.</h2>
+      <p class="tst-lead">Engineering and product leaders on what shipping with Innogenio actually feels like — quoted verbatim, rendered pixel-faithful.</p>
+    </div>
+
+    <div class="tst-grid" id="tstGrid">
+
+      <figure class="tst-card">
+        <span class="rail" aria-hidden="true"><i></i></span>
+        <div class="stage" aria-hidden="true">
+          <span class="tag mono">USR·0001</span>
+          <canvas class="avatar" data-avatar="amara"></canvas>
+        </div>
+        <div class="tst-body">
+          <div class="stars" data-stars="5" role="img" aria-label="Rated 5 out of 5"></div>
+          <blockquote class="tst-quote">Innogenio rebuilt our data pipeline in nine weeks. Deploy frequency tripled, and our on-call pages dropped to nearly zero.</blockquote>
+          <figcaption class="tst-meta">
+            <span class="tst-name">Amara Okafor</span>
+            <span class="tst-role">VP of Engineering</span>
+            <span class="tst-co mono">Helixon</span>
+          </figcaption>
+        </div>
+      </figure>
+
+      <figure class="tst-card">
+        <span class="rail" aria-hidden="true"><i></i></span>
+        <div class="stage" aria-hidden="true">
+          <span class="tag mono">USR·0010</span>
+          <canvas class="avatar" data-avatar="marcus"></canvas>
+        </div>
+        <div class="tst-body">
+          <div class="stars" data-stars="5" role="img" aria-label="Rated 5 out of 5"></div>
+          <blockquote class="tst-quote">The rare partner that argues with your spec — and is usually right. Their AI copilot cut our claims processing time by 60%.</blockquote>
+          <figcaption class="tst-meta">
+            <span class="tst-name">Marcus Bell</span>
+            <span class="tst-role">Chief Technology Officer</span>
+            <span class="tst-co mono">Datastride</span>
+          </figcaption>
+        </div>
+      </figure>
+
+      <figure class="tst-card">
+        <span class="rail" aria-hidden="true"><i></i></span>
+        <div class="stage" aria-hidden="true">
+          <span class="tag mono">USR·0011</span>
+          <canvas class="avatar" data-avatar="yuki"></canvas>
+        </div>
+        <div class="tst-body">
+          <div class="stars" data-stars="5" role="img" aria-label="Rated 5 out of 5"></div>
+          <blockquote class="tst-quote">Design and engineering under one roof — no telephone game. We shipped v2 two months ahead of the board's deadline.</blockquote>
+          <figcaption class="tst-meta">
+            <span class="tst-name">Yuki Tanaka</span>
+            <span class="tst-role">Head of Product</span>
+            <span class="tst-co mono">Kepler Labs</span>
+          </figcaption>
+        </div>
+      </figure>
+
+      <figure class="tst-card">
+        <span class="rail" aria-hidden="true"><i></i></span>
+        <div class="stage" aria-hidden="true">
+          <span class="tag mono">USR·0100</span>
+          <canvas class="avatar" data-avatar="david"></canvas>
+        </div>
+        <div class="tst-body">
+          <div class="stars" data-stars="5" role="img" aria-label="Rated 5 out of 5"></div>
+          <blockquote class="tst-quote">They automated our ERP workflows without breaking a single integration. Finance now closes the quarter in four days, not eleven.</blockquote>
+          <figcaption class="tst-meta">
+            <span class="tst-name">David Kessler</span>
+            <span class="tst-role">Director of Operations</span>
+            <span class="tst-co mono">Corevance</span>
+          </figcaption>
+        </div>
+      </figure>
+
+      <figure class="tst-card">
+        <span class="rail" aria-hidden="true"><i></i></span>
+        <div class="stage" aria-hidden="true">
+          <span class="tag mono">USR·0101</span>
+          <canvas class="avatar" data-avatar="priya"></canvas>
+        </div>
+        <div class="tst-body">
+          <div class="stars" data-stars="5" role="img" aria-label="Rated 5 out of 5"></div>
+          <blockquote class="tst-quote">Security review passed on the first audit. Their team writes production code with the discipline of an internal platform group.</blockquote>
+          <figcaption class="tst-meta">
+            <span class="tst-name">Priya Sharma</span>
+            <span class="tst-role">Chief Information Officer</span>
+            <span class="tst-co mono">Quantex</span>
+          </figcaption>
+        </div>
+      </figure>
+
+      <figure class="tst-card">
+        <span class="rail" aria-hidden="true"><i></i></span>
+        <div class="stage" aria-hidden="true">
+          <span class="tag mono">USR·0110</span>
+          <canvas class="avatar" data-avatar="henrik"></canvas>
+        </div>
+        <div class="tst-body">
+          <div class="stars" data-stars="5" role="img" aria-label="Rated 5 out of 5"></div>
+          <blockquote class="tst-quote">Fixed scope, weekly demos, zero surprises. After three failed vendors, Innogenio made us believe in partnership again.</blockquote>
+          <figcaption class="tst-meta">
+            <span class="tst-name">Henrik Voss</span>
+            <span class="tst-role">Founder &amp; CEO</span>
+            <span class="tst-co mono">Tessellate</span>
+          </figcaption>
+        </div>
+      </figure>
+
+    </div>
+
+    <div class="tst-foot">
+      <div class="tst-score">
+        <span class="n">4.9<span style="color:#9A92A8">/5</span></span>
+        <span class="lbl mono">Avg. across 120+ delivery reviews</span>
+      </div>
+      <a class="tst-cta" href="#">Read the case studies
+        <svg class="ar" viewBox="0 0 30 12" width="26" height="11" aria-hidden="true"><rect x="0" y="4.4" width="3.2" height="3.2"/><line x1="9" y1="6" x2="24.5" y2="6"/><path d="M19.5 1 L24.5 6 L19.5 11"/></svg>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(() => {
+'use strict';
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ══ pixel sprites (two-tone, shared with other pages) ══ */
+const PX = {
+  logo: ["..######.##","...#####.##","....####.##","...#####.##","..##.###.##",".##...##.##","###......##","##.......##"]
+};
+function pxRender(el, map){
+  const rows = map.length, cols = map[0].length;
+  let d1 = '', d2 = '';
+  for (let y=0; y<rows; y++) for (let x=0; x<cols; x++){
+    const c = map[y][x];
+    if (c === '#') d1 += 'M' + x + ' ' + y + 'h1v1h-1z';
+    else if (c === '*') d2 += 'M' + x + ' ' + y + 'h1v1h-1z';
+  }
+  el.setAttribute('viewBox', '0 0 ' + cols + ' ' + rows);
+  el.setAttribute('shape-rendering', 'crispEdges');
+  el.innerHTML = '<path class="p1" d="' + d1 + '"/>' + (d2 ? '<path class="p2" d="' + d2 + '"/>' : '');
+}
+document.querySelectorAll('svg[data-px]').forEach(el => pxRender(el, PX[el.dataset.px]));
+
+/* ══ living halftone portraits — photo-derived (Cleo-style) ══
+   Real portrait photos are pre-processed offline into 56×70 tone
+   grids (luminance → contrast grade → background mask, quantized
+   to hex 0-f) — see tools/ for the pipeline and how to swap in
+   your own photos. At runtime every cell becomes a plus-shaped ink
+   mark sized by tone; the sampling window sways, breathes and
+   micro-zooms at ~10fps with per-frame shimmer and a flickering
+   silhouette rim, so the portrait reads as halftoned film.
+   Marks materialize center-first when the card scrolls in. */
+const INK='#1D0429';
+const SEEDS={amara:11,marcus:23,yuki:37,david:41,priya:53,henrik:67};
+/*GRIDS:BEGIN — generated by tools/halftone-embed.js, do not hand-edit*/
+const GRIDS={
+  amara:
+  '00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000001110000000000000000000000000000000000000000000000\n00000112233222222111101232110001100000000000111110000000\n00000123456776666555534565555556553333333444443221100000\n000001234679aaaaaaa96468779aaa988a5689888888765432100000\n000001234579bcccccb9679b9bbcdddcba669bbbbbb9865432100000\n000000002567878ab97789bedddeefffdb858cccbb98653322100000\n0000000003654333211888bcbba9befffd9579a98754000000000000\n00000000015422200007797641037cffffea56875210000000000000\n00000000014311100019960000000136becc86652000000000000000\n0000000000441220006c80000000000006b998740000000000000000\n000000000045556400ba100000000000006c76610000000000000000\n000000000045578637ea000000000000000ce7510000000000000000\n000000000045688647da0000000000000007fea70000000000000000\n000000000056699755d70000000000000006ff996000000000000000\n0000000000578aa856940000000000000004efa44320000000000000\n0000000000578aa866800000030000400000ffc53333000000000000\n000000000046899768b00079600000144000efe83222211110000000\n00000000007999757cc00000530000767600cffb4123334560000000\n00000000006766536db00000000000000000affd7135666660000000\n00000000005544426cb000000000000000008fffb336aa9872000000\n00000000005433428cb000000000000000009fffd625bcba85000000\n00000000034323328d700000000000000000afffea339cba86300000\n00000000243211218e8000000000000000009fffdc5389a975321000\n00000012332211008ef30001000000000000ffffcb73667754311000\n00000112222110007fea0007300000270003ffffcba4344433210000\n00000112221000006fef000050000062000cffffdaa6011211110000\n00001112211000006eff700002000800001fffffec9a300000000000\n000001111000000039fdf0000032400000effffffdb8a20000000000\n000001110000000019fdf8000000000007ffffffffea4a1000000000\n00000000000000001cfde900000000000bfffffffffe578000000000\n00000000000000003cffe8000000000008feffffffff837200000000\n00000000000000004c8cf5000000000008ffffffffffb54400000000\n00000000000000006a34c4000000000006fffffc9feee87400000000\n000000000000000000778a000000000006fffffa1feff68500000000\n0000000000000000008aaa80000000000bffffff09fff62600000000\n000000000000000059acb9ab300000008ffffefffceeda4440000000\n300000000000006abbabb9abcc74458ceefffffffffedca548000000\n2000000000148bcbbababaabcccddddddeefffffffffeea636600000\n2000000005bbccbbbbaaaaabbccccddddeeefffffffffedb21600000\n2000000049bcccccbbaaaaaabccccccccddeefffffffffee52300000\n200000049abbcccbbba9aaaabbbbbbcccdddeeeeeffffffeb9500000\n20000019abcccccbbbaaaaaabbbbbbccccccdddddeeffffeec652000\n2000007abbcccccbbbaaaaaaabbbbbbbbbbcccccddddeeffed304100\n200001bbbcccccbbbbaaaaabbbbbbbbbbbbbbcccccccdddedc900400\n200006ccccdcccbbbbaaaaabbbbbbbbbbbbbbbcccccccddddcb00310\n30100adddddccbbbbbbaaaaabbbbbbbbbbbbbbbccccccdeeddc40130\n31101cdeeddccbbbbbbbbaabbbbbbbbbbbbbbbbbccccceeeedd80030\n31103deeedcccbbbbbbbbbbbbbbbbbbbbbbbbbbbcbbcdeeeeedb0010\n42205deeeeddcbbbbbbbbbbbbbbbbbbbbbbbbbcccbbcdeeeeedc1000\n42206eeeeedecbabbbbbbbbbbbbbbbbbbbbbbccccbbceeeeeeed2011\n42207eeeeeefcaabbbbbbbbbbbbbbbbbbbbbcccccbbceeeeeeee4011\n42208eeeeeffdaabbbbbbbbbbbbbbbbbbbbccccccbbceffffeee4022\n43318feeefffcabbbccccbbbbbbbbbbbbcccccccccbbffffffee5033\n53319ffeefffdabbbcccccccbbbbbbbbccccccccccbbfffffffe5133\n6442afffffffdbbbbccccccccccbbbccccccccccccbbffffffff6133\n6443bfffffffdbbccccccccccccccccccccccdddccccffffffff7244\n6454cfffffffcbccccccccccccccccccccccdddddcbcffffffff7355\n6554cfffffffcccccccccccccccccccccccddddddcccffffffff7455\n7554cfffffffdccddddddddddcccccccccddddddddcdffffffff6466\n7564bfffffffdcddddddddddddddddddcddeeeeeddcefffffffe4456\n7665bfffffffedeeeeeeeeeddddddddddeeeeeeeedcffffffffc4555\n8665affffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeedffffffff93565\n8776cffffffffefffffffffffffeeeefffffffffeeeffffffff64565',
+  marcus:
+  '00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000001222222222221000000000000000000000000\n00000000010000000034444444444444420000000111111100000000\n00000111111100015788888887787777773000000100012200000000\n000000122111004cddddddcccbccbaababc301000000001101100000\n00000001210100dffffffffddcedccbdddfb01000000001101100000\n00000001210102efffffeedcbcdcbbccedee82000000000000000000\n0000001111012afffefeddcbbcdcccdcddeed7000000000000000000\n000000011000bffffeedcdcbccdddddddeeffd400000000000000000\n000000011003effffecccdedcdeeeeefeeffffb00000000000000000\n000000011004effededcdddeddddeddeeeffffd00000000000000000\n000000010007efeddeca99777bb866779abeffe10000000000000000\n000000000007ffedda76543213420012467afff40000000000000000\n000000000004feeea5543100000000012457cff60000000000000000\n000000000000dfec64431000000000001345aff80000000000000000\n0000011000009feb543200000000000002459efa0000000000000000\n0000022000009fda533200000000000001348dfe0000000000000000\n0000000100009fd9423000000000000000137dfe0000000020000000\n0000000001006fd9421000000000000000136bfd0000000010000000\n0000000000103fd84100000000000000011248fc0000000000000000\n0000000000000dc63120000000000000013346ed1000000000000000\n0000000000001db54330000000000000037646ea3000000000000000\n0000000000002ba44695100000000027866855c71000000000000000\n00000000000018a34413575000000031000244b61000000000000000\n00000000000007932000000000000000000003940000000000000000\n000000000000058200445a100000002b738102810000000000000000\n00000001111001720170020000000000002102950000000000000000\n00000000000003820000000000000000000002970000000000000000\n00000000000004920000000000000000000002620000000000000000\n00000000000002740000000000000000000003500000000000000000\n00000000000001640000000000000000000004500000000000000000\n00000000000000450000000010000100000005400000000000000000\n00000000000000362000000000000000000026400000000000000000\n00000000000000373000000000000000000025300000000000000000\n00000101000000272000000352003410100126200000000000000000\n00001222001111172010176458444336860138000000000000000000\n00000222100012274000495113888834740169000000000010000000\n000001320100001480100462038888351005a5000000000020000000\n000001220220000183100034038888300139a0000000000000000000\n0000002311210010692210020388883128ac40000000000000000000\n000000132122111488645103038888314bd800000000000000000000\n000000232122000984557200348888308dc100000000000000000000\n00000022220000067324850003888830bf7131000000000000000000\n00000013000000026211683003888834cc6233211000000000000000\n0000122000000000620018940388883ab69400321000000000000000\n000000000000000042000078548888aa558700010000000000000000\n00000000000000000200000389889a84457900000000000000000000\n00000000000000000200023456888865466800000000000000000000\n000000000000000000024679aabbbbaa976820000000120000000000\n000000000000000002468abcdeeeeeedcba864200000000000000000\n0000000000000000368aceeeeeeeeeeeeeeca8630000000000000000\n000000000000001479ceeeeeeeeeeeeeeeeeec974100000000000000\n0000000000000147adeeeeeeeeeddeeeeeeeeeda7410000000000000\n000000000000148bdeeeeeeddddddddddeeeeeedb841000000000000\n00000000000047beeeeeeddddddddddddddeeeeeeb74000000000000\n0000000000037aeeeeeddddddddddddddddddeeeeea7300000000000\n000000000026adeeeedddddccccccccccdddddeeeeda620000000000\n000000000059ceeeeddddccccccccccccccddddeeeec950000000000\n00000000037beeeeddddccccccccccccccccddddeeeeb73000000000\n00000000159deeeddddcccccccbbbbcccccccddddeeed95100000000\n0000000037ceeeddddcccccbbbbbbbbbbcccccddddeeec7300000000\n0000000059eeeedddcccccbbbbbbbbbbbbcccccdddeeee9500000000\n000000027beeedddccccbbbbbbbbbbbbbbbbccccdddeeeb720000000\n000000048deeedddccccbbbbbbbbbbbbbbbbccccdddeeed840000000\n00000005aeeedddccccbbbbbbbbbbbbbbbbbbccccdddeeea50000000\n00000027beeedddcccbbbbbbbbbbbbbbbbbbbbcccdddeeeb72000000\n00000038deeeddccccbbbbbbbbbbbbbbbbbbbbccccddeeed83000000\n00000049eeedddcccbbbbbbbbbbbbbbbbbbbbbbcccdddeee94000000',
+  yuki:
+  '00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000111000000000000000000000000\n000000000000000000000000039dffffd63100000000000000000000\n000000000000000000000001cfffffffffeeda400000000000000000\n00000000000000000000004ffffffffefffffefa0000000000000000\n0000000000000000000002fffefffedddccdffffa000000000000000\n000000000000000000000ffeddffeb877656bffef400000000000000\n000000000000000000007fefeffda533211149eddb00000000000000\n00000000000000000000effdefc843221000027ddc00000000000000\n00000000000000000006ffedfb85421110000018ec20000000000000\n0000000000000000000bffdfb765421100000002ae50000000000000\n0000000000000000000efefe66654311000000003e90000000000000\n0000000000000000002feff856554311000000000ad0000000000000\n0000000000000000003eefc6555542100000000007e0000000000000\n0000000000000000006effc5455432100000000005c0000000000000\n0000000000000000008fffb4456665300000000203b0000000000000\n000000000000000000aeff7257456774000146411580000000000000\n000000000000000000adfd4354444323200002100540000000000000\n0000000000000000002afc3347acd45440004b862210000000000000\n00000000000000000005da335666726650006a553000000000000000\n00000000000000000013573244321246510000000000000000000000\n00000000000000000004453243211244410000000000000000000000\n00000000000000000005442231111244410000000000000000000000\n00000000000000000003432231012344310000000000000000000000\n00000000000000000000332133112233410000000000000000000000\n00000000000000000000242123221034801100000000000000000000\n00000000000000000000034123320034200000000000000000000000\n00000000000000000000004222321233000000000000000000000000\n00000000000000000000008322322332310000000000000000000000\n00000000000000000000007512222465542200000000000000000000\n00000000000000000000000412233432110000000000000000000000\n00000000000000000000000032333322210000000000000000000000\n00000000000000000000000043333320000000000000000000000000\n00000000000000000000000034433320000000000000000000000000\n00000000000000000000000033454331000000000000000000000000\n00000000000000000000000033345432000000000000000000000000\n00000000000000000000000133224310000000000000000000000000\n00000000000000000000001333113200000000000000000000000000\n000000000000000000002f933321210000003a000000000000000000\n0000000000000000005beeec863100000000adc60000000000000000\n00000000000000000affeeeffedb9764458cecef9200000000000000\n000000000000001bfffffeeeefffffffffeddddddfc7200000000000\n0000000000002affffffffffffffffeeedddddedddeffda400000000\n00000000003dfffffffffffffffffeeedddeeeddeedeeffffa400000\n000000005efffffffffffffffffffffeedeeeddddddeeeeeeffe6000\n0000007fffffffffffffffffffffffffeeeedddeeeeeeeffeeeefa00\n00002fffffffffffffffffffffffffffeeeeedeeeeeeeeffeeeeee40\n0002ffffffffffffffffffffffffffffeeeeeeeeeeeeeeffeeeffe90\n000fffffffffffffffffffffffffffffeeeeeeeeeeeeeeffedeffdd0\n00bfeefffffffffffffffffffffffffeefeeeeeeeeeeefffedeffde4\n07ffeefffffffffffffffffffffffffffeeeeeeeeeeeeffeedeffddb\n0bffffffffffffffffffffffffffffffefeeeeeeeeeeffffedeffddd\n4ceffffffffffffffffffffffffffffeefeeeeeeeeeeffffedefeded\ncdefffffffffffffffffffffffffffffefeeeeeeeeeeffffedefeded\nedeffffffffffffffffffffffffffffffffffeeeeeeefffeedeeedee\neefffffffffffffffffffffffffffffefffffefeeeeffffeedeeeeee\neeffffffffffffffffffffffffffffffffffffeeeefffffeedeeeefe\neefffffffffffffffffffffffffffffffffffffeeefffffeedeeeefe\nffffffffffffffffffffffffffffffffffffffffeffffffeedeedefe\nfffffffffffffffffffffffffffffffffffffffffffffffeedeedefe\nffffffffffffffffffffffffffffffffeeffffefeeffffeedddedefe',
+  david:
+  '00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000122332233444100000000000000000000\n00000000000000000000135665555888888870000000000000000000\n00000000000000000013bddda888cddddddddd100000000000000000\n0000000000000000049fffff8889a8befffffff20000000000000000\n00000000000000028aefffffeffb648fffffffff0000000000000000\n000000000000002ba8effbadfffffffcdfffffff9000000000000000\n00000000000000bc76afe7555689dff67dfffffff200000000000000\n00000000000007ec738b6000000006ca7dfffffffe00000000000000\n0000000000002dec56830000000000169dffffffff50000000000000\n0000000000007efb994000000000000026cfffffff90000000000000\n000000000000affed810000000000000004bffffffc0000000000000\n000000000002dfffe5000000000000000005dffffff2000000000000\n000000000004ffffc30000000000000000038ffffffb000000000000\n000000000007ffff920000000000000000025affffff100000000000\n000000000009ffffa200000000000000000247bfffff600000000000\n00000000000affffc3000000000000000000357fffff900000000000\n000000000009ffffe3000000000000000000257dffffa00000000000\n000000000006ffffe2000000000000000000027cffff600000000000\n000000000001ffffa0000134620000000235424affff200000000000\n000000000000bfff80269dffd7300004bffffd9affff000000000000\n0000000000001fff605788adeb70005cfffeeffdfffd000000000000\n00000000000009ff4048a97bcb90008ffc9ddffefff4000000000000\n00000000000000bf2027a5585640009fb8defffedfa0000000000000\n00000000000003cd000020001100007961139fcacfb0000000000000\n00000000000001eb0000035520000043468ad966af90000000000000\n000000000000006b200000000000003102575435bf60000000000000\n000000000000004b400000000000002200000016df20000000000000\n000000000000000a700000000000002920000028ff00000000000000\n000000000000000680000000000000045000004bff00000000000000\n000000000000008462000000000000012100028ffc00000000000000\n000000000000006144000000008645be502326cffa00000000000000\n000000000000000573210000008effff72258cfff600000000000000\n00000000000000004423100000028ffc5356aefe2000000000000000\n0000000000000000052311300000034318da8dfd0000000000000000\n0000000000000000064201aa3000258bdfe75efb0000000000000000\n0000000000000000077320016767bb87b8019ff50000000001000000\n000000000000000005a64200000000039425fff00000000011000000\n000000000000000000aa8610006878cfc68dff900000000011000000\n0000000000000000007b9840003bfffd78affff00000000111100000\n0000000000000000004ab8510000143135bffff80000001111122221\n00000000000000000036bb820000000027dffffb0000001111222221\n000000000000000000137bc9200002378dfffffc6000011122222232\n1000000000000022000147acb9aaccdeeffffffb9d51011222222332\n100000000000134000101468bedddddefffffff94ffb511122223332\n1010000000121240001012446bfffffffffffef62eeed95222233332\n10111001221102400001122335afffffffffddf14ddbbbb953233332\n1011112321120141000212343149fffffffcbdb08dcb9aaab8533342\n1012233310110032000131256216aeeeffdbbe30ddb99999aaa85333\n1123433200000033000052246536bdcdddbabc00fda8988999999742\n3233332012111034000045346889ccbccbaad406fd97888888888885\n32322211342111151000084457bdcbaba99ab008fd98789878777787\n2122221233110114500017755579a99a999c500cfca8678888777776\n3222222342110024610ff385678889aa99ad008efca7798777766775\n3221223441011114631ff08568abbba989c208fffc87899767545654\n11221346300111125227f28a68bccba89d1009fffb77888777545554\n21222355201210022025f79ffeeffffff4000fffd977887766545554\n22344564111111110012f42fffffffffb003ffeed978a98765446564\n423456421121211100007e4dfffffffa006fff96d979998665446665\n5346553112222112300028fa8dffff74fffffe958a99997664457776\n64455421222422313421027ef9bff8bfffffd8a62989a97755568766\n645543332234543356b30146a67f9dfffffa645129aa986664578765\n755444432344542457af7011000daffffa633203ddba876655578764\n646544434456554458affa110008dfff6224229ffcba877544677655\n656654334445665568bdffc2000becc511225ffffeb9866556789664\n6677643244555676689befff201e9958313affffffdb866556788674\n76775432344565766789acfff053451414ffffffffdb766566778664',
+  priya:
+  '00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n000000000000000000000000000000007dff80000000000000000000\n0000000000000000000000000000003ffedef8000000000000000000\n00000000000000000000000000014affc8bcff600000000000000000\n000000000000000000000004cb06fffffff9afb00000000000000000\n00000000000000000000000adfefffffffff9c440000000000000000\n00000000000000000000000defffffffffffbc550000000000000000\n0000000000000000000003affffffffffffb68900000000000000000\n00000000000000000000affffffffffffffffa100000000000000000\n00000000000000000008ffffffffffffffffd1000000000000000000\n00000000000000000008ffdfffffffffdef910000000000000000000\n000000000000000000008ffffffffffff8b000000000000000000000\n00000000000000000006ffffffffffffffe898500000000000000000\n0000000000000000027fffffffffffffffffc1000000000000000000\n000000000000000000bfffffffffffffffffb1000000000000000000\n000000000000000000dffffffffffffffffffd640000000000000000\n000000000000000004ffffffffffeeffffffff005000000000000000\n00000000000000000affffffffffcabfdcffff501000000000000000\n00000000000000000bfffffffecb756759ddefe00000000000000000\n00000000000000000dffffcb9899977526cffff30000000000000000\n00000000000000000ffffc7225796331027dfff90000000000000000\n00000000000000000fffe710000000000037fffb0000000000000000\n00000000000000004fff92000000000000029ffb0000000000000000\n00000000000000008ff930000000000000004ef80000000000000000\n00000000000000006fb410000000000000001bf50000000000000000\n00000000000000002f90000000000000000009f10000000000000000\n00000000000000001e90000000000000000006b00000000000000000\n00000000000000000cb0035554000000356307c00000000000000000\n00000000000000000cb0111378500029840206f30000000000000000\n00000000000000000c9004efd7100017dec205980000000000000000\n00000000000000002651003421100033676100133000000000000000\n00000000000000001012000000010000000000002000000000000000\n00000000000000000002000003888830000010000000000000000000\n00000000000000000000100003888830000010000000000000000000\n00000000000000000000100003888830000010000000000000000000\n00000000000000000000100003888830000000000000000000000000\n00000000000000000000000003888830000000000000000000000000\n00000000000000000000000023888831310000000000000000000000\n00000000000000000000000054888833200000000000000000000000\n00000000000000000000000004888831000000000000000000000000\n00000000000000000000000003888830001000000000000000000000\n00000000000000000000000003888830003000000000000000000000\n00000000000000000000001013888831001000000000000000000000\n00000000000000000000023456888865432700000000000000000000\n000000000000000000024679aabbbbaa976680000000000000000000\n000000000000000002468abcdeeeeeedcba864200000000000000000\n0000000000000000368aceeeeeeeeeeeeeeca8630000000000000000\n000000000000001479ceeeeeeeeeeeeeeeeeec974100000000000000\n0000000000000147adeeeeeeeeeddeeeeeeeeeda7410000000000000\n000000000000148bdeeeeeeddddddddddeeeeeedb841000000000000\n00000000000047beeeeeeddddddddddddddeeeeeeb74000000000000\n0000000000037aeeeeeddddddddddddddddddeeeeea7300000000000\n000000000026adeeeedddddccccccccccdddddeeeeda620000000000\n000000000059ceeeeddddccccccccccccccddddeeeec950000000000\n00000000037beeeeddddccccccccccccccccddddeeeeb73000000000\n00000000159deeeddddcccccccbbbbcccccccddddeeed95100000000\n0000000037ceeeddddcccccbbbbbbbbbbcccccddddeeec7300000000\n0000000059eeeedddcccccbbbbbbbbbbbbcccccdddeeee9500000000\n000000027beeedddccccbbbbbbbbbbbbbbbbccccdddeeeb720000000\n000000048deeedddccccbbbbbbbbbbbbbbbbccccdddeeed840000000\n00000005aeeedddccccbbbbbbbbbbbbbbbbbbccccdddeeea50000000\n00000027beeedddcccbbbbbbbbbbbbbbbbbbbbcccdddeeeb72000000\n00000038deeeddccccbbbbbbbbbbbbbbbbbbbbccccddeeed83000000\n00000049eeedddcccbbbbbbbbbbbbbbbbbbbbbbcccdddeee94000000',
+  henrik:
+  '00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000011111000000000000000000000000000\n00000000000000000000001444444443100000000000000000000000\n00000000000000000000027656787645786630000000000000000000\n00000000000000000000099b88a9abbbca67c8000000000000000000\n000000000000000000009cccbdcca9ffdb979e700000000000000000\n00000000000000000000bbcadffffdcdeedddac20000000000000000\n00000000000000000006caa9bcdc9edadccedb7c0000000000000000\n0000000000000000009cba30000007bcaddeffcb9000000000000000\n0000000000000000067ce20000000379bcddfff9c700000000000000\n000000000000000078ac9000000000238ddbbcda8d20000000000000\n0000000000000004bc8e500000000000016cbcdccb80000000000000\n0000000000000009a99d0000000000000000bcdccdb0000000000000\n000000000000004a98ca00000000000100005ccedba0000000000000\n000000000000008da5e500000000000000000aadcca0000000000000\n000000000000003fb6e000000000000000000aadccb0000000000000\n000000000000000bd8c00489b920004bcb5009eeddc0000000000000\n000000000000000be93334104520068aa87636bfcca0000000000000\n0000000000000009ee80005ad700adb9993136aeae80000000000000\n0000000000000000ac40004aca0029fccfa700afbd50000000000000\n000000000000000029100002520002cff931004fb800000000000000\n00000000000000000a00005500000078c930001e2410000000000000\n000000000000000008000023110000799520001f5110000000000000\n0000000000000000070000000000004ed720002f7000000000000000\n0000000000000000020000010000000af6000026d200000000000000\n00000000000000000000000400004b5ab11000006100000000000000\n00000000000000000000000000178babe50000000000000000000000\n00000000000000000000000100025677ee1000220000000000000000\n00000000000000000000000a5000567cc81000100000000000000000\n0000000000000000000000077000005fa20201000000000000000000\n00000000000000000000000000023422943302000000000000000000\n00000000000000000000000000025614b72210000000000000000000\n00000000000000000000000000037747a42310000000000000000000\n00000000000000000000000000027425635400000000000000000000\n00000000000000000000000000023332475000000000000000000000\n00000000000000000000000000043895872000000000000000000000\n00000000000000000000000002356bcca31000000000000000000000\n0000000000000000000000000046adc7430000000000000000000000\n00000000000000000000000000000320320000000000000000000000\n00000000000000000000000000000000100000000000000000000000\n00000000000000000000000000000000000000000000000000000000\n00000000000000000000000000000000000000025000000000000000\n0000000000000000000000000000220000000006fd20000000000000\n000000000000000000000000000241000000006ffffc830000000000\n0000000000000000001700000000000000000afffffffff200000000\n00000000000000005cda0000000000000008ffffffffffff70000000\n00000000000002affdbe90000000000018fffffffffffffffd500000\n000000000039fffffedeff81000005beffffffffffffffffffffb200\n00000007efffffffffefffffffffffffffffffffffffffffffffffa0\n000007fffffffffffffeefffffffffffffffffffffffffffffffffff\n0003efffffffffffffffffffffffffffffffffffffffffffffffffff\n007fffffffffffffffffffffffffffffffffffffffffffffffffffff\n03ffffffffffffffffffffffffffffffffffffffffffffffffffffff\n0effffffffffffffffffffffffffffffffffffffffffffffffffffff\nbdffffffffffffffffffffffffffffffffffffffffffffffffffffff\nfdffffffffffffffffffffffffffffffffffffffffffffffffffffff\nedfeffffffffffffffffffffffffffffffffffffffffffffffffffff\ndefeffffffffffffffffffffffffffffffffffffffffffffffffffff\ndefeffffffffffffffffffffffffffffffffffffffffffffffffffff\neefeeeffffffffffffffffffffffffffffffffffffffffffffffffff\nfefeeeffffffffffffffffffffffffffffffffffffffffffffffffff\neeffefffffffffffffffffffffffffffffffffffffffffffffffffff\neeffefffffffffffffffffffffffffffffffffffffffffffffffffff\neeffffefffffffffffffffffffffffffffffffffffffffffffffffff\neeffffefffffffffffffffffffffffffffffffffffffffffffffffff\neefffeefffffffffffffffffffffffffffffffffffffffffffffffff\neefffefffeffffffffffffffffffffffffffffffffffffffffffffff\neeffeefeeeffffffffffffffffffffffffffffffffffffffffffffff'
+};
+/*GRIDS:END*/
+
+function mulberry32(a){
+  return () => {
+    a|=0; a=a+0x6D2B79F5|0;
+    let t=Math.imul(a^a>>>15,1|a);
+    t=t+Math.imul(t^t>>>7,61|t)^t;
+    return ((t^t>>>14)>>>0)/4294967296;
+  };
+}
+/* stateless per-cell hash — stable shimmer that varies by frame */
+function hash(x,y,s){
+  let h=(x*374761393 + y*668265263 + s*1274126177)|0;
+  h=Math.imul(h^(h>>>13),1103515245);
+  return ((h^(h>>>16))>>>0)/4294967296;
+}
+const cl=(x,lo,hi)=>Math.max(lo,Math.min(hi,x));
+
+/* per-canvas animator — renders one photo-derived tone grid */
+function livePortrait(cv){
+  const src=GRIDS[cv.dataset.avatar];
+  if(!src) return;
+  const grid=src.split('\n').map(r=>[...r].map(c=>parseInt(c,16)/15));
+  const ROWS=grid.length, COLS=grid[0].length, CELL=8;
+  const seed=SEEDS[cv.dataset.avatar]||1;
+  cv.width=COLS*CELL; cv.height=ROWS*CELL;
+  const ctx=cv.getContext('2d');
+
+  /* bilinear sample of the tone grid at a fractional position */
+  function tex(fx,fy){
+    fx=cl(fx,0,COLS-1.001); fy=cl(fy,0,ROWS-1.001);
+    const x0=fx|0, y0=fy|0, ax=fx-x0, ay=fy-y0;
+    const x1=Math.min(x0+1,COLS-1), y1=Math.min(y0+1,ROWS-1);
+    return grid[y0][x0]*(1-ax)*(1-ay)+grid[y0][x1]*ax*(1-ay)
+         + grid[y1][x0]*(1-ax)*ay   +grid[y1][x1]*ax*ay;
+  }
+
+  const N=COLS*ROWS, rvl=new Float32Array(N);
+  const rnd=mulberry32(seed*7919+13);
+  for(let y=0;y<ROWS;y++) for(let x=0;x<COLS;x++){    /* center-first reveal order */
+    const du=(x+.5)/COLS-.5, dv=(y+.5)/ROWS-.40;
+    rvl[y*COLS+x]=cl(Math.hypot(du,dv)*1.5,0,1)*.72+rnd()*.28;
+  }
+  const phase=seed%7;
+  let frame=0, revealed=REDUCED?1:0, raf=null, last=0, running=false;
+
+  function mark(cx,cy,s){
+    const w=Math.max(s*.34,1.6);
+    if(s<=CELL*.42){ ctx.fillRect(cx-s/2,cy-s/2,s,s); return; }  /* tiny → dot */
+    ctx.fillRect(cx-s/2,cy-w/2,s,w);                             /* else → plus */
+    ctx.fillRect(cx-w/2,cy-s/2,w,s);
+  }
+  function draw(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ctx.fillStyle=INK;
+    const ts=frame/10;
+    /* handheld-film motion: slow sway, breath, micro-zoom about the head */
+    const sway  =REDUCED?0:.55*Math.sin(ts*.8+phase);
+    const breath=REDUCED?0:.38*Math.sin(ts*1.15+phase*2);
+    const zoom  =REDUCED?1:1+.004*Math.sin(ts*.6+phase);
+    for(let y=0;y<ROWS;y++) for(let x=0;x<COLS;x++){
+      if(rvl[y*COLS+x]>revealed) continue;
+      const fx=(x-COLS/2)/zoom+COLS/2+sway;
+      const fy=(y-ROWS*.42)/zoom+ROWS*.42+breath*(y/ROWS);
+      let t=tex(fx,fy)+(hash(x,y,(frame>>1)+seed*3)-.5)*.08;   /* shimmer */
+      if(t<.06) continue;
+      if(t<.20&&hash(x,y,frame+seed)>t*5) continue;   /* flickering rim */
+      t=cl(t,0,1);
+      const s=CELL*1.16*t;
+      if(s<CELL*.15) continue;
+      mark(x*CELL+CELL/2,y*CELL+CELL/2,s);
+    }
+    frame++;
+    if(revealed<1) revealed=Math.min(1,revealed+.15);
+  }
+  function tick(now){
+    if(!running) return;
+    if(now-last>=100){ last=now; draw(); }               /* ~10 fps, chunky */
+    raf=requestAnimationFrame(tick);
+  }
+  if(REDUCED){ draw(); return; }                         /* static frame    */
+  new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){
+      if(!running){ running=true; last=0; raf=requestAnimationFrame(tick); }
+    } else {
+      running=false;
+      if(raf) cancelAnimationFrame(raf);
+    }
+  }),{threshold:.05}).observe(cv);
+}
+document.querySelectorAll('canvas[data-avatar]').forEach(livePortrait);
+
+/* ══ pixel-diamond star ratings ══ */
+const DIAMOND = 'M2 0h1v1h-1zM1 1h3v1h-3zM0 2h5v1h-5zM1 3h3v1h-3zM2 4h1v1h-1z';
+document.querySelectorAll('.stars').forEach(el => {
+  const n = +el.dataset.stars;
+  let html = '';
+  for (let i=0; i<5; i++)
+    html += '<svg viewBox="0 0 5 5" aria-hidden="true"><path class="' + (i < n ? 'on' : 'off') + '" d="' + DIAMOND + '"/></svg>';
+  el.innerHTML = html;
+});
+
+/* ══ binary edge columns — a slow, stepped digit flicker ══ */
+const binCols = document.querySelectorAll('.bin-col');
+const binStr = len => Array.from({length: len}, () => Math.random() < .5 ? '0' : '1').join('');
+binCols.forEach(el => el.textContent = binStr(160));
+if (!REDUCED && binCols.length){
+  setInterval(() => {
+    binCols.forEach(el => {
+      const chars = el.textContent.split('');
+      for (let k=0; k<6; k++){
+        const p = Math.floor(Math.random() * chars.length);
+        chars[p] = chars[p] === '0' ? '1' : '0';
+      }
+      el.textContent = chars.join('');
+    });
+  }, 700);
+}
+
+/* ══ card entrance on scroll ══ */
+const cards = document.querySelectorAll('.tst-card');
+if (REDUCED || !('IntersectionObserver' in window)){
+  cards.forEach(c => c.classList.add('in'));
+} else {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, {threshold: .18, rootMargin: '0px 0px -40px 0px'});
+  cards.forEach(c => io.observe(c));
+}
+})();
+</script>

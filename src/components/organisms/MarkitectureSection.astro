@@ -1,0 +1,176 @@
+---
+/* Markitecture section (Mistral markitecture) — an interlocking "building"
+   of product cards, filler squares, rotated diamonds, and corner tech-dots
+   arranged in three bottom-aligned rows. Blocks stagger in (--i) when the
+   section scrolls into view; each card's face slides off its colored plate
+   on hover. Six content slots are filled from the `cards` prop in order:
+   [0] top wide · [1][2] middle pair · [3] middle right square ·
+   [4] bottom left square · [5] bottom wide. Slide direction, size, and
+   decor per slot are part of the architecture and stay fixed. */
+import MarkitectureCard from '../molecules/MarkitectureCard.astro';
+import type { Plate } from '../molecules/MarkitectureCard.astro';
+import type { PixelSpriteName } from '../atoms/PixelSprite.astro';
+import type { EtchedIconName } from '../atoms/EtchedIcon.astro';
+
+export interface Card {
+	title: string;
+	description?: string;
+	href?: string;
+	icon?: PixelSpriteName;
+	plate?: Plate;
+}
+
+export interface Mini {
+	title: string;
+	description?: string;
+	icon?: EtchedIconName;
+	plate?: Plate;
+}
+
+interface Props {
+	/** Centered section heading, one array item per line */
+	titleLines?: string[];
+	cards?: Card[];
+	/** Feature strip below the blocks (innogenio-home-v2 .mini-row) */
+	minis?: Mini[];
+}
+
+const {
+	titleLines = ['Built for enterprises.', 'Fine-tuned for growth.'],
+	cards = [
+		{ title: 'AI & Automation Studio', description: 'Agents and workflow automation in production.', icon: 'robot', plate: 'case-1' },
+		{ title: 'Custom Software', description: 'Web, mobile, and APIs built to scale.', icon: 'logo', plate: 'case-2' },
+		{ title: 'ERP Systems', description: 'ERPNext, Zoho, and Odoo rollouts.', icon: 'erp', plate: 'case-3' },
+		{ title: 'Applied AI services', icon: 'ai', plate: 'paper' },
+		{ title: 'Data platforms', icon: 'data', plate: 'panel' },
+		{ title: 'Cloud & DevOps', description: 'CI/CD, cloud, and observability at scale.', icon: 'flag', plate: 'case-2' },
+	],
+	minis = [
+		{ title: 'High uptime', description: 'Enterprise-grade hosting and monitoring built-in.', icon: 'clock', plate: 'case-1' },
+		{ title: 'Launch support', description: 'Hands-on help from a dedicated deployment team.', icon: 'flag', plate: 'case-1' },
+		{ title: 'Security built-in', description: 'Safeguards and compliance baked in from day one.', icon: 'ops', plate: 'case-1' },
+		{ title: 'Compliance ready', description: 'SOC 2, HIPAA, and GDPR standards covered.', icon: 'erp', plate: 'case-1' },
+	],
+} = Astro.props;
+---
+
+<section
+	data-markitecture
+	class="py-block-y relative flex flex-col items-center justify-center overflow-hidden border-t border-line bg-paper px-section-x font-sans text-ink"
+	aria-label="What we build"
+>
+	<div class="w-full">
+		<h2 class="text-center text-h2">
+			{titleLines.map((line) => <span class="block">{line}</span>)}
+		</h2>
+
+		<!-- row 1 -->
+		<div
+			class="mt-[clamp(56px,8vw,110px)] flex w-full translate-y-1 items-end justify-center lg:-translate-x-9"
+		>
+			<div
+				class="mk-block-rotated hidden aspect-square h-15 w-15 shrink-0 origin-bottom-right -translate-x-10 rotate-45 border border-line bg-panel lg:block"
+				style="--i: 0"
+			>
+			</div>
+			<MarkitectureCard {...cards[0]} slide="left" index={1} class="h-34 w-full lg:h-50 lg:w-100" />
+		</div>
+
+		<!-- row 2 -->
+		<div
+			class="flex w-full translate-y-0.5 flex-row flex-wrap items-end justify-center lg:translate-x-8.5 lg:flex-nowrap"
+		>
+			<div
+				class="mk-block tech-dot tech-dot-top-left hidden aspect-square h-50 shrink-0 border border-r-0 border-line bg-fill-warm lg:block"
+				style="--i: 2"
+			>
+			</div>
+			<MarkitectureCard {...cards[1]} slide="left-alt" index={3} class="h-40 w-1/2 lg:h-50 lg:w-50" />
+			<MarkitectureCard
+				{...cards[2]}
+				slide="right"
+				index={4}
+				class="h-40 w-1/2 lg:h-50 lg:w-50"
+				faceClass="border-l-0"
+			/>
+			<div class="hidden w-20 shrink-0 lg:block"></div>
+			<MarkitectureCard
+				{...cards[3]}
+				slide="rotate"
+				index={5}
+				class="tech-dot tech-dot-top-left h-30 w-full lg:h-50 lg:w-50"
+			/>
+		</div>
+
+		<!-- row 3 -->
+		<div
+			class="flex w-full translate-y-px flex-row flex-wrap items-end justify-center lg:translate-x-6 lg:flex-nowrap"
+		>
+			<MarkitectureCard
+				{...cards[4]}
+				slide="right-far"
+				index={6}
+				class="z-20 h-30 w-full lg:h-50 lg:w-50"
+				faceClass="tech-dot tech-dot-top-right"
+			/>
+			<div
+				class="mk-block hidden aspect-square h-20 shrink-0 border border-x-0 border-line bg-fill-warm lg:block"
+				style="--i: 7"
+			>
+			</div>
+			<MarkitectureCard
+				{...cards[5]}
+				slide="right-far"
+				index={8}
+				class="z-20 h-40 w-full shrink-0 lg:h-50 lg:w-100"
+			/>
+			<div
+				class="mk-block tech-dot tech-dot-top-right z-10 hidden aspect-square h-20 shrink-0 border border-x-0 border-line bg-panel lg:block"
+				style="--i: 9"
+			>
+			</div>
+			<div
+				class="mk-block hidden aspect-square h-50 shrink-0 border border-line bg-fill-warm lg:block"
+				style="--i: 10"
+			>
+			</div>
+			<div
+				class="mk-block-rotated hidden aspect-square h-15 w-15 shrink-0 origin-bottom-right -translate-x-4.5 rotate-45 border border-line bg-panel lg:block"
+				style="--i: 11"
+			>
+			</div>
+		</div>
+
+		<!-- mini feature strip -->
+		{
+			minis.length > 0 && (
+				<div class="mt-[72px] grid w-full grid-cols-1 gap-[30px] text-left min-[560px]:grid-cols-2 min-[880px]:grid-cols-4">
+					{minis.map((mini) => (
+						<MarkitectureCard variant="mini" {...mini} />
+					))}
+				</div>
+			)
+		}
+	</div>
+</section>
+
+<script>
+	// stagger the blocks in once the section scrolls into view
+	const sections = document.querySelectorAll<HTMLElement>('[data-markitecture]');
+	if ('IntersectionObserver' in window) {
+		const io = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((e) => {
+					if (e.isIntersecting) {
+						e.target.classList.add('in-view');
+						io.unobserve(e.target);
+					}
+				});
+			},
+			{ threshold: 0.2 }
+		);
+		sections.forEach((s) => io.observe(s));
+	} else {
+		sections.forEach((s) => s.classList.add('in-view'));
+	}
+</script>
