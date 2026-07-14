@@ -1,0 +1,329 @@
+---
+/* AiAdvisor.astro - The multi-step quiz and results panel */
+---
+
+<section class="border-y border-line bg-panel font-sans text-ink" aria-label="AI solutions advisor">
+	<div class="flex flex-wrap items-center gap-3 border-b border-line px-5 py-4 sm:flex-nowrap sm:gap-5 sm:px-11 sm:py-5">
+		<div id="advSteps" class="flex min-w-0 flex-1 items-center gap-2" aria-hidden="true">
+			<span class="st cur relative h-1 flex-1 overflow-hidden bg-line"><b class="absolute inset-0 w-0 bg-brand transition-[width] duration-400 ease-[cubic-bezier(0.25,0.8,0.25,1)]"></b></span>
+			<span class="st relative h-1 flex-1 overflow-hidden bg-line"><b class="absolute inset-0 w-0 bg-brand transition-[width] duration-400 ease-[cubic-bezier(0.25,0.8,0.25,1)]"></b></span>
+			<span class="st relative h-1 flex-1 overflow-hidden bg-line"><b class="absolute inset-0 w-0 bg-brand transition-[width] duration-400 ease-[cubic-bezier(0.25,0.8,0.25,1)]"></b></span>
+			<span class="st relative h-1 flex-1 overflow-hidden bg-line"><b class="absolute inset-0 w-0 bg-brand transition-[width] duration-400 ease-[cubic-bezier(0.25,0.8,0.25,1)]"></b></span>
+		</div>
+		<span id="advCount" class="whitespace-nowrap font-mono text-[12px] tracking-[0.08em] text-ink-secondary">STEP 01 / 04</span>
+	</div>
+
+	<div id="advStage" class="min-h-[440px] px-5 pb-6 pt-8 sm:px-11 sm:py-block-y">
+		<!-- STEP 1 · INDUSTRY -->
+		<div class="step-panel on" data-step="0">
+			<span class="font-mono text-kicker font-medium uppercase tracking-widest text-brand">Your industry</span>
+			<h2 class="mt-3.5 mb-1.5 text-balance text-section-head font-medium text-ink">Which industry are you in?</h2>
+			<p class="mb-7 text-body text-ink-secondary">Pick the sector that best describes your business.</p>
+			<div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3" data-group="industry" data-max="1"></div>
+		</div>
+		<!-- STEP 2 · PROCESS -->
+		<div class="step-panel" data-step="1">
+			<span class="font-mono text-kicker font-medium uppercase tracking-widest text-brand">Where AI helps</span>
+			<h2 class="mt-3.5 mb-1.5 text-balance text-section-head font-medium text-ink">Which process would you improve first?</h2>
+			<p class="mb-7 text-body text-ink-secondary">Select up to two areas where automation would move the needle.</p>
+			<div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3" data-group="process" data-max="2"></div>
+		</div>
+		<!-- STEP 3 · OBJECTIVES -->
+		<div class="step-panel" data-step="2">
+			<span class="font-mono text-kicker font-medium uppercase tracking-widest text-brand">Your objectives</span>
+			<h2 class="mt-3.5 mb-1.5 text-balance text-section-head font-medium text-ink">What outcome matters most?</h2>
+			<p class="mb-7 text-body text-ink-secondary">Choose up to three business goals.</p>
+			<div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3" data-group="objective" data-max="3"></div>
+		</div>
+		<!-- STEP 4 · CHALLENGES -->
+		<div class="step-panel" data-step="3">
+			<span class="font-mono text-kicker font-medium uppercase tracking-widest text-brand">Your challenges</span>
+			<h2 class="mt-3.5 mb-1.5 text-balance text-section-head font-medium text-ink">What's holding you back today?</h2>
+			<p class="mb-7 text-body text-ink-secondary">Choose up to three operational challenges.</p>
+			<div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3" data-group="challenge" data-max="3"></div>
+		</div>
+
+		<!-- RESULT -->
+		<div class="step-panel" data-step="result">
+			<div class="relative overflow-hidden bg-panel-dark px-6 py-10 sm:px-16 sm:py-20 text-white result-texture">
+				<div class="relative z-1 mx-auto max-w-5xl">
+					<span class="inline-flex items-center gap-3 font-mono text-sm tracking-wider uppercase leading-relaxed text-sprite-soft before:content-[''] before:w-[7px] before:h-[7px] before:bg-sprite-soft before:rotate-45">Your personalized recommendation</span>
+					<h2 class="mt-4.5 text-balance text-listing-h font-medium text-white" id="rTitle"></h2>
+					<p class="mt-5 max-w-[60ch] text-lg leading-relaxed text-white/80" id="rSummary"></p>
+					
+					<div class="mt-9 grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/12 border border-white/12" id="rMetrics"></div>
+					
+					<div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-9">
+						<div>
+							<h4 class="mb-3.5 font-mono text-kicker tracking-widest uppercase text-sprite-soft">What it takes to start</h4>
+							<ul class="flex flex-col gap-3" id="rStart"></ul>
+						</div>
+						<div>
+							<h4 class="mb-3.5 font-mono text-kicker tracking-widest uppercase text-sprite-soft">Your first 90 days</h4>
+							<ul class="flex flex-col gap-3" id="rRoadmap"></ul>
+						</div>
+					</div>
+					
+					<div class="mt-10 flex flex-wrap items-center gap-3.5">
+						<a class="relative overflow-hidden bg-charcoal text-white border border-white/15 shadow-md transition-all duration-200 hover:bg-charcoal-hover hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg inline-flex items-center gap-3 px-6 py-3.5 text-body font-semibold no-underline" href="/contact">
+							<span class="relative z-1 inline-flex items-center gap-3">Book a consultation
+								<svg class="block flex-none overflow-visible group-hover:[&>rect]:opacity-100 group-hover:[&>rect]:translate-x-0 group-hover:[&>line]:scale-x-150 group-hover:[&>path]:translate-x-1" viewBox="0 0 30 12" width="26" height="11" aria-hidden="true"><rect x="0" y="4.4" width="3.2" height="3.2" class="fill-current opacity-0 -translate-x-1.5 transition-all duration-300"/><line x1="9" y1="6" x2="24.5" y2="6" class="stroke-current stroke-[1.6px] origin-[26px_6px] transition-transform duration-300"/><path d="M19.5 1 L24.5 6 L19.5 11" class="fill-none stroke-current stroke-[1.6px] transition-transform duration-300"/></svg>
+							</span>
+						</a>
+						<form class="flex min-w-[280px] max-w-[400px] flex-1 border border-white/25 bg-white/5" id="emailForm">
+							<input type="email" id="emailIn" placeholder="Email me these results" aria-label="Email address" required class="flex-1 min-w-0 bg-transparent border-none text-white px-4 py-3.5 text-body placeholder:text-white/50 focus:outline-none">
+							<button type="submit" class="px-4 bg-white text-ink font-semibold text-sm whitespace-nowrap transition-colors duration-200 hover:bg-brand hover:text-white border-none cursor-pointer">Send</button>
+						</form>
+						<button type="button" class="text-white/70 text-sm font-semibold underline underline-offset-4 cursor-pointer bg-transparent border-none hover:text-white" id="restart">Start over</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="advNav" class="flex items-center justify-between gap-4 border-t border-line px-5 py-4 sm:px-11 sm:py-5">
+		<button class="inline-flex items-center gap-2 text-body font-semibold text-ink-secondary transition-colors duration-200 hover:text-ink disabled:pointer-events-none disabled:opacity-35 cursor-pointer bg-transparent border-none" id="advBack" disabled>
+			<svg viewBox="0 0 30 12" width="24" height="10" aria-hidden="true" style="transform:scaleX(-1)"><line x1="9" y1="6" x2="24.5" y2="6" stroke="currentColor" stroke-width="1.6"/><path d="M19.5 1 L24.5 6 L19.5 11" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+			Back
+		</button>
+		<span class="text-xs text-ink-secondary" id="advHint">Select an option to continue</span>
+		<button class="group relative overflow-hidden bg-charcoal text-white border border-white/15 shadow-md transition-all duration-200 hover:bg-charcoal-hover hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg inline-flex items-center gap-3 px-6 py-3.5 text-body font-semibold disabled:pointer-events-none disabled:opacity-35 cursor-pointer" id="advNext" disabled>
+			<span class="relative z-1 inline-flex items-center gap-3" id="advNextLbl">Next
+				<svg class="block flex-none overflow-visible group-hover:[&>rect]:opacity-100 group-hover:[&>rect]:translate-x-0 group-hover:[&>line]:scale-x-150 group-hover:[&>path]:translate-x-1" viewBox="0 0 30 12" width="26" height="11" aria-hidden="true"><rect x="0" y="4.4" width="3.2" height="3.2" class="fill-current opacity-0 -translate-x-1.5 transition-all duration-300"/><line x1="9" y1="6" x2="24.5" y2="6" class="stroke-current stroke-[1.6px] origin-[26px_6px] transition-transform duration-300"/><path d="M19.5 1 L24.5 6 L19.5 11" class="fill-none stroke-current stroke-[1.6px] transition-transform duration-300"/></svg>
+			</span>
+		</button>
+	</div>
+</section>
+
+
+
+<script>
+(() => {
+  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── advisor data ── */
+  const DATA = {
+    industry: ["Technology & SaaS","Fintech & Banking","Healthcare & Pharma","Manufacturing","Retail & E-commerce","Logistics & Supply chain","Real estate","Media & Entertainment","Education","Energy & Utilities","Professional services","Hospitality & Travel"],
+    process: ["Customer support","Document & data processing","Analytics & reporting","Quality control","Demand forecasting","Fraud & risk detection","Personalization","Back-office automation","Predictive maintenance"],
+    objective: ["Improve customer experience","Reduce operating costs","Scale operations","Gain a competitive edge","Increase revenue","Speed up decisions","Improve accuracy & quality"],
+    challenge: ["Manual, repetitive work","Data silos & poor visibility","Rising costs","Slow time-to-market","Compliance & risk","Talent & capacity gaps","Ageing legacy systems","Unclear AI readiness"]
+  };
+
+  const SOLUTIONS: Record<string, {name: string, blurb: string}> = {
+    "Customer support":       {name:"Conversational AI & Intelligent Support",  blurb:"an AI assistant that resolves routine queries instantly and routes the rest with full context"},
+    "Document & data processing":{name:"Intelligent Document Processing",       blurb:"an AI pipeline that extracts, validates, and files documents without manual data entry"},
+    "Analytics & reporting":  {name:"AI Analytics & Decision Intelligence",     blurb:"a decision layer that turns scattered data into forecasts and clear next-best-actions"},
+    "Quality control":        {name:"Computer-Vision Quality Control",          blurb:"a vision system that inspects output in real time and flags defects before they ship"},
+    "Demand forecasting":     {name:"Predictive Forecasting Engine",            blurb:"a forecasting model that anticipates demand and optimizes stock and capacity"},
+    "Fraud & risk detection": {name:"AI Risk & Anomaly Detection",             blurb:"a monitoring model that catches anomalies and fraud patterns as they emerge"},
+    "Personalization":        {name:"AI Personalization & Recommendations",     blurb:"a recommendation engine that tailors every experience to each user in real time"},
+    "Back-office automation": {name:"Intelligent Process Automation",           blurb:"AI-driven automation that removes repetitive back-office work end-to-end"},
+    "Predictive maintenance": {name:"Predictive Maintenance System",           blurb:"a model that predicts equipment failure before it causes costly downtime"}
+  };
+  const DEFAULT_SOL = {name:"Custom AI Solution",blurb:"a tailored AI system built around your specific processes and goals"};
+
+  const state: Record<string, string[]> = {industry:[],process:[],objective:[],challenge:[]};
+  const ORDER = ["industry","process","objective","challenge"];
+  let step = 0; // 0..3, then 4 = result
+
+  const stage = document.getElementById('advStage');
+  if (!stage) return;
+  const panels = [...stage.querySelectorAll('.step-panel')];
+  const stepsBar = [...document.getElementById('advSteps')!.children];
+  const countEl = document.getElementById('advCount')!;
+  const nav = document.getElementById('advNav')!;
+  const backBtn = document.getElementById('advBack') as HTMLButtonElement;
+  const nextBtn = document.getElementById('advNext') as HTMLButtonElement;
+  const nextLbl = document.getElementById('advNextLbl')!;
+  const hintEl = document.getElementById('advHint')!;
+
+  stage.querySelectorAll('.opts').forEach(box => {
+    const boxEl = box as HTMLElement;
+    const group = boxEl.dataset.group!;
+    const max = +(boxEl.dataset.max || 1);
+    DATA[group as keyof typeof DATA].forEach(label => {
+      const b = document.createElement('button');
+      b.type = 'button'; 
+      b.className = 'opt' + (max > 1 ? ' multi' : ''); 
+      b.setAttribute('aria-pressed', 'false');
+      b.innerHTML = '<span class="mk" aria-hidden="true"></span><span>' + label + '</span>';
+      b.addEventListener('click', () => {
+        const arr = state[group]; 
+        const i = arr.indexOf(label);
+        if(i > -1) {
+          arr.splice(i,1); 
+          b.setAttribute('aria-pressed','false');
+        } else {
+          if (max === 1) {
+            arr.length = 0; 
+            box.querySelectorAll('.opt').forEach(o => o.setAttribute('aria-pressed','false'));
+          } else if (arr.length >= max) {
+            return;
+          }
+          arr.push(label); 
+          b.setAttribute('aria-pressed','true');
+        }
+        refresh();
+      });
+      box.appendChild(b);
+    });
+  });
+
+  const OTHER_PH: Record<string, string> = {
+    industry:  "Type your industry…",
+    process:   "Type the process you'd improve…",
+    objective: "Type the outcome you're after…",
+    challenge: "Type what's holding you back…"
+  };
+  stage.querySelectorAll('.opts').forEach(box => {
+    const boxEl = box as HTMLElement;
+    const group = boxEl.dataset.group!;
+    const max = +(boxEl.dataset.max || 1);
+    const b = document.createElement('button');
+    b.type='button'; b.className='opt other'+(max>1?' multi':''); b.setAttribute('aria-pressed','false');
+    b.innerHTML='<span class="mk" aria-hidden="true"></span><span>Other…</span>';
+    const wrap = document.createElement('div'); wrap.className='other-wrap';
+    const inp = document.createElement('input');
+    inp.type='text'; inp.className='other-in'; inp.maxLength=60;
+    inp.placeholder = OTHER_PH[group] || 'Type your answer…';
+    inp.setAttribute('aria-label','Your own answer');
+    wrap.appendChild(inp);
+    box.appendChild(b); box.appendChild(wrap);
+
+    let cur='';
+    const drop=()=>{ const i=state[group].indexOf(cur); if(i>-1) state[group].splice(i,1); cur=''; };
+    const sync=()=>{
+      const t=inp.value.trim();
+      drop();
+      if(b.getAttribute('aria-pressed')==='true' && t && (max===1 || state[group].length<max)){
+        state[group].push(t); cur=t;
+      }
+      refresh();
+    };
+    b.addEventListener('click',()=>{
+      if(b.getAttribute('aria-pressed')==='true'){
+        b.setAttribute('aria-pressed','false'); wrap.classList.remove('on'); drop(); refresh();
+      } else {
+        if(max===1){ state[group].length=0; box.querySelectorAll('.opt').forEach(o=>o.setAttribute('aria-pressed','false')); }
+        else if(state[group].length>=max){ return; }
+        b.setAttribute('aria-pressed','true'); wrap.classList.add('on'); inp.focus(); sync();
+      }
+    });
+    inp.addEventListener('input',sync);
+    box.addEventListener('click', (e: Event) => {
+      const t = (e.target as Element).closest('.opt');
+      if(!t || t===b) return;
+      if(b.getAttribute('aria-pressed')==='false'){ wrap.classList.remove('on'); cur=''; }
+    });
+  });
+
+  function refresh(){
+    const group = ORDER[step] || null;
+    stepsBar.forEach((s,i) => {
+      s.classList.toggle('done', i < step);
+      s.classList.toggle('cur', i === step);
+    });
+    if(step < 4 && group){
+      countEl.textContent = 'STEP '+String(step+1).padStart(2,'0')+' / 04';
+      const chosen = state[group].length;
+      nextBtn.disabled = chosen === 0;
+      nextLbl.childNodes[0].nodeValue = step === 3 ? 'See my recommendation ' : 'Next ';
+      const box = stage!.querySelector(`[data-group="${group}"]`) as HTMLElement;
+      const max = box ? +(box.dataset.max || 1) : 1;
+      const otherOn = box && box.querySelector('.opt.other[aria-pressed="true"]');
+      hintEl.textContent = chosen === 0 ? (otherOn ? 'Type your answer to continue' : 'Select an option to continue')
+        : max > 1 ? chosen+' of '+max+' selected' : '1 selected';
+    }
+    backBtn.disabled = step === 0;
+  }
+
+  function show(i: number){
+    panels.forEach(p => p.classList.remove('on'));
+    if(i < 4){ 
+      panels[i].classList.add('on'); 
+      nav.style.display = 'flex'; 
+    } else { 
+      panels[4].classList.add('on'); 
+      nav.style.display = 'none'; 
+      buildResult(); 
+    }
+    step = i; refresh();
+    if(i > 0){ 
+      const wrapper = document.querySelector('.advisor') || stage!;
+      const y = wrapper.getBoundingClientRect().top + window.scrollY - 70;
+      window.scrollTo({top: y, behavior: REDUCED ? 'auto' : 'smooth'}); 
+    }
+  }
+
+  nextBtn.addEventListener('click', () => { if(step < 4 && (ORDER[step] && state[ORDER[step]].length)) show(step+1); });
+  backBtn.addEventListener('click', () => { if(step > 0) show(step-1); });
+  document.getElementById('restart')?.addEventListener('click', () => {
+    ORDER.forEach(g => state[g].length = 0);
+    stage!.querySelectorAll('.opt[aria-pressed="true"]').forEach(o => o.setAttribute('aria-pressed','false'));
+    stage!.querySelectorAll('.other-wrap').forEach(w => w.classList.remove('on'));
+    stage!.querySelectorAll('.other-in').forEach(i => (i as HTMLInputElement).value = '');
+    show(0);
+  });
+  document.getElementById('emailForm')?.addEventListener('submit', (e) => {
+    e.preventDefault(); 
+    const inp = document.getElementById('emailIn') as HTMLInputElement;
+    if(!inp.value){ inp.focus(); return; }
+    inp.value = ''; 
+    inp.placeholder = '✓ Sent — check your inbox';
+  });
+
+  function buildResult(){
+    const ind = state.industry[0] || 'your industry';
+    const proc = state.process[0] || null;
+    const sol = (proc && SOLUTIONS[proc]) || DEFAULT_SOL;
+    const obj = state.objective[0] || 'measurable business impact';
+    const obj2 = state.objective[1];
+    const chal = state.challenge[0] || 'manual, repetitive work';
+
+    document.getElementById('rTitle')!.textContent = sol.name;
+
+    const objText = obj2 ? (obj.toLowerCase() + ' and ' + obj2.toLowerCase()) : obj.toLowerCase();
+    document.getElementById('rSummary')!.textContent =
+      `For a ${ind} team, we'd start with ${sol.blurb}. It directly targets "${chal.toLowerCase()}" while helping you ${objText} — deployed as a focused pilot, then scaled once the value is proven.`;
+
+    const seed = (ind.length + (proc ? proc.length : 5) + state.objective.length*3 + state.challenge.length*2);
+    const roiLo = 2 + (seed % 3), roiHi = roiLo + 2;
+    const eff = 30 + (seed % 5) * 5;
+    const weeks = 6 + (seed % 5);
+    const metrics = [
+      {v: roiLo+'–'+roiHi+'×', l: 'Projected 12-month ROI, based on industry benchmarks'},
+      {v: eff+'%', l: 'Reduction in manual effort on the targeted process'},
+      {v: weeks+' wks', l: 'From kickoff to a working, measurable pilot'}
+    ];
+    const mBox = document.getElementById('rMetrics')!; mBox.innerHTML = '';
+    metrics.forEach(m => {
+      const d = document.createElement('div'); d.className = 'flex flex-col gap-2.5 bg-panel-dark px-[22px] py-6';
+      d.innerHTML = `<span class="font-variant-numeric-tabular text-[clamp(30px,3.6vw,46px)] font-medium leading-none tracking-tight text-white">${m.v}</span><span class="text-[13px] leading-relaxed text-white/70">${m.l}</span>`;
+      mBox.appendChild(d);
+    });
+
+    const start = [
+      'Access to the data and systems behind '+(proc ? proc.toLowerCase() : 'the target process'),
+      'A single business owner to define success metrics with us',
+      'A two-week discovery to validate feasibility and ROI'
+    ];
+    const roadmap = [
+      'Weeks 1–2 · Discovery, data audit & success metrics',
+      `Weeks 3–${weeks} · Build & train a working pilot on real data`,
+      'Post-pilot · Measure impact, then scale to production'
+    ];
+    fill('rStart', start); fill('rRoadmap', roadmap);
+  }
+  function fill(id: string, items: string[]){
+    const ul = document.getElementById(id)!; ul.innerHTML = '';
+    items.forEach(t => {
+      const li = document.createElement('li'); 
+      li.className = "flex items-start gap-3 text-sm leading-relaxed text-white/90 before:mt-1.5 before:h-[7px] before:w-[7px] before:shrink-0 before:rotate-45 before:bg-brand before:content-['']";
+      li.textContent = t; 
+      ul.appendChild(li);
+    });
+  }
+
+  refresh();
+})();
+</script>

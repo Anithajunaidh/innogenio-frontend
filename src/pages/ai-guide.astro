@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/organisms/Navbar.astro';
+import Footer from '../components/organisms/Footer.astro';
+import type { FooterColumn } from '../components/molecules/FooterNav.astro';
+import { getSite } from '../i18n';
+
+import AiGuideHero from '../components/organisms/AiGuideHero.astro';
+import AiAdvisor from '../components/organisms/AiAdvisor.astro';
+import AiGuideImpact from '../components/organisms/AiGuideImpact.astro';
+import AiGuideServices from '../components/organisms/AiGuideServices.astro';
+import CtaSection from '../components/organisms/CtaSection.astro';
+import type { Action } from '../components/organisms/CtaSection.astro';
+
+const locale = 'en';
+const site = getSite(locale);
+const footerColumns = site.footer.columns as FooterColumn[];
+
+const ctaActions: Action[] = [
+  { label: 'Book a 1:1 Meeting', variant: 'pixel', href: '/contact' },
+  { label: 'Learn about us', variant: 'ghost', href: '/about' }
+];
+---
+
+<Layout lang={locale} title="Innogenio — AI Guide" description="Your AI guide, in four questions.">
+	<Navbar slot="header" locale={locale} />
+	
+	<div class="mx-auto w-full max-w-432 border-x border-line">
+		<AiGuideHero />
+		<AiAdvisor />
+		<AiGuideImpact />
+		<AiGuideServices />
+	</div>
+	
+	<CtaSection
+		titleLines={["Like what the advisor suggested?", "Let's build it."]}
+		body="Book a free 30-minute session with our engineers to pressure-test the plan and scope a pilot."
+		actions={ctaActions}
+	/>
+	
+	<Footer columns={footerColumns} copyright={site.footer.copyright} tagline={site.footer.tagline} />
+</Layout>

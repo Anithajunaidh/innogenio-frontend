@@ -6,7 +6,7 @@ import NavLink from '../atoms/NavLink.astro';
 import Button from '../atoms/Button.astro';
 
 interface Props {
-	links: { label: string; href: string }[];
+	links: { label: string; href: string; highlight?: boolean }[];
 }
 const { links } = Astro.props;
 ---
@@ -21,7 +21,7 @@ const { links } = Astro.props;
 	<nav class="flex flex-col divide-y divide-line border-t border-line" aria-label="Mobile">
 		{
 			links.map((link) => (
-				<NavLink href={link.href} class="px-6 py-4 text-base">
+				<NavLink href={link.href} class={`px-6 py-4 text-base ${link.highlight ? 'text-brand' : ''}`}>
 					{link.label}
 				</NavLink>
 			))

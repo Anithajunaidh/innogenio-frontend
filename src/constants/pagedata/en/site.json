@@ -33,6 +33,7 @@
 				]
 			},
 			{ "label": "About", "href": "/" },
+			{ "label": "AI Guide", "href": "/ai-guide", "highlight": true },
 			{ "label": "Blog", "href": "/" }
 		],
 		"workCta": { "label": "See Our Work", "href": "/works" },

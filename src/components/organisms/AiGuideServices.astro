@@ -1,0 +1,81 @@
+---
+import { initReveal } from '../../utils/reveal';
+---
+
+<section aria-label="Featured services" class="text-ink">
+	<div data-reveal class="border-t border-line px-5 pb-8 pt-12 sm:px-section-x">
+		<span class="rv-block mb-4 block font-mono text-kicker font-medium uppercase text-ink-secondary" style="--i:1">
+			Featured services
+		</span>
+		<h2 class="rv-block m-0 max-w-[30em] text-balance text-section-head font-medium text-ink" style="--i:2">
+			The capabilities behind every recommendation.
+		</h2>
+	</div>
+
+	<div data-reveal class="grid grid-cols-1 gap-px border-t border-line bg-line sm:grid-cols-2 md:grid-cols-3">
+		<!-- Card 1 -->
+		<article class="rv-block flex min-h-[200px] flex-col gap-3 bg-paper px-6 py-7 transition-colors duration-300 ease-out hover:bg-card-hover" style="--i:3">
+			<h3 class="m-0 text-card-title font-semibold text-ink">AI &amp; Data Science</h3>
+			<p class="m-0 text-sm leading-relaxed text-ink-secondary">Turn raw data into models that predict, classify, and recommend with measurable accuracy.</p>
+			<a class="mt-auto inline-flex items-center gap-2.5 text-sm font-semibold transition-colors duration-300 hover:text-brand [&:hover_.ar_rect]:opacity-100 [&:hover_.ar_rect]:translate-x-0 [&:hover_.ar_line]:scale-x-[1.45] [&:hover_.ar_path]:translate-x-[2.5px]" href="#">
+				Explore 
+				<svg class="ar block shrink-0 overflow-visible" viewBox="0 0 30 12" width="24" height="10" aria-hidden="true"><rect x="0" y="4.4" width="3.2" height="3.2" class="fill-current opacity-0 -translate-x-[5px] transition-all duration-[0.28s] ease-out"/><line x1="9" y1="6" x2="24.5" y2="6" class="origin-[26px_6px] stroke-current stroke-[1.6] transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.3,1)]"/><path d="M19.5 1 L24.5 6 L19.5 11" class="fill-transparent stroke-current stroke-[1.6] transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.3,1)]"/></svg>
+			</a>
+		</article>
+
+		<!-- Card 2 -->
+		<article class="rv-block flex min-h-[200px] flex-col gap-3 bg-paper px-6 py-7 transition-colors duration-300 ease-out hover:bg-card-hover" style="--i:4">
+			<h3 class="m-0 text-card-title font-semibold text-ink">Generative AI</h3>
+			<p class="m-0 text-sm leading-relaxed text-ink-secondary">LLM-powered assistants, copilots, and content systems tuned to your domain and data.</p>
+			<a class="mt-auto inline-flex items-center gap-2.5 text-sm font-semibold transition-colors duration-300 hover:text-brand [&:hover_.ar_rect]:opacity-100 [&:hover_.ar_rect]:translate-x-0 [&:hover_.ar_line]:scale-x-[1.45] [&:hover_.ar_path]:translate-x-[2.5px]" href="#">
+				Explore 
+				<svg class="ar block shrink-0 overflow-visible" viewBox="0 0 30 12" width="24" height="10" aria-hidden="true"><rect x="0" y="4.4" width="3.2" height="3.2" class="fill-current opacity-0 -translate-x-[5px] transition-all duration-[0.28s] ease-out"/><line x1="9" y1="6" x2="24.5" y2="6" class="origin-[26px_6px] stroke-current stroke-[1.6] transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.3,1)]"/><path d="M19.5 1 L24.5 6 L19.5 11" class="fill-transparent stroke-current stroke-[1.6] transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.3,1)]"/></svg>
+			</a>
+		</article>
+
+		<!-- Card 3 -->
+		<article class="rv-block flex min-h-[200px] flex-col gap-3 bg-paper px-6 py-7 transition-colors duration-300 ease-out hover:bg-card-hover" style="--i:5">
+			<h3 class="m-0 text-card-title font-semibold text-ink">Intelligent Automation</h3>
+			<p class="m-0 text-sm leading-relaxed text-ink-secondary">Automate document, support, and back-office workflows end-to-end with humans in the loop.</p>
+			<a class="mt-auto inline-flex items-center gap-2.5 text-sm font-semibold transition-colors duration-300 hover:text-brand [&:hover_.ar_rect]:opacity-100 [&:hover_.ar_rect]:translate-x-0 [&:hover_.ar_line]:scale-x-[1.45] [&:hover_.ar_path]:translate-x-[2.5px]" href="#">
+				Explore 
+				<svg class="ar block shrink-0 overflow-visible" viewBox="0 0 30 12" width="24" height="10" aria-hidden="true"><rect x="0" y="4.4" width="3.2" height="3.2" class="fill-current opacity-0 -translate-x-[5px] transition-all duration-[0.28s] ease-out"/><line x1="9" y1="6" x2="24.5" y2="6" class="origin-[26px_6px] stroke-current stroke-[1.6] transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.3,1)]"/><path d="M19.5 1 L24.5 6 L19.5 11" class="fill-transparent stroke-current stroke-[1.6] transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.3,1)]"/></svg>
+			</a>
+		</article>
+
+		<!-- Card 4 -->
+		<article class="rv-block flex min-h-[200px] flex-col gap-3 bg-paper px-6 py-7 transition-colors duration-300 ease-out hover:bg-card-hover" style="--i:6">
+			<h3 class="m-0 text-card-title font-semibold text-ink">Machine Learning &amp; MLOps</h3>
+			<p class="m-0 text-sm leading-relaxed text-ink-secondary">Production-grade pipelines that train, deploy, monitor, and retrain models reliably.</p>
+			<a class="mt-auto inline-flex items-center gap-2.5 text-sm font-semibold transition-colors duration-300 hover:text-brand [&:hover_.ar_rect]:opacity-100 [&:hover_.ar_rect]:translate-x-0 [&:hover_.ar_line]:scale-x-[1.45] [&:hover_.ar_path]:translate-x-[2.5px]" href="#">
+				Explore 
+				<svg class="ar block shrink-0 overflow-visible" viewBox="0 0 30 12" width="24" height="10" aria-hidden="true"><rect x="0" y="4.4" width="3.2" height="3.2" class="fill-current opacity-0 -translate-x-[5px] transition-all duration-[0.28s] ease-out"/><line x1="9" y1="6" x2="24.5" y2="6" class="origin-[26px_6px] stroke-current stroke-[1.6] transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.3,1)]"/><path d="M19.5 1 L24.5 6 L19.5 11" class="fill-transparent stroke-current stroke-[1.6] transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.3,1)]"/></svg>
+			</a>
+		</article>
+
+		<!-- Card 5 -->
+		<article class="rv-block flex min-h-[200px] flex-col gap-3 bg-paper px-6 py-7 transition-colors duration-300 ease-out hover:bg-card-hover" style="--i:7">
+			<h3 class="m-0 text-card-title font-semibold text-ink">Computer Vision</h3>
+			<p class="m-0 text-sm leading-relaxed text-ink-secondary">Detect, inspect, and measure from images and video for quality control and safety.</p>
+			<a class="mt-auto inline-flex items-center gap-2.5 text-sm font-semibold transition-colors duration-300 hover:text-brand [&:hover_.ar_rect]:opacity-100 [&:hover_.ar_rect]:translate-x-0 [&:hover_.ar_line]:scale-x-[1.45] [&:hover_.ar_path]:translate-x-[2.5px]" href="#">
+				Explore 
+				<svg class="ar block shrink-0 overflow-visible" viewBox="0 0 30 12" width="24" height="10" aria-hidden="true"><rect x="0" y="4.4" width="3.2" height="3.2" class="fill-current opacity-0 -translate-x-[5px] transition-all duration-[0.28s] ease-out"/><line x1="9" y1="6" x2="24.5" y2="6" class="origin-[26px_6px] stroke-current stroke-[1.6] transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.3,1)]"/><path d="M19.5 1 L24.5 6 L19.5 11" class="fill-transparent stroke-current stroke-[1.6] transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.3,1)]"/></svg>
+			</a>
+		</article>
+
+		<!-- Card 6 -->
+		<article class="rv-block flex min-h-[200px] flex-col gap-3 bg-paper px-6 py-7 transition-colors duration-300 ease-out hover:bg-card-hover" style="--i:8">
+			<h3 class="m-0 text-card-title font-semibold text-ink">AI Consulting &amp; Strategy</h3>
+			<p class="m-0 text-sm leading-relaxed text-ink-secondary">Assess readiness, prioritize use cases, and de-risk adoption from day one.</p>
+			<a class="mt-auto inline-flex items-center gap-2.5 text-sm font-semibold transition-colors duration-300 hover:text-brand [&:hover_.ar_rect]:opacity-100 [&:hover_.ar_rect]:translate-x-0 [&:hover_.ar_line]:scale-x-[1.45] [&:hover_.ar_path]:translate-x-[2.5px]" href="#">
+				Explore 
+				<svg class="ar block shrink-0 overflow-visible" viewBox="0 0 30 12" width="24" height="10" aria-hidden="true"><rect x="0" y="4.4" width="3.2" height="3.2" class="fill-current opacity-0 -translate-x-[5px] transition-all duration-[0.28s] ease-out"/><line x1="9" y1="6" x2="24.5" y2="6" class="origin-[26px_6px] stroke-current stroke-[1.6] transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.3,1)]"/><path d="M19.5 1 L24.5 6 L19.5 11" class="fill-transparent stroke-current stroke-[1.6] transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.3,1)]"/></svg>
+			</a>
+		</article>
+	</div>
+</section>
+
+<script>
+	import { initReveal } from '../../utils/reveal';
+	initReveal();
+</script>

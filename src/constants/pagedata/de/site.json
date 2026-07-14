@@ -34,6 +34,7 @@
 				]
 			},
 			{ "label": "Über uns", "href": "/de/" },
+			{ "label": "KI-Leitfaden", "href": "/ai-guide", "highlight": true },
 			{ "label": "Blog", "href": "/de/" },
 			{ "label": "Karriere", "href": "/de/" }
 		],
