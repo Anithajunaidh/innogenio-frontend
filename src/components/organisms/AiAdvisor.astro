@@ -137,7 +137,7 @@
   const nextLbl = document.getElementById('advNextLbl')!;
   const hintEl = document.getElementById('advHint')!;
 
-  stage.querySelectorAll('.opts').forEach(box => {
+  stage.querySelectorAll('[data-group]').forEach(box => {
     const boxEl = box as HTMLElement;
     const group = boxEl.dataset.group!;
     const max = +(boxEl.dataset.max || 1);
@@ -175,7 +175,7 @@
     objective: "Type the outcome you're after…",
     challenge: "Type what's holding you back…"
   };
-  stage.querySelectorAll('.opts').forEach(box => {
+  stage.querySelectorAll('[data-group]').forEach(box => {
     const boxEl = box as HTMLElement;
     const group = boxEl.dataset.group!;
     const max = +(boxEl.dataset.max || 1);
