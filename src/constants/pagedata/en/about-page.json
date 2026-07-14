@@ -1,0 +1,146 @@
+{
+	"seo": {
+		"title": "Innogenio — About Us",
+		"description": "We build scalable software with purpose. Innogenio helps bold innovators design, develop, and operate custom apps, ERPNext solutions, and automation systems to drive growth."
+	},
+	"hero": {
+		"tag": "ABOUT INNOGENIO",
+		"title": "We build scalable software with purpose.",
+		"lead": "Innogenio helps bold innovators design, develop, and operate custom apps, ERPNext solutions, and automation systems to drive growth.",
+		"cta": {
+			"label": "Book a 1:1 Meeting",
+			"href": "/",
+			"variant": "pixel"
+		}
+	},
+	"intro": {
+		"kicker": "Got a concept? Let's build it.",
+		"title": "A product engineering studio for startups & digital brands.",
+		"cta": {
+			"label": "Start a project",
+			"href": "/"
+		},
+		"body": "We help teams build smarter, scale faster, and launch better software with minimal friction — strategic roadmaps, agile execution, and results you can measure. Whether you're starting v1 or enhancing a complex platform, our solutions adapt to your goals instead of forcing you to adapt."
+	},
+	"stats": [
+		{
+			"num": "5+",
+			"title": "Years in business",
+			"desc": " — a legacy of crafting impactful digital solutions."
+		},
+		{
+			"num": "20+",
+			"title": "People",
+			"desc": " — a diverse team of innovators, strategists, and builders."
+		},
+		{
+			"num": "100%",
+			"title": "Independent",
+			"desc": " — freedom to focus purely on client success."
+		},
+		{
+			"num": "25K+",
+			"title": "Users",
+			"desc": ", leaders & teams engaged through our solutions."
+		}
+	],
+	"partner": {
+		"label": "Trusted by forward-thinking businesses globally",
+		"titleLead": "Not just a vendor — Innogenio is your ",
+		"titleBold": "technical co-founder, product partner, and growth ally",
+		"titleEnd": ", all rolled into one.",
+		"body": "We help startups and digital teams design standout brands, build scalable software, and ship seamless experiences that turn ideas into real-world value."
+	},
+	"values": {
+		"kicker": "Features · built for enterprises, fine-tuned for growth",
+		"title": "The principles behind every build.",
+		"body": "Modern software engineering and automation to scale your business reliably and securely.",
+		"items": [
+			{
+				"idx": "01",
+				"title": "Collaboration",
+				"body": "We build solutions together, steering with open communication, shared ownership, and clear accountability."
+			},
+			{
+				"idx": "02",
+				"title": "Innovation",
+				"body": "We challenge conventions and turn new ideas into practical, scalable outcomes."
+			},
+			{
+				"idx": "03",
+				"title": "Quality",
+				"body": "Details matter; our standards ensure results that consistently exceed expectations."
+			},
+			{
+				"idx": "04",
+				"title": "Deliver with impact",
+				"body": "We design for measurable business outcomes and real value."
+			},
+			{
+				"idx": "05",
+				"title": "Integrity",
+				"body": "Transparent, honest, and ethical, with decisions that reflect the right approach."
+			},
+			{
+				"idx": "06",
+				"title": "Continuous learning",
+				"body": "Curious by default; we evolve, upskill, and innovate to stay ahead."
+			},
+			{
+				"idx": "07",
+				"title": "Customer obsession",
+				"body": "We listen first, build what matters, and measure success by user outcomes."
+			},
+			{
+				"idx": "08",
+				"title": "Security & privacy",
+				"body": "Best-practice security and privacy by design — built in from day one."
+			},
+			{
+				"idx": "09",
+				"title": "Ownership",
+				"body": "We take end-to-end responsibility — no hand-offs, no excuses, just results."
+			}
+		]
+	},
+	"cases": {
+		"kicker": "Results that matter",
+		"title": "Outcomes that speak for themselves.",
+		"body": "Our team builds software that delivers measurable impact. Each project is crafted to enhance performance, cut costs, and drive growth — turning ideas into tangible outcomes.",
+		"items": [
+			{
+				"chip": "Envogue · AI Jewel",
+				"title": "Revolutionizing jewelry design with AI.",
+				"body": "AI Jewel uses advanced AI technology to create unique, personalized jewelry designs, boosting creativity and efficiency.",
+				"href": "/works",
+				"bgClass": "bg-[#9F00D4]"
+			},
+			{
+				"chip": "Vineo · Wine platform",
+				"title": "An AI-powered wine subscription platform.",
+				"body": "Connecting users with a curated selection of wines through intelligent recommendation.",
+				"metrics": [
+					{ "value": "+62%", "label": "Subscription conversion uplift" },
+					{ "value": "−28%", "label": "Drop in bounce rate" }
+				],
+				"href": "/works",
+				"bgClass": "bg-[#8A06BC]"
+			},
+			{
+				"chip": "Zappr · Social",
+				"title": "Empowering youth connections.",
+				"body": "An engaging social app for teens and college students to share honest opinions, earn rewards, and connect authentically.",
+				"href": "/works",
+				"bgClass": "bg-[#6D0797]"
+			}
+		]
+	},
+	"cta": {
+		"titleLines": ["Launch your project with us."],
+		"body": "From concept to launch, we help brands craft software that engages audiences, boosts conversions, and elevates your impact.",
+		"actions": [
+			{ "label": "Get Started", "variant": "pixel", "href": "/" },
+			{ "label": "Book a 1:1 Meeting", "variant": "ghost", "href": "/" }
+		]
+	}
+}

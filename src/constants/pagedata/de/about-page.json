@@ -1,0 +1,146 @@
+{
+	"seo": {
+		"title": "Innogenio — Über uns",
+		"description": "Wir entwickeln skalierbare Software mit Sinn. Innogenio hilft mutigen Innovatoren beim Design und Betrieb maßgeschneiderter Apps, ERPNext-Lösungen und Automatisierungssysteme."
+	},
+	"hero": {
+		"tag": "ÜBER INNOGENIO",
+		"title": "Wir entwickeln skalierbare Software mit Sinn.",
+		"lead": "Innogenio hilft mutigen Innovatoren beim Design und Betrieb maßgeschneiderter Apps, ERPNext-Lösungen und Automatisierungssysteme für nachhaltiges Wachstum.",
+		"cta": {
+			"label": "1:1 Termin buchen",
+			"href": "/de",
+			"variant": "pixel"
+		}
+	},
+	"intro": {
+		"kicker": "Sie haben ein Konzept? Lassen Sie es uns bauen.",
+		"title": "Ein Produktentwicklungsstudio für Startups & digitale Marken.",
+		"cta": {
+			"label": "Projekt starten",
+			"href": "/de"
+		},
+		"body": "Wir helfen Teams, intelligenter zu entwickeln, schneller zu skalieren und bessere Software mit minimaler Reibung einzuführen — strategische Roadmaps, agile Umsetzung und messbare Ergebnisse. Egal ob v1 oder komplexe Plattform: Unsere Lösungen passen sich Ihren Zielen an."
+	},
+	"stats": [
+		{
+			"num": "5+",
+			"title": "Jahre Erfahrung",
+			"desc": " — eine Erfolgsgeschichte wirkungsvoller digitaler Lösungen."
+		},
+		{
+			"num": "20+",
+			"title": "Experten",
+			"desc": " — ein vielfältiges Team aus Innovatoren, Strategen und Entwicklern."
+		},
+		{
+			"num": "100%",
+			"title": "Unabhängig",
+			"desc": " — volle Konzentration auf den Erfolg unserer Kunden."
+		},
+		{
+			"num": "25K+",
+			"title": "Nutzer",
+			"desc": ", Führungskräfte & Teams, die unsere Lösungen nutzen."
+		}
+	],
+	"partner": {
+		"label": "Weltweit von zukunftsorientierten Unternehmen geschätzt",
+		"titleLead": "Nicht nur ein Dienstleister — Innogenio ist Ihr ",
+		"titleBold": "technischer Mitgründer, Produktpartner und Wachstumsverbündeter",
+		"titleEnd": " in einem.",
+		"body": "Wir unterstützen Startups und digitale Teams dabei, herausragende Marken zu gestalten, skalierbare Software zu entwickeln und nahtlose Erlebnisse zu liefern."
+	},
+	"values": {
+		"kicker": "Funktionen · für Unternehmen gebaut, auf Wachstum optimiert",
+		"title": "Die Prinzipien hinter jeder Entwicklung.",
+		"body": "Moderne Softwareentwicklung und Automatisierung, um Ihr Unternehmen zuverlässig und sicher zu skalieren.",
+		"items": [
+			{
+				"idx": "01",
+				"title": "Zusammenarbeit",
+				"body": "Wir entwickeln Lösungen gemeinsam, mit offener Kommunikation, gemeinsamer Verantwortung und klaren Zuständigkeiten."
+			},
+			{
+				"idx": "02",
+				"title": "Innovation",
+				"body": "Wir hinterfragen Konventionen und verwandeln neue Ideen in praktische, skalierbare Ergebnisse."
+			},
+			{
+				"idx": "03",
+				"title": "Qualität",
+				"body": "Details zählen; unsere Standards garantieren Ergebnisse, die Erwartungen stetig übertreffen."
+			},
+			{
+				"idx": "04",
+				"title": "Wirkungsvoll liefern",
+				"body": "Wir entwickeln für messbare Geschäftsergebnisse und echten Mehrwert."
+			},
+			{
+				"idx": "05",
+				"title": "Integrität",
+				"body": "Transparente, ehrliche und ethische Entscheidungen, die den richtigen Weg widerspiegeln."
+			},
+			{
+				"idx": "06",
+				"title": "Kontinuierliches Lernen",
+				"body": "Neugierig aus Überzeugung; wir entwickeln uns weiter, um stets voraus zu sein."
+			},
+			{
+				"idx": "07",
+				"title": "Kundenfokus",
+				"body": "Wir hören zuerst zu, bauen was wichtig ist und messen den Erfolg an den Ergebnissen für die Nutzer."
+			},
+			{
+				"idx": "08",
+				"title": "Sicherheit & Datenschutz",
+				"body": "Best-Practice-Sicherheit und Datenschutz by Design — vom ersten Tag an integriert."
+			},
+			{
+				"idx": "09",
+				"title": "Verantwortung",
+				"body": "Wir übernehmen durchgängige Verantwortung — keine Ausreden, nur Ergebnisse."
+			}
+		]
+	},
+	"cases": {
+		"kicker": "Ergebnisse, die zählen",
+		"title": "Erfolge, die für sich sprechen.",
+		"body": "Unser Team entwickelt Software mit messbar hohem Impact. Jedes Projekt wird so gestaltet, dass die Leistung gesteigert, Kosten gesenkt und Wachstum gefördert werden.",
+		"items": [
+			{
+				"chip": "Envogue · AI Jewel",
+				"title": "Revolution im Schmuckdesign durch KI.",
+				"body": "AI Jewel nutzt fortschrittliche KI-Technologie zur Erstellung einzigartiger, personalisierter Schmuckdesigns.",
+				"href": "/de/works",
+				"bgClass": "bg-[#9F00D4]"
+			},
+			{
+				"chip": "Vineo · Weinplattform",
+				"title": "Eine KI-gestützte Wein-Abonnementplattform.",
+				"body": "Verbindet Nutzer mit einer handverlesenen Auswahl an Weinen durch intelligente Empfehlungen.",
+				"metrics": [
+					{ "value": "+62%", "label": "Steigerung der Abo-Konversionsrate" },
+					{ "value": "−28%", "label": "Rückgang der Absprungrate" }
+				],
+				"href": "/de/works",
+				"bgClass": "bg-[#8A06BC]"
+			},
+			{
+				"chip": "Zappr · Social",
+				"title": "Verbindungen für die Jugend stärken.",
+				"body": "Eine ansprechende Social-App für Jugendliche und Studenten zum ehrlichen Meinungsaustausch.",
+				"href": "/de/works",
+				"bgClass": "bg-[#6D0797]"
+			}
+		]
+	},
+	"cta": {
+		"titleLines": ["Starten Sie Ihr Projekt mit uns."],
+		"body": "Von der Idee bis zum Launch helfen wir Marken dabei, Software zu entwickeln, die begeistert und konvertiert.",
+		"actions": [
+			{ "label": "Jetzt starten", "variant": "pixel", "href": "/de" },
+			{ "label": "1:1 Termin buchen", "variant": "ghost", "href": "/de" }
+		]
+	}
+}

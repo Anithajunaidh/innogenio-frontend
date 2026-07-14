@@ -33,7 +33,7 @@
 					{ "icon": "data", "title": "Helixon", "body": "Eine Datenpipeline in neun Wochen neu gebaut.", "href": "/de/works/helixon" }
 				]
 			},
-			{ "label": "Über uns", "href": "/de/" },
+			{ "label": "Über uns", "href": "/de/about" },
 			{ "label": "Blog", "href": "/de/" },
 			{ "label": "Karriere", "href": "/de/" }
 		],
@@ -45,7 +45,7 @@
 			{
 				"title": "Warum Innogenio",
 				"links": [
-					{ "href": "/de/", "label": "Über uns" },
+					{ "href": "/de/about", "label": "Über uns" },
 					{ "href": "/de/", "label": "Unsere Kunden" },
 					{ "href": "/de/", "label": "Karriere" },
 					{ "href": "/de/", "label": "Kontakt" }

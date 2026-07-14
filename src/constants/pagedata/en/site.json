@@ -32,7 +32,7 @@
 					{ "icon": "data", "title": "Helixon", "body": "A data pipeline rebuilt in nine weeks.", "href": "/works/helixon" }
 				]
 			},
-			{ "label": "About", "href": "/" },
+			{ "label": "About", "href": "/about" },
 			{ "label": "Blog", "href": "/" }
 		],
 		"workCta": { "label": "See Our Work", "href": "/works" },
@@ -43,7 +43,7 @@
 			{
 				"title": "Why Innogenio",
 				"links": [
-					{ "href": "/", "label": "About us" },
+					{ "href": "/about", "label": "About us" },
 					{ "href": "/", "label": "Our customers" },
 					{ "href": "/", "label": "Careers" },
 					{ "href": "/", "label": "Contact us" }

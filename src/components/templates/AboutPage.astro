@@ -1,0 +1,316 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../organisms/Navbar.astro';
+import Footer from '../organisms/Footer.astro';
+import type { FooterColumn } from '../molecules/FooterNav.astro';
+import CtaSection from '../organisms/CtaSection.astro';
+import type { Action } from '../organisms/CtaSection.astro';
+import Button from '../atoms/Button.astro';
+import PixelSprite from '../atoms/PixelSprite.astro';
+import DimensionArrow from '../atoms/DimensionArrow.astro';
+import { getSite } from '../../i18n';
+import type { Locale } from '../../i18n';
+
+interface Metric {
+	value: string;
+	label: string;
+}
+
+interface CaseItem {
+	chip: string;
+	title: string;
+	body: string;
+	metrics?: Metric[];
+	href?: string;
+	bgClass?: string;
+}
+
+interface ValueItem {
+	idx: string;
+	title: string;
+	body: string;
+}
+
+interface StatItem {
+	num: string;
+	title: string;
+	desc: string;
+}
+
+interface Props {
+	locale: Locale;
+	seo: { title: string; description: string };
+	hero: {
+		tag: string;
+		title: string;
+		lead: string;
+		cta: { label: string; href?: string; variant?: any };
+	};
+	intro: {
+		kicker: string;
+		title: string;
+		cta?: { label: string; href?: string };
+		body: string;
+	};
+	stats: StatItem[];
+	partner: {
+		label: string;
+		titleLead: string;
+		titleBold: string;
+		titleEnd: string;
+		body: string;
+	};
+	values: {
+		kicker: string;
+		title: string;
+		body: string;
+		items: ValueItem[];
+	};
+	cases: {
+		kicker: string;
+		title: string;
+		body: string;
+		items: CaseItem[];
+	};
+	cta: {
+		titleLines: string[];
+		body?: string;
+		actions: Action[];
+	};
+}
+
+const { locale, seo, hero, intro, stats, partner, values, cases, cta } = Astro.props;
+const site = getSite(locale);
+const footerColumns = site.footer.columns as FooterColumn[];
+---
+
+<Layout lang={locale} title={seo.title} description={seo.description}>
+	<Navbar slot="header" locale={locale} />
+
+	<!-- ═══════ HERO ═══════ -->
+	<section data-reveal aria-label="Hero" class="border-x border-b border-line bg-paper font-sans text-ink">
+		<div class="grid grid-cols-1 min-[880px]:grid-cols-[1fr_minmax(300px,34%)]">
+			<div class="flex flex-col justify-end gap-[26px] p-[clamp(64px,11vw,150px)_44px_62px] max-[880px]:p-[clamp(64px,11vw,120px)_24px_48px]">
+				<div class="rv-block inline-flex items-center gap-[9px] self-start rounded-full border border-line bg-tile py-[7px] pr-3.5 pl-3 font-mono text-pill text-ink-secondary uppercase">
+					<PixelSprite name="logo" class="w-[15px] h-auto" />
+					<span>{hero.tag}</span>
+				</div>
+				<h1 class="rv-block text-balance text-[clamp(44px,7vw,104px)] font-medium leading-none tracking-[-0.04em]" style="--i:1">
+					{hero.title}
+				</h1>
+			</div>
+			<div class="flex flex-col items-start justify-end gap-[22px] bg-panel p-[34px] min-[880px]:border-l border-line max-[880px]:border-t rv-block" style="--i:2">
+				<p class="m-0 text-[clamp(18px,1.8vw,25px)] font-medium leading-[1.34] tracking-[-0.015em] text-ink">
+					{hero.lead}
+				</p>
+				<Button
+					variant={hero.cta.variant ?? 'pixel'}
+					href={hero.cta.href ?? '/'}
+					label={hero.cta.label}
+					arrow
+				/>
+			</div>
+		</div>
+	</section>
+
+	<!-- ═══════ INTRO STATEMENT ═══════ -->
+	<section data-reveal class="grid grid-cols-1 min-[900px]:grid-cols-[1.05fr_1fr] border-x border-b border-line bg-paper font-sans text-ink">
+		<div class="flex flex-col items-start gap-[22px] p-[clamp(56px,7vw,104px)_44px] max-[900px]:p-[clamp(40px,7vw,64px)_24px]">
+			<span class="rv-block font-mono text-kicker uppercase text-ink-secondary">{intro.kicker}</span>
+			<h2 class="rv-block m-0 text-balance text-[clamp(30px,3.8vw,50px)] font-medium leading-[1.06] tracking-[-0.03em]" style="--i:1">
+				{intro.title}
+			</h2>
+			<a
+				href={intro.cta?.href ?? '/'}
+				class="rv-block group inline-flex items-center gap-2.5 text-btn transition-colors hover:text-brand focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+				style="--i:2"
+			>
+				{intro.cta?.label ?? 'Start a project'}
+				<DimensionArrow class="w-[26px]" />
+			</a>
+		</div>
+		<div class="flex items-center p-[clamp(40px,5vw,84px)_44px] max-[900px]:p-[clamp(32px,5vw,64px)_24px] min-[900px]:border-l border-line max-[900px]:border-t rv-block" style="--i:3">
+			<p class="m-0 text-[clamp(16px,1.55vw,19px)] leading-[1.6] text-ink-secondary">
+				{intro.body}
+			</p>
+		</div>
+	</section>
+
+	<!-- ═══════ STATS ═══════ -->
+	<section data-reveal aria-label="By the numbers" class="grid grid-cols-1 min-[460px]:grid-cols-2 min-[880px]:grid-cols-4 gap-px border-x border-b border-line bg-line font-sans text-ink">
+		{
+			stats.map((st, i) => (
+				<div
+					class="rv-block flex min-h-[190px] flex-col justify-between gap-3 bg-paper p-[34px_26px_30px]"
+					style={`--i:${i + 1}`}
+				>
+					<span class="text-[clamp(46px,5.4vw,74px)] font-medium leading-[0.96] tracking-[-0.03em] tabular-nums text-ink">
+						{st.num}
+					</span>
+					<span class="max-w-[24ch] text-sm leading-[1.42] text-ink-secondary">
+						<b class="font-semibold text-ink">{st.title}</b>
+						{st.desc}
+					</span>
+				</div>
+			))
+		}
+	</section>
+
+	<!-- ═══════ PARTNER · DARK PANEL ═══════ -->
+	<section data-reveal aria-label="Your technical co-founder" class="border-x border-b border-line bg-paper px-11 py-0 font-sans max-[720px]:px-5">
+		<div class="proc-texture rv-block relative overflow-hidden bg-panel-dark p-[clamp(64px,9vw,120px)_clamp(28px,5vw,70px)] text-white">
+			<div class="relative z-1 mx-auto flex max-w-[960px] flex-col items-center gap-[26px] text-center">
+				<span class="inline-flex items-center gap-3 font-mono text-[14.5px] uppercase leading-[1.75] tracking-[0.08em] text-[#E2A9F7]">
+					<span class="size-[7px] rotate-45 bg-[#E2A9F7]" aria-hidden="true"></span>
+					{partner.label}
+				</span>
+				<h2 class="m-0 text-balance text-[clamp(28px,3.9vw,52px)] font-medium leading-[1.1] tracking-[-0.028em] text-white">
+					{partner.titleLead}
+					<b class="font-medium text-[#E2A9F7]">{partner.titleBold}</b>
+					{partner.titleEnd}
+				</h2>
+				<p class="m-0 max-w-[60ch] text-[clamp(16px,1.55vw,19px)] leading-[1.6] text-white/72">
+					{partner.body}
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ═══════ VALUES ═══════ -->
+	<section data-reveal aria-label="What we value" class="border-x border-b border-line bg-paper font-sans text-ink">
+		<div class="rv-block p-[48px_44px_30px] max-[720px]:p-[36px_24px_24px]">
+			<span class="mb-[18px] block font-mono text-kicker uppercase text-ink-secondary">{values.kicker}</span>
+			<h2 class="m-0 text-balance text-[clamp(34px,4.6vw,58px)] font-medium leading-[1.02] tracking-[-0.03em] text-ink">{values.title}</h2>
+			<p class="mt-4 max-w-[44em] text-[clamp(16px,1.6vw,19px)] leading-[1.5] text-ink-secondary">{values.body}</p>
+		</div>
+		<div class="grid grid-cols-1 gap-px border-t border-line bg-line min-[560px]:grid-cols-2 min-[900px]:grid-cols-3">
+			{
+				values.items.map((item, i) => (
+					<article
+						class="rv-block group flex min-h-[clamp(220px,22vw,260px)] flex-col items-start gap-3.5 bg-paper p-[26px] transition-colors hover:bg-card-hover"
+						style={`--i:${i + 1}`}
+					>
+						<svg class="size-[42px] shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+							{i === 0 && (
+								<>
+									<g class="fill-none stroke-ink stroke-[1.5]"><circle cx="9" cy="9" r="4" /><circle cx="16" cy="15" r="4" /></g>
+									<circle class="fill-brand" cx="12.5" cy="12" r="1.6" />
+								</>
+							)}
+							{i === 1 && (
+								<>
+									<g class="fill-none stroke-ink stroke-[1.5]"><path d="M12 3 A6 6 0 0 1 15 14 L15 17 L9 17 L9 14 A6 6 0 0 1 12 3 Z" /><path d="M9.5 20 L14.5 20" /></g>
+									<circle class="fill-brand" cx="12" cy="9.5" r="1.8" />
+								</>
+							)}
+							{i === 2 && (
+								<>
+									<g class="fill-none stroke-ink stroke-[1.5]"><path d="M12 3 L20 6 L20 12 A9 9 0 0 1 12 21 A9 9 0 0 1 4 12 L4 6 Z" /><path d="M8.5 12 L11 14.5 L16 9" /></g>
+									<circle class="fill-brand" cx="12" cy="6" r="1.5" />
+								</>
+							)}
+							{i === 3 && (
+								<>
+									<g class="fill-none stroke-ink stroke-[1.5]"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4.6" /></g>
+									<circle class="fill-brand" cx="12" cy="12" r="1.7" />
+								</>
+							)}
+							{i === 4 && (
+								<>
+									<g class="fill-none stroke-ink stroke-[1.5]"><path d="M12 3 L20 6 L20 12 A9 9 0 0 1 12 21 A9 9 0 0 1 4 12 L4 6 Z" /><path d="M12 8 L12 15 M8.5 11.5 L15.5 11.5" /></g>
+									<circle class="fill-brand" cx="12" cy="12" r="1.5" />
+								</>
+							)}
+							{i === 5 && (
+								<>
+									<g class="fill-none stroke-ink stroke-[1.5]"><path d="M18 6 A8 8 0 1 0 20 12" /><path d="M20 5 L20 9 L16 9" /></g>
+									<circle class="fill-brand" cx="12" cy="12" r="1.8" />
+								</>
+							)}
+							{i === 6 && (
+								<>
+									<g class="fill-none stroke-ink stroke-[1.5]"><path d="M12 20 C6 15 3 12 3 8.5 A4 4 0 0 1 12 6 A4 4 0 0 1 21 8.5 C21 12 18 15 12 20 Z" /></g>
+									<circle class="fill-brand" cx="12" cy="9" r="1.7" />
+								</>
+							)}
+							{i === 7 && (
+								<>
+									<g class="fill-none stroke-ink stroke-[1.5]"><rect x="5" y="10" width="14" height="10" /><path d="M8 10 L8 7 A4 4 0 0 1 16 7 L16 10" /></g>
+									<circle class="fill-brand" cx="12" cy="15" r="1.7" />
+								</>
+							)}
+							{i === 8 && (
+								<>
+									<g class="fill-none stroke-ink stroke-[1.5]"><path d="M6 21 L6 3 L18 6 L6 9" /></g>
+									<circle class="fill-brand" cx="6" cy="9" r="1.7" />
+								</>
+							)}
+						</svg>
+						<span class="font-mono text-[11px] tracking-[0.14em] text-ink-secondary">{item.idx}</span>
+						<h3 class="mt-auto text-[clamp(18px,1.7vw,22px)] font-semibold leading-snug tracking-[-0.015em] text-ink">{item.title}</h3>
+						<p class="m-0 text-sm leading-[1.5] text-ink-secondary">{item.body}</p>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- ═══════ RESULTS · CASE STUDIES ═══════ -->
+	<section data-reveal aria-label="Results that matter" class="border-x border-b border-line bg-paper font-sans text-ink">
+		<div class="rv-block p-[48px_44px_30px] max-[720px]:p-[36px_24px_24px]">
+			<span class="mb-[18px] block font-mono text-kicker uppercase text-ink-secondary">{cases.kicker}</span>
+			<h2 class="m-0 text-balance text-[clamp(34px,4.6vw,58px)] font-medium leading-[1.02] tracking-[-0.03em] text-ink">{cases.title}</h2>
+			<p class="mt-4 max-w-[44em] text-[clamp(16px,1.6vw,19px)] leading-[1.5] text-ink-secondary">{cases.body}</p>
+		</div>
+		<div class="grid grid-cols-1 gap-[22px] p-[8px_44px_46px] min-[900px]:grid-cols-3 max-[900px]:p-[8px_20px_40px]">
+			{
+				cases.items.map((item, i) => (
+					<article
+						class:list={[
+							'rv-block group relative flex min-h-[340px] flex-col items-start overflow-hidden rounded-lg p-[32px_30px] text-white',
+							item.bgClass ?? 'bg-[#9F00D4]',
+						]}
+						style={`--i:${i + 1}`}
+					>
+						<span class="rounded-[3px] bg-white px-2.5 py-1.25 font-mono text-[10px] font-semibold tracking-[0.12em] text-[#17121F] uppercase">
+							{item.chip}
+						</span>
+						<h3 class="m-[22px_0_12px] max-w-[13em] text-[clamp(21px,2.2vw,28px)] font-medium leading-[1.16] tracking-[-0.02em] text-white">
+							{item.title}
+						</h3>
+						<p class="m-0 max-w-[32em] text-[14.5px] leading-[1.5] text-white/82">{item.body}</p>
+						{item.metrics && (
+							<div class="mt-5 flex gap-6">
+								{item.metrics.map((m) => (
+									<div>
+										<div class="text-[clamp(24px,2.6vw,34px)] font-medium leading-none tracking-[-0.02em] tabular-nums text-white">
+											{m.value}
+										</div>
+										<div class="mt-1.5 max-w-[14ch] text-[11px] leading-[1.35] tracking-[0.02em] text-white/75">
+											{m.label}
+										</div>
+									</div>
+								))}
+							</div>
+						)}
+						<a
+							href={item.href ?? '/works'}
+							class="mt-auto inline-flex items-center gap-2.5 border-b border-white/50 pb-[3px] pt-[22px] text-[14.5px] font-semibold text-white transition-colors hover:border-white"
+						>
+							<span>Read the case study</span>
+							<DimensionArrow class="w-[24px]" />
+						</a>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<CtaSection titleLines={cta.titleLines} body={cta.body} actions={cta.actions} />
+	<Footer columns={footerColumns} copyright={site.footer.copyright} tagline={site.footer.tagline} />
+</Layout>
+
+<script>
+	import { initReveal } from '../../utils/reveal';
+	initReveal();
+</script>
