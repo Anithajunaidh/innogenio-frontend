@@ -8,9 +8,15 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://innogenio.com',
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    build: {
+      modulePreload: { polyfill: false }
+    }
   },
   server: { host: true },
+  devToolbar: {
+    enabled: false
+  },
   integrations: [
     // emits /sitemap-index.xml with hreflang alternates per locale
     sitemap({
@@ -26,5 +32,8 @@ export default defineConfig({
     defaultLocale: 'en',
     locales: ['en', 'de'],
     routing: { prefixDefaultLocale: false }
+  },
+  build: {
+    inlineStylesheets: 'always'
   }
 });

@@ -1,45 +1,37 @@
 ---
 import { initReveal } from '../../utils/reveal';
+
+export interface Props {
+	kicker: string;
+	headline: string;
+	body: string;
+	cards: Array<{ number: string; title: string; body: string }>;
+}
+
+const { kicker, headline, body, cards } = Astro.props;
 ---
 
-<section aria-label="What you'll get" class="text-ink">
+<section aria-label={kicker} class="text-ink">
 	<div data-reveal class="border-t border-line px-5 pb-8 pt-12 sm:px-section-x">
 		<span class="rv-block mb-4 block font-mono text-kicker font-medium uppercase text-ink-secondary" style="--i:1">
-			What you'll get
+			{kicker}
 		</span>
 		<h2 class="rv-block m-0 max-w-[30em] text-balance text-section-head font-medium text-ink" style="--i:2">
-			A clear starting point — in minutes, not meetings.
+			{headline}
 		</h2>
 		<p class="rv-block mt-4 max-w-3xl text-intro text-ink-secondary" style="--i:3">
-			The advisor turns your answers into a concrete, industry-aware plan you can act on right away.
+			{body}
 		</p>
 	</div>
 
 	<div data-reveal class="grid grid-cols-1 gap-px border-t border-line bg-line sm:grid-cols-2 md:grid-cols-4">
-		<div class="rv-block flex min-h-[190px] flex-col gap-3.5 bg-paper px-6 py-8" style="--i:4">
-			<span class="font-mono text-pill text-brand">01</span>
-			<h3 class="mt-auto text-story-h font-semibold text-ink">A tailored solution</h3>
-			<p class="m-0 text-small text-ink-secondary">A custom AI approach aligned with your specific industry, processes, and goals.</p>
-		</div>
-		<div class="rv-block flex min-h-[190px] flex-col gap-3.5 bg-paper px-6 py-8" style="--i:5">
-			<span class="font-mono text-pill text-brand">02</span>
-			<h3 class="mt-auto text-story-h font-semibold text-ink">Expected impact</h3>
-			<p class="m-0 text-small text-ink-secondary">ROI ranges and efficiency gains based on real industry benchmarks.</p>
-		</div>
-		<div class="rv-block flex min-h-[190px] flex-col gap-3.5 bg-paper px-6 py-8" style="--i:6">
-			<span class="font-mono text-pill text-brand">03</span>
-			<h3 class="mt-auto text-story-h font-semibold text-ink">Implementation roadmap</h3>
-			<p class="m-0 text-small text-ink-secondary">The likely challenges and a practical path from pilot to production.</p>
-		</div>
-		<div class="rv-block flex min-h-[190px] flex-col gap-3.5 bg-paper px-6 py-8" style="--i:7">
-			<span class="font-mono text-pill text-brand">04</span>
-			<h3 class="mt-auto text-story-h font-semibold text-ink">Next steps</h3>
-			<p class="m-0 text-small text-ink-secondary">Starter guidance and the option to book a 1:1 with our engineers.</p>
-		</div>
+		{cards.map((card, i) => (
+			<div class="rv-block flex min-h-[190px] flex-col gap-3.5 bg-paper px-6 py-8" style={`--i:${4 + i}`}>
+				<span class="font-mono text-pill text-brand">{card.number}</span>
+				<h3 class="mt-auto text-story-h font-semibold text-ink">{card.title}</h3>
+				<p class="m-0 text-small text-ink-secondary">{card.body}</p>
+			</div>
+		))}
 	</div>
 </section>
 
-<script>
-	import { initReveal } from '../../utils/reveal';
-	initReveal();
-</script>

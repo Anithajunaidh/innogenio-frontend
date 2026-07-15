@@ -1,5 +1,13 @@
 ---
 import PixelSprite from '../atoms/PixelSprite.astro';
+
+export interface Props {
+	kicker: string;
+	headline: string;
+	body: string;
+}
+
+const { kicker, headline, body } = Astro.props;
 ---
 
 <section
@@ -9,14 +17,14 @@ import PixelSprite from '../atoms/PixelSprite.astro';
 	<span
 		class="inline-flex items-center gap-2 rounded-full border border-line bg-tile px-3 py-2 font-mono text-pill font-medium uppercase tracking-wider text-ink-secondary"
 	>
-		<PixelSprite name="logo" class="w-4" /> AI SOLUTIONS ADVISOR
+		<PixelSprite name="logo" class="w-4" /> {kicker}
 	</span>
 	
 	<h1 class="m-0 text-balance text-listing-h font-medium text-ink">
-		Your AI guide, in four questions.
+		{headline}
 	</h1>
 	
 	<p class="m-0 max-w-2xl text-lead font-medium text-ink-secondary">
-		Answer four quick questions and let our advisor generate a personalized recommendation tailored to your industry and business objectives.
+		{body}
 	</p>
 </section>
