@@ -1,0 +1,307 @@
+---
+/* Contact page template — renders the contact hero, validation form,
+   trust strip, FAQs, and closing CTA dynamically from localized pagedata. */
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../organisms/Navbar.astro';
+import Footer from '../organisms/Footer.astro';
+import CtaSection from '../organisms/CtaSection.astro';
+import Button from '../atoms/Button.astro';
+import PixelSprite from '../atoms/PixelSprite.astro';
+import DimensionArrow from '../atoms/DimensionArrow.astro';
+import { getSite, getContact } from '../../i18n';
+import type { Locale } from '../../i18n';
+import type { FooterColumn } from '../molecules/FooterNav.astro';
+import type { Action } from '../organisms/CtaSection.astro';
+
+interface Props {
+	locale: Locale;
+}
+const { locale } = Astro.props;
+
+const site = getSite(locale);
+const page = getContact(locale);
+
+const footerColumns = site.footer.columns as FooterColumn[];
+const ctaActions = page.cta.actions as Action[];
+---
+
+<Layout lang={locale} title={page.seo.title} description={page.seo.description}>
+	<Navbar slot="header" locale={locale} />
+
+	<!-- Root content shell centered to match 1240px container -->
+	<div class="border-x border-line bg-paper">
+		<!-- ═══════ CONTACT + FORM ═══════ -->
+		<section
+			class="grid grid-cols-1 md:grid-cols-[1fr_minmax(380px,42%)] border-b border-line"
+			aria-label="Contact us"
+		>
+			<!-- Hero Left Column -->
+			<div class="flex flex-col justify-center gap-[26px] p-7 py-12 sm:p-11 md:py-[clamp(56px,8vw,120px)] md:border-r border-line">
+				<span class="inline-flex items-center gap-2 border border-line bg-tile px-3.5 py-1.5 rounded-full font-mono text-[11px] tracking-[0.02em] text-ink-secondary self-start">
+					<PixelSprite name="logo" class="h-[15px] w-auto shrink-0" />
+					{page.intro.tag}
+				</span>
+				<h1 class="m-0 text-[clamp(40px,5vw,78px)] font-medium leading-none tracking-[-0.04em] text-balance text-ink">
+					{page.intro.heading}
+				</h1>
+				<p class="m-0 text-[clamp(17px,1.7vw,22px)] leading-relaxed text-ink-secondary max-w-[30em] font-medium">
+					{page.intro.lead}
+				</p>
+				
+				<div class="flex flex-col gap-[2px] mt-1.5 border-t border-line">
+					{
+						page.methods.map((method) => (
+							<div class="flex items-center gap-4 py-4.5 border-b border-line">
+								<span class="size-[38px] shrink-0 border border-line bg-fill-warm flex items-center justify-center">
+									{method.icon === 'email' && (
+										<svg viewBox="0 0 24 24" class="size-5 text-brand" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+											<rect x="3" y="5" width="18" height="14" />
+											<path d="M3 6 L12 13 L21 6" />
+										</svg>
+									)}
+									{method.icon === 'calendar' && (
+										<svg viewBox="0 0 24 24" class="size-5 text-brand" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+											<rect x="3" y="5" width="18" height="16" />
+											<path d="M3 9 L21 9 M8 3 L8 6 M16 3 L16 6" />
+										</svg>
+									)}
+									{method.icon === 'map' && (
+										<svg viewBox="0 0 24 24" class="size-5 text-brand" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+											<path d="M12 21 C7 16 5 13 5 9.5 A7 7 0 0 1 19 9.5 C19 13 17 16 12 21 Z" />
+											<circle cx="12" cy="9.5" r="2.4" />
+										</svg>
+									)}
+								</span>
+								<div>
+									<b class="block text-[15px] font-semibold tracking-[-0.01em] text-ink">{method.title}</b>
+									<span class="text-[13.5px] text-ink-secondary">{method.description}</span>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+
+			<!-- Form Right Column -->
+			<div class="flex flex-col justify-center bg-panel p-7 sm:p-11 md:py-[clamp(40px,5vw,64px)] max-md:border-t border-line">
+				<h2 class="m-0 mb-1.5 text-[clamp(24px,2.6vw,32px)] font-medium tracking-[-0.025em] text-ink">
+					{page.form.heading}
+				</h2>
+				<p class="m-0 mb-6.5 text-[14px] text-ink-secondary">
+					{page.form.requiredNote}
+				</p>
+				
+				<form id="contactForm" novalidate class="flex flex-col gap-4">
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+						<div class="flex flex-col gap-2">
+							<label for="fn" class="font-mono text-[11px] tracking-[0.1em] uppercase text-ink-secondary">{page.form.fields.name.label}</label>
+							<input id="fn" name="name" type="text" placeholder={page.form.fields.name.placeholder} required class="w-full bg-tile border border-line text-ink px-3.5 py-3 text-[14.5px] focus:outline-none focus:border-brand transition-colors" />
+						</div>
+						<div class="flex flex-col gap-2">
+							<label for="fe" class="font-mono text-[11px] tracking-[0.1em] uppercase text-ink-secondary">{page.form.fields.email.label}</label>
+							<input id="fe" name="email" type="email" placeholder={page.form.fields.email.placeholder} required class="w-full bg-tile border border-line text-ink px-3.5 py-3 text-[14.5px] focus:outline-none focus:border-brand transition-colors" />
+						</div>
+					</div>
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+						<div class="flex flex-col gap-2">
+							<label for="fc" class="font-mono text-[11px] tracking-[0.1em] uppercase text-ink-secondary">{page.form.fields.company.label}</label>
+							<input id="fc" name="company" type="text" placeholder={page.form.fields.company.placeholder} class="w-full bg-tile border border-line text-ink px-3.5 py-3 text-[14.5px] focus:outline-none focus:border-brand transition-colors" />
+						</div>
+						<div class="flex flex-col gap-2">
+							<label for="fb" class="font-mono text-[11px] tracking-[0.1em] uppercase text-ink-secondary">{page.form.fields.budget.label}</label>
+							<select id="fb" name="budget" class="w-full bg-tile border border-line text-ink px-3.5 py-3 text-[14.5px] focus:outline-none focus:border-brand transition-colors">
+								<option value="">{page.form.fields.budget.placeholder}</option>
+								{page.form.fields.budget.options.map((opt) => (
+									<option value={opt}>{opt}</option>
+								))}
+							</select>
+						</div>
+					</div>
+					<div class="flex flex-col gap-2 col-span-full">
+						<label for="fs" class="font-mono text-[11px] tracking-[0.1em] uppercase text-ink-secondary">{page.form.fields.message.label}</label>
+						<textarea id="fs" name="message" placeholder={page.form.fields.message.placeholder} required class="w-full bg-tile border border-line text-ink px-3.5 py-3 text-[14.5px] focus:outline-none focus:border-brand transition-colors resize-y min-h-[120px]" />
+					</div>
+					
+					<Button type="submit" variant="pixel" class="mt-2 w-full justify-center" label={page.form.submit} />
+					
+					<div id="formOk" role="status" class="hidden mt-3.5 text-[13.5px] text-brand items-center gap-2 font-medium">
+						✓ {page.form.success}
+					</div>
+					<p class="mt-3.5 text-[11.5px] leading-normal text-ink-secondary" set:html={page.form.consent} />
+				</form>
+			</div>
+		</section>
+
+		<!-- ═══════ TRUST STRIP ═══════ -->
+		<div data-reveal class="flex flex-wrap items-center gap-y-4 gap-x-10 border-b border-line px-7 py-6.5 sm:px-11">
+			<span class="rv-block font-mono text-[10px] tracking-[0.14em] uppercase text-ink-secondary" style="--i:0">
+				{page.trust.text}
+			</span>
+			<div class="rv-block flex flex-wrap gap-9 opacity-75" style="--i:1">
+				{
+					page.trust.logos.map((logo) => (
+						<span class="text-[16px] font-bold tracking-[-0.02em] text-ink-secondary">
+							{logo}
+						</span>
+					))
+				}
+			</div>
+		</div>
+
+		<!-- ═══════ FAQ ═══════ -->
+		<section
+			data-reveal
+			class="faq-section grid grid-cols-1 md:grid-cols-[0.9fr_1.4fr] border-b border-line"
+			aria-label="Frequently asked questions"
+		>
+			<div class="relative w-full">
+				<div data-faq-sidebar class="flex flex-col gap-5 items-start p-7 py-12 sm:p-11 md:py-[clamp(48px,6vw,90px)] w-full">
+					<span class="rv-block font-mono text-[10px] tracking-[0.16em] uppercase text-ink-secondary" style="--i:0">
+						{page.faq.kicker}
+					</span>
+					<h2 class="rv-block m-0 text-[clamp(32px,4.2vw,52px)] font-medium tracking-[-0.03em] leading-[1.02] text-balance text-ink" style="--i:1">
+						{page.faq.title}
+					</h2>
+					<p class="rv-block m-0 text-[16px] leading-[1.5] text-ink-secondary max-w-[32em]" style="--i:2">
+						{page.faq.lead}
+					</p>
+					<a
+						href={page.faq.cta.href}
+						class="rv-block group mt-2 inline-flex items-center gap-2.5 text-btn font-semibold transition-colors hover:text-brand focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+						style="--i:3"
+					>
+						{page.faq.cta.label}
+						<DimensionArrow class="w-[26px]" />
+					</a>
+				</div>
+			</div>
+			
+			<div data-faq-list class="flex flex-col border-t md:border-t-0 md:border-l border-line">
+				{
+					page.faq.items.map((item, index) => (
+						<div
+							data-faq-item
+							data-on={index === 0 ? 'true' : 'false'}
+							class="rv-block group relative border-b border-line bg-paper before:absolute before:inset-y-0 before:left-0 before:w-1 before:bg-brand before:opacity-0 before:content-[''] last:border-b-0 data-[on=true]:bg-tile data-[on=true]:before:opacity-100"
+							style={`--i:${index}`}
+						>
+							<button
+								type="button"
+								data-faq-toggle
+								aria-expanded={index === 0 ? 'true' : 'false'}
+								class="flex items-center justify-between gap-5 w-full text-left cursor-pointer px-[34px] py-[26px] text-body md:text-intro text-ink-secondary transition-colors duration-200 hover:text-brand group-data-[on=true]:text-ink group-data-[on=true]:font-medium focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-inset"
+							>
+								{item.question}
+								<span class="pl size-4 shrink-0 relative text-brand transition-transform duration-300 ease-arrow group-data-[on=true]:rotate-[135deg]" aria-hidden="true">
+									<span class="absolute left-0 top-[7px] w-4 h-[2px] bg-current" />
+									<span class="absolute left-[7px] top-0 w-[2px] h-4 bg-current" />
+								</span>
+							</button>
+							<div
+								data-faq-body
+								class="max-h-0 overflow-hidden transition-[max-height] duration-300 ease-move group-data-[on=true]:max-h-[340px]"
+							>
+								<p class="m-0 px-[34px] pb-7 text-[15px] leading-relaxed text-ink-secondary max-w-[52em]">
+									{item.answer}
+								</p>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<!-- ═══════ FINAL CTA ═══════ -->
+		<CtaSection
+			kicker={page.cta.kicker}
+			titleLines={page.cta.titleLines}
+			body={page.cta.body}
+			actions={ctaActions}
+		/>
+
+		<!-- ═══════ FOOTER ═══════ -->
+		<Footer
+			columns={footerColumns}
+			copyright={site.footer.copyright}
+			tagline={site.footer.tagline}
+			simple={true}
+		/>
+	</div>
+</Layout>
+
+<script>
+	import { initReveal } from '../../utils/reveal';
+	initReveal();
+
+	// Client-side Contact Form logic
+	const form = document.getElementById('contactForm') as HTMLFormElement | null;
+	const formOk = document.getElementById('formOk');
+	if (form && formOk) {
+		form.addEventListener('submit', (e) => {
+			e.preventDefault();
+			if (!form.checkValidity()) {
+				form.reportValidity();
+				return;
+			}
+			formOk.classList.remove('hidden');
+			formOk.classList.add('flex');
+			form.querySelectorAll('input, textarea, select').forEach((el) => {
+				if (
+					el instanceof HTMLInputElement ||
+					el instanceof HTMLTextAreaElement ||
+					el instanceof HTMLSelectElement
+				) {
+					el.value = '';
+				}
+			});
+		});
+	}
+
+	// Client-side FAQ Accordion logic
+	document.querySelectorAll('[data-faq-list]').forEach((list) => {
+		const items = list.querySelectorAll<HTMLElement>('[data-faq-item]');
+		items.forEach((item) => {
+			const btn = item.querySelector<HTMLButtonElement>('[data-faq-toggle]');
+			btn?.addEventListener('click', () => {
+				const isCurrentlyOn = item.getAttribute('data-on') === 'true';
+
+				// Close all accordion items
+				items.forEach((i) => {
+					i.setAttribute('data-on', 'false');
+					i.querySelector('[data-faq-toggle]')?.setAttribute('aria-expanded', 'false');
+				});
+
+				// Open only if it wasn't already open
+				if (!isCurrentlyOn) {
+					item.setAttribute('data-on', 'true');
+					btn.setAttribute('aria-expanded', 'true');
+				}
+			});
+		});
+	});
+
+	// GSAP ScrollTrigger FAQ Sidebar Pinning
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	window.addEventListener('load', () => {
+		const faqSection = document.querySelector('.faq-section');
+		const faqSidebar = document.querySelector('[data-faq-sidebar]');
+
+		if (faqSection && faqSidebar) {
+			const mm = gsap.matchMedia();
+			// Desktop and tablet screens: pin the FAQ sidebar while scrolling past list items
+			mm.add('(min-width: 768px)', () => {
+				ScrollTrigger.create({
+					trigger: faqSection,
+					pin: faqSidebar,
+					start: 'top 56px',
+					end: () => 'bottom ' + (56 + (faqSidebar as HTMLElement).offsetHeight) + 'px',
+					pinSpacing: false,
+				});
+			});
+		}
+	});
+</script>

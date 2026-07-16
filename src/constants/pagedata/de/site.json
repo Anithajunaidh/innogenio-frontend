@@ -38,7 +38,7 @@
 			{ "label": "Karriere", "href": "/de/" }
 		],
 		"workCta": { "label": "Unsere Arbeiten", "href": "/de/works" },
-		"hireCta": { "label": "Mit uns arbeiten", "href": "/de/" }
+		"hireCta": { "label": "Mit uns arbeiten", "href": "/de/contact" }
 	},
 	"footer": {
 		"columns": [
@@ -48,7 +48,7 @@
 					{ "href": "/de/", "label": "Über uns" },
 					{ "href": "/de/", "label": "Unsere Kunden" },
 					{ "href": "/de/", "label": "Karriere" },
-					{ "href": "/de/", "label": "Kontakt" }
+					{ "href": "/de/contact", "label": "Kontakt" }
 				]
 			},
 			{

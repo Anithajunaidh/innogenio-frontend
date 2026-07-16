@@ -14,16 +14,27 @@ const tulips = [
 	{ pos: 'right-[4%] w-8', color: '#D18BF4' },
 	{ pos: 'right-[9%] w-[26px]', color: '#E85BC6' },
 ];
+
+interface Props {
+	simple?: boolean;
+}
+const { simple = false } = Astro.props;
 ---
 
 <div class="relative mt-[18px] h-[236px]" aria-hidden="true">
 	<SunsetRays class="absolute bottom-10 left-1/2 h-auto w-[min(560px,72%)] -translate-x-1/2" />
 
-	<span class="footer-moon absolute bottom-[148px] left-1/2 -ml-[31px] w-[62px]">
-		<PixelSprite name="logo" class="w-full" primary="#F7ECFF" secondary="#E4C8F8" />
-	</span>
+	{
+		!simple && (
+			<>
+				<span class="footer-moon absolute bottom-[148px] left-1/2 -ml-[31px] w-[62px]">
+					<PixelSprite name="logo" class="w-full" primary="#F7ECFF" secondary="#E4C8F8" />
+				</span>
 
-	<FooterCrane class="absolute bottom-[39px] left-1/2 h-[144px] w-[184px] -translate-x-[40%]" />
+				<FooterCrane class="absolute bottom-[39px] left-1/2 h-[144px] w-[184px] -translate-x-[40%]" />
+			</>
+		)
+	}
 
 	{
 		tulips.map((t) => (

@@ -1,0 +1,95 @@
+{
+	"seo": {
+		"title": "Innogenio — Contact Us",
+		"description": "Tell us about your product, your timeline, and where you want to go. We'll reply within one business day."
+	},
+	"intro": {
+		"tag": "LET'S TALK",
+		"heading": "Let's build something worth shipping.",
+		"lead": "Tell us about your product, your timeline, and where you want to go. We'll reply within one business day."
+	},
+	"methods": [
+		{
+			"icon": "email",
+			"title": "hello@innogenio.com",
+			"description": "General enquiries & new projects"
+		},
+		{
+			"icon": "calendar",
+			"title": "Book a 1:1 meeting",
+			"description": "30 minutes with an engineer, no sales pitch"
+		},
+		{
+			"icon": "map",
+			"title": "Remote-first · Global",
+			"description": "Teams across EU & APAC time zones"
+		}
+	],
+	"form": {
+		"heading": "Send us a message",
+		"requiredNote": "Fields marked with * are required.",
+		"fields": {
+			"name": { "label": "Full name *", "placeholder": "Ada Lovelace" },
+			"email": { "label": "Work email *", "placeholder": "you@company.com" },
+			"company": { "label": "Company", "placeholder": "Innogenio Inc." },
+			"budget": {
+				"label": "Budget range",
+				"placeholder": "Select…",
+				"options": ["Under $25k", "$25k – $75k", "$75k – $150k", "$150k+", "Not sure yet"]
+			},
+			"message": { "label": "How can we help? *", "placeholder": "A few lines about your product, goals, and timeline…" }
+		},
+		"submit": "Send message",
+		"success": "✓ Thanks — your message is on its way. We'll be in touch shortly.",
+		"consent": "By submitting, you agree to our Privacy Policy. We'll never share your details."
+	},
+	"trust": {
+		"text": "Trusted by forward-thinking businesses globally",
+		"logos": ["Envogue", "Vineo", "Zappr", "Meridian", "Northwind"]
+	},
+	"faq": {
+		"kicker": "FAQ",
+		"title": "Questions, answered.",
+		"lead": "Everything you need to know before reaching out. Still curious? Drop us a line — a real engineer will reply.",
+		"cta": { "label": "Talk to us directly", "href": "#" },
+		"items": [
+			{
+				"question": "What services does Innogenio offer?",
+				"answer": "We're a product engineering studio covering custom software, AI & automation, ERPNext implementation, and data & DevOps. From v1 MVPs to scaling complex platforms, we handle strategy, design, build, and operation end-to-end."
+			},
+			{
+				"question": "How much does a project cost?",
+				"answer": "It depends on scope, but we scope transparently. Most engagements start between $25k and $150k+. Tell us your budget range in the form and we'll propose an approach that fits — no surprise invoices, no hidden hand-offs."
+			},
+			{
+				"question": "How quickly can we start?",
+				"answer": "Discovery calls happen within a day or two of reaching out. Once scope is agreed, a dedicated team typically kicks off within two to three weeks. Need to move faster? Tell us — we'll do our best to accommodate urgent timelines."
+			},
+			{
+				"question": "Do you work with startups as well as enterprises?",
+				"answer": "Both. We act as a technical co-founder for early-stage startups and as a scalable delivery partner for established teams. Our solutions adapt to your goals instead of forcing you to adapt to a fixed process."
+			},
+			{
+				"question": "Who owns the code and IP?",
+				"answer": "You do — fully. All source code, designs, and intellectual property belong to you from day one. We build in your repositories with clear documentation so your team can take over at any time."
+			},
+			{
+				"question": "How do you handle security and privacy?",
+				"answer": "Security and privacy are designed in from day one, not bolted on. We follow best-practice access control, encryption, and compliance workflows, and we're happy to sign an NDA before any detailed discussion."
+			},
+			{
+				"question": "Do you offer support after launch?",
+				"answer": "Yes. We can operate and evolve what we build through ongoing support and DevOps retainers, or hand off cleanly to your in-house team with full documentation and a transition period — your choice."
+			}
+		]
+	},
+	"cta": {
+		"kicker": "Ready to eliminate chaos? Let's talk.",
+		"titleLines": ["Not sure where to start?", "Let our AI advisor point the way."],
+		"body": "Answer four quick questions and get a personalized AI solution recommendation for your industry and goals.",
+		"actions": [
+			{ "label": "Try the AI Guide", "href": "/ai-guide", "variant": "pixel" },
+			{ "label": "Book a 1:1 Meeting", "href": "/contact", "variant": "ghost" }
+		]
+	}
+}

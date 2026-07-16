@@ -25,6 +25,7 @@ interface Props extends HTMLAttributes<'a'> {
 	variant?: Variant;
 	label?: string;
 	arrow?: boolean;
+	type?: string;
 }
 
 const {
@@ -33,14 +34,16 @@ const {
 	label,
 	arrow = variant === 'pixel',
 	class: className = '',
+	type,
 	...rest
 } = Astro.props;
 
-/* icon buttons trigger scripts, not navigation — no href means <button> */
-const asButton = variant === 'icon' && href === undefined;
+/* icon buttons trigger scripts, not navigation — no href means <button>.
+   If a button type (like type="submit") is passed, we also render it as a <button> element. */
+const asButton = (variant === 'icon' || type !== undefined) && href === undefined;
 const Tag = asButton ? 'button' : 'a';
 
-const base = 'group focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none';
+const base = 'group cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none';
 
 const variants: Record<Variant, string> = {
 	pixel:
@@ -62,7 +65,7 @@ const pixelShades = variant === 'nav-ghost' ? 'grey' : undefined;
 
 <Tag
 	href={asButton ? undefined : (href ?? '/')}
-	type={asButton ? 'button' : undefined}
+	type={asButton ? (type as any || 'button') : undefined}
 	data-pixel-btn={pixelVariant || undefined}
 	data-pixel-shades={pixelShades}
 	class:list={[base, variants[variant], className]}

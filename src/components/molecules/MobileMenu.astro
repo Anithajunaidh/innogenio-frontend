@@ -7,8 +7,10 @@ import Button from '../atoms/Button.astro';
 
 interface Props {
 	links: { label: string; href: string }[];
+	workCta?: { label: string; href: string };
+	hireCta?: { label: string; href: string };
 }
-const { links } = Astro.props;
+const { links, workCta, hireCta } = Astro.props;
 ---
 
 <MenuToggle class="lg:hidden" />
@@ -28,8 +30,8 @@ const { links } = Astro.props;
 		}
 	</nav>
 	<div class="flex flex-col gap-3 border-t border-line p-6">
-		<Button variant="ghost" href="/" label="See Our Work" class="justify-center" />
-		<Button variant="pixel" href="/" label="Work With Us" class="justify-center py-3" />
+		{workCta && <Button variant="ghost" href={workCta.href} label={workCta.label} class="justify-center" />}
+		{hireCta && <Button variant="pixel" href={hireCta.href} label={hireCta.label} class="justify-center py-3" />}
 	</div>
 </div>
 

@@ -14,9 +14,11 @@
 import enLanding from '../constants/pagedata/en/landing-page.json';
 import enTestimonials from '../constants/pagedata/en/testimonials.json';
 import enSite from '../constants/pagedata/en/site.json';
+import enContact from '../constants/pagedata/en/contact.json';
 import deLanding from '../constants/pagedata/de/landing-page.json';
 import deTestimonials from '../constants/pagedata/de/testimonials.json';
 import deSite from '../constants/pagedata/de/site.json';
+import deContact from '../constants/pagedata/de/contact.json';
 
 export const locales = ['en', 'de'] as const;
 export type Locale = (typeof locales)[number];
@@ -43,9 +45,11 @@ export const pathForLocale = (pathname: string, locale: Locale) => {
 const landing = { en: enLanding, de: deLanding };
 const testimonials = { en: enTestimonials, de: deTestimonials };
 const site = { en: enSite, de: deSite };
+const contact = { en: enContact, de: deContact };
 
 /** landing-page copy: typed by the en files, so a locale file with a
  * missing or misshapen section fails the build instead of rendering holes */
 export const getLanding = (locale: Locale): typeof enLanding => landing[locale];
 export const getTestimonials = (locale: Locale): typeof enTestimonials => testimonials[locale];
 export const getSite = (locale: Locale): typeof enSite => site[locale];
+export const getContact = (locale: Locale): typeof enContact => contact[locale];
