@@ -11,13 +11,13 @@ const { kicker, headline, body } = Astro.props;
 ---
 
 <section
-	class="px-section-x mx-auto flex max-w-4xl flex-col items-start gap-6 pb-section-y pt-section-y text-ink"
+	class="px-section-x mx-left flex max-w-4xl flex-col items-start gap-6 pb-section-y pt-section-y text-ink"
 	aria-label="AI Guide intro"
 >
 	<span
 		class="inline-flex items-center gap-2 rounded-full border border-line bg-tile px-3 py-2 font-mono text-pill font-medium uppercase tracking-wider text-ink-secondary"
 	>
-		<PixelSprite name="logo" class="w-4" /> {kicker}
+		<svg viewBox="0 0 24 24" class="w-4 h-4 shrink-0 fill-brand" aria-hidden="true"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z"></path></svg> {kicker}
 	</span>
 	
 	<h1 class="m-0 text-balance text-listing-h font-medium text-ink">

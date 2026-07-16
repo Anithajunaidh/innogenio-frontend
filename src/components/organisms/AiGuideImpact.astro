@@ -13,8 +13,8 @@ const { kicker, headline, body, cards } = Astro.props;
 
 <section aria-label={kicker} class="text-ink">
 	<div data-reveal class="border-t border-line px-5 pb-8 pt-12 sm:px-section-x">
-		<span class="rv-block mb-4 block font-mono text-kicker font-medium uppercase text-ink-secondary" style="--i:1">
-			{kicker}
+		<span class="rv-block mb-4 flex items-center gap-2 font-mono text-kicker font-medium uppercase text-ink-secondary" style="--i:1">
+			<svg viewBox="0 0 24 24" class="w-4 h-4 shrink-0 fill-brand" aria-hidden="true"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z"></path></svg> {kicker}
 		</span>
 		<h2 class="rv-block m-0 max-w-[30em] text-balance text-section-head font-medium text-ink" style="--i:2">
 			{headline}
