@@ -63,10 +63,10 @@
 			{
 				"title": "Leistungen",
 				"links": [
-					{ "href": "/de/", "label": "Individuelle Software" },
-					{ "href": "/de/", "label": "KI & Automatisierung" },
-					{ "href": "/de/", "label": "ERP-Einführung" },
-					{ "href": "/de/", "label": "Daten & DevOps" }
+					{ "href": "/de/services", "label": "Individuelle Software" },
+					{ "href": "/de/services", "label": "KI & Automatisierung" },
+					{ "href": "/de/services", "label": "ERP-Einführung" },
+					{ "href": "/de/services", "label": "Daten & DevOps" }
 				]
 			},
 			{
@@ -88,10 +88,10 @@
 			{
 				"title": "Community",
 				"links": [
-					{ "href": "/", "label": "LinkedIn", "external": true },
-					{ "href": "/", "label": "X", "external": true },
-					{ "href": "/", "label": "GitHub", "external": true },
-					{ "href": "/", "label": "Instagram", "external": true }
+					{ "href": "https://linkedin.com/company/innogenio", "label": "LinkedIn", "external": true },
+					{ "href": "https://x.com/innogenio", "label": "X", "external": true },
+					{ "href": "https://github.com/innogenio", "label": "GitHub", "external": true },
+					{ "href": "https://instagram.com/innogenio", "label": "Instagram", "external": true }
 				]
 			}
 		],

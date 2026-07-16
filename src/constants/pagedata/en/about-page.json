@@ -9,7 +9,7 @@
 		"lead": "Innogenio helps bold innovators design, develop, and operate custom apps, ERPNext solutions, and automation systems to drive growth.",
 		"cta": {
 			"label": "Book a 1:1 Meeting",
-			"href": "/",
+			"href": "/works",
 			"variant": "pixel"
 		}
 	},
@@ -18,7 +18,7 @@
 		"title": "A product engineering studio for startups & digital brands.",
 		"cta": {
 			"label": "Start a project",
-			"href": "/"
+			"href": "/services"
 		},
 		"body": "We help teams build smarter, scale faster, and launch better software with minimal friction — strategic roadmaps, agile execution, and results you can measure. Whether you're starting v1 or enhancing a complex platform, our solutions adapt to your goals instead of forcing you to adapt."
 	},
@@ -139,8 +139,8 @@
 		"titleLines": ["Launch your project with us."],
 		"body": "From concept to launch, we help brands craft software that engages audiences, boosts conversions, and elevates your impact.",
 		"actions": [
-			{ "label": "Get Started", "variant": "pixel", "href": "/" },
-			{ "label": "Book a 1:1 Meeting", "variant": "ghost", "href": "/" }
+			{ "label": "Get Started", "variant": "pixel", "href": "/services" },
+			{ "label": "Book a 1:1 Meeting", "variant": "ghost", "href": "/works" }
 		]
 	}
 }

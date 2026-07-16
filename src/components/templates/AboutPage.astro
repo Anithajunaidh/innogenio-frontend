@@ -8,8 +8,10 @@ import type { Action } from '../organisms/CtaSection.astro';
 import Button from '../atoms/Button.astro';
 import PixelSprite from '../atoms/PixelSprite.astro';
 import DimensionArrow from '../atoms/DimensionArrow.astro';
+import CookieBanner from '../organisms/CookieBanner.astro';
 import { getSite } from '../../i18n';
 import type { Locale } from '../../i18n';
+import { aboutPageLd } from '../../utils/seo';
 
 interface Metric {
 	value: string;
@@ -82,10 +84,17 @@ interface Props {
 const { locale, seo, hero, intro, stats, partner, values, cases, cta } = Astro.props;
 const site = getSite(locale);
 const footerColumns = site.footer.columns as FooterColumn[];
+
+/* JSON-LD — AboutPage + Organization schema for /about and /de/about */
+const siteBase = (Astro.site ?? new URL('https://innogenio.com')).href;
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://innogenio.com').href;
+const jsonLd = aboutPageLd(siteBase, pageUrl, seo.title, seo.description, locale);
 ---
 
-<Layout lang={locale} title={seo.title} description={seo.description}>
+<Layout lang={locale} title={seo.title} description={seo.description} jsonLd={jsonLd}>
 	<Navbar slot="header" locale={locale} />
+
+	<main id="about-main" aria-label="About Innogenio">
 
 	<!-- ═══════ HERO ═══════ -->
 	<section data-reveal aria-label="Hero" class="border-x border-b border-line bg-paper font-sans text-ink">
@@ -307,7 +316,9 @@ const footerColumns = site.footer.columns as FooterColumn[];
 	</section>
 
 	<CtaSection titleLines={cta.titleLines} body={cta.body} actions={cta.actions} />
+	</main>
 	<Footer columns={footerColumns} copyright={site.footer.copyright} tagline={site.footer.tagline} />
+	<CookieBanner slot="cookie-banner" />
 </Layout>
 
 <script>

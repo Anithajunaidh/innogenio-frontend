@@ -61,10 +61,10 @@
 			{
 				"title": "Services",
 				"links": [
-					{ "href": "/", "label": "Custom software" },
-					{ "href": "/", "label": "AI & automation" },
-					{ "href": "/", "label": "ERP implementation" },
-					{ "href": "/", "label": "Data & DevOps" }
+					{ "href": "/services", "label": "Custom software" },
+					{ "href": "/services", "label": "AI & automation" },
+					{ "href": "/services", "label": "ERP implementation" },
+					{ "href": "/services", "label": "Data & DevOps" }
 				]
 			},
 			{
@@ -86,10 +86,10 @@
 			{
 				"title": "Community",
 				"links": [
-					{ "href": "/", "label": "LinkedIn", "external": true },
-					{ "href": "/", "label": "X", "external": true },
-					{ "href": "/", "label": "GitHub", "external": true },
-					{ "href": "/", "label": "Instagram", "external": true }
+					{ "href": "https://linkedin.com/company/innogenio", "label": "LinkedIn", "external": true },
+					{ "href": "https://x.com/innogenio", "label": "X", "external": true },
+					{ "href": "https://github.com/innogenio", "label": "GitHub", "external": true },
+					{ "href": "https://instagram.com/innogenio", "label": "Instagram", "external": true }
 				]
 			}
 		],

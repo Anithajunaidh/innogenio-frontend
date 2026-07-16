@@ -9,7 +9,7 @@
 		"lead": "Innogenio hilft mutigen Innovatoren beim Design und Betrieb maßgeschneiderter Apps, ERPNext-Lösungen und Automatisierungssysteme für nachhaltiges Wachstum.",
 		"cta": {
 			"label": "1:1 Termin buchen",
-			"href": "/de",
+			"href": "/de/works",
 			"variant": "pixel"
 		}
 	},
@@ -18,7 +18,7 @@
 		"title": "Ein Produktentwicklungsstudio für Startups & digitale Marken.",
 		"cta": {
 			"label": "Projekt starten",
-			"href": "/de"
+			"href": "/de/services"
 		},
 		"body": "Wir helfen Teams, intelligenter zu entwickeln, schneller zu skalieren und bessere Software mit minimaler Reibung einzuführen — strategische Roadmaps, agile Umsetzung und messbare Ergebnisse. Egal ob v1 oder komplexe Plattform: Unsere Lösungen passen sich Ihren Zielen an."
 	},
@@ -139,8 +139,8 @@
 		"titleLines": ["Starten Sie Ihr Projekt mit uns."],
 		"body": "Von der Idee bis zum Launch helfen wir Marken dabei, Software zu entwickeln, die begeistert und konvertiert.",
 		"actions": [
-			{ "label": "Jetzt starten", "variant": "pixel", "href": "/de" },
-			{ "label": "1:1 Termin buchen", "variant": "ghost", "href": "/de" }
+			{ "label": "Jetzt starten", "variant": "pixel", "href": "/de/services" },
+			{ "label": "1:1 Termin buchen", "variant": "ghost", "href": "/de/works" }
 		]
 	}
 }
