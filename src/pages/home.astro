@@ -6,23 +6,27 @@ import Footer from '../components/organisms/Footer.astro';
 ---
 
 <Layout>
-	<HeroSection />
-	<HeroScaleup
-		eyebrow="Products — Studio"
-		titleLines={['Build your frontier with Studio.']}
-		copy="One platform to build, deploy, and govern agentic AI systems — all with enterprise privacy, security, and full ownership of your data."
-		actions={[{ label: 'Try Studio', href: '#', variant: 'pixel' }]}
-		overlayText="Operationalize AI. From frontier models to real-world systems."
-		panelClass="bg-[#007aff]"
-		panelLabel="Mistral Studio dashboard showing Build, Capture, and Govern sections"
-	>
-		<img
-			src="/werb.svg"
-			alt="Mistral Studio dashboard"
-			class="w-full max-w-2xl rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.18)] lg:max-w-3xl"
-			width="955"
-			height="598"
-		/>
-	</HeroScaleup>
-	<Footer />
+	<main>
+		<HeroSection />
+		<HeroScaleup
+			eyebrow="Products — Studio"
+			titleLines={['Build your frontier with Studio.']}
+			copy="One platform to build, deploy, and govern agentic AI systems — all with enterprise privacy, security, and full ownership of your data."
+			actions={[{ label: 'Try Studio', href: '#', variant: 'pixel' }]}
+			overlayText="Operationalize AI. From frontier models to real-world systems."
+			panelClass="bg-[#007aff]"
+			panelLabel="Mistral Studio dashboard showing Build, Capture, and Govern sections"
+		>
+			<img
+				src="/werb.svg"
+				alt="Innogenio Studio dashboard interface"
+				loading="lazy"
+				decoding="async"
+				class="w-full max-w-2xl rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.18)] lg:max-w-3xl"
+				width="955"
+				height="598"
+			/>
+		</HeroScaleup>
+		<Footer />
+	</main>
 </Layout>

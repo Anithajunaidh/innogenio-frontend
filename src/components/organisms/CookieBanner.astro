@@ -1,0 +1,121 @@
+---
+/*
+  CookieBanner — GDPR/CCPA-compliant consent banner.
+  Stores the user's choice in localStorage under the key "innogenio-cookie-consent".
+  Hidden by default via JS; the <noscript> fallback is not shown since the site
+  itself requires JS for GSAP animations anyway.
+  No third-party scripts are loaded until consent is granted.
+  The banner uses the site design tokens and matches the existing UI style.
+*/
+
+interface Props {
+  /** Locale-specific copy */
+  message?: string;
+  acceptLabel?: string;
+  declineLabel?: string;
+  policyLabel?: string;
+  policyHref?: string;
+}
+
+const {
+  message = 'We use cookies to improve your experience and analyse site traffic. By clicking "Accept", you consent to our use of cookies.',
+  acceptLabel = 'Accept',
+  declineLabel = 'Decline',
+  policyLabel = 'Privacy policy',
+  policyHref = '/privacy-policy',
+} = Astro.props;
+---
+
+<!-- Cookie consent banner (GDPR §7 / ePrivacy Directive) -->
+<div
+  id="cookie-banner"
+  role="dialog"
+  aria-label="Cookie consent"
+  aria-modal="false"
+  aria-live="polite"
+  class="fixed bottom-0 left-0 right-0 z-[999] hidden border-t border-line bg-paper shadow-[0_-4px_24px_rgba(23,18,31,0.10)] font-sans text-ink"
+>
+  <div class="mx-auto flex max-w-432 flex-wrap items-center justify-between gap-4 px-section-x py-4">
+    <p class="m-0 max-w-[64ch] text-sm leading-[1.55] text-ink-secondary">
+      {message}
+      {policyHref && (
+        <a
+          href={policyHref}
+          class="ml-1 underline underline-offset-2 hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          {policyLabel}
+        </a>
+      )}
+    </p>
+    <div class="flex shrink-0 items-center gap-3">
+      <button
+        id="cookie-decline"
+        type="button"
+        class="rounded border border-line bg-transparent px-4 py-2 text-sm font-semibold text-ink-secondary transition-colors hover:border-ink hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        {declineLabel}
+      </button>
+      <button
+        id="cookie-accept"
+        type="button"
+        class="rounded bg-brand px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        {acceptLabel}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'innogenio-cookie-consent';
+  const banner = document.getElementById('cookie-banner') as HTMLElement | null;
+  const acceptBtn = document.getElementById('cookie-accept');
+  const declineBtn = document.getElementById('cookie-decline');
+
+  function dismiss(choice: 'accepted' | 'declined') {
+    try {
+      localStorage.setItem(STORAGE_KEY, choice);
+    } catch {
+      /* storage blocked — treat as declined */
+    }
+    if (banner) {
+      banner.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      banner.style.opacity = '0';
+      banner.style.transform = 'translateY(12px)';
+      setTimeout(() => banner.classList.add('hidden'), 320);
+    }
+    // If accepted, signal to any analytics loader waiting on consent
+    if (choice === 'accepted') {
+      window.dispatchEvent(new CustomEvent('cookie-consent-accepted'));
+    }
+  }
+
+  // Show banner only if no prior decision was stored
+  function init() {
+    let prior: string | null = null;
+    try {
+      prior = localStorage.getItem(STORAGE_KEY);
+    } catch {
+      /* storage blocked */
+    }
+    if (!prior && banner) {
+      // Small delay so layout settles before banner animates in
+      setTimeout(() => {
+        banner.classList.remove('hidden');
+        banner.style.opacity = '0';
+        banner.style.transform = 'translateY(12px)';
+        banner.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            banner.style.opacity = '1';
+            banner.style.transform = 'translateY(0)';
+          });
+        });
+      }, 800);
+    }
+  }
+
+  acceptBtn?.addEventListener('click', () => dismiss('accepted'));
+  declineBtn?.addEventListener('click', () => dismiss('declined'));
+  init();
+</script>
