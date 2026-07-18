@@ -14,6 +14,7 @@ export interface Action {
 }
 
 interface Props {
+	kicker?: string;
 	/** Heading, one array item per line */
 	titleLines?: string[];
 	/** supporting copy; omitted → not rendered */
@@ -24,6 +25,7 @@ interface Props {
 }
 
 const {
+	kicker,
 	titleLines = ['Ready to eliminate chaos?', "Let's talk."],
 	body,
 	actions = [
@@ -32,6 +34,8 @@ const {
 	],
 	newsletter,
 } = Astro.props;
+
+const kShift = kicker ? 1 : 0;
 ---
 
 <section
@@ -39,12 +43,19 @@ const {
 	aria-label="Contact call to action"
 	class="flex flex-col items-center gap-[22px] border-t border-line bg-panel px-section-x py-block-y text-center font-sans text-ink"
 >
-	<h2 class="rv-block max-w-[15em] text-balance text-cta-h">
+	{
+		kicker && (
+			<span class="rv-block font-mono text-[10px] tracking-[0.16em] uppercase text-ink-secondary" style="--i:0">
+				{kicker}
+			</span>
+		)
+	}
+	<h2 class="rv-block max-w-[15em] text-balance text-cta-h" style={`--i:${0 + kShift}`}>
 		{titleLines.map((line) => <span class="block">{line}</span>)}
 	</h2>
-	{body && <p class="rv-block max-w-[46ch] text-intro text-ink-secondary" style="--i:1">{body}</p>}
+	{body && <p class="rv-block max-w-[46ch] text-intro text-ink-secondary" style={`--i:${1 + kShift}`}>{body}</p>}
 
-	<div class="rv-block mt-1.5 flex flex-wrap justify-center gap-3.5" style="--i:2">
+	<div class="rv-block mt-1.5 flex flex-wrap justify-center gap-3.5" style={`--i:${2 + kShift}`}>
 		{
 			actions.map((action) => (
 				<Button
@@ -59,7 +70,7 @@ const {
 
 	{
 		newsletter && (
-			<div class="rv-block mt-4 w-[min(420px,90%)]" style="--i:3">
+			<div class="rv-block mt-4 w-[min(420px,90%)]" style={`--i:${3 + kShift}`}>
 				<NewsletterForm
 					placeholder={newsletter.placeholder}
 					buttonLabel={newsletter.buttonLabel}
@@ -70,7 +81,7 @@ const {
 	}
 	{
 		newsletter?.note && (
-			<span class="rv-block font-mono text-note" style="--i:4">
+			<span class="rv-block font-mono text-note" style={`--i:${4 + kShift}`}>
 				{newsletter.note}
 			</span>
 		)

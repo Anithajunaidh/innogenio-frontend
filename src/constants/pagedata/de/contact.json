@@ -1,0 +1,95 @@
+{
+	"seo": {
+		"title": "Innogenio — Kontakt",
+		"description": "Erzählen Sie uns von Ihrem Produkt, Ihrem Zeitrahmen und wohin Sie wollen. Wir antworten innerhalb eines Werktages."
+	},
+	"intro": {
+		"tag": "LASS UNS REDEN",
+		"heading": "Bauen wir etwas, das sich zu releasen lohnt.",
+		"lead": "Erzählen Sie uns von Ihrem Produkt, Ihrem Zeitrahmen und wohin Sie wollen. Wir antworten innerhalb eines Werktages."
+	},
+	"methods": [
+		{
+			"icon": "email",
+			"title": "hello@innogenio.com",
+			"description": "Allgemeine Anfragen & neue Projekte"
+		},
+		{
+			"icon": "calendar",
+			"title": "Buchen Sie ein 1:1-Gespräch",
+			"description": "30 Minuten mit einem Engineer, kein Verkaufsgespräch"
+		},
+		{
+			"icon": "map",
+			"title": "Remote-first · Global",
+			"description": "Teams in EU- & APAC-Zeitzonen"
+		}
+	],
+	"form": {
+		"heading": "Senden Sie uns eine Nachricht",
+		"requiredNote": "Mit * gekennzeichnete Felder sind Pflichtfelder.",
+		"fields": {
+			"name": { "label": "Vollständiger Name *", "placeholder": "Ada Lovelace" },
+			"email": { "label": "E-Mail-Adresse *", "placeholder": "ihr@unternehmen.de" },
+			"company": { "label": "Unternehmen", "placeholder": "Innogenio GmbH" },
+			"budget": {
+				"label": "Budgetrahmen",
+				"placeholder": "Auswählen…",
+				"options": ["Unter 25.000 €", "25.000 € – 75.000 €", "75.000 € – 150.000 €", "Über 150.000 €", "Noch unsicher"]
+			},
+			"message": { "label": "Wie können wir helfen? *", "placeholder": "Erzählen Sie uns von Ihrem Produkt, Zielen und Zeitrahmen…" }
+		},
+		"submit": "Nachricht senden",
+		"success": "✓ Danke — Ihre Nachricht ist unterwegs. Wir melden uns in Kürze.",
+		"consent": "Mit dem Absenden stimmen Sie unserer Datenschutzerklärung zu. Wir geben Ihre Daten niemals weiter."
+	},
+	"trust": {
+		"text": "Weltweit geschätzt von zukunftsorientierten Unternehmen",
+		"logos": ["Envogue", "Vineo", "Zappr", "Meridian", "Northwind"]
+	},
+	"faq": {
+		"kicker": "FAQ",
+		"title": "Fragen & Antworten.",
+		"lead": "Alles, was Sie vor einer Kontaktaufnahme wissen müssen. Immer noch neugierig? Schreiben Sie uns — ein echter Entwickler wird antworten.",
+		"cta": { "label": "Sprechen Sie direkt mit uns", "href": "#" },
+		"items": [
+			{
+				"question": "Welche Leistungen bietet Innogenio an?",
+				"answer": "Wir sind ein Studio für Produktentwicklung und decken individuelle Software, KI & Automatisierung, ERPNext-Implementierungen sowie Daten & DevOps ab. Von v1-MVPs bis hin zur Skalierung komplexer Plattformen übernehmen wir Strategie, Design, Entwicklung und Betrieb."
+			},
+			{
+				"question": "Wie viel kostet ein Projekt?",
+				"answer": "Das hängt vom Umfang ab, aber wir kalkulieren transparent. Die meisten Projekte liegen zwischen 25.000 € und über 150.000 €. Nennen Sie uns Ihren Budgetrahmen im Formular und wir schlagen Ihnen einen passenden Ansatz vor — keine überraschenden Rechnungen, keine versteckten Übergaben."
+			},
+			{
+				"question": "Wie schnell können wir starten?",
+				"answer": "Erstgespräche finden in der Regel innerhalb von 1–2 Tagen nach Kontaktaufnahme statt. Sobald der Umfang geklärt ist, kann ein dediziertes Team meist innerhalb von 2–3 Wochen starten. Eilt es? Lassen Sie es uns wissen — wir tun unser Bestes, um enge Zeitpläne zu berücksichtigen."
+			},
+			{
+				"question": "Arbeiten Sie sowohl mit Startups als auch mit etablierten Unternehmen?",
+				"answer": "Ja, mit beiden. Wir agieren als technischer Co-Founder für Startups in der Frühphase und als skalierbarer Entwicklungspartner für etablierte Teams. Unsere Lösungen passen sich Ihren Zielen an, anstatt Sie in starre Prozesse zu pressen."
+			},
+			{
+				"question": "Wem gehören Code und IP?",
+				"answer": "Ihnen — und zwar vollständig. Sämtlicher Quellcode, Designs und das geistige Eigentum gehören ab dem ersten Tag Ihnen. Wir entwickeln in Ihren Repositories und dokumentieren sauber, sodass Ihr Team jederzeit übernehmen kann."
+			},
+			{
+				"question": "Wie handhaben Sie Sicherheit und Datenschutz?",
+				"answer": "Sicherheit und Datenschutz sind von Anfang an integriert, nicht erst nachträglich hinzugefügt. Wir folgen Best Practices bei Zugriffskontrolle, Verschlüsselung und Compliance und unterzeichnen vor detaillierten Gesprächen gerne ein NDA."
+			},
+			{
+				"question": "Bieten Sie Support nach dem Launch an?",
+				"answer": "Ja. Wir können den Betrieb und die Weiterentwicklung durch Support- und DevOps-Verträge (Retainer) übernehmen oder die Software sauber mit vollständiger Dokumentation an Ihr internes Team übergeben — ganz wie Sie möchten."
+			}
+		]
+	},
+	"cta": {
+		"kicker": "Bereit, das Chaos zu beseitigen? Lass uns reden.",
+		"titleLines": ["Noch unsicher, wo Sie anfangen sollen?", "Lassen Sie sich von unserem KI-Berater helfen."],
+		"body": "Beantworten Sie vier kurze Fragen und erhalten Sie eine personalisierte KI-Lösungsempfehlung für Ihre Branche und Ihre Ziele.",
+		"actions": [
+			{ "label": "KI-Guide ausprobieren", "href": "/de/ai-guide", "variant": "pixel" },
+			{ "label": "1:1-Gespräch buchen", "href": "/de/contact", "variant": "ghost" }
+		]
+	}
+}
