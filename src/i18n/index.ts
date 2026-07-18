@@ -17,6 +17,8 @@ import enSite from '../constants/pagedata/en/site.json';
 import deLanding from '../constants/pagedata/de/landing-page.json';
 import deTestimonials from '../constants/pagedata/de/testimonials.json';
 import deSite from '../constants/pagedata/de/site.json';
+import enAiGuide from '../constants/pagedata/en/ai-guide.json';
+import deAiGuide from '../constants/pagedata/de/ai-guide.json';
 
 export const locales = ['en', 'de'] as const;
 export type Locale = (typeof locales)[number];
@@ -43,9 +45,11 @@ export const pathForLocale = (pathname: string, locale: Locale) => {
 const landing = { en: enLanding, de: deLanding };
 const testimonials = { en: enTestimonials, de: deTestimonials };
 const site = { en: enSite, de: deSite };
+const aiGuide = { en: enAiGuide, de: deAiGuide };
 
 /** landing-page copy: typed by the en files, so a locale file with a
  * missing or misshapen section fails the build instead of rendering holes */
 export const getLanding = (locale: Locale): typeof enLanding => landing[locale];
 export const getTestimonials = (locale: Locale): typeof enTestimonials => testimonials[locale];
 export const getSite = (locale: Locale): typeof enSite => site[locale];
+export const getAiGuide = (locale: Locale): typeof enAiGuide => aiGuide[locale];

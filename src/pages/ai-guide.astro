@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/organisms/Navbar.astro';
+import Footer from '../components/organisms/Footer.astro';
+import type { FooterColumn } from '../components/molecules/FooterNav.astro';
+import { getSite, getAiGuide } from '../i18n';
+
+import AiGuideHero from '../components/organisms/AiGuideHero.astro';
+import AiAdvisor from '../components/organisms/AiAdvisor.astro';
+import AiGuideImpact from '../components/organisms/AiGuideImpact.astro';
+import AiGuideServices from '../components/organisms/AiGuideServices.astro';
+import CtaSection from '../components/organisms/CtaSection.astro';
+import type { Action } from '../components/organisms/CtaSection.astro';
+
+const locale = 'en';
+const site = getSite(locale);
+const copy = getAiGuide(locale);
+const footerColumns = site.footer.columns as FooterColumn[];
+
+const ctaActions: Action[] = copy.cta.actions as Action[];
+---
+
+<Layout lang={locale} title={copy.meta.title} description={copy.meta.description}>
+	<Navbar slot="header" locale={locale} />
+	
+	<div class="mx-auto w-full max-w-432 border-x border-line">
+		<AiGuideHero {...copy.hero} />
+		<AiAdvisor copy={copy.advisor} />
+		<AiGuideImpact {...copy.impact} />
+		<AiGuideServices {...copy.services} />
+	</div>
+	
+	<CtaSection
+		titleLines={copy.cta.titleLines}
+		body={copy.cta.body}
+		actions={ctaActions}
+	/>
+	
+	<Footer columns={footerColumns} copyright={site.footer.copyright} tagline={site.footer.tagline} />
+</Layout>

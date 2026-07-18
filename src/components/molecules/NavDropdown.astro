@@ -69,44 +69,54 @@ const spanLast = shown.length % 2 === 1;
 </div>
 
 <script>
-	const HOVER = matchMedia('(hover: hover)').matches;
-	const roots = document.querySelectorAll<HTMLElement>('[data-nav-dropdown]');
+	const initNavDropdown = () => {
+		if ((window as any).navDropdownLoaded) return;
+		(window as any).navDropdownLoaded = true;
 
-	const close = (root: Element) => {
-		root.querySelector('[data-nd-panel]')?.classList.add('hidden');
-		root.querySelector('[data-nd-trigger]')?.setAttribute('aria-expanded', 'false');
+		const HOVER = matchMedia('(hover: hover)').matches;
+		const roots = document.querySelectorAll<HTMLElement>('[data-nav-dropdown]');
+
+		const close = (root: Element) => {
+			root.querySelector('[data-nd-panel]')?.classList.add('hidden');
+			root.querySelector('[data-nd-trigger]')?.setAttribute('aria-expanded', 'false');
+		};
+
+		roots.forEach((root) => {
+			const trigger = root.querySelector<HTMLElement>('[data-nd-trigger]');
+			const panel = root.querySelector<HTMLElement>('[data-nd-panel]');
+			if (!trigger || !panel) return;
+
+			let closeTimer = 0;
+			const setOpen = (open: boolean) => {
+				clearTimeout(closeTimer);
+				if (open) roots.forEach((r) => r !== root && close(r)); // one open at a time
+				panel.classList.toggle('hidden', !open);
+				trigger.setAttribute('aria-expanded', String(open));
+			};
+			// small grace delay so crossing any sub-pixel seam doesn't flicker it shut
+			const scheduleClose = () => {
+				clearTimeout(closeTimer);
+				closeTimer = window.setTimeout(() => setOpen(false), 120);
+			};
+
+			if (HOVER) {
+				root.addEventListener('mouseenter', () => setOpen(true));
+				root.addEventListener('mouseleave', scheduleClose);
+			}
+			// keyboard: open when focus enters, close when it leaves the whole group
+			root.addEventListener('focusin', () => setOpen(true));
+			root.addEventListener('focusout', (e) => {
+				if (!root.contains((e as FocusEvent).relatedTarget as Node | null)) setOpen(false);
+			});
+		});
+
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') roots.forEach(close);
+		});
 	};
 
-	roots.forEach((root) => {
-		const trigger = root.querySelector<HTMLElement>('[data-nd-trigger]');
-		const panel = root.querySelector<HTMLElement>('[data-nd-panel]');
-		if (!trigger || !panel) return;
-
-		let closeTimer = 0;
-		const setOpen = (open: boolean) => {
-			clearTimeout(closeTimer);
-			if (open) roots.forEach((r) => r !== root && close(r)); // one open at a time
-			panel.classList.toggle('hidden', !open);
-			trigger.setAttribute('aria-expanded', String(open));
-		};
-		// small grace delay so crossing any sub-pixel seam doesn't flicker it shut
-		const scheduleClose = () => {
-			clearTimeout(closeTimer);
-			closeTimer = window.setTimeout(() => setOpen(false), 120);
-		};
-
-		if (HOVER) {
-			root.addEventListener('mouseenter', () => setOpen(true));
-			root.addEventListener('mouseleave', scheduleClose);
-		}
-		// keyboard: open when focus enters, close when it leaves the whole group
-		root.addEventListener('focusin', () => setOpen(true));
-		root.addEventListener('focusout', (e) => {
-			if (!root.contains((e as FocusEvent).relatedTarget as Node | null)) setOpen(false);
-		});
-	});
-
-	document.addEventListener('keydown', (e) => {
-		if (e.key === 'Escape') roots.forEach(close);
-	});
+	window.addEventListener('mousemove', initNavDropdown, { once: true, passive: true });
+	window.addEventListener('touchstart', initNavDropdown, { once: true, passive: true });
+	window.addEventListener('pointerdown', initNavDropdown, { once: true, passive: true });
+	window.addEventListener('keydown', initNavDropdown, { once: true, passive: true });
 </script>

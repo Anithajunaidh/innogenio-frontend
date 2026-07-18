@@ -106,39 +106,49 @@ const {
 </footer>
 
 <script>
-	// moonrise: lift the logo-moon (and brighten the sun) when the footer
-	// scrolls into view, then let the moon settle into its idle pulse
-	document.querySelectorAll<HTMLElement>('[data-footer]').forEach((footer) => {
-		const seat = () => {
-			footer.classList.add('risen');
-			setTimeout(() => footer.classList.add('moon-seated'), 3000);
-		};
-		if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-			footer.classList.add('risen', 'moon-seated');
-		} else if ('IntersectionObserver' in window) {
-			const io = new IntersectionObserver(
-				(entries) => {
-					entries.forEach((e) => {
-						if (e.isIntersecting) {
-							seat();
-							io.unobserve(e.target);
-						}
-					});
-				},
-				{ threshold: 0.2 }
-			);
-			io.observe(footer);
-		} else {
-			seat();
-		}
+	const initFooter = () => {
+		if ((window as any).footerLoaded) return;
+		(window as any).footerLoaded = true;
+		
+		// moonrise: lift the logo-moon (and brighten the sun) when the footer
+		// scrolls into view, then let the moon settle into its idle pulse
+		document.querySelectorAll<HTMLElement>('[data-footer]').forEach((footer) => {
+			const seat = () => {
+				footer.classList.add('risen');
+				setTimeout(() => footer.classList.add('moon-seated'), 3000);
+			};
+			if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+				footer.classList.add('risen', 'moon-seated');
+			} else if ('IntersectionObserver' in window) {
+				const io = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((e) => {
+							if (e.isIntersecting) {
+								seat();
+								io.unobserve(e.target);
+							}
+						});
+					},
+					{ threshold: 0.2 }
+				);
+				io.observe(footer);
+			} else {
+				seat();
+			}
 
-		// sky toggle: swap the bright ↔ classic sunset gradient
-		const toggle = footer.querySelector<HTMLButtonElement>('[data-sky-toggle]');
-		const sky = footer.querySelector<HTMLElement>('.footer-sky');
-		toggle?.addEventListener('click', () => {
-			const bright = sky?.classList.toggle('bright') ?? false;
-			toggle.setAttribute('aria-pressed', String(bright));
-			toggle.textContent = bright ? 'Sky · bright' : 'Sky · classic';
+			// sky toggle: swap the bright ↔ classic sunset gradient
+			const toggle = footer.querySelector<HTMLButtonElement>('[data-sky-toggle]');
+			const sky = footer.querySelector<HTMLElement>('.footer-sky');
+			toggle?.addEventListener('click', () => {
+				const bright = sky?.classList.toggle('bright') ?? false;
+				toggle.setAttribute('aria-pressed', String(bright));
+				toggle.textContent = bright ? 'Sky · bright' : 'Sky · classic';
+			});
 		});
-	});
+	};
+	
+	window.addEventListener('mousemove', initFooter, { once: true, passive: true });
+	window.addEventListener('touchstart', initFooter, { once: true, passive: true });
+	window.addEventListener('pointerdown', initFooter, { once: true, passive: true });
+	window.addEventListener('keydown', initFooter, { once: true, passive: true });
 </script>

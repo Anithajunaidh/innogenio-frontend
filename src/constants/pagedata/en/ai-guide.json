@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "title": "Innogenio — AI Guide",
+    "description": "Your AI guide, in four questions."
+  },
+  "hero": {
+    "kicker": "AI SOLUTIONS ADVISOR",
+    "headline": "Your AI guide, in four questions.",
+    "body": "Answer four quick questions and let our advisor generate a personalized recommendation tailored to your industry and business objectives."
+  },
+  "advisor": {
+    "ui": {
+      "stepFormat": "STEP {step} / 04",
+      "resultKicker": "Your personalized recommendation",
+      "startOver": "Start over",
+      "back": "Back",
+      "next": "Next",
+      "seeRecommendation": "See my recommendation",
+      "selectToContinue": "Select an option to continue",
+      "typeToContinue": "Type your answer to continue",
+      "nSelected": "{count} selected",
+      "nOfMSelected": "{count} of {max} selected",
+      "whatItTakes": "What it takes to start",
+      "first90Days": "Your first 90 days",
+      "bookConsultation": "Book a consultation",
+      "emailPlaceholder": "Email me these results",
+      "emailSent": "✓ Sent — check your inbox",
+      "send": "Send",
+      "otherLabel": "Other…"
+    },
+    "steps": {
+      "industry": {
+        "kicker": "Your industry",
+        "title": "Which industry are you in?",
+        "body": "Pick the sector that best describes your business.",
+        "placeholder": "Type your industry…",
+        "options": [
+          "Technology & SaaS",
+          "Fintech & Banking",
+          "Healthcare & Pharma",
+          "Manufacturing",
+          "Retail & E-commerce",
+          "Logistics & Supply chain",
+          "Real estate",
+          "Media & Entertainment",
+          "Education",
+          "Energy & Utilities",
+          "Professional services",
+          "Hospitality & Travel"
+        ]
+      },
+      "process": {
+        "kicker": "Where AI helps",
+        "title": "Which process would you improve first?",
+        "body": "Select up to two areas where automation would move the needle.",
+        "placeholder": "Type the process you'd improve…",
+        "options": [
+          "Customer support",
+          "Document & data processing",
+          "Analytics & reporting",
+          "Quality control",
+          "Demand forecasting",
+          "Fraud & risk detection",
+          "Personalization",
+          "Back-office automation",
+          "Predictive maintenance"
+        ]
+      },
+      "objective": {
+        "kicker": "Your objectives",
+        "title": "What outcome matters most?",
+        "body": "Choose up to three business goals.",
+        "placeholder": "Type the outcome you're after…",
+        "options": [
+          "Improve customer experience",
+          "Reduce operating costs",
+          "Scale operations",
+          "Gain a competitive edge",
+          "Increase revenue",
+          "Speed up decisions",
+          "Improve accuracy & quality"
+        ]
+      },
+      "challenge": {
+        "kicker": "Your challenges",
+        "title": "What's holding you back today?",
+        "body": "Choose up to three operational challenges.",
+        "placeholder": "Type what's holding you back…",
+        "options": [
+          "Manual, repetitive work",
+          "Data silos & poor visibility",
+          "Rising costs",
+          "Slow time-to-market",
+          "Compliance & risk",
+          "Talent & capacity gaps",
+          "Ageing legacy systems",
+          "Unclear AI readiness"
+        ]
+      }
+    },
+    "result": {
+      "solutions": {
+        "Customer support": {
+          "name": "Conversational AI & Intelligent Support",
+          "blurb": "an AI assistant that resolves routine queries instantly and routes the rest with full context"
+        },
+        "Document & data processing": {
+          "name": "Intelligent Document Processing",
+          "blurb": "an AI pipeline that extracts, validates, and files documents without manual data entry"
+        },
+        "Analytics & reporting": {
+          "name": "AI Analytics & Decision Intelligence",
+          "blurb": "a decision layer that turns scattered data into forecasts and clear next-best-actions"
+        },
+        "Quality control": {
+          "name": "Computer-Vision Quality Control",
+          "blurb": "a vision system that inspects output in real time and flags defects before they ship"
+        },
+        "Demand forecasting": {
+          "name": "Predictive Forecasting Engine",
+          "blurb": "a forecasting model that anticipates demand and optimizes stock and capacity"
+        },
+        "Fraud & risk detection": {
+          "name": "AI Risk & Anomaly Detection",
+          "blurb": "a monitoring model that catches anomalies and fraud patterns as they emerge"
+        },
+        "Personalization": {
+          "name": "AI Personalization & Recommendations",
+          "blurb": "a recommendation engine that tailors every experience to each user in real time"
+        },
+        "Back-office automation": {
+          "name": "Intelligent Process Automation",
+          "blurb": "AI-driven automation that removes repetitive back-office work end-to-end"
+        },
+        "Predictive maintenance": {
+          "name": "Predictive Maintenance System",
+          "blurb": "a model that predicts equipment failure before it causes costly downtime"
+        },
+        "default": {
+          "name": "Custom AI Solution",
+          "blurb": "a tailored AI system built around your specific processes and goals"
+        }
+      },
+      "summaryTemplate": "For a {industry} team, we'd start with {blurb}. It directly targets \"{challenge}\" while helping you {objective} — deployed as a focused pilot, then scaled once the value is proven.",
+      "metrics": {
+        "roi": "Projected 12-month ROI, based on industry benchmarks",
+        "efficiency": "Reduction in manual effort on the targeted process",
+        "speed": "From kickoff to a working, measurable pilot",
+        "weeksLabel": "wks"
+      },
+      "start": [
+        "Access to the data and systems behind {process}",
+        "A single business owner to define success metrics with us",
+        "A two-week discovery to validate feasibility and ROI"
+      ],
+      "roadmap": [
+        "Weeks 1–2 · Discovery, data audit & success metrics",
+        "Weeks 3–{weeks} · Build & train a working pilot on real data",
+        "Post-pilot · Measure impact, then scale to production"
+      ],
+      "defaults": {
+        "industry": "your industry",
+        "process": "the target process",
+        "objective": "measurable business impact",
+        "challenge": "manual, repetitive work"
+      },
+      "andJoin": " and "
+    }
+  },
+  "impact": {
+    "kicker": "What you'll get",
+    "headline": "A clear starting point — in minutes, not meetings.",
+    "body": "The advisor turns your answers into a concrete, industry-aware plan you can act on right away.",
+    "cards": [
+      {
+        "number": "01",
+        "title": "A tailored solution",
+        "body": "A custom AI approach aligned with your specific industry, processes, and goals."
+      },
+      {
+        "number": "02",
+        "title": "Expected impact",
+        "body": "ROI ranges and efficiency gains based on real industry benchmarks."
+      },
+      {
+        "number": "03",
+        "title": "Implementation roadmap",
+        "body": "The likely challenges and a practical path from pilot to production."
+      },
+      {
+        "number": "04",
+        "title": "Next steps",
+        "body": "Starter guidance and the option to book a 1:1 with our engineers."
+      }
+    ]
+  },
+  "services": {
+    "kicker": "Featured services",
+    "headline": "The capabilities behind every recommendation.",
+    "exploreLabel": "Explore",
+    "cards": [
+      {
+        "title": "AI & Data Science",
+        "body": "Turn raw data into models that predict, classify, and recommend with measurable accuracy.",
+        "href": "#"
+      },
+      {
+        "title": "Generative AI",
+        "body": "LLM-powered assistants, copilots, and content systems tuned to your domain and data.",
+        "href": "#"
+      },
+      {
+        "title": "Intelligent Automation",
+        "body": "Automate document, support, and back-office workflows end-to-end with humans in the loop.",
+        "href": "#"
+      },
+      {
+        "title": "Machine Learning & MLOps",
+        "body": "Production-grade pipelines that train, deploy, monitor, and retrain models reliably.",
+        "href": "#"
+      },
+      {
+        "title": "Computer Vision",
+        "body": "Detect, inspect, and measure from images and video for quality control and safety.",
+        "href": "#"
+      },
+      {
+        "title": "AI Consulting & Strategy",
+        "body": "Assess readiness, prioritize use cases, and de-risk adoption from day one.",
+        "href": "#"
+      }
+    ]
+  },
+  "cta": {
+    "titleLines": [
+      "Like what the advisor suggested?",
+      "Let's build it."
+    ],
+    "body": "Book a free 30-minute session with our engineers to pressure-test the plan and scope a pilot.",
+    "actions": [
+      {
+        "label": "Book a 1:1 Meeting",
+        "variant": "pixel",
+        "href": "/contact"
+      },
+      {
+        "label": "Learn about us",
+        "variant": "ghost",
+        "href": "/about"
+      }
+    ]
+  }
+}

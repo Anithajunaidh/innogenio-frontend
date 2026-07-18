@@ -6,7 +6,7 @@ import NavLink from '../atoms/NavLink.astro';
 import Button from '../atoms/Button.astro';
 
 interface Props {
-	links: { label: string; href: string }[];
+	links: { label: string; href: string; highlight?: boolean }[];
 }
 const { links } = Astro.props;
 ---
@@ -21,7 +21,7 @@ const { links } = Astro.props;
 	<nav class="flex flex-col divide-y divide-line border-t border-line" aria-label="Mobile">
 		{
 			links.map((link) => (
-				<NavLink href={link.href} class="px-6 py-4 text-base">
+				<NavLink href={link.href} class={`px-6 py-4 text-base ${link.highlight ? 'text-brand' : ''}`}>
 					{link.label}
 				</NavLink>
 			))
@@ -34,24 +34,34 @@ const { links } = Astro.props;
 </div>
 
 <script>
-	const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
-	const panel = document.querySelector<HTMLElement>('[data-menu-panel]');
-	const iconOpen = toggle?.querySelector<SVGElement>('[data-icon="open"]');
-	const iconClose = toggle?.querySelector<SVGElement>('[data-icon="close"]');
+	const initMobileMenu = () => {
+		if ((window as any).mobileMenuLoaded) return;
+		(window as any).mobileMenuLoaded = true;
 
-	function setOpen(open: boolean) {
-		panel?.classList.toggle('hidden', !open);
-		iconOpen?.classList.toggle('hidden', open);
-		iconClose?.classList.toggle('hidden', !open);
-		toggle?.setAttribute('aria-expanded', String(open));
-	}
+		const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+		const panel = document.querySelector<HTMLElement>('[data-menu-panel]');
+		const iconOpen = toggle?.querySelector<SVGElement>('[data-icon="open"]');
+		const iconClose = toggle?.querySelector<SVGElement>('[data-icon="close"]');
 
-	toggle?.addEventListener('click', () => {
-		setOpen(panel?.classList.contains('hidden') ?? false);
-	});
+		function setOpen(open: boolean) {
+			panel?.classList.toggle('hidden', !open);
+			iconOpen?.classList.toggle('hidden', open);
+			iconClose?.classList.toggle('hidden', !open);
+			toggle?.setAttribute('aria-expanded', String(open));
+		}
 
-	// close the panel when a link inside it is tapped
-	panel?.querySelectorAll('a').forEach((link) => {
-		link.addEventListener('click', () => setOpen(false));
-	});
+		toggle?.addEventListener('click', () => {
+			setOpen(panel?.classList.contains('hidden') ?? false);
+		});
+
+		// close the panel when a link inside it is tapped
+		panel?.querySelectorAll('a').forEach((link) => {
+			link.addEventListener('click', () => setOpen(false));
+		});
+	};
+
+	window.addEventListener('mousemove', initMobileMenu, { once: true, passive: true });
+	window.addEventListener('touchstart', initMobileMenu, { once: true, passive: true });
+	window.addEventListener('pointerdown', initMobileMenu, { once: true, passive: true });
+	window.addEventListener('keydown', initMobileMenu, { once: true, passive: true });
 </script>

@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "title": "Innogenio — KI-Leitfaden",
+    "description": "Ihr KI-Leitfaden in vier Fragen."
+  },
+  "hero": {
+    "kicker": "KI-LÖSUNGSBERATER",
+    "headline": "Ihr KI-Leitfaden, in vier Fragen.",
+    "body": "Beantworten Sie vier kurze Fragen und lassen Sie unseren Berater eine personalisierte Empfehlung erstellen, die auf Ihre Branche und Geschäftsziele zugeschnitten ist."
+  },
+  "advisor": {
+    "ui": {
+      "stepFormat": "SCHRITT {step} / 04",
+      "resultKicker": "Ihre persönliche Empfehlung",
+      "startOver": "Von vorne beginnen",
+      "back": "Zurück",
+      "next": "Weiter",
+      "seeRecommendation": "Empfehlung ansehen",
+      "selectToContinue": "Wählen Sie eine Option um fortzufahren",
+      "typeToContinue": "Geben Sie Ihre Antwort ein um fortzufahren",
+      "nSelected": "{count} ausgewählt",
+      "nOfMSelected": "{count} von {max} ausgewählt",
+      "whatItTakes": "Was Sie zum Start benötigen",
+      "first90Days": "Ihre ersten 90 Tage",
+      "bookConsultation": "Beratung buchen",
+      "emailPlaceholder": "Mir diese Ergebnisse per E-Mail senden",
+      "emailSent": "✓ Gesendet — Bitte überprüfen Sie Ihren Posteingang",
+      "send": "Senden",
+      "otherLabel": "Andere…"
+    },
+    "steps": {
+      "industry": {
+        "kicker": "Ihre Branche",
+        "title": "In welcher Branche sind Sie tätig?",
+        "body": "Wählen Sie den Sektor, der Ihr Unternehmen am besten beschreibt.",
+        "placeholder": "Geben Sie Ihre Branche ein…",
+        "options": [
+          "Technologie & SaaS",
+          "Fintech & Banking",
+          "Gesundheitswesen & Pharma",
+          "Fertigung",
+          "Einzelhandel & E-Commerce",
+          "Logistik & Supply Chain",
+          "Immobilien",
+          "Medien & Unterhaltung",
+          "Bildung",
+          "Energie & Versorgungsunternehmen",
+          "Professionelle Dienstleistungen",
+          "Gastgewerbe & Reisen"
+        ]
+      },
+      "process": {
+        "kicker": "Wo KI hilft",
+        "title": "Welchen Prozess würden Sie zuerst verbessern?",
+        "body": "Wählen Sie bis zu zwei Bereiche, in denen Automatisierung etwas bewirken würde.",
+        "placeholder": "Geben Sie den Prozess ein…",
+        "options": [
+          "Kundensupport",
+          "Dokumenten- & Datenverarbeitung",
+          "Analytik & Berichterstattung",
+          "Qualitätskontrolle",
+          "Nachfrageprognose",
+          "Betrugs- & Risikoerkennung",
+          "Personalisierung",
+          "Back-Office-Automatisierung",
+          "Vorausschauende Wartung"
+        ]
+      },
+      "objective": {
+        "kicker": "Ihre Ziele",
+        "title": "Welches Ergebnis ist am wichtigsten?",
+        "body": "Wählen Sie bis zu drei Geschäftsziele.",
+        "placeholder": "Geben Sie das gewünschte Ergebnis ein…",
+        "options": [
+          "Kundenerlebnis verbessern",
+          "Betriebskosten senken",
+          "Betrieb skalieren",
+          "Wettbewerbsvorteil erlangen",
+          "Umsatz steigern",
+          "Entscheidungen beschleunigen",
+          "Genauigkeit & Qualität verbessern"
+        ]
+      },
+      "challenge": {
+        "kicker": "Ihre Herausforderungen",
+        "title": "Was hält Sie heute zurück?",
+        "body": "Wählen Sie bis zu drei betriebliche Herausforderungen.",
+        "placeholder": "Geben Sie Ihre Herausforderung ein…",
+        "options": [
+          "Manuelle, sich wiederholende Arbeit",
+          "Datensilos & mangelnde Transparenz",
+          "Steigende Kosten",
+          "Langsame Markteinführung",
+          "Compliance & Risiko",
+          "Talent- & Kapazitätslücken",
+          "Veraltete Altsysteme",
+          "Unklare KI-Bereitschaft"
+        ]
+      }
+    },
+    "result": {
+      "solutions": {
+        "Kundensupport": {
+          "name": "Conversational AI & Intelligenter Support",
+          "blurb": "ein KI-Assistent, der Routineanfragen sofort löst und den Rest mit vollem Kontext weiterleitet"
+        },
+        "Dokumenten- & Datenverarbeitung": {
+          "name": "Intelligente Dokumentenverarbeitung",
+          "blurb": "eine KI-Pipeline, die Dokumente ohne manuelle Dateneingabe extrahiert, validiert und ablegt"
+        },
+        "Analytik & Berichterstattung": {
+          "name": "KI-Analytik & Decision Intelligence",
+          "blurb": "eine Entscheidungsebene, die verstreute Daten in Prognosen und klare nächste Handlungsschritte umwandelt"
+        },
+        "Qualitätskontrolle": {
+          "name": "Computer-Vision zur Qualitätskontrolle",
+          "blurb": "ein Bildverarbeitungssystem, das die Ausgabe in Echtzeit inspiziert und Fehler vor dem Versand meldet"
+        },
+        "Nachfrageprognose": {
+          "name": "Prädiktive Prognose-Engine",
+          "blurb": "ein Prognosemodell, das die Nachfrage vorhersagt und den Bestand und die Kapazität optimiert"
+        },
+        "Betrugs- & Risikoerkennung": {
+          "name": "KI-Risiko- & Anomalie-Erkennung",
+          "blurb": "ein Überwachungsmodell, das Anomalien und Betrugsmuster bei ihrer Entstehung erkennt"
+        },
+        "Personalisierung": {
+          "name": "KI-Personalisierung & Empfehlungen",
+          "blurb": "eine Empfehlungs-Engine, die jedes Erlebnis für jeden Benutzer in Echtzeit anpasst"
+        },
+        "Back-Office-Automatisierung": {
+          "name": "Intelligente Prozessautomatisierung",
+          "blurb": "KI-gesteuerte Automatisierung, die sich wiederholende Back-Office-Aufgaben durchgängig beseitigt"
+        },
+        "Vorausschauende Wartung": {
+          "name": "Prädiktives Wartungssystem",
+          "blurb": "ein Modell, das Geräteausfälle vorhersagt, bevor sie kostspielige Ausfallzeiten verursachen"
+        },
+        "default": {
+          "name": "Benutzerdefinierte KI-Lösung",
+          "blurb": "ein maßgeschneidertes KI-System, das um Ihre spezifischen Prozesse und Ziele herum aufgebaut ist"
+        }
+      },
+      "summaryTemplate": "Für ein {industry} Team würden wir mit {blurb} beginnen. Es zielt direkt auf „{challenge}“ ab und hilft Ihnen {objective} — eingesetzt als fokussiertes Pilotprojekt, dann skaliert, sobald der Wert bewiesen ist.",
+      "metrics": {
+        "roi": "Prognostizierter 12-Monats-ROI, basierend auf Branchen-Benchmarks",
+        "efficiency": "Reduzierung des manuellen Aufwands für den Zielprozess",
+        "speed": "Vom Kickoff bis zu einem funktionierenden, messbaren Pilotprojekt",
+        "weeksLabel": "Wo"
+      },
+      "start": [
+        "Zugriff auf die Daten und Systeme hinter {process}",
+        "Ein einzelner Business Owner zur Definition von Erfolgsmetriken mit uns",
+        "Eine zweiwöchige Discovery-Phase zur Validierung von Machbarkeit und ROI"
+      ],
+      "roadmap": [
+        "Woche 1–2 · Discovery, Daten-Audit & Erfolgsmetriken",
+        "Woche 3–{weeks} · Aufbau & Training eines funktionierenden Pilotprojekts mit realen Daten",
+        "Post-Pilot · Auswirkungen messen, dann auf Produktion skalieren"
+      ],
+      "defaults": {
+        "industry": "Ihrer Branche",
+        "process": "dem Zielprozess",
+        "objective": "messbare geschäftliche Auswirkungen zu erzielen",
+        "challenge": "manuelle, sich wiederholende Arbeit"
+      },
+      "andJoin": " und "
+    }
+  },
+  "impact": {
+    "kicker": "Was Sie bekommen",
+    "headline": "Ein klarer Startpunkt — in Minuten, nicht Meetings.",
+    "body": "Der Berater wandelt Ihre Antworten in einen konkreten, branchenbewussten Plan um, auf den Sie sofort reagieren können.",
+    "cards": [
+      {
+        "number": "01",
+        "title": "Eine maßgeschneiderte Lösung",
+        "body": "Ein individueller KI-Ansatz, abgestimmt auf Ihre spezifische Branche, Prozesse und Ziele."
+      },
+      {
+        "number": "02",
+        "title": "Erwartete Auswirkungen",
+        "body": "ROI-Bereiche und Effizienzsteigerungen basierend auf realen Branchen-Benchmarks."
+      },
+      {
+        "number": "03",
+        "title": "Implementierungs-Roadmap",
+        "body": "Die wahrscheinlichen Herausforderungen und ein praktischer Weg vom Pilotprojekt zur Produktion."
+      },
+      {
+        "number": "04",
+        "title": "Nächste Schritte",
+        "body": "Starter-Guidance und die Möglichkeit, ein 1:1 mit unseren Ingenieuren zu buchen."
+      }
+    ]
+  },
+  "services": {
+    "kicker": "Ausgewählte Services",
+    "headline": "Die Fähigkeiten hinter jeder Empfehlung.",
+    "exploreLabel": "Entdecken",
+    "cards": [
+      {
+        "title": "KI & Data Science",
+        "body": "Verwandeln Sie Rohdaten in Modelle, die mit messbarer Genauigkeit vorhersagen, klassifizieren und empfehlen.",
+        "href": "#"
+      },
+      {
+        "title": "Generative KI",
+        "body": "LLM-gestützte Assistenten, Copiloten und Content-Systeme, abgestimmt auf Ihre Domäne und Daten.",
+        "href": "#"
+      },
+      {
+        "title": "Intelligente Automatisierung",
+        "body": "Automatisieren Sie Dokumenten-, Support- und Back-Office-Workflows durchgängig mit Menschen in der Schleife.",
+        "href": "#"
+      },
+      {
+        "title": "Machine Learning & MLOps",
+        "body": "Produktionsreife Pipelines, die Modelle zuverlässig trainieren, bereitstellen, überwachen und neu trainieren.",
+        "href": "#"
+      },
+      {
+        "title": "Computer Vision",
+        "body": "Erkennen, inspizieren und messen Sie aus Bildern und Videos zur Qualitätskontrolle und Sicherheit.",
+        "href": "#"
+      },
+      {
+        "title": "KI-Beratung & Strategie",
+        "body": "Bewerten Sie die Bereitschaft, priorisieren Sie Anwendungsfälle und verringern Sie das Adoptionsrisiko vom ersten Tag an.",
+        "href": "#"
+      }
+    ]
+  },
+  "cta": {
+    "titleLines": [
+      "Gefällt Ihnen, was der Berater vorschlägt?",
+      "Lassen Sie es uns bauen."
+    ],
+    "body": "Buchen Sie eine kostenlose 30-minütige Sitzung mit unseren Ingenieuren, um den Plan einem Stresstest zu unterziehen und ein Pilotprojekt zu planen.",
+    "actions": [
+      {
+        "label": "1:1 Meeting buchen",
+        "variant": "pixel",
+        "href": "/de/contact"
+      },
+      {
+        "label": "Mehr über uns erfahren",
+        "variant": "ghost",
+        "href": "/de/about"
+      }
+    ]
+  }
+}

@@ -11,6 +11,7 @@ interface NavItem {
 	href: string;
 	menu?: { icon: string; title: string; body: string; href: string }[];
 	menuFooter?: string;
+	highlight?: boolean;
 }
 interface Props {
 	links: NavItem[];
@@ -32,7 +33,7 @@ const { links } = Astro.props;
 			) : (
 				<NavLink
 					href={link.href}
-					class="flex items-center border-l border-line px-5 text-nav last:border-r"
+					class={`flex items-center border-l border-line px-5 text-nav last:border-r ${link.highlight ? 'text-brand' : ''}`}
 				>
 					{link.label}
 				</NavLink>

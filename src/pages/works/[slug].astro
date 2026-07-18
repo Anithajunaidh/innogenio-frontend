@@ -3,6 +3,8 @@ import WorkDetailPage from '../../components/templates/WorkDetailPage.astro';
 import type { Work } from '../../components/templates/WorkDetailPage.astro';
 import data from '../../constants/pagedata/en/work-details.json';
 
+export const prerender = true;
+
 export function getStaticPaths() {
 	return data.works.map((work) => ({ params: { slug: work.slug } }));
 }
