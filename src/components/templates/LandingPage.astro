@@ -23,6 +23,7 @@ import type { Action } from '../organisms/CtaSection.astro';
 import { getLanding, getTestimonials, getSite } from '../../i18n';
 import type { Locale } from '../../i18n';
 import { organizationLd, servicesLd, webSiteLd } from '../../utils/seo';
+import CookieBanner from '../organisms/CookieBanner.astro';
 import image1 from '../../assets/image1.webp';
 import image2 from '../../assets/image2.webp';
 import image3 from '../../assets/image3.webp';
@@ -117,4 +118,5 @@ const jsonLd = [
 		newsletter={page.cta.newsletter}
 	/>
 	<Footer columns={footerColumns} copyright={site.footer.copyright} tagline={site.footer.tagline} />
+	<CookieBanner slot="cookie-banner" />
 </Layout>

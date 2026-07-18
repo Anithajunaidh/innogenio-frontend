@@ -12,8 +12,10 @@ interface Props {
 	description?: string;
 	/** JSON-LD blocks (Organization, WebSite, Service, …) */
 	jsonLd?: object[];
+	/** label for the skip-to-main-content link (locale-specific) */
+	skipLabel?: string;
 }
-const { lang = defaultLocale, title = 'Innogenio', description, jsonLd = [] } = Astro.props;
+const { lang = defaultLocale, title = 'Innogenio', description, jsonLd = [], skipLabel = 'Skip to main content' } = Astro.props;
 
 const site = Astro.site ?? new URL('https://innogenio.com');
 const canonical = new URL(Astro.url.pathname, site);
@@ -27,6 +29,9 @@ const ogImage = new URL('/og.png', site);
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/manifest.json" />
+		<meta name="theme-color" content="#9f00d4" />
 		<meta name="generator" content={Astro.generator} />
 
 		<title>{title}</title>
@@ -70,19 +75,30 @@ const ogImage = new URL('/og.png', site);
 				<script is:inline type="application/ld+json" set:html={JSON.stringify(block)} />
 			))
 		}
+		<!-- Analytics — inject per-deployment via this slot (Plausible, GA, etc.) -->
+		<slot name="head-analytics" />
 	</head>
 	<body class="m-0 bg-paper text-ink">
+		<!-- Skip to main content — hidden until focused; meets WCAG 2.4.1 -->
+		<a
+			href="#main-content"
+			class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:rounded focus:bg-brand focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"
+		>
+			{skipLabel}
+		</a>
 		<!-- fixed chrome (navbar) must sit outside the smooth-scroll content:
 		     ScrollSmoother translates #smooth-content, and a transformed
 		     ancestor turns position:fixed into absolute -->
 		<slot name="header" />
 		<div id="smooth-wrapper">
 			<div id="smooth-content">
-				<main class="mx-auto w-full max-w-432">
+				<div id="main-content" class="mx-auto w-full max-w-432">
 					<slot />
 				</main>
 			</div>
 		</div>
+		<!-- Cookie consent banner (GDPR/CCPA) -->
+		<slot name="cookie-banner" />
 	</body>
 </html>
 
